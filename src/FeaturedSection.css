@@ -1,0 +1,121 @@
+/* ----- Alapértelmezett stílusok ----- */
+
+.featured-section {
+    background-color: #000; /* Fekete háttér */
+    padding: 40px 0;
+    color: #fff;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  .content-wrapper {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .stats-section {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 40px 0;
+    color: #fff;
+  }
+  
+  .stat-item {
+    text-align: center;
+    margin: 20px;
+    flex: 1 1 200px; /* engedjük, hogy rugalmasan törjön, min. 200px szélességgel */
+  }
+  
+  .icon-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 10px;
+  }
+  
+  .icon {
+    color: #000;
+    font-size: 24px;
+  }
+  
+  .stat-number {
+    font-size: 36px;
+    font-weight: bold;
+    line-height: 1.2;
+  }
+  
+  .stat-number span {
+    margin-left: 2px;
+  }
+  
+  .stat-description {
+    font-size: 16px;
+    margin-top: 8px;
+  }
+  
+  /* ----- Szöveg, logók, idézet ----- */
+  .text-content {
+    text-align: center;
+    margin: 20px 0;
+  }
+  
+  .text-content h2 {
+    font-size: 24px;
+    line-height: 1.4;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  
+  .text-content h2 span {
+    font-weight: 500;
+  }
+  
+  .logos {
+    text-align: center;
+    margin: 40px 0;
+  }
+  
+  .quote {
+    text-align: center;
+    margin-top: 40px;
+    font-style: italic;
+  }
+  
+  /* ----- Reszponzív nézet (max. 768px) ----- */
+  @media (max-width: 768px) {
+    .stats-section {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .stat-item {
+      margin: 10px 0;
+    }
+  
+    .icon-circle {
+      width: 50px;
+      height: 50px;
+    }
+  
+    .icon {
+      font-size: 20px;
+    }
+  
+    .stat-number {
+      font-size: 28px;
+    }
+  
+    .stat-description {
+      font-size: 14px;
+    }
+  
+    .text-content h2 {
+      font-size: 20px;
+      padding: 0 10px;
+    }
+  }
+  

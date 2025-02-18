@@ -1,0 +1,18 @@
+@media (max-width: 768px) {
+    /* Elrejti azokat a gomb változatokat, melyek tartalmazzák a hidden-17mnt2g osztályt */
+    /* .ssr-variant.hidden-17mnt2g {
+      display: none !important;
+    } */
+  
+    /* Csak a maradék első változat jelenjen meg, és legyen középre igazítva */
+    .framer-ahrh2z {
+      text-align: center; /* A belső inline(-block) elemek középre kerülnek */
+    }
+    
+    /* Ha szükséges, állítsuk a gomb szélességét is automatikusra */
+    .ssr-variant.hidden-1q3dwis.hidden-1303b6h {
+      display: inline-block !important;
+      width: auto !important;
+    }
+  }
+  
