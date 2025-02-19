@@ -287,43 +287,47 @@ const Contact: React.FC = () => {
       {/* Media query: mobil nézetben egymás alatt jelenjenek meg a részek */}
       <style>
         {`
-          .contact-main-container {
-            grid-template-columns: 1fr;
-          }
-          @media (min-width: 769px) {
-            .contact-main-container {
-              grid-template-columns: 1fr 1fr;
-            }
-          }
           /* Custom checkbox styles */
-          .custom-checkbox {
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            border: 2px solid #ccc;
-            border-radius: 4px;
-            position: relative;
-            cursor: pointer;
-            outline: none;
-            transition: all 0.2s ease;
-          }
-          .custom-checkbox:checked {
-            background-color: #00D28C;
-            border-color: #00D28C;
-          }
-          .custom-checkbox:checked::after {
-            content: "";
-            position: absolute;
-            left: 6px;
-            top: 2px;
-            width: 5px;
-            height: 10px;
-            border: solid #fff;
-            border-width: 0 2px 2px 0;
-            transform: rotate(45deg);
-          }
+.custom-checkbox {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease;
+  flex-shrink: 0; /* Biztosítja, hogy a méret ne változzon */
+}
+
+.custom-checkbox:checked {
+  background-color: #00D28C;
+  border-color: #00D28C;
+}
+
+.custom-checkbox:checked::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Checkbox label stílus */
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
         `}
       </style>
     </section>
