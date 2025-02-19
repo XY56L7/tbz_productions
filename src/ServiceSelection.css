@@ -34,13 +34,31 @@
   border-radius: 100px;
   padding: 10px 24px;
   font-weight: 500;
+  background-color: #00D28C; /* Smaragdzöld háttér */
+  color: #000; /* Fekete szöveg */
+  border: none;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); /* Alap árnyék */
+  outline: 2px solid transparent; /* Alap outline */
+}
+
+.custom-btn:hover {
+  background-color: #00B87A; /* Sötétebb zöld hover hatáshoz */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.12); /* Nagyobb árnyék hover esetén */
+  outline: 2px solid #00D28C; /* Smaragdzöld outline hover esetén */
+  transform: translateY(-2px); /* Enyhe emelkedés hover esetén */
+}
+
+.custom-btn:active {
+  transform: translateY(0); /* Visszaállítás aktiváláskor */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); /* Alap árnyék aktiváláskor */
 }
 
 /* Kártya stílusok */
 .card-item {
   border-radius: 24px;
   overflow: hidden;
-  background: linear-gradient(90deg, rgb(255, 60, 93) 0%, rgb(255, 60, 93) 100%);
+  background: linear-gradient(90deg, #00D28C 0%, #00B87A 100%); /* Smaragdzöld gradienst */
 }
 
 .card-img {
@@ -53,12 +71,14 @@
 .card-title {
   font-size: 24px;
   margin-bottom: 0.75rem;
+  color: #fff; /* Fehér szöveg */
 }
 
 .card-desc {
   opacity: 0.75;
   font-size: 14px;
   margin-bottom: 1rem;
+  color: #fff; /* Fehér szöveg */
 }
 
 /* Reszponzív stílusok */

@@ -41,7 +41,7 @@ const Header = () => {
               <div className="framer-16rdjif" data-framer-name="Title" style={{ opacity: 0, transform: 'translateY(40px)' }}>
                 <div className="framer-1f41923" data-framer-name="Text">
                   <div className="framer-zms2nu" data-framer-name="App Store" style={{ outline: 'none', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', flexShrink: 0, transform: 'none' }} data-framer-component-type="RichTextContainer">
-                    <p style={{ fontFamily: 'Poppins, Poppins Placeholder, sans-serif', fontSize: '13px', fontWeight: 600, letterSpacing: '0.15em', lineHeight: '1.5em', textAlign: 'left', color: 'rgba(222, 222, 222, 0.8)', textTransform: 'uppercase' }} className="framer-text">directed by esd content</p>
+                    <p style={{ fontFamily: 'Poppins, Poppins Placeholder, sans-serif', fontSize: '13px', fontWeight: 600, letterSpacing: '0.15em', lineHeight: '1.5em', textAlign: 'left', color: 'rgba(222, 222, 222, 0.8)', textTransform: 'uppercase' }} className="framer-text">directed by TBZ productions</p>
                   </div>
                 </div>
               </div>
@@ -50,7 +50,7 @@ const Header = () => {
               <div className="framer-16rdjif" data-framer-name="Title" style={{ opacity: 1, transform: 'none' }}>
                 <div className="framer-1f41923" data-framer-name="Text">
                   <div className="framer-zms2nu" data-framer-name="App Store" style={{ outline: 'none', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', flexShrink: 0, transform: 'none' }} data-framer-component-type="RichTextContainer">
-                    <p style={{ fontFamily: 'Poppins, Poppins Placeholder, sans-serif', fontSize: '13px', fontWeight: 600, letterSpacing: '0.15em', lineHeight: '1.5em', textAlign: 'left', color: 'rgba(222, 222, 222, 0.8)', textTransform: 'uppercase' }} className="framer-text">directed by esd content</p>
+                    <p style={{ fontFamily: 'Poppins, Poppins Placeholder, sans-serif', fontSize: '13px', fontWeight: 600, letterSpacing: '0.15em', lineHeight: '1.5em', textAlign: 'left', color: 'rgba(222, 222, 222, 0.8)', textTransform: 'uppercase' }} className="framer-text">directed by TBZ productions</p>
                   </div>
                 </div>
               </div>

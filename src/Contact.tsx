@@ -1,13 +1,24 @@
 import React from "react";
 
 const Contact: React.FC = () => {
+  // ---------- Dátum kiszámítása ----------
+  const today = new Date();
+  const expectedDate = new Date(today);
+  expectedDate.setDate(expectedDate.getDate() + 2);
+  const formattedExpectedDate = expectedDate.toLocaleDateString("hu-HU", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    weekday: "long",
+  });
+
   // ---------- Styles ----------
 
   // Outer wrapper: black background, padding
   const outerWrapperStyle: React.CSSProperties = {
     backgroundColor: "#000",
     padding: "60px 20px",
-    color: "#fff"
+    color: "#fff",
   };
 
   // Main container: centers content, sets max width, uses a 2-column grid on desktop
@@ -15,28 +26,27 @@ const Contact: React.FC = () => {
     maxWidth: "1200px",
     margin: "0 auto",
     display: "grid",
-    gridTemplateColumns: "1fr 1fr", // 2 columns: left & right
-    gap: "40px"
+    gap: "40px",
   };
 
   // Left side container
   const leftContainerStyle: React.CSSProperties = {
     display: "flex",
     flexDirection: "column",
-    gap: "24px"
+    gap: "24px",
   };
 
   const leftHeadingStyle: React.CSSProperties = {
     fontSize: "1.8rem",
     fontWeight: 600,
-    margin: 0
+    margin: 0,
   };
 
   const leftParagraphStyle: React.CSSProperties = {
     fontSize: "1rem",
     lineHeight: 1.6,
     margin: 0,
-    color: "#ccc"
+    color: "#ccc",
   };
 
   // Container for the "cards" with contact info
@@ -44,7 +54,7 @@ const Contact: React.FC = () => {
     display: "flex",
     flexDirection: "row",
     gap: "20px",
-    flexWrap: "wrap" // in case it needs to wrap on smaller screens
+    flexWrap: "wrap", // wrap on smaller screens
   };
 
   // A single card style
@@ -56,19 +66,19 @@ const Contact: React.FC = () => {
     display: "flex",
     flexDirection: "column",
     gap: "8px",
-    boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
+    boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
   };
 
   const cardTitleStyle: React.CSSProperties = {
     fontSize: "1rem",
     fontWeight: 500,
-    margin: 0
+    margin: 0,
   };
 
   const cardSubtitleStyle: React.CSSProperties = {
     fontSize: "0.95rem",
     color: "#bbb",
-    margin: 0
+    margin: 0,
   };
 
   const cardIconWrapperStyle: React.CSSProperties = {
@@ -79,7 +89,7 @@ const Contact: React.FC = () => {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: "8px"
+    marginBottom: "8px",
   };
 
   // Right side container
@@ -90,25 +100,25 @@ const Contact: React.FC = () => {
     boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
     display: "flex",
     flexDirection: "column",
-    gap: "20px"
+    gap: "20px",
   };
 
   const rightHeadingStyle: React.CSSProperties = {
     fontSize: "1.4rem",
     fontWeight: 600,
-    margin: 0
+    margin: 0,
   };
 
   const formGroupStyle: React.CSSProperties = {
     display: "flex",
     flexDirection: "column",
     gap: "6px",
-    marginBottom: "12px"
+    marginBottom: "12px",
   };
 
   const labelStyle: React.CSSProperties = {
     fontSize: "0.95rem",
-    fontWeight: 500
+    fontWeight: 500,
   };
 
   const inputStyle: React.CSSProperties = {
@@ -117,28 +127,22 @@ const Contact: React.FC = () => {
     border: "1px solid #333",
     backgroundColor: "#222",
     color: "#fff",
-    fontSize: "0.95rem"
+    fontSize: "0.95rem",
   };
 
-  // For the checkboxes
+  // Checkboxes with igényes dizájnnal
   const checkboxGroupStyle: React.CSSProperties = {
     display: "flex",
     flexDirection: "column",
-    gap: "8px"
+    gap: "12px",
   };
 
   const checkboxLabelStyle: React.CSSProperties = {
     display: "flex",
     alignItems: "center",
-    gap: "8px",
+    gap: "12px",
     fontSize: "0.95rem",
-    cursor: "pointer"
-  };
-
-  const checkboxInputStyle: React.CSSProperties = {
-    width: "16px",
-    height: "16px",
-    cursor: "pointer"
+    cursor: "pointer",
   };
 
   // Submit button style
@@ -151,19 +155,23 @@ const Contact: React.FC = () => {
     cursor: "pointer",
     fontSize: "1rem",
     fontWeight: 500,
-    marginTop: "8px"
+    marginTop: "8px",
   };
 
-  // Note at the bottom (like "Kalkulált válasz érkezése: 2025. február 20, csütörtök")
+  // Modern, letisztult bottom note stílus
   const bottomNoteStyle: React.CSSProperties = {
     fontSize: "0.85rem",
-    color: "#888",
-    textAlign: "right"
+    color: "#aaa",
+    textAlign: "right",
+    marginTop: "20px",
+    borderTop: "1px solid #333",
+    paddingTop: "10px",
+    fontStyle: "italic",
   };
 
   return (
     <section style={outerWrapperStyle}>
-      <div style={mainContainerStyle}>
+      <div style={mainContainerStyle} className="contact-main-container">
         {/* Left side */}
         <div style={leftContainerStyle}>
           <h2 style={leftHeadingStyle}>Kapcsolatfelvétel</h2>
@@ -178,7 +186,6 @@ const Contact: React.FC = () => {
             {/* Card 1: E-mail */}
             <div style={cardStyle}>
               <div style={cardIconWrapperStyle}>
-                {/* Replace with actual icon or image */}
                 <span role="img" aria-label="Mail" style={{ fontSize: "1.2rem" }}>
                   ✉️
                 </span>
@@ -187,10 +194,9 @@ const Contact: React.FC = () => {
               <p style={cardSubtitleStyle}>info@seccontent.hu</p>
             </div>
 
-            {/* Card 2: Telephone */}
+            {/* Card 2: Telefon */}
             <div style={cardStyle}>
               <div style={cardIconWrapperStyle}>
-                {/* Replace with actual icon or image */}
                 <span role="img" aria-label="Phone" style={{ fontSize: "1.2rem" }}>
                   📞
                 </span>
@@ -205,7 +211,7 @@ const Contact: React.FC = () => {
         <div style={rightContainerStyle}>
           <h3 style={rightHeadingStyle}>Árajánlat kérelem</h3>
           <p style={{ fontSize: "0.9rem", color: "#bbb", margin: 0 }}>
-            Vedd fel velünk a kapcsolatot gyors és pontos árajánlatot kérhetsz!
+            Vedd fel velünk a kapcsolatot, gyors és pontos árajánlatot kérhetsz!
             Általában 24-48 órán belül válaszolunk.
           </p>
 
@@ -244,26 +250,26 @@ const Contact: React.FC = () => {
             />
           </div>
 
-          {/* Checkboxes */}
+          {/* Checkboxes with custom styling */}
           <div style={checkboxGroupStyle}>
             <label style={checkboxLabelStyle}>
-              <input type="checkbox" style={checkboxInputStyle} />
+              <input type="checkbox" className="custom-checkbox" />
               Teljeskörű TikTok tartalomgyártás
             </label>
             <label style={checkboxLabelStyle}>
-              <input type="checkbox" style={checkboxInputStyle} />
+              <input type="checkbox" className="custom-checkbox" />
               Social media image- és hirdetéskezelés
             </label>
             <label style={checkboxLabelStyle}>
-              <input type="checkbox" style={checkboxInputStyle} />
+              <input type="checkbox" className="custom-checkbox" />
               Weboldal szövegmásolás és hirdetések kezelése
             </label>
             <label style={checkboxLabelStyle}>
-              <input type="checkbox" style={checkboxInputStyle} />
+              <input type="checkbox" className="custom-checkbox" />
               Extra csomag
             </label>
             <label style={checkboxLabelStyle}>
-              <input type="checkbox" style={checkboxInputStyle} />
+              <input type="checkbox" className="custom-checkbox" />
               Adatvédelmi Nyilatkozat elfogadása
             </label>
           </div>
@@ -273,10 +279,53 @@ const Contact: React.FC = () => {
 
           {/* Bottom note */}
           <p style={bottomNoteStyle}>
-            Kalkulált válasz várható érkezése: 2025. február 20, csütörtök
+            Kalkulált válasz várható érkezése: {formattedExpectedDate}
           </p>
         </div>
       </div>
+
+      {/* Media query: mobil nézetben egymás alatt jelenjenek meg a részek */}
+      <style>
+        {`
+          .contact-main-container {
+            grid-template-columns: 1fr;
+          }
+          @media (min-width: 769px) {
+            .contact-main-container {
+              grid-template-columns: 1fr 1fr;
+            }
+          }
+          /* Custom checkbox styles */
+          .custom-checkbox {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            position: relative;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.2s ease;
+          }
+          .custom-checkbox:checked {
+            background-color: #00D28C;
+            border-color: #00D28C;
+          }
+          .custom-checkbox:checked::after {
+            content: "";
+            position: absolute;
+            left: 6px;
+            top: 2px;
+            width: 5px;
+            height: 10px;
+            border: solid #fff;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+          }
+        `}
+      </style>
     </section>
   );
 };
