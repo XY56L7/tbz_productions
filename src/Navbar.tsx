@@ -44,7 +44,7 @@ const Navbar = () => {
                   className="framer-1x28qk9 framer-b65qkz"
                   role="img"
                   aria-label="esd logo"
-                  aria-description="esd logo"
+                  aria-labelledby="esd logo"
                 >
                   <div className="svgContainer" style={{ width: '100%', height: '100%', aspectRatio: 'inherit' }}>
                     <svg style={{ width: '100%', height: '100%' }}>
@@ -121,7 +121,7 @@ const Navbar = () => {
                   className="framer-1x28qk9 framer-b65qkz"
                   role="img"
                   aria-label="esd logo"
-                  aria-description="esd logo"
+                  aria-labelledby="esd logo"
                 >
                   <div className="svgContainer" style={{ width: '100%', height: '100%', aspectRatio: 'inherit' }}>
                     <svg style={{ width: '100%', height: '100%' }}>

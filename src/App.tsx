@@ -1,7 +1,6 @@
 import React from 'react';
 import Header from './Header'; // Ha van Header komponens
 import Navbar from './Navbar'; // Ha van Navbar komponens
-import FeaturedSection from './FeaturedSection';
 import ServicesSection from './ServicesSelection';
 import Asked from './asked';
 import CallToActionCard from './ActionCard';
