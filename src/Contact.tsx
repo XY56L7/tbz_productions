@@ -170,7 +170,7 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <section style={outerWrapperStyle}>
+    <section style={outerWrapperStyle} id="contact">
       <div style={mainContainerStyle} className="contact-main-container">
         {/* Left side */}
         <div style={leftContainerStyle}>

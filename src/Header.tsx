@@ -2,6 +2,14 @@ import React from 'react';
 import './Header.css';
 
 const Header = () => {
+
+  const scrollToServices = () => {
+    const mainSection = document.getElementById('services');
+    if (mainSection) {
+      mainSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <header className="framer-16709mg" data-framer-name="Hero Section">
       <div className="framer-113wd9s" data-framer-name="BG">       
@@ -77,7 +85,7 @@ const Header = () => {
         <div className="framer-ahrh2z" style={{ marginTop: '50px' }}>
           <div className="ssr-variant hidden-1q3dwis hidden-1303b6h">
             <div className="framer-7we1a5-container">
-              <a className="framer-BTbjQ framer-dKer1 framer-bhZhX framer-152rnsu framer-v-1mb0zqp framer-1qzgy94" data-framer-name="White" data-highlight="true" style={{ borderBottomWidth: '0px', borderColor: 'rgba(0, 0, 0, 0)', borderLeftWidth: '0px', borderRightWidth: '0px', borderStyle: 'solid', borderTopWidth: '0px', backdropFilter: 'none', backgroundColor: 'rgb(255, 255, 255)', borderRadius: '100px', WebkitBackdropFilter: 'none', height: '100%', maxWidth: '100%', width: '100%' }} href="./#szolgaltatasok" tabIndex={0}>
+              <a className="framer-BTbjQ framer-dKer1 framer-bhZhX framer-152rnsu framer-v-1mb0zqp framer-1qzgy94" data-framer-name="White" data-highlight="true" style={{ borderBottomWidth: '0px', borderColor: 'rgba(0, 0, 0, 0)', borderLeftWidth: '0px', borderRightWidth: '0px', borderStyle: 'solid', borderTopWidth: '0px', backdropFilter: 'none', backgroundColor: 'rgb(255, 255, 255)', borderRadius: '100px', WebkitBackdropFilter: 'none', height: '100%', maxWidth: '100%', width: '100%' }} onClick={scrollToServices} tabIndex={0}>
                 <div className="framer-1wnb748" data-framer-name="Main Text" style={{ outline: 'none', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', flexShrink: 0, transform: 'none' }} data-framer-component-type="RichTextContainer">
                   <p className="framer-text framer-styles-preset-1ress3h" data-styles-preset="OdrXVUxks" style={{ color: 'rgb(33, 33, 33)' }}>Szolgáltatásaink</p>
                 </div>

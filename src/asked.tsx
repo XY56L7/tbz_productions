@@ -156,7 +156,7 @@ const FAQ: React.FC = () => {
   };
 
   return (
-    <section style={sectionStyle}>
+    <section style={sectionStyle} id='FAQ'>
       <div style={containerStyle}>
         <h2 style={mainHeadingStyle}>Kérdésed van? Itt megtalálod!</h2>
         <p style={subHeadingStyle}>
