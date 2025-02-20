@@ -19,7 +19,7 @@ const Header = () => {
           ></video>
         </div>
       </div>
-        <div className="ssr-variant hidden-17mnt2g hidden-1q3dwis">
+        <div className="ssr-variant  hidden-1q3dwis">
           <div className="framer-1di1bym-container" style={{ opacity: 1, transform: 'none' }}>
             <video
               src="https://framerusercontent.com/assets/a1hvWk1WbwKQRHiqYm2y0UdHe7M.mp4"
