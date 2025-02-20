@@ -4,20 +4,21 @@ import './Header.css';
 const Header = () => {
   return (
     <header className="framer-16709mg" data-framer-name="Hero Section">
-        <div style={{ background: "your-background-value" }} className="framer-113wd9s" data-framer-name="BG">        <div className="ssr-variant hidden-1303b6h">
-          <div className="framer-1di1bym-container" style={{ willChange: 'transform', opacity: 1, transform: 'none' }}>
+      <div className="framer-113wd9s" data-framer-name="BG">       
+         <div className="ssr-variant">
+        <div className="framer-1di1bym-container" style={{ willChange: 'transform', opacity: 1, transform: 'none' }}>
           <video
-                src="https://framerusercontent.com/assets/a1hvWk1WbwKQRHiqYm2y0UdHe7M.mp4"
-                loop
-                preload="auto"
-                poster="https://framerusercontent.com/images/lGGQGTWaeRqSnE3anMrQcGmD4o.png?scale-down-to=1024"
-                muted
-                playsInline
-                autoPlay  // Automatikus lejátszás
-                style={{ cursor: 'auto', width: '100%', height: '100%', borderRadius: '0px', display: 'block', objectFit: 'cover', backgroundColor: 'rgba(0, 0, 0, 0)', objectPosition: '50% 50%' }}
-            ></video>
-          </div>
+            src="https://framerusercontent.com/assets/a1hvWk1WbwKQRHiqYm2y0UdHe7M.mp4"
+            loop
+            preload="auto"
+            poster="https://framerusercontent.com/images/lGGQGTWaeRqSnE3anMrQcGmD4o.png?scale-down-to=1024"
+            muted
+            playsInline
+            autoPlay  // Automatikus lejátszás
+            style={{ cursor: 'auto', width: '100%', height: '100%', borderRadius: '0px', display: 'block', objectFit: 'cover', backgroundColor: 'rgba(0, 0, 0, 0)', objectPosition: '50% 50%' }}
+          ></video>
         </div>
+      </div>
         <div className="ssr-variant hidden-17mnt2g hidden-1q3dwis">
           <div className="framer-1di1bym-container" style={{ opacity: 1, transform: 'none' }}>
             <video
@@ -68,7 +69,7 @@ const Header = () => {
             </div>
             <div className="framer-bnplt4" data-framer-appear-id="bnplt4" data-framer-name="Description" style={{ outline: 'none', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', opacity: 1, flexShrink: 0, willChange: 'transform', transform: 'translateY(2px)' }} data-framer-component-type="RichTextContainer">
               <p className="framer-text framer-styles-preset-jt39bk" data-styles-preset="q0QedYkV9" style={{ textAlign: 'center', color: 'rgb(255, 255, 255)' }}>
-                Arra vágysz, hogy valós eredmények legyenek felmutatva neked céged tartalmaiban?! Akkor a megfelelő helyen jársz. Üdvözöl téged az ESD Content! Csapatunk küldetése, hogy a legmagasabb minőségbe kivitelezze a céged tartalmait.
+                Arra vágysz, hogy valós eredmények legyenek felmutatva neked céged tartalmaiban?! Akkor a megfelelő helyen jársz. Üdvözöl téged az TBZ productions! Csapatunk küldetése, hogy a legmagasabb minőségbe kivitelezze a céged tartalmait.
               </p>
             </div>
           </div>
