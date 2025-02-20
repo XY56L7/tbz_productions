@@ -72,9 +72,9 @@ const Footer: React.FC = () => {
       <div style={containerStyle} className="footer-container">
         {/* Bal oldal: ikon + szöveg */}
         <div style={leftSideStyle}>
-          <div style={iconCircleStyle}>
+          {/* <div style={iconCircleStyle}>
             <span>F</span>
-          </div>
+          </div> */}
           <span style={leftTextStyle}>
             Tervezte és készítette |{" "}
             <a
