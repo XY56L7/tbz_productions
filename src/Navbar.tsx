@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import logo from './logo.png';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -39,7 +40,14 @@ const Navbar = () => {
     <div className="framer-1yv3j76-container">
       {/* Desktop navbar */}
       <div className="ssr-variant hidden-1303b6h">
-        <nav className="framer-f4Ugu framer-9oCrN framer-qva57 framer-v-qva57" data-framer-name="Desktop" style={{ background: 'linear-gradient(180deg, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0) 100%', width: '100%' }}>
+        <nav
+          className="framer-f4Ugu framer-9oCrN framer-qva57 framer-v-qva57"
+          data-framer-name="Desktop"
+          style={{
+            background: 'linear-gradient(180deg, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0) 100%)',
+            width: '100%'
+          }}
+        >
           <div className="framer-7auulw-container">
             <div style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
               {[...Array(8)].map((_, i) => (
@@ -54,73 +62,204 @@ const Navbar = () => {
                     WebkitMaskImage: `linear-gradient(to top, rgba(0, 0, 0, 0) ${i * 12.5}%, rgba(0, 0, 0, 1) ${(i + 1) * 12.5}%, rgba(0, 0, 0, 1) ${(i + 2) * 12.5}%, rgba(0, 0, 0, 0) ${(i + 3) * 12.5}%)`,
                     borderRadius: '0px',
                     pointerEvents: 'none',
-                    backdropFilter: `blur(${0.1171875 * Math.pow(2, i)}px)`,
+                    backdropFilter: `blur(${0.1171875 * Math.pow(2, i)}px)`
                   }}
                 />
               ))}
             </div>
           </div>
-          <div className="framer-mx8mak" data-framer-name="Nav Wrapper">
-            <div aria-label="esd logo" className="framer-1ve3frv" data-framer-name="Content">
-              <div aria-label="esd logo" className="framer-1mo70g1" data-framer-name="Logo & Hamburger Icon">
-                <a
-                  data-framer-component-type="SVG"
-                  data-framer-name="esd logo"
-                  href="./"
-                  data-framer-page-link-current="true"
-                  style={{ imageRendering: 'pixelated', flexShrink: 0 }}
-                  className="framer-1x28qk9 framer-b65qkz"
-                  role="img"
-                  aria-label="esd logo"
-                  aria-labelledby="esd logo"
-                >
-                  <div className="svgContainer" style={{ width: '100%', height: '100%', aspectRatio: 'inherit' }}>
-                    <svg style={{ width: '100%', height: '100%' }}>
-                      <use href="#svg12553293481" />
-                    </svg>
-                  </div>
-                </a>
-              </div>
+          <div
+            className="framer-mx8mak"
+            data-framer-name="Nav Wrapper"
+            style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
+          >
+            {/* Logo a bal oldalon */}
+            <div
+              className="logo-container"
+              style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}
+            >
+              <a href="./" style={{ flexShrink: 0 }}>
+                <img src={logo} alt="Logo" style={{ width: '100px', height: 'auto' }} />
+              </a>
             </div>
+            {/* Linkek */}
             <div className="framer-1b61lg7" data-framer-name="Links">
-              <div className="framer-uxaq5g" data-framer-name="Features" style={{ outline: 'none', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', flexShrink: 0, transform: 'none' }} data-framer-component-type="RichTextContainer">
-                <p style={{ fontFamily: 'Poppins, Poppins Placeholder, sans-serif', fontSize: '14px', fontWeight: 500, lineHeight: '22px', color: 'rgb(255, 255, 255)' }} className="framer-text">
+              <div
+                className="framer-uxaq5g"
+                data-framer-name="Features"
+                style={{
+                  outline: 'none',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'flex-start',
+                  flexShrink: 0,
+                  transform: 'none'
+                }}
+                data-framer-component-type="RichTextContainer"
+              >
+                <p
+                  style={{
+                    fontFamily: 'Poppins, Poppins Placeholder, sans-serif',
+                    fontSize: '14px',
+                    fontWeight: 500,
+                    lineHeight: '22px',
+                    color: 'rgb(255, 255, 255)'
+                  }}
+                  className="framer-text"
+                >
                   <a className="framer-text framer-styles-preset-1b1g0kp" data-styles-preset="dRzQBmjh2" href="./#rolunk">
                     Rólunk
                   </a>
                 </p>
               </div>
-              <div className="framer-uxaq5g" data-framer-name="Features" style={{ outline: 'none', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', flexShrink: 0, transform: 'none' }} data-framer-component-type="RichTextContainer">
-                <p style={{ fontFamily: 'Poppins, Poppins Placeholder, sans-serif', fontSize: '14px', fontWeight: 500, lineHeight: '22px', color: 'rgb(255, 255, 255)' }} className="framer-text">
-                  <a className="framer-text framer-styles-preset-1b1g0kp" data-styles-preset="dRzQBmjh2" onClick={scrollToServices}>
+              <div
+                className="framer-uxaq5g"
+                data-framer-name="Features"
+                style={{
+                  outline: 'none',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'flex-start',
+                  flexShrink: 0,
+                  transform: 'none'
+                }}
+                data-framer-component-type="RichTextContainer"
+              >
+                <p
+                  style={{
+                    fontFamily: 'Poppins, Poppins Placeholder, sans-serif',
+                    fontSize: '14px',
+                    fontWeight: 500,
+                    lineHeight: '22px',
+                    color: 'rgb(255, 255, 255)'
+                  }}
+                  className="framer-text"
+                >
+                  <a
+                    className="framer-text framer-styles-preset-1b1g0kp"
+                    data-styles-preset="dRzQBmjh2"
+                    onClick={scrollToServices}
+                  >
                     Szolgáltatások
                   </a>
                 </p>
               </div>
-              <div className="framer-uxaq5g" data-framer-name="Features" style={{ outline: 'none', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', flexShrink: 0, transform: 'none' }} data-framer-component-type="RichTextContainer">
-                <p style={{ fontFamily: 'Poppins, Poppins Placeholder, sans-serif', fontSize: '14px', fontWeight: 500, lineHeight: '22px', color: 'rgb(255, 255, 255)' }} className="framer-text">
+              <div
+                className="framer-uxaq5g"
+                data-framer-name="Features"
+                style={{
+                  outline: 'none',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'flex-start',
+                  flexShrink: 0,
+                  transform: 'none'
+                }}
+                data-framer-component-type="RichTextContainer"
+              >
+                <p
+                  style={{
+                    fontFamily: 'Poppins, Poppins Placeholder, sans-serif',
+                    fontSize: '14px',
+                    fontWeight: 500,
+                    lineHeight: '22px',
+                    color: 'rgb(255, 255, 255)'
+                  }}
+                  className="framer-text"
+                >
                   <a className="framer-text framer-styles-preset-1b1g0kp" data-styles-preset="dRzQBmjh2" href="./#referenciak">
                     Referenciák
                   </a>
                 </p>
               </div>
-              <div className="framer-uxaq5g" data-framer-name="Features" style={{ outline: 'none', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', flexShrink: 0, transform: 'none' }} data-framer-component-type="RichTextContainer">
-                <p style={{ fontFamily: 'Poppins, Poppins Placeholder, sans-serif', fontSize: '14px', fontWeight: 500, lineHeight: '22px', color: 'rgb(255, 255, 255)' }} className="framer-text">
+              <div
+                className="framer-uxaq5g"
+                data-framer-name="Features"
+                style={{
+                  outline: 'none',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'flex-start',
+                  flexShrink: 0,
+                  transform: 'none'
+                }}
+                data-framer-component-type="RichTextContainer"
+              >
+                <p
+                  style={{
+                    fontFamily: 'Poppins, Poppins Placeholder, sans-serif',
+                    fontSize: '14px',
+                    fontWeight: 500,
+                    lineHeight: '22px',
+                    color: 'rgb(255, 255, 255)'
+                  }}
+                  className="framer-text"
+                >
                   <a className="framer-text framer-styles-preset-1b1g0kp" data-styles-preset="dRzQBmjh2" href="./#velemenyek">
                     Vélemények
                   </a>
                 </p>
               </div>
-              <div className="framer-uxaq5g" data-framer-name="Features" style={{ outline: 'none', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', flexShrink: 0, transform: 'none' }} data-framer-component-type="RichTextContainer">
-                <p style={{ fontFamily: 'Poppins, Poppins Placeholder, sans-serif', fontSize: '14px', fontWeight: 500, lineHeight: '22px', color: 'rgb(255, 255, 255)' }} className="framer-text">
-                  <a className="framer-text framer-styles-preset-1b1g0kp" data-styles-preset="dRzQBmjh2" onClick={scrollToFAQ}>
+              <div
+                className="framer-uxaq5g"
+                data-framer-name="Features"
+                style={{
+                  outline: 'none',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'flex-start',
+                  flexShrink: 0,
+                  transform: 'none'
+                }}
+                data-framer-component-type="RichTextContainer"
+              >
+                <p
+                  style={{
+                    fontFamily: 'Poppins, Poppins Placeholder, sans-serif',
+                    fontSize: '14px',
+                    fontWeight: 500,
+                    lineHeight: '22px',
+                    color: 'rgb(255, 255, 255)'
+                  }}
+                  className="framer-text"
+                >
+                  <a
+                    className="framer-text framer-styles-preset-1b1g0kp"
+                    data-styles-preset="dRzQBmjh2"
+                    onClick={scrollToFAQ}
+                  >
                     GY.I.K
                   </a>
                 </p>
               </div>
-              <div className="framer-uxaq5g" data-framer-name="Features" style={{ outline: 'none', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', flexShrink: 0, transform: 'none' }} data-framer-component-type="RichTextContainer">
-                <p style={{ fontFamily: 'Poppins, Poppins Placeholder, sans-serif', fontSize: '14px', fontWeight: 500, lineHeight: '22px', color: 'rgb(255, 255, 255)' }} className="framer-text">
-                  <a className="framer-text framer-styles-preset-1b1g0kp" data-styles-preset="dRzQBmjh2" onClick={scrollToContact}>
+              <div
+                className="framer-uxaq5g"
+                data-framer-name="Features"
+                style={{
+                  outline: 'none',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'flex-start',
+                  flexShrink: 0,
+                  transform: 'none'
+                }}
+                data-framer-component-type="RichTextContainer"
+              >
+                <p
+                  style={{
+                    fontFamily: 'Poppins, Poppins Placeholder, sans-serif',
+                    fontSize: '14px',
+                    fontWeight: 500,
+                    lineHeight: '22px',
+                    color: 'rgb(255, 255, 255)'
+                  }}
+                  className="framer-text"
+                >
+                  <a
+                    className="framer-text framer-styles-preset-1b1g0kp"
+                    data-styles-preset="dRzQBmjh2"
+                    onClick={scrollToContact}
+                  >
                     Kapcsolat
                   </a>
                 </p>
@@ -142,13 +281,29 @@ const Navbar = () => {
                     backdropFilter: 'none',
                     backgroundColor: 'rgb(255, 255, 255)',
                     borderRadius: '100px',
-                    WebkitBackdropFilter: 'none',
+                    WebkitBackdropFilter: 'none'
                   }}
                   href="./#szolgaltatasok"
                   tabIndex={0}
                 >
-                  <div className="framer-1wnb748" data-framer-name="Main Text" style={{ outline: 'none', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', flexShrink: 0, transform: 'none' }} data-framer-component-type="RichTextContainer">
-                    <p className="framer-text framer-styles-preset-1ress3h" data-styles-preset="OdrXVUxks" style={{ color: 'rgb(33, 33, 33)' }}>
+                  <div
+                    className="framer-1wnb748"
+                    data-framer-name="Main Text"
+                    style={{
+                      outline: 'none',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'flex-start',
+                      flexShrink: 0,
+                      transform: 'none'
+                    }}
+                    data-framer-component-type="RichTextContainer"
+                  >
+                    <p
+                      className="framer-text framer-styles-preset-1ress3h"
+                      data-styles-preset="OdrXVUxks"
+                      style={{ color: 'rgb(33, 33, 33)' }}
+                    >
                       Árajánlat
                     </p>
                   </div>
@@ -159,7 +314,7 @@ const Navbar = () => {
         </nav>
       </div>
 
-      {/* Mobil navbar */}
+      {/* Mobile navbar */}
       <div className="ssr-variant hidden-17mnt2g">
         <nav
           className="framer-f4Ugu framer-9oCrN framer-qva57 framer-v-qva57"
@@ -169,26 +324,22 @@ const Navbar = () => {
             width: '100%'
           }}
         >
-          <div className="framer-mx8mak" data-framer-name="Nav Wrapper" style={{ position: 'relative' }}>
+          <div
+            className="framer-mx8mak"
+            data-framer-name="Nav Wrapper"
+            style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
+          >
+            {/* Logo a bal oldalon */}
+            <div
+              className="logo-container"
+              style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}
+            >
+              <a href="./" style={{ flexShrink: 0 }}>
+                <img src={logo} alt="Logo" style={{ width: '80px', height: 'auto' }} />
+              </a>
+            </div>
             <div aria-label="esd logo" className="framer-1ve3frv" data-framer-name="Content">
               <div className="framer-1mo70g1" data-framer-name="Logo & Hamburger Icon">
-                <a
-                  data-framer-component-type="SVG"
-                  data-framer-name="esd logo"
-                  href="./"
-                  data-framer-page-link-current="true"
-                  style={{ imageRendering: 'pixelated', flexShrink: 0 }}
-                  className="framer-1x28qk9 framer-b65qkz"
-                  role="img"
-                  aria-label="esd logo"
-                  aria-labelledby="esd logo"
-                >
-                  <div className="svgContainer" style={{ width: '100%', height: '100%', aspectRatio: 'inherit' }}>
-                    <svg style={{ width: '100%', height: '100%' }}>
-                      <use href="#svg12553293481" />
-                    </svg>
-                  </div>
-                </a>
                 {/* Hamburger ikon */}
                 <button
                   onClick={toggleMenu}
@@ -198,72 +349,219 @@ const Navbar = () => {
                     cursor: 'pointer',
                     color: 'white',
                     fontSize: '24px',
-                    position: 'absolute',
                     right: '20px',
                     top: '20px',
-                    zIndex: 1100,
+                    zIndex: 1100
                   }}
                 >
                   ☰
                 </button>
               </div>
             </div>
-            {/* Legördülő menü */}
             {isMenuOpen && (
               <div
                 className="framer-1b61lg7"
                 data-framer-name="Links"
                 style={{
+                  position: 'absolute',
+
                   display: 'flex',
                   flexDirection: 'column',
                   marginTop: '60px',
                   alignItems: 'center',
                   width: '100%',
-                  position: 'absolute',
-                  top: '0',
+                  top: '-70px',
                   left: '0',
-                  backgroundColor: 'rgba(0, 0, 0, 0.9)',
+                  backgroundColor: '#000', // Nem áttetsző háttér
                   zIndex: 1000
                 }}
               >
-                <div className="framer-uxaq5g" data-framer-name="Features" style={{ outline: 'none', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', flexShrink: 0, transform: 'none', marginBottom: '10px' }} data-framer-component-type="RichTextContainer">
-                  <p style={{ fontFamily: 'Poppins, Poppins Placeholder, sans-serif', fontSize: '14px', fontWeight: 500, lineHeight: '22px', color: 'rgb(255, 255, 255)' }} className="framer-text">
+
+                <div style={{ marginBottom: '20px' }}>
+                  <img src={logo} alt="Logo" style={{ width: '80px', height: 'auto' }} />
+                </div>
+                <div
+                  className="framer-uxaq5g"
+                  data-framer-name="Features"
+                  style={{
+                    outline: 'none',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'flex-start',
+                    flexShrink: 0,
+                    transform: 'none',
+                    marginBottom: '10px'
+                  }}
+                  data-framer-component-type="RichTextContainer"
+                >
+                  <p
+                    style={{
+                      fontFamily: 'Poppins, Poppins Placeholder, sans-serif',
+                      fontSize: '14px',
+                      fontWeight: 500,
+                      lineHeight: '22px',
+                      color: 'rgb(255, 255, 255)'
+                    }}
+                    className="framer-text"
+                  >
                     <a className="framer-text framer-styles-preset-1b1g0kp" data-styles-preset="dRzQBmjh2" href="./#rolunk">
                       Rólunk
                     </a>
                   </p>
                 </div>
-                <div className="framer-uxaq5g" data-framer-name="Features" style={{ outline: 'none', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', flexShrink: 0, transform: 'none', marginBottom: '10px' }} data-framer-component-type="RichTextContainer">
-                  <p style={{ fontFamily: 'Poppins, Poppins Placeholder, sans-serif', fontSize: '14px', fontWeight: 500, lineHeight: '22px', color: 'rgb(255, 255, 255)' }} className="framer-text">
-                    <a className="framer-text framer-styles-preset-1b1g0kp" data-styles-preset="dRzQBmjh2" onClick={scrollToServices}>
+                <div
+                  className="framer-uxaq5g"
+                  data-framer-name="Features"
+                  style={{
+                    outline: 'none',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'flex-start',
+                    flexShrink: 0,
+                    transform: 'none',
+                    marginBottom: '10px'
+                  }}
+                  data-framer-component-type="RichTextContainer"
+                >
+                  <p
+                    style={{
+                      fontFamily: 'Poppins, Poppins Placeholder, sans-serif',
+                      fontSize: '14px',
+                      fontWeight: 500,
+                      lineHeight: '22px',
+                      color: 'rgb(255, 255, 255)'
+                    }}
+                    className="framer-text"
+                  >
+                    <a
+                      className="framer-text framer-styles-preset-1b1g0kp"
+                      data-styles-preset="dRzQBmjh2"
+                      onClick={scrollToServices}
+                    >
                       Szolgáltatások
                     </a>
                   </p>
                 </div>
-                <div className="framer-uxaq5g" data-framer-name="Features" style={{ outline: 'none', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', flexShrink: 0, transform: 'none', marginBottom: '10px' }} data-framer-component-type="RichTextContainer">
-                  <p style={{ fontFamily: 'Poppins, Poppins Placeholder, sans-serif', fontSize: '14px', fontWeight: 500, lineHeight: '22px', color: 'rgb(255, 255, 255)' }} className="framer-text">
+                <div
+                  className="framer-uxaq5g"
+                  data-framer-name="Features"
+                  style={{
+                    outline: 'none',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'flex-start',
+                    flexShrink: 0,
+                    transform: 'none',
+                    marginBottom: '10px'
+                  }}
+                  data-framer-component-type="RichTextContainer"
+                >
+                  <p
+                    style={{
+                      fontFamily: 'Poppins, Poppins Placeholder, sans-serif',
+                      fontSize: '14px',
+                      fontWeight: 500,
+                      lineHeight: '22px',
+                      color: 'rgb(255, 255, 255)'
+                    }}
+                    className="framer-text"
+                  >
                     <a className="framer-text framer-styles-preset-1b1g0kp" data-styles-preset="dRzQBmjh2" href="./#referenciak">
                       Referenciák
                     </a>
                   </p>
                 </div>
-                <div className="framer-uxaq5g" data-framer-name="Features" style={{ outline: 'none', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', flexShrink: 0, transform: 'none', marginBottom: '10px' }} data-framer-component-type="RichTextContainer">
-                  <p style={{ fontFamily: 'Poppins, Poppins Placeholder, sans-serif', fontSize: '14px', fontWeight: 500, lineHeight: '22px', color: 'rgb(255, 255, 255)' }} className="framer-text">
+                <div
+                  className="framer-uxaq5g"
+                  data-framer-name="Features"
+                  style={{
+                    outline: 'none',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'flex-start',
+                    flexShrink: 0,
+                    transform: 'none',
+                    marginBottom: '10px'
+                  }}
+                  data-framer-component-type="RichTextContainer"
+                >
+                  <p
+                    style={{
+                      fontFamily: 'Poppins, Poppins Placeholder, sans-serif',
+                      fontSize: '14px',
+                      fontWeight: 500,
+                      lineHeight: '22px',
+                      color: 'rgb(255, 255, 255)'
+                    }}
+                    className="framer-text"
+                  >
                     <a className="framer-text framer-styles-preset-1b1g0kp" data-styles-preset="dRzQBmjh2" href="./#velemenyek">
                       Vélemények
                     </a>
                   </p>
                 </div>
-                <div className="framer-uxaq5g" data-framer-name="Features" style={{ outline: 'none', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', flexShrink: 0, transform: 'none', marginBottom: '10px' }} data-framer-component-type="RichTextContainer">
-                  <p style={{ fontFamily: 'Poppins, Poppins Placeholder, sans-serif', fontSize: '14px', fontWeight: 500, lineHeight: '22px', color: 'rgb(255, 255, 255)' }} className="framer-text">
-                    <a className="framer-text framer-styles-preset-1b1g0kp" data-styles-preset="dRzQBmjh2" onClick={scrollToFAQ}>
+                <div
+                  className="framer-uxaq5g"
+                  data-framer-name="Features"
+                  style={{
+                    outline: 'none',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'flex-start',
+                    flexShrink: 0,
+                    transform: 'none',
+                    marginBottom: '10px'
+                  }}
+                  data-framer-component-type="RichTextContainer"
+                >
+                  <p
+                    style={{
+                      fontFamily: 'Poppins, Poppins Placeholder, sans-serif',
+                      fontSize: '14px',
+                      fontWeight: 500,
+                      lineHeight: '22px',
+                      color: 'rgb(255, 255, 255)'
+                    }}
+                    className="framer-text"
+                  >
+                    <a
+                      className="framer-text framer-styles-preset-1b1g0kp"
+                      data-styles-preset="dRzQBmjh2"
+                      onClick={scrollToFAQ}
+                    >
                       GY.I.K
                     </a>
                   </p>
                 </div>
-                <div className="framer-uxaq5g" data-framer-name="Features" style={{ outline: 'none', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', flexShrink: 0, transform: 'none', marginBottom: '10px' }} data-framer-component-type="RichTextContainer">
-                  <p style={{ fontFamily: 'Poppins, Poppins Placeholder, sans-serif', fontSize: '14px', fontWeight: 500, lineHeight: '22px', color: 'rgb(255, 255, 255)' }} className="framer-text">
-                    <a className="framer-text framer-styles-preset-1b1g0kp" data-styles-preset="dRzQBmjh2" onClick={scrollToContact}>
+                <div
+                  className="framer-uxaq5g"
+                  data-framer-name="Features"
+                  style={{
+                    outline: 'none',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'flex-start',
+                    flexShrink: 0,
+                    transform: 'none',
+                    marginBottom: '10px'
+                  }}
+                  data-framer-component-type="RichTextContainer"
+                >
+                  <p
+                    style={{
+                      fontFamily: 'Poppins, Poppins Placeholder, sans-serif',
+                      fontSize: '14px',
+                      fontWeight: 500,
+                      lineHeight: '22px',
+                      color: 'rgb(255, 255, 255)'
+                    }}
+                    className="framer-text"
+                  >
+                    <a
+                      className="framer-text framer-styles-preset-1b1g0kp"
+                      data-styles-preset="dRzQBmjh2"
+                      onClick={scrollToContact}
+                    >
                       Kapcsolat
                     </a>
                   </p>
