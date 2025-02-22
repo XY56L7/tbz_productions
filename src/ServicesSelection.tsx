@@ -6,7 +6,7 @@ const ServiceSelection = () => {
   return (
     <div className="my-section container py-5" id="services">
       <div className="row">
-        {/* Bal oldali szöveges tartalom */}
+        {/* Bal oldali szöveg (sticky) */}
         <div className="text-content col-md-6 mb-4 mb-md-0">
           <div className="heading mb-3">
             <h2 className="heading-text">
@@ -15,23 +15,7 @@ const ServiceSelection = () => {
           </div>
           <div className="description">
             <p className="desc-text">
-              Ma már azt a kort éljük ahol szinte elengedhetetlen, hogy aktív
-              social média jelenléte legyen a cégednek. A short-form tartalmak
-              ehhez pedig a legnagyobb fegyvered lesz!
-            </p>
-            <p className="desc-text">
-              Feltéve ha megfelelő kézben van. Legyen szó organikus márka építésről
-              ahol minden a megtekintésekről és a követésekről szól vagy éppen
-              konverzió fókuszú hirdetés videókról, állunk rendelkezésedre! Ugyanis
-              minden téren több ezer videó tapasztalatunk van. Teljeskörű
-              szolgáltatásainkkal célunk, hogy egy kézben megkapj mindent, ami
-              tartalomgyártás.
-            </p>
-            <p className="desc-text">
-              Legyen szó a tiktokról, short-form tartalmakról, reklám és image
-              filmekről vagy éppen fotózásról. Minden projektet alaposan
-              megtervezünk, figyelembe véve az egyedi kéréseket, igényeket és
-              célokat, hogy a legjobb végeredményt érjük el.
+              A mai világban már elengedhetetlenné vált az online jelenlét, hiszen ha NEM LÁTSZOL = NEM JÁTSZOL. Kreatív csapatunk küldetése, hogy ebben segítséget nyújtson Neked és a márkád/céged számára.
             </p>
           </div>
           <div className="button-container mt-3">
@@ -57,15 +41,21 @@ const ServiceSelection = () => {
               }}
             ></div>
             <div className="card-content p-3">
-              <h3 className="card-title">Card 1 Title</h3>
+              <h3 className="card-title">
+                Teljeskörű tartalomgyártás a tervezéstől a posztolásig
+              </h3>
               <p className="card-desc">
-                Description for card 1. Lorem ipsum dolor sit amet.
+                Figyelemfelkeltő rövid videós tartalmak, amelyek hatékonyan vonzzák be a
+                közönséget, miközben stílusosan képviselik márkádat. Érzelmeket váltanak
+                ki és hatékonyan közvetítik az üzenetedet. Ezek a videók ideálisak arra,
+                hogy elérd közönségedet ott, ahol a legtöbb időt töltik: a közösségi médián.
               </p>
               <a href="#" className="btn btn-light custom-btn">
                 Árajánlat <span className="btn-subtext">(24-48H)</span>
               </a>
             </div>
           </div>
+
           {/* Card 2 */}
           <div className="card-item mb-4">
             <div
@@ -76,15 +66,19 @@ const ServiceSelection = () => {
               }}
             ></div>
             <div className="card-content p-3">
-              <h3 className="card-title">Card 2 Title</h3>
+              <h3 className="card-title">
+                Reklám és Image videók készítése
+              </h3>
               <p className="card-desc">
-                Description for card 2. Lorem ipsum dolor sit amet.
+                Magával ragadó, minőségi reklámfilmek, amelyek hatékonyan mesélik el márkád
+                üzenetét és történetét.
               </p>
               <a href="#" className="btn btn-light custom-btn">
                 Árajánlat <span className="btn-subtext">(24-48H)</span>
               </a>
             </div>
           </div>
+
           {/* Card 3 */}
           <div className="card-item mb-4">
             <div
@@ -95,15 +89,18 @@ const ServiceSelection = () => {
               }}
             ></div>
             <div className="card-content p-3">
-              <h3 className="card-title">Card 3 Title</h3>
+              <h3 className="card-title">Fotózás</h3>
               <p className="card-desc">
-                Description for card 3. Lorem ipsum dolor sit amet.
+                Minőségi és karakteres fotók, amelyek valóban kiemelik márkád egyediségét,
+                valamint megmutatják termékeid/szolgáltatásaid értékét. Célunk, hogy a
+                legtöbbet hozzuk ki a márkából.
               </p>
               <a href="#" className="btn btn-light custom-btn">
                 Árajánlat <span className="btn-subtext">(24-48H)</span>
               </a>
             </div>
           </div>
+
           {/* Card 4 */}
           <div className="card-item mb-4">
             <div
@@ -114,9 +111,33 @@ const ServiceSelection = () => {
               }}
             ></div>
             <div className="card-content p-3">
-              <h3 className="card-title">Card 4 Title</h3>
+              <h3 className="card-title">Social media management</h3>
               <p className="card-desc">
-                Description for card 4. Lorem ipsum dolor sit amet.
+                Mi gondoskodunk a közösségi médiád sikeréről! Facebook, Instagram, TikTok és
+                YouTube profiljaidat aktívan frissítjük, vonzó tartalommal töltjük meg.
+              </p>
+              <a href="#" className="btn btn-light custom-btn">
+                Árajánlat <span className="btn-subtext">(24-48H)</span>
+              </a>
+            </div>
+          </div>
+
+          {/* Card 5 */}
+          <div className="card-item mb-4">
+            <div
+              className="card-img"
+              style={{
+                backgroundImage:
+                  "url(https://via.placeholder.com/400x300?text=Card+5)",
+              }}
+            ></div>
+            <div className="card-content p-3">
+              <h3 className="card-title">
+                Weboldal tervezés és fejlesztés
+              </h3>
+              <p className="card-desc">
+                Professzionális, modern, esztétikus, felhasználóbarát weboldalak, amelyek
+                megfelelnek céged igényeinek és céljainak.
               </p>
               <a href="#" className="btn btn-light custom-btn">
                 Árajánlat <span className="btn-subtext">(24-48H)</span>

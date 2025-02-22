@@ -14,5 +14,22 @@
       display: inline-block !important;
       width: auto !important;
     }
+    header.framer-16709mg {
+      margin-bottom: 80px; /* tetszőleges érték */
+    }
+    
+  }
+
+  header.framer-16709mg {
+    margin-bottom: 80px; /* tetszőleges érték */
+  }
+  
+  .highlight {
+    /* Using text-shadow to simulate a white outline */
+    text-shadow: 
+      1px 1px 0 #fff,
+      -1px 1px 0 #fff,
+      1px -1px 0 #fff,
+      -1px -1px 0 #fff;
   }
   

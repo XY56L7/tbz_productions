@@ -1,23 +1,22 @@
-/* Alap stílusok */
+/* Base styling */
 .my-section {
   background-color: #000;
   color: #fff;
 }
 
-/* A szöveges tartalom lejjebb tolása és sticky viselkedés desktop nézetben */
+/* Push the text content down and use sticky in desktop view */
 .text-content {
-  margin-top: 80px; /* Ez biztosítja a kezdeti távolságot */
+  margin-top: 80px; /* initial spacing */
 }
 
-/* Sticky megoldás csak desktop nézetben */
 @media (min-width: 992px) {
   .text-content {
     position: sticky;
-    top: 80px; /* Ez a felső távolság fixálva */
+    top: 80px; /* fix to top at 80px */
   }
 }
 
-/* Szöveges tartalom stílusai */
+/* Text content styles */
 .heading-text {
   font-size: 32px;
   line-height: 1.3;
@@ -29,36 +28,45 @@
   margin-bottom: 1rem;
 }
 
-/* Gomb stílus */
+/* Button style */
 .custom-btn {
   border-radius: 100px;
   padding: 10px 24px;
   font-weight: 500;
-  background-color: #00D28C; /* Smaragdzöld háttér */
-  color: #000; /* Fekete szöveg */
+  background-color: #00D28C; /* emerald green */
+  color: #000; /* black text */
   border: none;
   transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); /* Alap árnyék */
-  outline: 2px solid transparent; /* Alap outline */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1),
+              0 1px 3px rgba(0, 0, 0, 0.08);
+  outline: 2px solid transparent;
 }
 
 .custom-btn:hover {
-  background-color: #00B87A; /* Sötétebb zöld hover hatáshoz */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.12); /* Nagyobb árnyék hover esetén */
-  outline: 2px solid #00D28C; /* Smaragdzöld outline hover esetén */
-  transform: translateY(-2px); /* Enyhe emelkedés hover esetén */
+  background-color: #00B87A; /* darker green on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15),
+              0 3px 6px rgba(0, 0, 0, 0.12);
+  outline: 2px solid #00D28C;
+  transform: translateY(-2px);
 }
 
 .custom-btn:active {
-  transform: translateY(0); /* Visszaállítás aktiváláskor */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); /* Alap árnyék aktiváláskor */
+  transform: translateY(0);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1),
+              0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
-/* Kártya stílusok */
+/* Card styles */
 .card-item {
   border-radius: 24px;
   overflow: hidden;
-  background: linear-gradient(90deg, #00D28C 0%, #00B87A 100%); /* Smaragdzöld gradienst */
+  /* Vertical gradient: top #002c23, middle #005945, bottom #002C23 */
+  background: linear-gradient(
+    to bottom,
+    #002c23 0%,
+    #005945 50%,
+    #002C23 100%
+  );
 }
 
 .card-img {
@@ -71,17 +79,17 @@
 .card-title {
   font-size: 24px;
   margin-bottom: 0.75rem;
-  color: #fff; /* Fehér szöveg */
+  color: #fff;
 }
 
 .card-desc {
   opacity: 0.75;
   font-size: 14px;
   margin-bottom: 1rem;
-  color: #fff; /* Fehér szöveg */
+  color: #fff;
 }
 
-/* Reszponzív stílusok */
+/* Responsive adjustments */
 @media (max-width: 809px) {
   .heading-text {
     font-size: 28px;
