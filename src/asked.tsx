@@ -2,34 +2,45 @@ import React, { useState, useEffect, CSSProperties } from "react";
 
 const faqData = [
   {
-    question: "Hogyan zajlik le a közös munka veletek?",
-    answer:
-      "A közös munka során megbeszéljük az igényeket, a célokat és a konkrét lépéseket. Ez magában foglalja az előkészítést, a forgatást és az utómunkát."
+    question: "Hogy néz ki a közös munka?",
+    answer: (
+      <div>
+        <p><strong>Kapcsolatfelvétel</strong></p>
+        <p>Töltsd ki az űrlapot vagy foglalj egy teljesen díjmentes és kötelezettségmentes konzultációt a naptárban (ha a Calendly megoldható), és 24 órán belül felvesszük veled a kapcsolatot a részletek átbeszéléséhez.</p>
+        <p><strong>Ismerkedés, Start meeting</strong></p>
+        <p>Személyes vagy online konzultáció keretében megismerjük részletesen vállalkozásod, igényeid és elképzeléseid. Mi pedig bemutatjuk, hogyan tudjuk ezeket megvalósítani.</p>
+        <p><strong>Megegyezés, szerződéskötés</strong></p>
+        <p>Amennyiben elképzeléseink összhangban állnak, és szimpatikusnak találod csapatunk munkamódszerét, egy hivatalos szerződés megkötésével megkezdhetjük az együttműködést.</p>
+        <p><strong>Együttműködés kezdetének meghatározása</strong></p>
+        <p>Lefixáljuk a közös munka kezdetét.</p>
+        <p><strong>Stratégiai tervezés</strong></p>
+        <p>A szerződéskötést követően azonnal elkezdjük a stratégiai tervezést. Ezeket ismertetjük, majd közösen véglegesítjük a koncepciót, hogy az a lehető legjobban illeszkedjen a céljaidhoz. A jóváhagyásod után részletesen kidolgozzuk a havi tartalmakat.</p>
+        <p><strong>Forgatási időpont, helyszín és szereplők egyeztetése</strong></p>
+        <p>Leszervezzük a forgatás időpontját, helyszínét és szereplőit.</p>
+        <p><strong>Forgatókönyvek kidolgozása</strong></p>
+        <p>Professzionális forgatókönyveket készítünk, amelyek bemutatják a videók scriptjeit, vizuális koncepcióját, illetve a fényképek üzenetét.</p>
+        <p><strong>Helyszíni forgatás</strong></p>
+        <p>Csapatunk, amely a legmodernebb technológiával és szakmai tapasztalattal dolgozik, a forgatás minden szakaszában a legmagasabb színvonalat képviseli. Az elképzeléseid figyelembe véve, prémium minőségű tartalmakat készítünk, amelyek hatékonyan támogatják márkád/céged kommunikációját.</p>
+        <p><strong>Vágás és utómunka</strong></p>
+        <p>Az elkészült nyers videókat feliratozzuk, animáljuk, színezzük és effektekkel látjuk el. A vágás során a legújabb trendeket és dizájnokat követjük, hogy modern, kreatív végeredményt kapjunk. Az elkészült nyers fotókat megszerkesztjük és vizuálisan optimalizáljuk.</p>
+        <p><strong>Kreatívok átadása, véleményezés</strong></p>
+        <p>A kész anyagokat átadjuk jóváhagyásra, amennyiben bármi észrevétel felmerül, korrigáljuk.</p>
+        <p><strong>Social media management</strong></p>
+        <p>Lehetőség van Social media managementre is, amely magában foglalja a közösségi média oldalak kezelését. Tapasztalatok alapján bevált módszereinkkel garantáltan jobb teljesítményt tudunk elérni, de természetesen a kész anyagokat Te is kezelheted. A posztolást követően minden tartalmat részletesen elemzünk a statisztikai adatok alapján, így pontos képet kapunk célközönséged igényeiről és preferenciáiról.</p>
+      </div>
+    )
   },
   {
-    question: "Milyen költségekkel számolhatok?",
-    answer:
-      "A költségek függnek a projekt komplexitásától, a forgatási napok számától, a szükséges eszközöktől és az utómunka igényeitől."
+    question: "Mennyibe kerül?",
+    answer: "Minden projekt egyedi, ezért teljesen személyre szabott árajánlatot készítünk. Kérj bátran ajánlatot, és egyeztetjük a részleteket!"
   },
   {
-    question: "Mennyi időt vesz igénybe egy forgatás?",
-    answer:
-      "Általában egy forgatási napot vesz igénybe, de a pontos időtartam a projekt méretétől és összetettségétől függ."
+    question: "Miért éri ez meg nekem?",
+    answer: "Fő célunk, hogy teljes mértékben levegyük a tartalomgyártás terhét a válladról. Ugye milyen jól hangzik? A professzionális, minőségi tartalomgyártás drága eszközöket és egy teljes csapatot igényel – stratégiai tervezőt, szövegírót, operatőrt, vágót, fotóst és projektmenedzsert. Ha mindezt saját magadnak akarnád összeállítani, az jelentős idő- és költségráfordítást igényelne. Nálunk viszont mindent egy kézben kapsz meg, gördülékenyen és hatékonyan. Ha Te szerepelsz a videókban és a képeken, a forgatások időtartama a videók és képek mennyiségétől függően alakulnak, de általában havi egy alkalommal 6-8 órát vesznek igénybe. Ezen felül csak annyi a dolgod, hogy véleményezd és jóváhagyd a kész anyagokat."
   },
   {
-    question: "Ki fog szerepelni a videókban?",
-    answer:
-      "Az előre egyeztetett koncepció alapján készítjük el a videókat. Az ügyfél vagy az általunk biztosított szereplők is részt vehetnek."
-  },
-  {
-    question: "Hol használhatom fel a tartalmakat?",
-    answer:
-      "A videókat, fotókat és egyéb tartalmakat szabadon felhasználhatod weboldaladon, közösségi média felületeiden és promóciós anyagokban."
-  },
-  {
-    question: "Tudok többnyelvű tartalmakat is készíteni?",
-    answer:
-      "Igen, lehetőség van többnyelvű tartalmak készítésére. Ezt előzetesen egyeztetjük, és az utómunka során készítjük el a különböző nyelvi verziókat."
+    question: "Ki fog szerepelni?",
+    answer: "2 opció van: a céged belsős embere szerepel vagy amennyiben szeretnéd, mi is tudunk biztosítani szereplőt."
   }
 ];
 
@@ -90,7 +101,6 @@ const FAQ: React.FC = () => {
   const gridContainerStyle: CSSProperties = {
     display: "grid",
     gridTemplateColumns: "1fr"
-    // A boxok közötti távolságot itt nem gap-pel kezeljük, hanem az egyes elemeknél negatív margin-top segítségével érjük el az átfedést.
   };
 
   // Az egyes FAQ box alapstílusa: gradient háttérrel, lekerekített sarkokkal és árnyékkal
@@ -146,7 +156,7 @@ const FAQ: React.FC = () => {
       const itemStyle: CSSProperties = {
         ...accordionItemBaseStyle,
         marginTop: index === 0 ? "0" : "-20px",
-        // A későbbi elemeknek nagyobb z-indexet adunk, hogy az alsó boxok "a tetejére" kerüljenek
+        marginBottom: index === 0 ? "20px" : "0", // Az első elem után margin-bottom
         zIndex: faqData.length - index
       };
       return (
