@@ -90,7 +90,7 @@ const Footer: React.FC = () => {
         </div>
         {/* Jobb oldal: jogi információ */}
         <div style={rightTextStyle}>
-          © 2025 TBZ Productions Kft. – Minden jog fenntartva.
+          © 2025 TBZ Productions – Minden jog fenntartva.
         </div>
       </div>
 

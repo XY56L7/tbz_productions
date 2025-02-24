@@ -36,17 +36,16 @@ const faqData = [
 const FAQ: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
-  // We still listen for resize in case you want to add more responsive behavior later.
+  // Reszponzív viselkedéshez, ha később további módosítást szeretnél
   const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth < 768);
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // ---------- Styles ----------
+  // ---------- Inline stílusok ----------
+
   const sectionStyle: CSSProperties = {
     backgroundColor: "#000",
     padding: "60px 20px"
@@ -60,14 +59,14 @@ const FAQ: React.FC = () => {
   const mainHeadingStyle: CSSProperties = {
     color: "#fff",
     fontSize: "2.2rem",
-    textAlign: "center" as const,
+    textAlign: "center",
     marginBottom: "1rem"
   };
 
   const subHeadingStyle: CSSProperties = {
     color: "#ccc",
     fontSize: "1rem",
-    textAlign: "center" as const,
+    textAlign: "center",
     maxWidth: "700px",
     margin: "0 auto 2rem"
   };
@@ -83,30 +82,31 @@ const FAQ: React.FC = () => {
   };
 
   const contactLinkWrapperStyle: CSSProperties = {
-    textAlign: "center" as const,
+    textAlign: "center",
     marginBottom: "3rem"
   };
 
-  // In desktop view, we want a single column grid.
+  // A boxokat egy egysoros elrendezésben jelenítjük meg (1 oszlop)
   const gridContainerStyle: CSSProperties = {
     display: "grid",
-    gridTemplateColumns: "1fr",
-    gap: "30px"
+    gridTemplateColumns: "1fr"
+    // A boxok közötti távolságot itt nem gap-pel kezeljük, hanem az egyes elemeknél negatív margin-top segítségével érjük el az átfedést.
   };
 
-  const accordionItemStyle: CSSProperties = {
-    backgroundColor: "#111",
+  // Az egyes FAQ box alapstílusa: gradient háttérrel, lekerekített sarkokkal és árnyékkal
+  const accordionItemBaseStyle: CSSProperties = {
+    background: "linear-gradient(to bottom, #002c23 0%, #005945 50%, #002C23 100%)",
     color: "#fff",
     borderRadius: "16px",
     overflow: "hidden",
-    boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.3)"
+    boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.3)",
+    position: "relative"
   };
 
   const accordionHeaderStyle: CSSProperties = {
     padding: "1.5rem 2rem",
     cursor: "pointer",
     fontWeight: 500,
-    width: "100%",
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center"
@@ -131,7 +131,7 @@ const FAQ: React.FC = () => {
 
   const accordionBodyStyle = (isActive: boolean): CSSProperties => ({
     padding: "1.5rem 2rem",
-    borderTop: "1px solid #333",
+    borderTop: "1px solid rgba(255, 255, 255, 0.3)",
     display: isActive ? "block" : "none"
   });
 
@@ -139,12 +139,18 @@ const FAQ: React.FC = () => {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
-  // Render FAQ items once
   const renderFAQItems = () => {
     return faqData.map((item, index) => {
       const isActive = activeIndex === index;
+      // Az első elemnél nincs átfedés, a többi esetén -20px margin-top, így részben "elfedik" egymást
+      const itemStyle: CSSProperties = {
+        ...accordionItemBaseStyle,
+        marginTop: index === 0 ? "0" : "-20px",
+        // A későbbi elemeknek nagyobb z-indexet adunk, hogy az alsó boxok "a tetejére" kerüljenek
+        zIndex: faqData.length - index
+      };
       return (
-        <div key={index} style={accordionItemStyle}>
+        <div key={index} style={itemStyle}>
           <div style={accordionHeaderStyle} onClick={() => toggleAccordion(index)}>
             <span style={headerTextStyle}>{item.question}</span>
             <span style={plusCircleStyle}>{isActive ? "-" : "+"}</span>
@@ -156,7 +162,7 @@ const FAQ: React.FC = () => {
   };
 
   return (
-    <section style={sectionStyle} id='FAQ'>
+    <section style={sectionStyle} id="FAQ">
       <div style={containerStyle}>
         <h2 style={mainHeadingStyle}>Kérdésed van? Itt megtalálod!</h2>
         <p style={subHeadingStyle}>

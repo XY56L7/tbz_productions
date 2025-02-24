@@ -3,9 +3,7 @@ import './Header.css';
 import wallpaper from './wallpaper.png';
 
 const headings = [
-  [
-    { text: "MI VAGYUNK A TBZ. PRODUCTIONS!", highlight: true }
-  ],
+  [{ text: "MI VAGYUNK A TBZ. PRODUCTIONS!", highlight: true }],
   [
     { text: "SZERETNÉD", highlight: false },
     { text: "EGY KÉZBEN TARTANI", highlight: true },
@@ -15,25 +13,17 @@ const headings = [
     { text: "EGYEDI ÉS PROFI MÉDIATARTALMAK A", highlight: false },
     { text: "MÁRKÁDNAK ÉS VÁLLALKOZÁSODNAK", highlight: true }
   ],
-  [
-    { text: "TE MÁRKÁD, TE TÖRTÉNETED", highlight: true }
-  ],
-  [
-    { text: "TERVEZÉSTŐL A MEGVALÓSÍTÁSIG", highlight: true }
-  ]
+  [{ text: "TE MÁRKÁD, TE TÖRTÉNETED", highlight: true }],
+  [{ text: "TERVEZÉSTŐL A MEGVALÓSÍTÁSIG", highlight: true }]
 ];
 
 const Header = () => {
   const [currentHeadingIndex, setCurrentHeadingIndex] = useState(0);
-  const [backgroundError, setBackgroundError] = useState(false); // State to track background loading errors
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentHeadingIndex((prevIndex) => (prevIndex + 1) % headings.length);
-    }, 4000); // Change heading every 4 seconds
-
-    // Optional: Test if the image loads
-    
+    }, 4000);
 
     return () => clearInterval(interval);
   }, []);
@@ -58,11 +48,11 @@ const Header = () => {
           height: '100%',
           top: 0,
           left: 0,
-          backgroundImage: `url(${wallpaper})`, // Fallback if image fails
+          backgroundImage: `url(${wallpaper})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          filter: 'blur(10px)', // Apply blur effect to the background
-          zIndex: 0 // Ensure it stays behind the text
+          filter: 'blur(10px)',
+          zIndex: 0
         }}
       ></div>
       <div
@@ -115,8 +105,10 @@ const Header = () => {
                             textShadow:
                               '1px 1px 0 #fff, -1px 1px 0 #fff, 1px -1px 0 #fff, -1px -1px 0 #fff'
                           }
-                        : {textShadow:
-                          '1px 1px 0 #003B2E, -1px 1px 0 #003B2E, 1px -1px 0 #003B2E, -1px -1px 0 #003B2E'}
+                        : {
+                            textShadow:
+                              '1px 1px 0 #003B2E, -1px 1px 0 #003B2E, 1px -1px 0 #003B2E, -1px -1px 0 #003B2E'
+                          }
                     }
                   >
                     {segment.text}
@@ -126,87 +118,79 @@ const Header = () => {
             </div>
           </div>
         </div>
-        <div
-          className="framer-ahrh2z"
-          style={{
-            marginTop: '40px', // Consistent spacing below the text
-            textAlign: 'center',
-            width: '100%' // Ensure it spans the full width
-          }}
-        >
-          <div className="ssr-variant hidden-1q3dwis hidden-1303b6h">
-            <div className="framer-7we1a5-container">
-              <a
-                className="framer-BTbjQ framer-dKer1 framer-bhZhX framer-152rnsu framer-v-1mb0zqp framer-1qzgy94"
-                data-framer-name="White"
-                data-highlight="true"
-                style={{
-                  backgroundColor: '#fff',
-                  borderRadius: '100px',
-                  width: '200px',
-                  display: 'inline-block',
-                  padding: '10px'
-                }}
-                onClick={() => {
-                  const mainSection = document.getElementById('services');
-                  if (mainSection) {
-                    mainSection.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
-                tabIndex={0}
-              >
-                <div
-                  className="framer-1wnb748"
-                  data-framer-name="Main Text"
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center'
-                  }}
-                  data-framer-component-type="RichTextContainer"
-                >
-                  <p
-                    className="framer-text framer-styles-preset-1ress3h"
-                    style={{ color: '#212121', margin: 0, textAlign: 'center' }}
-                  >
-                    Szolgáltatásaink
-                  </p>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div
-            className="framer-tm7nua"
-            data-framer-appear-id="tm7nua"
-            data-framer-name="Description"
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              marginTop: '15px' // Consistent spacing above the email
-            }}
-            data-framer-component-type="RichTextContainer"
-          >
-            <p
-              className="framer-text framer-styles-preset-1ff0x4j"
-              style={{ textAlign: 'center', color: '#fff', margin: 0 }}
+        {/* Egyéb tartalom itt */}
+      </div>
+
+      {/* FIX gomb: Külön van elhelyezve, így nem érinti a dinamikus szöveg */}
+      <div className="fixed-button">
+        <div className="ssr-variant hidden-1q3dwis hidden-1303b6h">
+          <div className="framer-7we1a5-container">
+            <a
+              className="framer-BTbjQ framer-dKer1 framer-bhZhX framer-152rnsu framer-v-1mb0zqp framer-1qzgy94"
+              data-framer-name="White"
+              data-highlight="true"
+              style={{
+                backgroundColor: '#fff',
+                borderRadius: '100px',
+                width: '100%', /* A gomb szélessége most 100% lesz a konténer szélességéhez igazítva */
+                display: 'inline-block',
+                padding: '10px'
+              }}
+              onClick={() => {
+                const mainSection = document.getElementById('services');
+                if (mainSection) {
+                  mainSection.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+              tabIndex={0}
             >
-              <a
-                className="framer-text framer-styles-preset-gd5tqz"
-                href="mailto:info@tbzproductions.hu"
-                target="_blank"
-                rel="noopener noreferrer"
+              <div
+                className="framer-1wnb748"
+                data-framer-name="Main Text"
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center'
+                }}
+                data-framer-component-type="RichTextContainer"
               >
-                info@tbzproductions.hu
-              </a>
-            </p>
+                <p
+                  className="framer-text framer-styles-preset-1ress3h"
+                  style={{ color: '#212121', margin: 0, textAlign: 'center' }}
+                >
+                  Szolgáltatásaink
+                </p>
+              </div>
+            </a>
           </div>
         </div>
+        <div
+          className="framer-tm7nua"
+          data-framer-appear-id="tm7nua"
+          data-framer-name="Description"
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            marginTop: '15px'
+          }}
+          data-framer-component-type="RichTextContainer"
+        >
+          <p
+            className="framer-text framer-styles-preset-1ff0x4j"
+            style={{ textAlign: 'center', color: '#fff', margin: 0 }}
+          >
+            {/* <a style={{ marginLeft:'20%'}}
+              className="framer-text framer-styles-preset-gd5tqz"
+              href="mailto:info@tbzproductions.hu"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              info@tbzproductions.hu
+            </a> */}
+          </p>
+        </div>
       </div>
-      <div
-        className="framer-1pybv41 hidden-17mnt2g hidden-1q3dwis"
-        id="nav-trigger"
-      ></div>
     </header>
   );
 };
