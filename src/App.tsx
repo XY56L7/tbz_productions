@@ -6,6 +6,7 @@ import Asked from './asked';
 import CallToActionCard from './ActionCard';
 import Contact from './Contact';
 import Footer from './Footer';
+import Partnerships from './Partnerships';
 
 const App = () => {
   return (
@@ -33,6 +34,7 @@ const App = () => {
         </div>
         <Header />
         <Navbar />
+        <Partnerships />
         <ServicesSection />
         <Asked />
         <CallToActionCard />

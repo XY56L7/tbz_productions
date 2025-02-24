@@ -2,18 +2,40 @@
 .my-section {
   background-color: #000;
   color: #fff;
+  padding-top: 80px; /* Ensure some padding at the top */
+  padding-bottom: 80px; /* Ensure some padding at the bottom */
 }
 
 /* Push the text content down and use sticky in desktop view */
 .text-content {
-  margin-top: 80px; /* initial spacing */
+  margin-top: 80px; /* Initial spacing */
 }
 
 @media (min-width: 992px) {
   .text-content {
     position: sticky;
-    top: 80px; /* fix to top at 80px */
+    top: 50%; /* Center vertically in the viewport */
+    transform: translateY(-50%); /* Offset to center perfectly */
+    align-self: flex-start; /* Ensure it sticks to the left side */
+    max-height: calc(100vh - 160px); /* Limit height to viewport minus padding, preventing overflow beyond cards */
+    overflow-y: auto; /* Allow scrolling if content exceeds max-height */
   }
+
+  /* Ensure the sticky text stops when the cards reach the bottom */
+  .cards {
+    position: relative;
+  }
+
+  /* Calculate the height of the cards container dynamically or ensure it extends to the full content */
+  .cards::after {
+    content: "";
+    display: block;
+    height: 0; /* Placeholder for dynamic height */
+    visibility: hidden;
+  }
+
+  /* Optional: Use JavaScript or additional CSS to detect when cards reach the bottom */
+  /* For simplicity, we’ll rely on the max-height and natural scroll behavior here */
 }
 
 /* Text content styles */
@@ -37,23 +59,20 @@
   color: #000; /* black text */
   border: none;
   transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1),
-              0 1px 3px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
   outline: 2px solid transparent;
 }
 
 .custom-btn:hover {
   background-color: #00B87A; /* darker green on hover */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15),
-              0 3px 6px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.12);
   outline: 2px solid #00D28C;
   transform: translateY(-2px);
 }
 
 .custom-btn:active {
   transform: translateY(0);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1),
-              0 1px 3px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
 /* Card styles */
@@ -61,12 +80,7 @@
   border-radius: 24px;
   overflow: hidden;
   /* Vertical gradient: top #002c23, middle #005945, bottom #002C23 */
-  background: linear-gradient(
-    to bottom,
-    #002c23 0%,
-    #005945 50%,
-    #002C23 100%
-  );
+  background: linear-gradient(to bottom, #002c23 0%, #005945 50%, #002C23 100%);
 }
 
 .card-img {

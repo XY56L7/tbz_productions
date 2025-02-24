@@ -1,0 +1,92 @@
+/* Partnerships.css */
+.partnerships-section {
+    text-align: center;
+  }
+  
+  .partnerships-title {
+    color: #00d28c;
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .partnership-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 200px;
+    min-height: 150px;
+  }
+  
+  .logo {
+    width: 100%;
+    max-width: 120px;
+    height: auto;
+    border-radius: 10px;
+    transition: filter 0.3s ease;
+  }
+  
+  .logo-text {
+    color: #fff;
+    font-size: 14px;
+    display: block;
+    margin-top: 1rem;
+  }
+  
+  .grayscale {
+    filter: grayscale(100%);
+  }
+  
+  .desktop-grayscale:hover {
+    filter: grayscale(0%);
+  }
+  
+  .partnership-item:hover .logo-text {
+    color: #fff;
+  }
+  
+  /* Mobil nézet beállításai */
+  @media (max-width: 767px) {
+    .partnerships-title {
+      font-size: 20px;
+    }
+    .logo {
+      max-width: 100px;
+    }
+    .logo-text {
+      font-size: 12px;
+    }
+    .desktop-grayscale,
+    .desktop-grayscale:hover {
+      filter: grayscale(0%);
+    }
+    .partnership-item {
+      min-height: 150px;
+      padding: 10px 0;
+    }
+    .logo-text {
+      margin-top: 0.5rem;
+    }
+    .row > .col-6 {
+      margin-bottom: 2rem;
+    }
+    .col-6 {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  
+  /* Desktop nézet: nagyobb hézag a logók között */
+  @media (min-width: 992px) {
+    .custom-gap {
+      gap: 4rem;
+    }
+
+    .partnerships-section {
+        margin-bottom: 7.5em;
+      }
+  }

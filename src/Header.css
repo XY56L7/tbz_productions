@@ -1,35 +1,32 @@
+/* Base styling for the header */
+header.framer-16709mg {
+  margin-bottom: 80px;
+}
+
+/* Media query for mobile devices (max-width: 768px) */
 @media (max-width: 768px) {
-    /* Elrejti azokat a gomb változatokat, melyek tartalmazzák a hidden-17mnt2g osztályt */
-    /* .ssr-variant.hidden-17mnt2g {
-      display: none !important;
-    } */
-  
-    /* Csak a maradék első változat jelenjen meg, és legyen középre igazítva */
-    .framer-ahrh2z {
-      text-align: center; /* A belső inline(-block) elemek középre kerülnek */
-    }
-    
-    /* Ha szükséges, állítsuk a gomb szélességét is automatikusra */
-    .ssr-variant.hidden-1q3dwis.hidden-1303b6h {
-      display: inline-block !important;
-      width: auto !important;
-    }
-    header.framer-16709mg {
-      margin-bottom: 80px; /* tetszőleges érték */
-    }
-    
+  /* Hide button variants with the hidden-17mnt2g class */
+  /* .ssr-variant.hidden-17mnt2g {
+    display: none !important;
+  } */
+
+  /* Ensure the remaining button variant is centered */
+  .framer-ahrh2z {
+    text-align: center; /* Centers inline or inline-block elements */
   }
 
-  header.framer-16709mg {
-    margin-bottom: 80px; /* tetszőleges érték */
+  /* Adjust button width if needed */
+  .ssr-variant.hidden-1q3dwis.hidden-1303b6h {
+    display: inline-block !important;
+    width: auto !important;
   }
-  
-  .highlight {
-    /* Using text-shadow to simulate a white outline */
-    text-shadow: 
-      1px 1px 0 #fff,
-      -1px 1px 0 #fff,
-      1px -1px 0 #fff,
-      -1px -1px 0 #fff;
-  }
-  
+}
+
+/* Highlight style for text (keeping the text-shadow for highlighted text) */
+.highlight {
+  text-shadow: 
+    1px 1px 0 #fff,
+    -1px 1px 0 #fff,
+    1px -1px 0 #fff,
+    -1px -1px 0 #fff;
+}

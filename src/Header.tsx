@@ -1,25 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import './Header.css';
+import wallpaper from './wallpaper.png';
 
 const headings = [
   [
-    { text: "MI VAGYUNK A ", highlight: false },
-    { text: "TBZ. PRODUCTIONS!", highlight: true }
+    { text: "MI VAGYUNK A TBZ. PRODUCTIONS!", highlight: true }
   ],
   [
-    { text: "SZERETNÉD ", highlight: false },
+    { text: "SZERETNÉD", highlight: false },
     { text: "EGY KÉZBEN TARTANI", highlight: true },
-    { text: " AZ ONLINE JELENLÉTED?", highlight: false }
+    { text: "AZ ONLINE JELENLÉTED?", highlight: false }
   ],
   [
-    { text: "EGYEDI ÉS PROFI MÉDIATARTALMAK A ", highlight: false },
+    { text: "EGYEDI ÉS PROFI MÉDIATARTALMAK A", highlight: false },
     { text: "MÁRKÁDNAK ÉS VÁLLALKOZÁSODNAK", highlight: true }
   ],
   [
-    { text: "TE ", highlight: true },
-    { text: "MÁRKÁD, ", highlight: false },
-    { text: "TE ", highlight: true },
-    { text: "TÖRTÉNETED", highlight: false }
+    { text: "TE MÁRKÁD, TE TÖRTÉNETED", highlight: true }
   ],
   [
     { text: "TERVEZÉSTŐL A MEGVALÓSÍTÁSIG", highlight: true }
@@ -28,72 +25,59 @@ const headings = [
 
 const Header = () => {
   const [currentHeadingIndex, setCurrentHeadingIndex] = useState(0);
+  const [backgroundError, setBackgroundError] = useState(false); // State to track background loading errors
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentHeadingIndex((prevIndex) => (prevIndex + 1) % headings.length);
     }, 4000); // Change heading every 4 seconds
+
+    // Optional: Test if the image loads
+    
+
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <header className="framer-16709mg" data-framer-name="Hero Section">
-      <div className="framer-113wd9s" data-framer-name="BG">       
-        <div className="ssr-variant">
-          <div
-            className="framer-1di1bym-container"
-            style={{ willChange: 'transform', opacity: 1, transform: 'none' }}
-          >
-            <video
-              src="https://framerusercontent.com/assets/a1hvWk1WbwKQRHiqYm2y0UdHe7M.mp4"
-              loop
-              preload="auto"
-              poster="https://framerusercontent.com/images/lGGQGTWaeRqSnE3anMrQcGmD4o.png?scale-down-to=1024"
-              muted
-              playsInline
-              autoPlay
-              style={{
-                cursor: 'auto',
-                width: '100%',
-                height: '100%',
-                borderRadius: '0px',
-                display: 'block',
-                objectFit: 'cover',
-                backgroundColor: 'rgba(0, 0, 0, 0)',
-                objectPosition: '50% 50%'
-              }}
-            ></video>
-          </div>
-        </div>
-        <div className="ssr-variant hidden-1q3dwis">
-          <div
-            className="framer-1di1bym-container"
-            style={{ opacity: 1, transform: 'none' }}
-          >
-            <video
-              src="https://framerusercontent.com/assets/a1hvWk1WbwKQRHiqYm2y0UdHe7M.mp4"
-              loop
-              preload="none"
-              poster="https://framerusercontent.com/images/lGGQGTWaeRqSnE3anMrQcGmD4o.png?scale-down-to=1024"
-              muted
-              playsInline
-              autoPlay
-              style={{
-                cursor: 'auto',
-                width: '100%',
-                height: '100%',
-                borderRadius: '0px',
-                display: 'block',
-                objectFit: 'cover',
-                backgroundColor: 'rgba(0, 0, 0, 0)',
-                objectPosition: '50% 50%'
-              }}
-            ></video>
-          </div>
-        </div>
-        <div className="framer-17pyaiw" data-framer-name="BG"></div>
-      </div>
-      <div className="framer-y7w8l1" data-framer-name="title">
+    <header
+      className="framer-16709mg"
+      data-framer-name="Hero Section"
+      style={{
+        width: '100%',
+        height: '800px',
+        overflow: 'hidden',
+        position: 'relative'
+      }}
+    >
+      <div
+        className="framer-113wd9s"
+        data-framer-name="BG"
+        style={{
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          top: 0,
+          left: 0,
+          backgroundImage: `url(${wallpaper})`, // Fallback if image fails
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          filter: 'blur(10px)', // Apply blur effect to the background
+          zIndex: 0 // Ensure it stays behind the text
+        }}
+      ></div>
+      <div
+        className="framer-y7w8l1"
+        data-framer-name="title"
+        style={{
+          position: 'relative',
+          zIndex: 1,
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}
+      >
         <div className="framer-1b880ke">
           <div className="framer-1v8xiey" id="navbar-scroll-trigger">
             <div
@@ -102,13 +86,24 @@ const Header = () => {
               style={{
                 display: 'flex',
                 flexDirection: 'column',
-                justifyContent: 'flex-start'
+                justifyContent: 'center',
+                height: 'auto',
+                overflow: 'visible'
               }}
               data-framer-component-type="RichTextContainer"
             >
               <h1
                 className="framer-text framer-styles-preset-13gpyit"
-                style={{ color: '#fff' }}
+                style={{
+                  color: '#fff',
+                  margin: 0,
+                  lineHeight: '1.5',
+                  whiteSpace: 'pre-wrap',
+                  textAlign: 'center',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '20px'
+                }}
               >
                 {headings[currentHeadingIndex].map((segment, idx) => (
                   <span
@@ -120,7 +115,8 @@ const Header = () => {
                             textShadow:
                               '1px 1px 0 #fff, -1px 1px 0 #fff, 1px -1px 0 #fff, -1px -1px 0 #fff'
                           }
-                        : {}
+                        : {textShadow:
+                          '1px 1px 0 #003B2E, -1px 1px 0 #003B2E, 1px -1px 0 #003B2E, -1px -1px 0 #003B2E'}
                     }
                   >
                     {segment.text}
@@ -128,24 +124,16 @@ const Header = () => {
                 ))}
               </h1>
             </div>
-            <div
-              className="framer-bnplt4"
-              data-framer-appear-id="bnplt4"
-              data-framer-name="Description"
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'flex-start',
-                opacity: 1,
-                transform: 'translateY(2px)'
-              }}
-              data-framer-component-type="RichTextContainer"
-            >
-              {/* Optional description */}
-            </div>
           </div>
         </div>
-        <div className="framer-ahrh2z" style={{ marginTop: '50px' }}>
+        <div
+          className="framer-ahrh2z"
+          style={{
+            marginTop: '40px', // Consistent spacing below the text
+            textAlign: 'center',
+            width: '100%' // Ensure it spans the full width
+          }}
+        >
           <div className="ssr-variant hidden-1q3dwis hidden-1303b6h">
             <div className="framer-7we1a5-container">
               <a
@@ -155,7 +143,9 @@ const Header = () => {
                 style={{
                   backgroundColor: '#fff',
                   borderRadius: '100px',
-                  width: '100%'
+                  width: '200px',
+                  display: 'inline-block',
+                  padding: '10px'
                 }}
                 onClick={() => {
                   const mainSection = document.getElementById('services');
@@ -171,13 +161,13 @@ const Header = () => {
                   style={{
                     display: 'flex',
                     flexDirection: 'column',
-                    justifyContent: 'flex-start'
+                    justifyContent: 'center'
                   }}
                   data-framer-component-type="RichTextContainer"
                 >
                   <p
                     className="framer-text framer-styles-preset-1ress3h"
-                    style={{ color: '#212121' }}
+                    style={{ color: '#212121', margin: 0, textAlign: 'center' }}
                   >
                     Szolgáltatásaink
                   </p>
@@ -192,14 +182,14 @@ const Header = () => {
             style={{
               display: 'flex',
               flexDirection: 'column',
-              justifyContent: 'flex-start',
-              transform: 'translateY(40px)'
+              justifyContent: 'center',
+              marginTop: '15px' // Consistent spacing above the email
             }}
             data-framer-component-type="RichTextContainer"
           >
             <p
               className="framer-text framer-styles-preset-1ff0x4j"
-              style={{ textAlign: 'center', color: '#fff' }}
+              style={{ textAlign: 'center', color: '#fff', margin: 0 }}
             >
               <a
                 className="framer-text framer-styles-preset-gd5tqz"
