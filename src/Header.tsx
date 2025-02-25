@@ -101,14 +101,14 @@ const Header = () => {
                     style={
                       segment.highlight
                         ? {
-                            color: '#003B2E',
-                            textShadow:
-                              '1px 1px 0 #fff, -1px 1px 0 #fff, 1px -1px 0 #fff, -1px -1px 0 #fff'
-                          }
+                          color: '#003B2E',
+                          textShadow:
+                            '1px 1px 0 #fff, -1px 1px 0 #fff, 1px -1px 0 #fff, -1px -1px 0 #fff'
+                        }
                         : {
-                            textShadow:
-                              '1px 1px 0 #003B2E, -1px 1px 0 #003B2E, 1px -1px 0 #003B2E, -1px -1px 0 #003B2E'
-                          }
+                          textShadow:
+                            '1px 1px 0 #003B2E, -1px 1px 0 #003B2E, 1px -1px 0 #003B2E, -1px -1px 0 #003B2E'
+                        }
                     }
                   >
                     {segment.text}
@@ -132,9 +132,11 @@ const Header = () => {
               style={{
                 backgroundColor: '#fff',
                 borderRadius: '100px',
-                width: '100%', /* A gomb szélessége most 100% lesz a konténer szélességéhez igazítva */
-                display: 'inline-block',
-                padding: '10px'
+                width: '100%', // a gomb szélessége a konténer szélességéhez igazodik
+                display: 'flex',           // flex konténer
+                alignItems: 'center',      // vertikális középre igazítás
+                justifyContent: 'center',  // horizontális középre igazítás
+                padding: '20px 10px'
               }}
               onClick={() => {
                 const mainSection = document.getElementById('services');

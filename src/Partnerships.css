@@ -1,116 +1,121 @@
 .partnerships-section {
-    text-align: center;
-  }
-  
-  .partnerships-title {
-    color: #00d28c; /* Bright green for "EGYÜTTMŰKÖDÉSEINK" */
-    font-size: 24px;
-    font-weight: bold;
-    text-transform: uppercase;
-  }
-  
-  .partnership-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    max-width: 200px; /* Limit item width for consistency */
-    min-height: 150px; /* Fixed minimum height for desktop to ensure consistent positioning */
-  }
-  
-  .logo {
-    width: 100%;
-    max-width: 120px; /* Consistent size for logos on desktop */
-    height: auto;
-    border-radius: 10px; /* Optional: slight rounding for images */
-    transition: filter 0.3s ease; /* Smooth transition for hover effect */
-  }
-  
-  .logo-text {
-    color: #fff; /* White text for logo names */
-    font-size: 14px;
-    display: block; /* Ensure text wraps properly */
-    margin-top: 1rem; /* Increased spacing between logo and text for consistency */
-  }
-  
-  /* Grayscale effect for black-and-white appearance on desktop by default */
+  text-align: center;
+}
+
+.partnerships-title {
+  color: #00d28c; /* Bright green for "EGYÜTTMŰKÖDÉSEINK" */
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.partnership-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 200px; /* Limit item width for consistency */
+  min-height: 150px; /* Fixed minimum height for desktop to ensure consistent positioning */
+}
+
+.logo {
+  width: 100%;
+  max-width: 120px; /* Consistent size for logos on desktop */
+  height: auto;
+  border-radius: 10px; /* Optional: slight rounding for images */
+  transition: filter 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.logo-text {
+  color: #fff; /* White text for logo names */
+  font-size: 14px;
+  display: block; /* Ensure text wraps properly */
+  margin-top: 1rem; /* Increased spacing between logo and text for consistency */
+}
+
+/* Specific rules for the MADBRO logo to handle its white appearance */
+.partnership-item img[src*="madbro-logo"] {
+  filter: grayscale(100%) brightness(0.7); /* Adjust brightness to simulate grayscale for white logos */
+  transition: filter 0.3s ease; /* Ensure smooth transition */
+}
+
+.partnership-item img[src*="madbro-logo"]:hover {
+  filter: grayscale(0%) brightness(1); /* Remove grayscale and restore brightness */
+}
+
+/* Ensure this overrides other rules for MADBRO */
+.partnership-item img[src*="madbro-logo"].grayscale,
+.partnership-item img[src*="madbro-logo"].desktop-grayscale {
+  filter: grayscale(100%) brightness(0.7) !important;
+}
+
+.partnership-item img[src*="madbro-logo"].desktop-grayscale:hover {
+  filter: grayscale(0%) brightness(1) !important;
+}
+
+/* Desktop view (min-width: 768px): Apply grayscale by default */
+@media (min-width: 768px) {
   .grayscale {
-    filter: grayscale(100%);
+    filter: grayscale(100%) !important;
   }
-  
-  /* Hover effect to show color on desktop */
   .desktop-grayscale:hover {
-    filter: grayscale(0%);
+    filter: grayscale(0%) !important;
   }
-  
-  /* Ensure text remains readable against the green background */
-  .partnership-item:hover .logo-text {
-    color: #fff; /* Keep text white on hover */
+}
+
+/* Mobile view (max-width: 767px): Remove grayscale effect completely */
+@media (max-width: 767px) {
+  .grayscale,
+  .desktop-grayscale,
+  .desktop-grayscale:hover {
+    filter: none !important;
   }
-  
-  /* Mobile view (phones, < 768px): Remove grayscale, make logos colorful by default, and fix layout */
-  @media (max-width: 767px) {
-    .partnerships-title {
-      font-size: 20px;
-    }
-  
-    .logo {
-      max-width: 100px; /* Smaller logos on mobile */
-    }
-  
-    .logo-text {
-      font-size: 12px;
-    }
-  
-    /* Remove grayscale on mobile, making logos colorful by default */
-    .desktop-grayscale {
-      filter: grayscale(0%);
-    }
-  
-    /* Remove hover effect on mobile (optional, to keep logos colorful) */
-    .desktop-grayscale:hover {
-      filter: grayscale(0%);
-    }
-  
-    /* Fixed layout for mobile: ensure logo and text are aligned and spaced consistently */
-    .partnership-item {
-      min-height: 150px; /* Increased minimum height for mobile to allow vertical centering */
-      padding: 10px 0; /* Add vertical padding for consistent spacing */
-    }
-  
-    .logo-text {
-      margin-top: 0.5rem; /* Reduced spacing on mobile for tighter layout */
-    }
-  
-    .row > .col-6 {
-      margin-bottom: 2rem; /* Larger vertical margin between rows on mobile */
-    }
-  
-    .col-6 {
-      height: 100%; /* Ensure the column takes full height for centering */
-      display: flex;
-      justify-content: center;
-      align-items: center; /* Vertically center the content in the column */
-    }
+}
+
+/* Ensure text remains readable against the green background on hover */
+.partnership-item:hover .logo-text {
+  color: #fff;
+}
+
+/* Additional mobile layout adjustments */
+@media (max-width: 767px) {
+  .partnerships-title {
+    font-size: 20px;
   }
-  
-  /* Desktop view (≥ 992px): Ensure logos are in a single row, side by side left to right, with large gaps */
-  @media (min-width: 992px) {
-    .custom-gap {
-      gap: 8rem; /* Large gap between logos on desktop */
-    }
-  
-    .partnerships-section {
-      margin-bottom: 7.5em;
-    }
-  
-    /* Ensure all logos are in a single row, horizontally aligned left to right */
-    .row.custom-gap > .col-md-4 {
-      flex: 0 0 auto; /* Prevent columns from shrinking or growing */
-      max-width: 33.333333%; /* Ensure equal width for three columns in a row */
-      display: flex; /* Ensure flex positioning for alignment */
-      justify-content: center; /* Center logos horizontally within columns */
-      align-items: center; /* Center logos vertically within columns */
-    }
+  .logo {
+    max-width: 100px; /* Smaller logos on mobile */
   }
+  .logo-text {
+    font-size: 12px;
+    margin-top: 0.5rem; /* Tighter spacing on mobile */
+  }
+  .row > .col-12 {
+    margin-bottom: 2rem; /* Larger vertical margin between rows on mobile */
+  }
+  .col-12 {
+    height: 100%; /* Ensure full height for centering */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+/* Desktop view (≥992px): Layout adjustments for large gaps */
+@media (min-width: 992px) {
+  .custom-gap {
+    gap: 8rem; /* Large gap between logos on desktop */
+    display: flex; /* Ensure row behaves as a flex container */
+    justify-content: center; /* Center the row if there’s extra space */
+  }
+  .partnerships-section {
+    margin-bottom: 7.5em;
+  }
+  .row.custom-gap > .col-md-4 {
+    flex: 0 0 auto; /* Prevent columns from shrinking or growing */
+    max-width: 33.333333%; /* Equal width for three columns */
+    display: flex; /* For proper alignment */
+    justify-content: center;
+    align-items: center;
+  }
+}

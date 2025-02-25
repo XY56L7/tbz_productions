@@ -14,19 +14,16 @@ const Partnerships = () => {
         <div className="col-6 col-md-4 d-flex justify-content-center align-items-center">
           <div className="partnership-item">
             <img src={madbroLogo} alt="MADBRO" className="logo grayscale desktop-grayscale" />
-            <span className="logo-text mt-2">MADBRO</span>
           </div>
         </div>
         <div className="col-6 col-md-4 d-flex justify-content-center align-items-center">
           <div className="partnership-item">
             <img src={meisterTransLogo} alt="Meister Trans" className="logo grayscale desktop-grayscale" />
-            <span className="logo-text mt-2">Meister Trans</span>
           </div>
         </div>
         <div className="col-6 col-md-4 d-flex justify-content-center align-items-center">
           <div className="partnership-item">
             <img src={victoryFitnessLogo} alt="Victory Fitness" className="logo grayscale desktop-grayscale" />
-            <span className="logo-text mt-2">Victory Fitness</span>
           </div>
         </div>
       </div>

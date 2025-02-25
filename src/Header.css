@@ -34,7 +34,7 @@ header.framer-16709mg {
   .fixed-button {
     position: absolute;
     bottom: 80px;       /* Fix helyzet a header alján */
-    left: 52%;
+    left: 55%;
     transform: translateX(-50%);
     z-index: 1000;
     width: 400px;       /* Növelt szélesség desktopon */
