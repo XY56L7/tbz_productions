@@ -3,18 +3,35 @@ import './Header.css';
 import wallpaper from './wallpaper.png';
 
 const headings = [
-  [{ text: "MI VAGYUNK A TBZ. PRODUCTIONS!", highlight: true }],
+  // "MI VAGYUNK A TBZ. PRODUCTIONS!" - kiemelve: "TBZ. PRODUCTIONS"
+  [
+    { text: "MI VAGYUNK A", highlight: false },
+    { text: "TBZ. PRODUCTIONS!", highlight: true }
+  ],
+  // "SZERETNÉD EGY KÉZBEN TARTANI AZ ONLINE JELENLÉTED?" - kiemelve: "EGY KÉZBEN TARTANI"
   [
     { text: "SZERETNÉD", highlight: false },
     { text: "EGY KÉZBEN TARTANI", highlight: true },
     { text: "AZ ONLINE JELENLÉTED?", highlight: false }
   ],
+  // "EGYEDI ÉS PROFI MÉDIATARTALMAK A MÁRKÁDNAK ÉS VÁLLALKOZÁSODNAK" - kiemelve: "MÁRKÁDNAK ÉS VÁLLALKOZÁSODNAK"
   [
     { text: "EGYEDI ÉS PROFI MÉDIATARTALMAK A", highlight: false },
     { text: "MÁRKÁDNAK ÉS VÁLLALKOZÁSODNAK", highlight: true }
   ],
-  [{ text: "TE MÁRKÁD, TE TÖRTÉNETED", highlight: true }],
-  [{ text: "TERVEZÉSTŐL A MEGVALÓSÍTÁSIG", highlight: true }]
+  // "TE MÁRKÁD, TE TÖRTÉNETED" - kiemelve: "TE" (mindkét előfordulás)
+  [
+    { text: "TE", highlight: true },
+    { text: "MÁRKÁD,", highlight: false },
+    { text: "TE", highlight: true },
+    { text: "TÖRTÉNETED", highlight: false }
+  ],
+  // "TERVEZÉSTŐL A MEGVALÓSÍTÁSIG" - kiemelve: "TERVEZÉSTŐL" és "MEGVALÓSÍTÁSIG"
+  [
+    { text: "TERVEZÉSTŐL", highlight: true },
+    { text: "A", highlight: false },
+    { text: "MEGVALÓSÍTÁSIG", highlight: true }
+  ]
 ];
 
 const Header = () => {
@@ -24,9 +41,10 @@ const Header = () => {
     const interval = setInterval(() => {
       setCurrentHeadingIndex((prevIndex) => (prevIndex + 1) % headings.length);
     }, 4000);
-
     return () => clearInterval(interval);
   }, []);
+
+  const isRow = [0, 3, 4].includes(currentHeadingIndex);
 
   return (
     <header
@@ -34,11 +52,16 @@ const Header = () => {
       data-framer-name="Hero Section"
       style={{
         width: '100%',
-        height: '800px',
+        height: '100vh',
         overflow: 'hidden',
-        position: 'relative'
+        position: 'relative',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center'
       }}
     >
+      {/* Háttérkép */}
       <div
         className="framer-113wd9s"
         data-framer-name="BG"
@@ -55,75 +78,77 @@ const Header = () => {
           zIndex: 0
         }}
       ></div>
+
+      {/* Szövegkonténer */}
       <div
         className="framer-y7w8l1"
         data-framer-name="title"
         style={{
           position: 'relative',
           zIndex: 1,
-          height: '100%',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
+          alignItems: 'center',
+          width: '100%',
+          padding: '0 20px',
+          flexGrow: 1
+        }}
+      >
+        <h1
+          className="framer-text framer-styles-preset-13gpyit"
+          style={{
+            color: '#fff',
+            margin: 0,
+            lineHeight: '1.5',
+            fontSize: '1.2rem',
+            whiteSpace: isRow ? 'nowrap' : 'normal',
+            textAlign: 'center',
+            display: 'flex',
+            alignItems: 'center',
+            flexDirection: isRow ? 'row' : 'column',
+            gap: isRow ? '5px' : '10px', // Csökkentett gap egysoros szövegeknél
+            overflow: 'visible',
+            maxWidth: '90%'
+          }}
+        >
+          {headings[currentHeadingIndex].map((segment, idx) => (
+            <span
+              key={idx}
+              className={segment.highlight ? 'highlight' : ''}
+              style={
+                segment.highlight
+                  ? {
+                      color: '#003B2E',
+                      textShadow:
+                        '1px 1px 0 #fff, -1px 1px 0 #fff, 1px -1px 0 #fff, -1px -1px 0 #fff'
+                    }
+                  : {
+                      textShadow:
+                        '1px 1px 0 #003B2E, -1px 1px 0 #003B2E, 1px -1px 0 #003B2E, -1px -1px 0 #003B2E'
+                    }
+              }
+            >
+              {segment.text}
+            </span>
+          ))}
+        </h1>
+      </div>
+
+      {/* Fix gomb */}
+      <div
+        className="fixed-button"
+        style={{
+          position: 'absolute',
+          bottom: '20px',
+          zIndex: 1000, // Magas z-index a láthatóságért
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'column',
           alignItems: 'center'
         }}
       >
-        <div className="framer-1b880ke">
-          <div className="framer-1v8xiey" id="navbar-scroll-trigger">
-            <div
-              className="framer-ykv72m"
-              data-framer-name="Title"
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                height: 'auto',
-                overflow: 'visible'
-              }}
-              data-framer-component-type="RichTextContainer"
-            >
-              <h1
-                className="framer-text framer-styles-preset-13gpyit"
-                style={{
-                  color: '#fff',
-                  margin: 0,
-                  lineHeight: '1.5',
-                  whiteSpace: 'pre-wrap',
-                  textAlign: 'center',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '20px'
-                }}
-              >
-                {headings[currentHeadingIndex].map((segment, idx) => (
-                  <span
-                    key={idx}
-                    style={
-                      segment.highlight
-                        ? {
-                          color: '#003B2E',
-                          textShadow:
-                            '1px 1px 0 #fff, -1px 1px 0 #fff, 1px -1px 0 #fff, -1px -1px 0 #fff'
-                        }
-                        : {
-                          textShadow:
-                            '1px 1px 0 #003B2E, -1px 1px 0 #003B2E, 1px -1px 0 #003B2E, -1px -1px 0 #003B2E'
-                        }
-                    }
-                  >
-                    {segment.text}
-                  </span>
-                ))}
-              </h1>
-            </div>
-          </div>
-        </div>
-        {/* Egyéb tartalom itt */}
-      </div>
-
-      {/* FIX gomb: Külön van elhelyezve, így nem érinti a dinamikus szöveg */}
-      <div className="fixed-button">
-        <div className="ssr-variant hidden-1q3dwis hidden-1303b6h">
+        <div className="ssr-variant">
           <div className="framer-7we1a5-container">
             <a
               className="framer-BTbjQ framer-dKer1 framer-bhZhX framer-152rnsu framer-v-1mb0zqp framer-1qzgy94"
@@ -132,11 +157,11 @@ const Header = () => {
               style={{
                 backgroundColor: '#fff',
                 borderRadius: '100px',
-                width: '100%', // a gomb szélessége a konténer szélességéhez igazodik
-                display: 'flex',           // flex konténer
-                alignItems: 'center',      // vertikális középre igazítás
-                justifyContent: 'center',  // horizontális középre igazítás
-                padding: '20px 10px'
+                width: 'auto',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '15px 20px'
               }}
               onClick={() => {
                 const mainSection = document.getElementById('services');
@@ -165,32 +190,6 @@ const Header = () => {
               </div>
             </a>
           </div>
-        </div>
-        <div
-          className="framer-tm7nua"
-          data-framer-appear-id="tm7nua"
-          data-framer-name="Description"
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            marginTop: '15px'
-          }}
-          data-framer-component-type="RichTextContainer"
-        >
-          <p
-            className="framer-text framer-styles-preset-1ff0x4j"
-            style={{ textAlign: 'center', color: '#fff', margin: 0 }}
-          >
-            {/* <a style={{ marginLeft:'20%'}}
-              className="framer-text framer-styles-preset-gd5tqz"
-              href="mailto:info@tbzproductions.hu"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              info@tbzproductions.hu
-            </a> */}
-          </p>
         </div>
       </div>
     </header>

@@ -16,14 +16,14 @@
   justify-content: center;
   width: 100%;
   max-width: 200px; /* Limit item width for consistency */
-  min-height: 150px; /* Fixed minimum height for desktop to ensure consistent positioning */
+  min-height: 150px; /* Fixed minimum height for desktop */
 }
 
 .logo {
   width: 100%;
   max-width: 120px; /* Consistent size for logos on desktop */
   height: auto;
-  border-radius: 10px; /* Optional: slight rounding for images */
+  border-radius: 10px; /* Slight rounding for images */
   transition: filter 0.3s ease; /* Smooth transition for hover effect */
 }
 
@@ -31,45 +31,41 @@
   color: #fff; /* White text for logo names */
   font-size: 14px;
   display: block; /* Ensure text wraps properly */
-  margin-top: 1rem; /* Increased spacing between logo and text for consistency */
+  margin-top: 1rem; /* Increased spacing between logo and text */
 }
 
-/* Specific rules for the MADBRO logo to handle its white appearance */
+/* Specific rules for the MADBRO logo */
 .partnership-item img[src*="madbro-logo"] {
-  filter: grayscale(100%) brightness(0.7); /* Adjust brightness to simulate grayscale for white logos */
-  transition: filter 0.3s ease; /* Ensure smooth transition */
-}
-
-.partnership-item img[src*="madbro-logo"]:hover {
-  filter: grayscale(0%) brightness(1); /* Remove grayscale and restore brightness */
-}
-
-/* Ensure this overrides other rules for MADBRO */
-.partnership-item img[src*="madbro-logo"].grayscale,
-.partnership-item img[src*="madbro-logo"].desktop-grayscale {
-  filter: grayscale(100%) brightness(0.7) !important;
-}
-
-.partnership-item img[src*="madbro-logo"].desktop-grayscale:hover {
-  filter: grayscale(0%) brightness(1) !important;
+  transition: filter 0.3s ease; /* Smooth transition */
 }
 
 /* Desktop view (min-width: 768px): Apply grayscale by default */
 @media (min-width: 768px) {
   .grayscale {
-    filter: grayscale(100%) !important;
+    filter: grayscale(100%);
   }
   .desktop-grayscale:hover {
-    filter: grayscale(0%) !important;
+    filter: none; /* Remove grayscale on hover */
+  }
+  /* MADBRO specific grayscale for desktop */
+  .partnership-item img[src*="madbro-logo"] {
+    filter: grayscale(100%) brightness(0.7);
+  }
+  .partnership-item img[src*="madbro-logo"]:hover {
+    filter: none; /* Remove grayscale and brightness adjustment on hover */
   }
 }
 
-/* Mobile view (max-width: 767px): Remove grayscale effect completely */
+/* Mobile view (max-width: 767px): Remove grayscale completely for all logos */
 @media (max-width: 767px) {
+  .logo,
   .grayscale,
   .desktop-grayscale,
+  .partnership-item img[src*="madbro-logo"] {
+    filter: none !important; /* Remove all filters, including grayscale and brightness */
+  }
   .desktop-grayscale:hover {
-    filter: none !important;
+    filter: none !important; /* Ensure hover doesn't change anything */
   }
 }
 
@@ -90,10 +86,10 @@
     font-size: 12px;
     margin-top: 0.5rem; /* Tighter spacing on mobile */
   }
-  .row > .col-12 {
+  .row > .col-6 {
     margin-bottom: 2rem; /* Larger vertical margin between rows on mobile */
   }
-  .col-12 {
+  .col-6 {
     height: 100%; /* Ensure full height for centering */
     display: flex;
     justify-content: center;
@@ -105,16 +101,16 @@
 @media (min-width: 992px) {
   .custom-gap {
     gap: 8rem; /* Large gap between logos on desktop */
-    display: flex; /* Ensure row behaves as a flex container */
-    justify-content: center; /* Center the row if there’s extra space */
+    display: flex;
+    justify-content: center;
   }
   .partnerships-section {
     margin-bottom: 7.5em;
   }
   .row.custom-gap > .col-md-4 {
-    flex: 0 0 auto; /* Prevent columns from shrinking or growing */
-    max-width: 33.333333%; /* Equal width for three columns */
-    display: flex; /* For proper alignment */
+    flex: 0 0 auto;
+    max-width: 33.333333%;
+    display: flex;
     justify-content: center;
     align-items: center;
   }

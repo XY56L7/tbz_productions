@@ -5,44 +5,46 @@ header.framer-16709mg {
 
 /* Media query for mobile devices (max-width: 768px) */
 @media (max-width: 768px) {
+  .framer-text.framer-styles-preset-13gpyit {
+    font-size: 1rem; /* Kisebb betűméret mobilra */
+    gap: 8px; /* Kisebb gap mobilra */
+  }
+
   .fixed-button {
-    position: absolute;
-    bottom: 20px;       /* Fix helyzet a viewport alján */
+    position: absolute; /* Javítsd: nincs idézőjel */
+    bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 1000;
-    width: 300px;       /* Növelt szélesség mobilon */
-    max-width: 90%;     /* Ne lógjon ki a képernyőből */
+    z-index: 1000; /* Magas z-index, hogy biztosan látható legyen */
+    width: 300px;
+    max-width: 90%; /* Ne lógjon ki a képernyőből */
     text-align: center;
-    box-sizing: border-box; /* Biztosítja, hogy a padding ne növelje a szélességet */
+    box-sizing: border-box;
   }
 
-  /* Ensure the remaining button variant is centered */
-  .framer-ahrh2z {
-    text-align: center; /* Centers inline or inline-block elements */
-  }
-
-  /* Adjust button width if needed */
-  .ssr-variant.hidden-1q3dwis.hidden-1303b6h {
-    display: inline-block !important;
-    width: auto !important;
+  .framer-BTbjQ {
+    padding: 12px 18px; /* Kisebb padding mobilra */
   }
 }
 
 /* Media query for desktop devices (min-width: 769px) */
 @media (min-width: 769px) {
+  .framer-text.framer-styles-preset-13gpyit {
+    font-size: 1.2rem; /* Eredeti betűméret desktopon */
+  }
+
   .fixed-button {
-    position: absolute;
-    bottom: 80px;       /* Fix helyzet a header alján */
-    left: 55%;
+    position: absolute; /* Javítsd: nincs idézőjel */
+    bottom: 80px;
+    left: 50%;
     transform: translateX(-50%);
     z-index: 1000;
-    width: 400px;       /* Növelt szélesség desktopon */
+    width: 400px;
     text-align: center;
   }
 }
 
-/* Highlight style for text (keeping the text-shadow for highlighted text) */
+/* Highlight style for text */
 .highlight {
   text-shadow: 
     1px 1px 0 #fff,
