@@ -2,40 +2,35 @@
 .my-section {
   background-color: #000;
   color: #fff;
-  padding-top: 80px; /* Ensure some padding at the top */
-  padding-bottom: 80px; /* Ensure some padding at the bottom */
+  padding-top: 80px;
+  padding-bottom: 80px;
 }
 
 /* Push the text content down and use sticky in desktop view */
 .text-content {
-  margin-top: 80px; /* Initial spacing */
+  margin-top: 80px;
 }
 
 @media (min-width: 992px) {
   .text-content {
     position: sticky;
-    top: 50%; /* Center vertically in the viewport */
-    transform: translateY(-50%); /* Offset to center perfectly */
-    align-self: flex-start; /* Ensure it sticks to the left side */
-    max-height: calc(100vh - 160px); /* Limit height to viewport minus padding, preventing overflow beyond cards */
-    overflow-y: auto; /* Allow scrolling if content exceeds max-height */
+    top: 50%;
+    transform: translateY(-50%);
+    align-self: flex-start;
+    max-height: calc(100vh - 160px);
+    overflow-y: auto;
   }
 
-  /* Ensure the sticky text stops when the cards reach the bottom */
   .cards {
     position: relative;
   }
 
-  /* Calculate the height of the cards container dynamically or ensure it extends to the full content */
   .cards::after {
     content: "";
     display: block;
-    height: 0; /* Placeholder for dynamic height */
+    height: 0;
     visibility: hidden;
   }
-
-  /* Optional: Use JavaScript or additional CSS to detect when cards reach the bottom */
-  /* For simplicity, we’ll rely on the max-height and natural scroll behavior here */
 }
 
 /* Text content styles */
@@ -64,7 +59,7 @@
 }
 
 .custom-btn:hover {
-  background-color: #00B87A; /* darker green on hover */
+  background-color: #00B87A;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.12);
   outline: 2px solid #00D28C;
   transform: translateY(-2px);
@@ -75,11 +70,34 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
+/* Új stílus a "Referenciák" gombhoz */
+.ref-btn {
+  background-color: #fff !important; /* fehér háttér */
+  color: #000 !important;            /* fekete betűszín */
+  border: 1px solid #ccc;
+}
+
+.ref-btn:hover {
+  background-color: #f7f7f7 !important;
+  color: #000 !important;
+}
+
+/* Új stílus az "Árajánlat" gombhoz */
+.quote-btn {
+  background-color: #fff !important; /* fehér háttér */
+  color: #000 !important;            /* fekete betűszín */
+  border: 1px solid #ccc;
+}
+
+.quote-btn:hover {
+  background-color: #f7f7f7 !important;
+  color: #000 !important;
+}
+
 /* Card styles */
 .card-item {
   border-radius: 24px;
   overflow: hidden;
-  /* Vertical gradient: top #002c23, middle #005945, bottom #002C23 */
   background: linear-gradient(to bottom, #002c23 0%, #005945 50%, #002C23 100%);
 }
 
@@ -90,17 +108,26 @@
   background-position: center;
 }
 
+/* Card content: balra igazítás */
+.card-content {
+  padding: 1rem;
+  text-align: left;
+}
+
 .card-title {
-  font-size: 24px;
-  margin-bottom: 0.75rem;
+  font-size: 24px; /* Nagyobb betűméret a fő címekhez */
+  margin-bottom: 0.5rem; /* Kis margó a title és a desc között */
   color: #fff;
+  text-align: left; /* Balra igazítás */
 }
 
 .card-desc {
   opacity: 0.75;
-  font-size: 14px;
+  font-size: 16px; /* Nagyobb betűméret a leíráshoz */
   margin-bottom: 1rem;
   color: #fff;
+  text-align: left; /* Balra igazítás */
+  padding-top: 0.5rem; /* Kis padding a title és a leírás között */
 }
 
 /* Responsive adjustments */
@@ -116,6 +143,6 @@
     font-size: 20px;
   }
   .card-desc {
-    font-size: 12px;
+    font-size: 14px;
   }
 }
