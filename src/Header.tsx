@@ -3,45 +3,64 @@ import './Header.css';
 import wallpaper from './wallpaper.png';
 
 const headings = [
-  // "MI VAGYUNK A TBZ. PRODUCTIONS!" - kiemelve: "TBZ. PRODUCTIONS"
+  // "MI VAGYUNK A TBZ. PRODUCTIONS!" - kiemelve: "TBZ. PRODUCTIONS!"
   [
     { text: "MI VAGYUNK A", highlight: false },
+    { text: " ", highlight: false }, // Explicit szóköz
     { text: "TBZ. PRODUCTIONS!", highlight: true }
   ],
   // "SZERETNÉD EGY KÉZBEN TARTANI AZ ONLINE JELENLÉTED?" - kiemelve: "EGY KÉZBEN TARTANI"
   [
     { text: "SZERETNÉD", highlight: false },
+    { text: " ", highlight: false }, // Explicit szóköz
     { text: "EGY KÉZBEN TARTANI", highlight: true },
+    { text: " ", highlight: false }, // Explicit szóköz
     { text: "AZ ONLINE JELENLÉTED?", highlight: false }
   ],
   // "EGYEDI ÉS PROFI MÉDIATARTALMAK A MÁRKÁDNAK ÉS VÁLLALKOZÁSODNAK" - kiemelve: "MÁRKÁDNAK ÉS VÁLLALKOZÁSODNAK"
   [
     { text: "EGYEDI ÉS PROFI MÉDIATARTALMAK A", highlight: false },
+    { text: " ", highlight: false }, // Explicit szóköz
     { text: "MÁRKÁDNAK ÉS VÁLLALKOZÁSODNAK", highlight: true }
   ],
   // "TE MÁRKÁD, TE TÖRTÉNETED" - kiemelve: "TE" (mindkét előfordulás)
   [
     { text: "TE", highlight: true },
+    { text: " ", highlight: false }, // Explicit szóköz
     { text: "MÁRKÁD,", highlight: false },
+    { text: " ", highlight: false }, // Explicit szóköz
     { text: "TE", highlight: true },
+    { text: " ", highlight: false }, // Explicit szóköz
     { text: "TÖRTÉNETED", highlight: false }
   ],
   // "TERVEZÉSTŐL A MEGVALÓSÍTÁSIG" - kiemelve: "TERVEZÉSTŐL" és "MEGVALÓSÍTÁSIG"
   [
     { text: "TERVEZÉSTŐL", highlight: true },
+    { text: " ", highlight: false }, // Explicit szóköz
     { text: "A", highlight: false },
+    { text: " ", highlight: false }, // Explicit szóköz
     { text: "MEGVALÓSÍTÁSIG", highlight: true }
   ]
 ];
 
 const Header = () => {
   const [currentHeadingIndex, setCurrentHeadingIndex] = useState(0);
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 769);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentHeadingIndex((prevIndex) => (prevIndex + 1) % headings.length);
     }, 4000);
-    return () => clearInterval(interval);
+
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= 769);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   const isRow = [0, 3, 4].includes(currentHeadingIndex);
@@ -101,13 +120,13 @@ const Header = () => {
             color: '#fff',
             margin: 0,
             lineHeight: '1.5',
-            fontSize: '1.2rem',
+            fontSize: isDesktop ? '2.5rem' : '1.2rem', // Dinamikus betűméret
             whiteSpace: isRow ? 'nowrap' : 'normal',
             textAlign: 'center',
             display: 'flex',
             alignItems: 'center',
             flexDirection: isRow ? 'row' : 'column',
-            gap: isRow ? '5px' : '10px', // Csökkentett gap egysoros szövegeknél
+            gap: isRow ? '5px' : '10px',
             overflow: 'visible',
             maxWidth: '90%'
           }}
@@ -141,7 +160,7 @@ const Header = () => {
         style={{
           position: 'absolute',
           bottom: '20px',
-          zIndex: 1000, // Magas z-index a láthatóságért
+          zIndex: 1000,
           width: '100%',
           display: 'flex',
           flexDirection: 'column',

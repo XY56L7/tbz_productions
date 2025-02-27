@@ -5,19 +5,14 @@ header.framer-16709mg {
 
 /* Media query for mobile devices (max-width: 768px) */
 @media (max-width: 768px) {
-  .framer-text.framer-styles-preset-13gpyit {
-    font-size: 1rem; /* Kisebb betűméret mobilra */
-    gap: 8px; /* Kisebb gap mobilra */
-  }
-
   .fixed-button {
-    position: absolute; /* Javítsd: nincs idézőjel */
+    position: absolute;
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 1000; /* Magas z-index, hogy biztosan látható legyen */
+    z-index: 1000;
     width: 300px;
-    max-width: 90%; /* Ne lógjon ki a képernyőből */
+    max-width: 90%;
     text-align: center;
     box-sizing: border-box;
   }
@@ -29,12 +24,8 @@ header.framer-16709mg {
 
 /* Media query for desktop devices (min-width: 769px) */
 @media (min-width: 769px) {
-  .framer-text.framer-styles-preset-13gpyit {
-    font-size: 1.2rem; /* Eredeti betűméret desktopon */
-  }
-
   .fixed-button {
-    position: absolute; /* Javítsd: nincs idézőjel */
+    position: absolute;
     bottom: 80px;
     left: 50%;
     transform: translateX(-50%);
