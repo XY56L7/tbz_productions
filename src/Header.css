@@ -3,6 +3,25 @@ header.framer-16709mg {
   margin-bottom: 80px;
 }
 
+/* Highlight text and normal text base styles */
+.highlight {
+  color: #003B2E !important;
+  text-shadow: 
+    1px 1px 0 #fff,
+    -1px 1px 0 #fff,
+    1px -1px 0 #fff,
+    -1px -1px 0 #fff !important;
+}
+
+.normal-text {
+  color: #fff !important;
+  text-shadow: 
+    1px 1px 0 #003B2E,
+    -1px 1px 0 #003B2E,
+    1px -1px 0 #003B2E,
+    -1px -1px 0 #003B2E !important;
+}
+
 /* Media query for mobile devices (max-width: 768px) */
 @media (max-width: 768px) {
   .fixed-button {
@@ -20,6 +39,22 @@ header.framer-16709mg {
   .framer-BTbjQ {
     padding: 12px 18px; /* Kisebb padding mobilra */
   }
+  
+  /* Mobilon nincs space sehol */
+  .mobile-view .highlight,
+  .mobile-view .normal-text {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Row és column layout különböző kezelése mobilon */
+  .mobile-view.row-layout span {
+    margin: 0;
+  }
+  
+  .mobile-view.column-layout span {
+    margin: 4px 0;
+  }
 }
 
 /* Media query for desktop devices (min-width: 769px) */
@@ -33,13 +68,35 @@ header.framer-16709mg {
     width: 400px;
     text-align: center;
   }
+  
+  /* Desktopnál van space a highlight körül */
+  .desktop-view .highlight {
+    margin: 0 4px;
+    padding: 0 2px;
+  }
+  
+  /* Normál szöveg esetén nincs külön space */
+  .desktop-view .normal-text {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Column layout-nál különleges kezelés */
+  .desktop-view.column-layout .highlight {
+    margin: 4px 0;
+  }
+  
+  /* "TE MÁRKÁD, TE TÖRTÉNETED" és hasonló rövid szövegű soroknál */
+  .desktop-view.row-layout .highlight:not(:first-child):not(:last-child) {
+    margin: 0 6px;
+  }
 }
 
-/* Highlight style for text */
-.highlight {
-  text-shadow: 
-    1px 1px 0 #fff,
-    -1px 1px 0 #fff,
-    1px -1px 0 #fff,
-    -1px -1px 0 #fff;
+/* Finomhangolás speciális elrendezésekhez */
+.row-layout {
+  word-spacing: normal;
+}
+
+.column-layout {
+  word-spacing: normal;
 }

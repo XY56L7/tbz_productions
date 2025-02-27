@@ -6,39 +6,30 @@ const headings = [
   // "MI VAGYUNK A TBZ. PRODUCTIONS!" - kiemelve: "TBZ. PRODUCTIONS!"
   [
     { text: "MI VAGYUNK A", highlight: false },
-    { text: " ", highlight: false }, // Explicit szóköz
     { text: "TBZ. PRODUCTIONS!", highlight: true }
   ],
   // "SZERETNÉD EGY KÉZBEN TARTANI AZ ONLINE JELENLÉTED?" - kiemelve: "EGY KÉZBEN TARTANI"
   [
     { text: "SZERETNÉD", highlight: false },
-    { text: " ", highlight: false }, // Explicit szóköz
     { text: "EGY KÉZBEN TARTANI", highlight: true },
-    { text: " ", highlight: false }, // Explicit szóköz
     { text: "AZ ONLINE JELENLÉTED?", highlight: false }
   ],
   // "EGYEDI ÉS PROFI MÉDIATARTALMAK A MÁRKÁDNAK ÉS VÁLLALKOZÁSODNAK" - kiemelve: "MÁRKÁDNAK ÉS VÁLLALKOZÁSODNAK"
   [
     { text: "EGYEDI ÉS PROFI MÉDIATARTALMAK A", highlight: false },
-    { text: " ", highlight: false }, // Explicit szóköz
     { text: "MÁRKÁDNAK ÉS VÁLLALKOZÁSODNAK", highlight: true }
   ],
   // "TE MÁRKÁD, TE TÖRTÉNETED" - kiemelve: "TE" (mindkét előfordulás)
   [
     { text: "TE", highlight: true },
-    { text: " ", highlight: false }, // Explicit szóköz
     { text: "MÁRKÁD,", highlight: false },
-    { text: " ", highlight: false }, // Explicit szóköz
     { text: "TE", highlight: true },
-    { text: " ", highlight: false }, // Explicit szóköz
     { text: "TÖRTÉNETED", highlight: false }
   ],
   // "TERVEZÉSTŐL A MEGVALÓSÍTÁSIG" - kiemelve: "TERVEZÉSTŐL" és "MEGVALÓSÍTÁSIG"
   [
     { text: "TERVEZÉSTŐL", highlight: true },
-    { text: " ", highlight: false }, // Explicit szóköz
     { text: "A", highlight: false },
-    { text: " ", highlight: false }, // Explicit szóköz
     { text: "MEGVALÓSÍTÁSIG", highlight: true }
   ]
 ];
@@ -115,41 +106,38 @@ const Header = () => {
         }}
       >
         <h1
-          className="framer-text framer-styles-preset-13gpyit"
+          className={`framer-text framer-styles-preset-13gpyit heading-container ${isRow ? 'row-layout' : 'column-layout'} ${isDesktop ? 'desktop-view' : 'mobile-view'}`}
           style={{
             color: '#fff',
             margin: 0,
             lineHeight: '1.5',
-            fontSize: isDesktop ? '2.5rem' : '1.2rem', // Dinamikus betűméret
-            whiteSpace: isRow ? 'nowrap' : 'normal',
+            fontSize: isDesktop ? '2.5rem' : '1.2rem',
             textAlign: 'center',
             display: 'flex',
             alignItems: 'center',
             flexDirection: isRow ? 'row' : 'column',
-            gap: isRow ? '5px' : '10px',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            gap: isRow ? '4px' : '10px',
             overflow: 'visible',
             maxWidth: '90%'
           }}
         >
           {headings[currentHeadingIndex].map((segment, idx) => (
-            <span
-              key={idx}
-              className={segment.highlight ? 'highlight' : ''}
-              style={
-                segment.highlight
-                  ? {
-                      color: '#003B2E',
-                      textShadow:
-                        '1px 1px 0 #fff, -1px 1px 0 #fff, 1px -1px 0 #fff, -1px -1px 0 #fff'
-                    }
-                  : {
-                      textShadow:
-                        '1px 1px 0 #003B2E, -1px 1px 0 #003B2E, 1px -1px 0 #003B2E, -1px -1px 0 #003B2E'
-                    }
-              }
-            >
-              {segment.text}
-            </span>
+            <React.Fragment key={idx}>
+              <span
+                className={segment.highlight ? 'highlight' : 'normal-text'}
+                style={{
+                  color: segment.highlight ? '#003B2E' : '#fff',
+                  textShadow: segment.highlight
+                    ? '1px 1px 0 #fff, -1px 1px 0 #fff, 1px -1px 0 #fff, -1px -1px 0 #fff'
+                    : '1px 1px 0 #003B2E, -1px 1px 0 #003B2E, 1px -1px 0 #003B2E, -1px -1px 0 #003B2E',
+                  display: 'inline-block'
+                }}
+              >
+                {segment.text}
+              </span>
+            </React.Fragment>
           ))}
         </h1>
       </div>

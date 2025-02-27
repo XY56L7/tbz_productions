@@ -1,10 +1,10 @@
 import React from "react";
 
 const Contact: React.FC = () => {
-  // ---------- Dátum kiszámítása ----------
+  // ---------- Dátum kiszámítása (a következő nap) ----------
   const today = new Date();
   const expectedDate = new Date(today);
-  expectedDate.setDate(expectedDate.getDate() + 2);
+  expectedDate.setDate(expectedDate.getDate() + 1);
   const formattedExpectedDate = expectedDate.toLocaleDateString("hu-HU", {
     year: "numeric",
     month: "long",
@@ -14,22 +14,23 @@ const Contact: React.FC = () => {
 
   // ---------- Styles ----------
 
-  // Outer wrapper: black background, padding
+  // Outer wrapper: fekete háttér, padding
   const outerWrapperStyle: React.CSSProperties = {
     backgroundColor: "#000",
     padding: "60px 20px",
     color: "#fff",
   };
 
-  // Main container: centers content, sets max width, uses a 2-column grid on desktop
+  // Main container: középre igazított tartalom, egymás alatti elrendezés
   const mainContainerStyle: React.CSSProperties = {
     maxWidth: "1200px",
     margin: "0 auto",
-    display: "grid",
+    display: "flex",
+    flexDirection: "column",
     gap: "40px",
   };
 
-  // Left side container
+  // Bal oldali container (elérhetőségi kártyák)
   const leftContainerStyle: React.CSSProperties = {
     display: "flex",
     flexDirection: "column",
@@ -49,32 +50,35 @@ const Contact: React.FC = () => {
     color: "#ccc",
   };
 
-  // Container for the "cards" with contact info
+  // Container a kártyákhoz
   const contactCardsWrapperStyle: React.CSSProperties = {
     display: "flex",
     flexDirection: "row",
     gap: "20px",
-    flexWrap: "wrap", // wrap on smaller screens
+    flexWrap: "wrap",
   };
 
-  // A single card style
+  // Egyetlen kártya stílusa
   const cardStyle: React.CSSProperties = {
     backgroundColor: "#111",
     borderRadius: "12px",
     padding: "20px",
-    flex: "1 0 220px", // min width ~220px
+    flex: "1 0 220px",
     display: "flex",
     flexDirection: "column",
     gap: "8px",
     boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
   };
 
+  // Kártya cím: fehér színű
   const cardTitleStyle: React.CSSProperties = {
     fontSize: "1rem",
     fontWeight: 500,
     margin: 0,
+    color: "#fff",
   };
 
+  // Kártya alcím: szürkés
   const cardSubtitleStyle: React.CSSProperties = {
     fontSize: "0.95rem",
     color: "#bbb",
@@ -92,7 +96,7 @@ const Contact: React.FC = () => {
     marginBottom: "8px",
   };
 
-  // Right side container
+  // Jobb oldali container (űrlap)
   const rightContainerStyle: React.CSSProperties = {
     backgroundColor: "#111",
     borderRadius: "12px",
@@ -107,6 +111,20 @@ const Contact: React.FC = () => {
     fontSize: "1.4rem",
     fontWeight: 600,
     margin: 0,
+  };
+
+  // Az űrlap fő szövege, a cím alatti rész
+  const rightParagraphStyle: React.CSSProperties = {
+    fontSize: "0.9rem",
+    color: "#bbb",
+    margin: 0,
+  };
+
+  // Kötelező mezők figyelmeztetése
+  const requiredNoteStyle: React.CSSProperties = {
+    fontSize: "0.85rem",
+    color: "#bbb",
+    fontStyle: "italic",
   };
 
   const formGroupStyle: React.CSSProperties = {
@@ -130,7 +148,13 @@ const Contact: React.FC = () => {
     fontSize: "0.95rem",
   };
 
-  // Checkboxes with igényes dizájnnal
+  const textareaStyle: React.CSSProperties = {
+    ...inputStyle,
+    height: "80px",
+    resize: "vertical",
+  };
+
+  // Checkbox csoport stílusa
   const checkboxGroupStyle: React.CSSProperties = {
     display: "flex",
     flexDirection: "column",
@@ -145,7 +169,7 @@ const Contact: React.FC = () => {
     cursor: "pointer",
   };
 
-  // Submit button style
+  // "Elküldés" gomb stílusa (alap: fehér háttér, fekete szöveg)
   const submitButtonStyle: React.CSSProperties = {
     padding: "14px 20px",
     backgroundColor: "#fff",
@@ -156,9 +180,10 @@ const Contact: React.FC = () => {
     fontSize: "1rem",
     fontWeight: 500,
     marginTop: "8px",
+    transition: "background-color 0.3s ease, color 0.3s ease",
   };
 
-  // Modern, letisztult bottom note stílus
+  // Bottom note stílusa, ahol a dátum zöld (#00D28C)
   const bottomNoteStyle: React.CSSProperties = {
     fontSize: "0.85rem",
     color: "#aaa",
@@ -169,63 +194,65 @@ const Contact: React.FC = () => {
     fontStyle: "italic",
   };
 
+  const dateStyle: React.CSSProperties = {
+    color: "#00D28C",
+  };
+
   return (
     <section style={outerWrapperStyle} id="contact">
       <div style={mainContainerStyle} className="contact-main-container">
-        {/* Left side */}
+        {/* Bal oldali rész: Elérhetőségi kártyák */}
         <div style={leftContainerStyle}>
           <h2 style={leftHeadingStyle}>Kapcsolatfelvétel</h2>
           <p style={leftParagraphStyle}>
-            Készen állsz, hogy új szintre emeld a márkádat? Mi segítünk abban,
-            hogy kitűnj a tömegből! Vedd fel velünk a kapcsolatot, és beszéljük
-            együtt át terveidet. Az első lépés egyszerű: lépj velünk kapcsolatba,
-            és kezdjük el a közös munkát!
+            Készen állsz a növekedésre? Beszélj velünk, hogy együtt emeljük új szintre a márkádat!
           </p>
-
           <div style={contactCardsWrapperStyle}>
-            {/* Card 1: E-mail */}
+            {/* E-mail kártya */}
             <div style={cardStyle}>
               <div style={cardIconWrapperStyle}>
                 <span role="img" aria-label="Mail" style={{ fontSize: "1.2rem" }}>
                   ✉️
                 </span>
               </div>
-              <h4 style={cardTitleStyle}>E-mail cím elérhetőségünk</h4>
-              <p style={cardSubtitleStyle}>info@seccontent.hu</p>
+              <h4 style={cardTitleStyle}>E-mail cím</h4>
+              <p style={cardSubtitleStyle}>info@tbzproductions.com</p>
             </div>
-
-            {/* Card 2: Telefon */}
+            {/* Telefon kártya */}
             <div style={cardStyle}>
               <div style={cardIconWrapperStyle}>
                 <span role="img" aria-label="Phone" style={{ fontSize: "1.2rem" }}>
                   📞
                 </span>
               </div>
-              <h4 style={cardTitleStyle}>Telefonszám elérhetőségünk</h4>
-              <p style={cardSubtitleStyle}>+36 (70) 220-4634</p>
+              <h4 style={cardTitleStyle}>Telefonszám</h4>
+              <p style={cardSubtitleStyle}>+36 70 622 2157</p>
             </div>
           </div>
         </div>
-
-        {/* Right side */}
+        {/* Jobb oldali rész: Árajánlat kérelem űrlap */}
         <div style={rightContainerStyle}>
           <h3 style={rightHeadingStyle}>Árajánlat kérelem</h3>
-          <p style={{ fontSize: "0.9rem", color: "#bbb", margin: 0 }}>
-            Vedd fel velünk a kapcsolatot, gyors és pontos árajánlatot kérhetsz!
-            Általában 24-48 órán belül válaszolunk.
+          <p style={rightParagraphStyle}>
+            Dolgozzunk együtt és emeljük új szintre az online jelenléted! Vedd fel velünk a kapcsolatot és kérj egyedi ajánlatot.
           </p>
-
+          <p style={requiredNoteStyle}>
+            *-gal jelölt mezők kitöltése kötelező!
+          </p>
+          {/* Űrlap mezők */}
           <div style={formGroupStyle}>
-            <label style={labelStyle} htmlFor="videoTema">
-              Videó téma / Rövid leírás *
+            <label style={labelStyle} htmlFor="fullName">
+              Teljes név *
             </label>
-            <textarea
-              id="videoTema"
-              style={{ ...inputStyle, height: "80px", resize: "vertical" }}
-              placeholder="Írd le röviden a videó témáját..."
+            <input
+              id="fullName"
+              type="text"
+              style={inputStyle}
+              placeholder="Teljes név"
+              onFocus={(e) => (e.currentTarget.placeholder = "")}
+              onBlur={(e) => (e.currentTarget.placeholder = "Teljes név")}
             />
           </div>
-
           <div style={formGroupStyle}>
             <label style={labelStyle} htmlFor="email">
               E-mail cím *
@@ -234,10 +261,11 @@ const Contact: React.FC = () => {
               id="email"
               type="email"
               style={inputStyle}
-              placeholder="pelda@email.hu"
+              placeholder="E-mail cím"
+              onFocus={(e) => (e.currentTarget.placeholder = "")}
+              onBlur={(e) => (e.currentTarget.placeholder = "E-mail cím")}
             />
           </div>
-
           <div style={formGroupStyle}>
             <label style={labelStyle} htmlFor="phone">
               Telefonszám *
@@ -246,88 +274,111 @@ const Contact: React.FC = () => {
               id="phone"
               type="tel"
               style={inputStyle}
-              placeholder="+36..."
+              placeholder="Telefonszám"
+              onFocus={(e) => (e.currentTarget.placeholder = "")}
+              onBlur={(e) => (e.currentTarget.placeholder = "Telefonszám")}
             />
           </div>
-
-          {/* Checkboxes with custom styling */}
-          <div style={checkboxGroupStyle}>
-            <label style={checkboxLabelStyle}>
-              <input type="checkbox" className="custom-checkbox" />
-              Teljeskörű TikTok tartalomgyártás
+          <div style={formGroupStyle}>
+            <label style={labelStyle} htmlFor="projectDiscussion">
+              Beszélgessünk a projektedről *
             </label>
-            <label style={checkboxLabelStyle}>
-              <input type="checkbox" className="custom-checkbox" />
-              Social media image- és hirdetéskezelés
-            </label>
-            <label style={checkboxLabelStyle}>
-              <input type="checkbox" className="custom-checkbox" />
-              Weboldal szövegmásolás és hirdetések kezelése
-            </label>
-            <label style={checkboxLabelStyle}>
-              <input type="checkbox" className="custom-checkbox" />
-              Extra csomag
-            </label>
-            <label style={checkboxLabelStyle}>
-              <input type="checkbox" className="custom-checkbox" />
-              Adatvédelmi Nyilatkozat elfogadása
-            </label>
+            <textarea
+              id="projectDiscussion"
+              style={textareaStyle}
+              placeholder="Beszélgessünk a projektedről"
+              onFocus={(e) => (e.currentTarget.placeholder = "")}
+              onBlur={(e) =>
+                (e.currentTarget.placeholder = "Beszélgessünk a projektedről")
+              }
+            />
           </div>
-
-          {/* Submit button */}
-          <button style={submitButtonStyle}>Elküldés</button>
-
-          {/* Bottom note */}
+          <div style={formGroupStyle}>
+            <label style={labelStyle}>
+              Milyen szolgáltatások érdekelnek? (Egyszerre több lehetőség is kiválasztható) *
+            </label>
+            <div style={checkboxGroupStyle}>
+              <label style={checkboxLabelStyle}>
+                <input type="checkbox" className="custom-checkbox" />
+                Teljeskörű tartalomgyártás
+              </label>
+              <label style={checkboxLabelStyle}>
+                <input type="checkbox" className="custom-checkbox" />
+                Reklám és Image videók készítése
+              </label>
+              <label style={checkboxLabelStyle}>
+                <input type="checkbox" className="custom-checkbox" />
+                Fotózás
+              </label>
+              <label style={checkboxLabelStyle}>
+                <input type="checkbox" className="custom-checkbox" />
+                Social media management
+              </label>
+              <label style={checkboxLabelStyle}>
+                <input type="checkbox" className="custom-checkbox" />
+                Weboldal tervezés és fejlesztés
+              </label>
+            </div>
+          </div>
+          {/* Submit gomb, hover hatással */}
+          <button
+            style={submitButtonStyle}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = "#00D28C";
+              e.currentTarget.style.color = "#fff";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = "#fff";
+              e.currentTarget.style.color = "#000";
+            }}
+          >
+            Elküldés
+          </button>
+          {/* Alsó jegyzet: Árajánlat várható érkezése, dátum zöld színnel */}
           <p style={bottomNoteStyle}>
-            Kalkulált válasz várható érkezése: {formattedExpectedDate}
+            Árajánlat várható érkezése:{" "}
+            <span style={dateStyle}>{formattedExpectedDate}</span>
           </p>
         </div>
       </div>
-
-      {/* Media query: mobil nézetben egymás alatt jelenjenek meg a részek */}
       <style>
         {`
-          /* Custom checkbox styles */
-.custom-checkbox {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  position: relative;
-  cursor: pointer;
-  outline: none;
-  transition: all 0.2s ease;
-  flex-shrink: 0; /* Biztosítja, hogy a méret ne változzon */
-}
-
-.custom-checkbox:checked {
-  background-color: #00D28C;
-  border-color: #00D28C;
-}
-
-.custom-checkbox:checked::after {
-  content: "";
-  position: absolute;
-  left: 6px;
-  top: 2px;
-  width: 5px;
-  height: 10px;
-  border: solid #fff;
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
-}
-
-/* Checkbox label stílus */
-.checkbox-label {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 0.95rem;
-  cursor: pointer;
-}
+          /* Egyedi checkbox stílusok */
+          .custom-checkbox {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            position: relative;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+          }
+          .custom-checkbox:checked {
+            background-color: #00D28C;
+            border-color: #00D28C;
+          }
+          .custom-checkbox:checked::after {
+            content: "";
+            position: absolute;
+            left: 6px;
+            top: 2px;
+            width: 5px;
+            height: 10px;
+            border: solid #fff;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+          }
+          /* Mobil nézet: egymás alatti elrendezés */
+          @media (max-width: 768px) {
+            .contact-main-container {
+              flex-direction: column;
+            }
+          }
         `}
       </style>
     </section>

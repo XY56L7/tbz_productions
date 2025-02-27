@@ -63,6 +63,7 @@ const CallToActionCard: React.FC = () => {
     borderRadius: "50%",
     backgroundColor: "#00D28C",
     boxShadow: "0 0 8px rgba(0, 210, 140, 0.5)", // Fényes hatás
+    animation: "vibrate 1s infinite", // Vibrálás
   };
 
   const userTitleStyle: React.CSSProperties = {
@@ -103,8 +104,8 @@ const CallToActionCard: React.FC = () => {
   };
 
   const buttonStyle: React.CSSProperties = {
-    backgroundColor: "#00D28C", // Zöld szín
-    color: "#fff",
+    backgroundColor: "#00D28C", // Zöld háttér, mint a pötty
+    color: "#000", // Fekete betűszín
     padding: "14px 24px", // Nagyobb gomb
     borderRadius: "30px",
     textDecoration: "none",
@@ -117,7 +118,7 @@ const CallToActionCard: React.FC = () => {
 
   const linkStyle: React.CSSProperties = {
     fontSize: "0.95rem",
-    color: "#00D28C",
+    color: "#002c23", // Szöveg színe #002c23
     textDecoration: "none",
     fontWeight: 600,
     borderBottom: "2px solid transparent", // Aláhúzás hover hatáshoz
@@ -139,40 +140,48 @@ const CallToActionCard: React.FC = () => {
               <h4 style={userNameStyle}>Tököli Bence</h4>
               <div style={greenDotStyle} />
             </div>
-            <p style={userTitleStyle}>Tulajdonos</p>
+            <p style={userTitleStyle}>Alapító, tulajdonos</p>
           </div>
         </div>
         {/* Desktop: jobb oldalon kapcsolatfelvétel */}
         <div style={textWrapperStyle} className="cta-text">
           <h3 style={headingStyle}>
-            Foglalj egy hívást, ha bármilyen kérdésed van
+            Kérdésed van? Foglalj egy konzultációt!
           </h3>
           <p style={paragraphStyle}>
-            Ne habozz! Ha kérdésed van, vagy szeretnéd megbeszélni, hogyan
-            tudnánk együtt dolgozni, egy 30 perces online meetingen mindent
-            tisztázhatunk. Legyen szó áttervezésről, egyedi igényekről, vagy a
-            folyamat pontos részleteiről – örömmel válaszolok mindenre.
+            Foglalj egy INGYENES és KÖTELEZETTSÉGMENTES konzultációt csapatunkkal, hogy
+            megismerjük vállalkozásod és elképzeléseid, átbeszéljük a részleteket és
+            megválaszoljuk minden felmerülő kérdésed. A kötetlen beszélgetés során
+            átbeszéljük, hogyan segíthetünk online jelenléted növelésében és célközönséged
+            elérésében. Gyere, vágjunk bele!
           </p>
           <div style={actionsRowStyle}>
             <button
               style={buttonStyle}
-              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#00B87A")} // Hover hatás
-              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#00D28C")}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.backgroundColor = "#00B87A")
+              } // Hover hatás: kissé sötétebb zöld
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.backgroundColor = "#00D28C")
+              }
             >
-              30 perces online hívás
+              30 perces online konzultáció
             </button>
             <a
               href="#!"
               style={linkStyle}
-              onMouseEnter={(e) => (e.currentTarget.style.borderBottomColor = "#00D28C")} // Hover hatás
-              onMouseLeave={(e) => (e.currentTarget.style.borderBottomColor = "transparent")}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.borderBottomColor = "#002c23")
+              } // Hover hatás
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.borderBottomColor = "transparent")
+              }
             >
               Díjmentes és kötelezettségmentes
             </a>
           </div>
         </div>
       </div>
-      {/* Mobil nézet: az elemek egymás alatt jelennek meg, a kapcsolatfelvétel legyen elöl */}
       <style>
         {`
           @media (max-width: 768px) {
@@ -186,6 +195,14 @@ const CallToActionCard: React.FC = () => {
             .cta-text {
               order: 1;
             }
+          }
+          @keyframes vibrate {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
           }
         `}
       </style>

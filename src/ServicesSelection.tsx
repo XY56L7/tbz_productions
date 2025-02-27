@@ -9,19 +9,21 @@ const ServiceSelection = () => {
         {/* Left-side text (sticky) */}
         <div className="text-content col-md-6 mb-4 mb-md-0">
           <div className="heading mb-3">
-            <h2 className="heading-text">
-              Számos valódi problémára nyújtunk megoldást
-            </h2>
+            <h2 className="heading-text">Szolgáltatások</h2>
           </div>
           <div className="description">
             <p className="desc-text">
-              A mai világban már elengedhetetlenné vált az online jelenlét, hiszen ha NEM
+              A mai világban elengedhetetlenné vált az online jelenlét, hiszen ha NEM
               LÁTSZOL = NEM JÁTSZOL. Kreatív csapatunk küldetése, hogy ebben segítséget
               nyújtson Neked és a márkád/céged számára.
             </p>
           </div>
           <div className="button-container mt-3">
-            <a href="#referenciak" tabIndex={0} className="btn btn-light custom-btn">
+            <a
+              href="#referenciak"
+              tabIndex={0}
+              className="btn btn-light custom-btn ref-btn"
+            >
               Referenciák
             </a>
           </div>
@@ -34,7 +36,8 @@ const ServiceSelection = () => {
             <div
               className="card-img"
               style={{
-                backgroundImage: "url(https://via.placeholder.com/400x300?text=Card+1)",
+                backgroundImage:
+                  "url(https://via.placeholder.com/400x300?text=Card+1)",
               }}
             ></div>
             <div className="card-content p-3">
@@ -45,11 +48,10 @@ const ServiceSelection = () => {
                 Figyelemfelkeltő rövid videós tartalmak, amelyek hatékonyan vonzzák be a
                 közönséget, miközben stílusosan képviselik márkádat. Érzelmeket váltanak
                 ki és hatékonyan közvetítik az üzenetedet. Ezek a videók ideálisak arra,
-                hogy elérd közönségedet ott, ahol a legtöbb időt töltik: a közösségi
-                médián.
+                hogy elérd közönségedet ott, ahol a legtöbb időt töltik: a közösségi médián.
               </p>
-              <a href="#" className="btn btn-light custom-btn">
-                Árajánlat <span className="btn-subtext">(24-48H)</span>
+              <a href="#" className="btn btn-light custom-btn quote-btn">
+                Árajánlat <span className="btn-subtext">(24H)</span>
               </a>
             </div>
           </div>
@@ -59,7 +61,8 @@ const ServiceSelection = () => {
             <div
               className="card-img"
               style={{
-                backgroundImage: "url(https://via.placeholder.com/400x300?text=Card+2)",
+                backgroundImage:
+                  "url(https://via.placeholder.com/400x300?text=Card+2)",
               }}
             ></div>
             <div className="card-content p-3">
@@ -68,8 +71,8 @@ const ServiceSelection = () => {
                 Magával ragadó, minőségi reklámfilmek, amelyek hatékonyan mesélik el
                 márkád üzenetét és történetét.
               </p>
-              <a href="#" className="btn btn-light custom-btn">
-                Árajánlat <span className="btn-subtext">(24-48H)</span>
+              <a href="#" className="btn btn-light custom-btn quote-btn">
+                Árajánlat <span className="btn-subtext">(24H)</span>
               </a>
             </div>
           </div>
@@ -79,7 +82,8 @@ const ServiceSelection = () => {
             <div
               className="card-img"
               style={{
-                backgroundImage: "url(https://via.placeholder.com/400x300?text=Card+3)",
+                backgroundImage:
+                  "url(https://via.placeholder.com/400x300?text=Card+3)",
               }}
             ></div>
             <div className="card-content p-3">
@@ -89,8 +93,8 @@ const ServiceSelection = () => {
                 egyediségét, valamint megmutatják termékeid/szolgáltatásaid értékét.
                 Célunk, hogy a legtöbbet hozzuk ki a márkából.
               </p>
-              <a href="#" className="btn btn-light custom-btn">
-                Árajánlat <span className="btn-subtext">(24-48H)</span>
+              <a href="#" className="btn btn-light custom-btn quote-btn">
+                Árajánlat <span className="btn-subtext">(24H)</span>
               </a>
             </div>
           </div>
@@ -100,7 +104,8 @@ const ServiceSelection = () => {
             <div
               className="card-img"
               style={{
-                backgroundImage: "url(https://via.placeholder.com/400x300?text=Card+4)",
+                backgroundImage:
+                  "url(https://via.placeholder.com/400x300?text=Card+4)",
               }}
             ></div>
             <div className="card-content p-3">
@@ -109,8 +114,8 @@ const ServiceSelection = () => {
                 Mi gondoskodunk a közösségi médiád sikeréről! Facebook, Instagram, TikTok
                 és YouTube profiljaidat aktívan frissítjük, vonzó tartalommal töltjük meg.
               </p>
-              <a href="#" className="btn btn-light custom-btn">
-                Árajánlat <span className="btn-subtext">(24-48H)</span>
+              <a href="#" className="btn btn-light custom-btn quote-btn">
+                Árajánlat <span className="btn-subtext">(24H)</span>
               </a>
             </div>
           </div>
@@ -120,7 +125,8 @@ const ServiceSelection = () => {
             <div
               className="card-img"
               style={{
-                backgroundImage: "url(https://via.placeholder.com/400x300?text=Card+5)",
+                backgroundImage:
+                  "url(https://via.placeholder.com/400x300?text=Card+5)",
               }}
             ></div>
             <div className="card-content p-3">
@@ -129,8 +135,8 @@ const ServiceSelection = () => {
                 Professzionális, modern, esztétikus, felhasználóbarát weboldalak, amelyek
                 megfelelnek céged igényeinek és céljainak.
               </p>
-              <a href="#" className="btn btn-light custom-btn">
-                Árajánlat <span className="btn-subtext">(24-48H)</span>
+              <a href="#" className="btn btn-light custom-btn quote-btn">
+                Árajánlat <span className="btn-subtext">(24H)</span>
               </a>
             </div>
           </div>
