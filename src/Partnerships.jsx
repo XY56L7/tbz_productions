@@ -9,21 +9,15 @@ const Partnerships = () => {
   return (
     <div className="partnerships-section">
       <h2 className="partnerships-title text-center mb-5">EGYÜTTMŰKÖDÉSEINK</h2>
-      <div className="row justify-content-center align-items-center custom-gap">
-        <div className="col-6 col-md-4 d-flex justify-content-center align-items-center">
-          <div className="partnership-item">
-            <img src={madbroLogo} alt="MADBRO" className="logo grayscale desktop-grayscale" />
-          </div>
+      <div className="custom-gap">
+        <div className="partnership-item">
+          <img src={madbroLogo} alt="MADBRO" className="logo grayscale desktop-grayscale" />
         </div>
-        <div className="col-6 col-md-4 d-flex justify-content-center align-items-center">
-          <div className="partnership-item">
-            <img src={meisterTransLogo} alt="Meister Trans" className="logo grayscale desktop-grayscale" />
-          </div>
+        <div className="partnership-item">
+          <img src={meisterTransLogo} alt="Meister Trans" className="logo grayscale desktop-grayscale" />
         </div>
-        <div className="col-6 col-md-4 d-flex justify-content-center align-items-center">
-          <div className="partnership-item">
-            <img src={victoryFitnessLogo} alt="Victory Fitness" className="logo grayscale desktop-grayscale" />
-          </div>
+        <div className="partnership-item">
+          <img src={victoryFitnessLogo} alt="Victory Fitness" className="logo grayscale desktop-grayscale" />
         </div>
       </div>
     </div>

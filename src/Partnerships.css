@@ -16,7 +16,7 @@
   justify-content: center;
   width: 100%;
   max-width: 200px; /* Limit item width for consistency */
-  min-height: 150px; /* Fixed minimum height for desktop */
+  min-height: 150px; /* Fixed minimum height */
 }
 
 .logo {
@@ -62,7 +62,7 @@
   .grayscale,
   .desktop-grayscale,
   .partnership-item img[src*="madbro-logo"] {
-    filter: none !important; /* Remove all filters, including grayscale and brightness */
+    filter: none !important; /* Remove all filters */
   }
   .desktop-grayscale:hover {
     filter: none !important; /* Ensure hover doesn't change anything */
@@ -74,7 +74,17 @@
   color: #fff;
 }
 
-/* Additional mobile layout adjustments */
+/* Flex container for single row layout */
+.custom-gap {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem; /* Default gap for desktop */
+  flex-wrap: nowrap; /* Prevent wrapping to multiple lines */
+}
+
+/* Mobile view (max-width: 767px): Adjustments for single row */
 @media (max-width: 767px) {
   .partnerships-title {
     font-size: 20px;
@@ -86,32 +96,21 @@
     font-size: 12px;
     margin-top: 0.5rem; /* Tighter spacing on mobile */
   }
-  .row > .col-6 {
-    margin-bottom: 2rem; /* Larger vertical margin between rows on mobile */
+  .custom-gap {
+    gap: 2rem; /* Smaller gap on mobile */
+    padding: 0 1rem; /* Add some padding to prevent edge clipping */
   }
-  .col-6 {
-    height: 100%; /* Ensure full height for centering */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  .partnership-item {
+    min-height: 120px; /* Reduced height for mobile */
   }
 }
 
-/* Desktop view (≥992px): Layout adjustments for large gaps */
+/* Desktop view (≥992px): Larger gap */
 @media (min-width: 992px) {
   .custom-gap {
     gap: 8rem; /* Large gap between logos on desktop */
-    display: flex;
-    justify-content: center;
   }
   .partnerships-section {
     margin-bottom: 7.5em;
-  }
-  .row.custom-gap > .col-md-4 {
-    flex: 0 0 auto;
-    max-width: 33.333333%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 }
