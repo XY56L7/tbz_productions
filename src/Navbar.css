@@ -1,9 +1,38 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 9999 !important;
+  background-color: var(--bg-color);
+}
+
+.navbar-collapse {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 9999 !important;
+  background-color: var(--bg-color);
+}
+
+.navbar-toggler {
+  z-index: 10000 !important;
+}
+
+/* Ensure the dropdown menu stays on top */
+.navbar-nav {
+  position: relative;
+  z-index: 9999 !important;
+}
+
 @media (max-width: 768px) {
-    .hidden-1303b6h {
-      display: none !important;
-    }
-    .hidden-17mnt2g {
-      display: block !important;
-    }
+  .hidden-1303b6h {
+    display: none !important;
   }
+  .hidden-17mnt2g {
+    display: block !important;
+  }
+}
   
