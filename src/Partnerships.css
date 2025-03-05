@@ -1,3 +1,6 @@
+/* ==========================================================================
+   Base Styles
+   ========================================================================== */
 .partnerships-section {
   text-align: center;
   padding: 1rem;
@@ -11,6 +14,9 @@
   margin-bottom: 2rem;
 }
 
+/* ==========================================================================
+   Logo Container Styles
+   ========================================================================== */
 .partnership-item {
   display: flex;
   flex-direction: column;
@@ -21,6 +27,9 @@
   padding: 0.5rem;
 }
 
+/* ==========================================================================
+   Logo Base Styles
+   ========================================================================== */
 .logo {
   width: 100%;
   height: 100%;
@@ -32,7 +41,10 @@
   transition: filter 0.3s ease, transform 0.3s ease; /* Smooth transition for hover effect */
 }
 
-/* Külön szabály a nagyobb logókhoz */
+/* ==========================================================================
+   Logo Size Variations
+   ========================================================================== */
+/* Larger logos for all views */
 .partnership-item img[src*="te"],
 .partnership-item img[src*="bence"],
 .partnership-item img[src*="rapper"] {
@@ -41,13 +53,17 @@
   min-height: 120px;
 }
 
-/* Még nagyobb méret csak a "te" logónak */
+/* Largest size for "te" logo */
 .partnership-item img[src*="te"] {
   max-width: 260px;
   max-height: 140px;
   min-height: 140px;
 }
 
+
+/* ==========================================================================
+   Logo Text Styles
+   ========================================================================== */
 .logo-text {
   color: #fff; /* White text for logo names */
   font-size: 14px;
@@ -60,8 +76,11 @@
   transition: filter 0.3s ease; /* Smooth transition */
 }
 
-/* Desktop view (min-width: 768px): Apply grayscale by default */
+/* ==========================================================================
+   Desktop Styles (≥768px)
+   ========================================================================== */
 @media (min-width: 768px) {
+  /* Section Layout */
   .partnerships-section {
     padding: 3rem 0;
     width: 100%;
@@ -73,6 +92,7 @@
     margin-bottom: 3rem;
   }
 
+  /* Container and Row Layout */
   .container {
     max-width: 100% !important;
     padding: 0 !important;
@@ -84,12 +104,14 @@
     width: 100%;
   }
 
+  /* Logo Container */
   .partnership-item {
     padding: 1.5rem 0.5rem;
     width: auto;
     height: auto;
   }
 
+  /* Base Logo Sizes */
   .logo {
     width: auto;
     height: auto;
@@ -98,7 +120,7 @@
     min-height: 100px !important;
   }
 
-  /* Nagyobb logók asztali nézetben */
+  /* Larger Logos */
   .partnership-item img[src*="te"],
   .partnership-item img[src*="bence"],
   .partnership-item img[src*="rapper"] {
@@ -109,7 +131,7 @@
     min-height: 140px !important;
   }
 
-  /* Még nagyobb méret csak a "te" logónak asztali nézetben */
+  /* Largest Logo (te) */
   .partnership-item img[src*="te"] {
     width: auto;
     height: auto;
@@ -118,6 +140,25 @@
     min-height: 160px !important;
   }
 
+  /* Victory Fitness Specific Size */
+  .partnership-item img[src*="victory"] {
+    width: auto;
+    height: auto;
+    max-width: 220px !important;
+    max-height: 140px !important;
+    min-height: 140px !important;
+  }
+
+  /* Meister Trans Specific Size */
+  .partnership-item img[src*="meister-trans-logo"] {
+    width: auto;
+    height: auto;
+    max-width: 140px !important;
+    max-height: 110px !important;
+    min-height: 110px !important;
+  }
+
+  /* Grayscale Effects */
   .grayscale {
     filter: grayscale(100%);
   }
@@ -127,7 +168,7 @@
     transform: scale(1.1);
   }
 
-  /* MADBRO és VaDe specific grayscale for desktop */
+  /* Special Grayscale for MADBRO and VaDe */
   .partnership-item img[src*="madbro-logo"],
   .partnership-item img[src*="rapper"] {
     filter: grayscale(100%) brightness(0.7) !important;
@@ -139,6 +180,7 @@
     transform: scale(1.1);
   }
 
+  /* Gap Layout */
   .custom-gap {
     display: flex;
     flex-direction: row;
@@ -149,71 +191,75 @@
   }
 }
 
-/* Mobile view (max-width: 767px): Remove grayscale completely for all logos */
+/* ==========================================================================
+   Mobile Styles (<768px)
+   ========================================================================== */
 @media (max-width: 767px) {
   .partnerships-section {
-    padding: 1rem;
+    padding: 0.5rem;
     margin-bottom: 1rem !important;
   }
   
   .partnerships-title {
     font-size: 20px;
+    margin-bottom: 1.5rem;
   }
   
+  /* Remove Grayscale Effects */
   .logo,
   .grayscale,
   .desktop-grayscale,
   .partnership-item img[src*="madbro-logo"] {
-    filter: none !important; /* Remove all filters */
+    filter: none !important;
   }
   
   .desktop-grayscale:hover {
-    filter: none !important; /* Ensure hover doesn't change anything */
+    filter: none !important;
   }
 
+  /* Container and Row Layout */
   .container {
     max-width: 100%;
-    padding: 0 0.5rem;
+    padding: 0 0.25rem;
   }
 
   .row {
-    margin: 0 -0.25rem;
+    margin: 0 -0.15rem;
   }
 
   .col {
+    padding: 0.15rem;
+  }
+
+  .partnership-item {
     padding: 0.25rem;
+  }
+}
+
+/* ==========================================================================
+   Large Desktop Styles (≥992px)
+   ========================================================================== */
+@media (min-width: 992px) {
+  .custom-gap {
+    gap: 8rem;
+  }
+  
+  .partnership-item {
+    padding: 1.5rem 0.5rem;
+  }
+  
+  .partnerships-section {
+    padding: 3rem 0;
+    margin-bottom: 12rem !important;
+  }
+  
+  .container {
+    max-width: 100%;
+    padding: 0 1rem;
   }
 }
 
 /* Ensure text remains readable against the green background on hover */
 .partnership-item:hover .logo-text {
   color: #fff;
-}
-
-/* Flex container for single row layout */
-.custom-gap {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 4rem; /* Default gap for desktop */
-  flex-wrap: nowrap; /* Prevent wrapping to multiple lines */
-}
-
-/* Desktop view (≥992px): Larger gap */
-@media (min-width: 992px) {
-  .custom-gap {
-    gap: 8rem;
-  }
-  .partnership-item {
-    padding: 1.5rem 0.5rem;
-  }
-  .partnerships-section {
-    padding: 3rem 0;
-    margin-bottom: 12rem !important;
-  }
-  .container {
-    max-width: 100%;
-    padding: 0 1rem;
-  }
 }

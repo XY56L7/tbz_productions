@@ -146,3 +146,25 @@
     font-size: 14px;
   }
 }
+
+/* Base styles for text content */
+.text-content {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Desktop styles */
+@media (min-width: 768px) {
+  .text-content {
+    padding-left: 5rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Mobile styles */
+@media (max-width: 767px) {
+  .text-content {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+} 

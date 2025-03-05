@@ -1,13 +1,21 @@
+/* Base styles for text content */
+.text-content {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Desktop styles */
 @media (min-width: 768px) {
   .text-content {
     padding-left: 5rem;
-    padding-right: 5rem;
+    padding-right: 2rem;
   }
 }
 
-@media (min-width: 992px) {
+/* Mobile styles */
+@media (max-width: 767px) {
   .text-content {
-    padding-left: 8rem;
-    padding-right: 8rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 } 
