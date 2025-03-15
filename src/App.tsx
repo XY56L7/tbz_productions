@@ -7,6 +7,7 @@ import CallToActionCard from './ActionCard';
 import Contact from './Contact';
 import Footer from './Footer';
 import Partnerships from './Partnerships';
+import References from './References';
 
 const App = () => {
   return (
@@ -36,6 +37,7 @@ const App = () => {
         <Navbar />
         <Partnerships />
         <ServicesSection />
+        <References />
         <Asked />
         <CallToActionCard />
         <Contact />
