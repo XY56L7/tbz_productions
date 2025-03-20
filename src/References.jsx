@@ -17,12 +17,11 @@ const References = () => {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(1);
   const [isZoomed, setIsZoomed] = useState(false);
   const [showAllPhotos, setShowAllPhotos] = useState(false);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const modalRef = useRef(null);
   const videoRef = useRef(null);
   const prevVideoRef = useRef(null);
   const nextVideoRef = useRef(null);
-  const fifthVideoRef = useRef(null);
-  const videoSectionRef = useRef(null);
 
   const photos = [
     { id: 1, src: img1, title: 'Referencia 1', category: 'Fotózás' },
@@ -94,26 +93,24 @@ const References = () => {
   };
 
   const handleVideoSwipe = (direction) => {
-    console.log(`Video swipe triggered: ${direction}`);
     const prevIndex = currentVideoIndex;
     const newIndex = direction === 'next'
       ? (prevIndex === videos.length - 1 ? 0 : prevIndex + 1)
       : (prevIndex === 0 ? videos.length - 1 : prevIndex - 1);
 
     setCurrentVideoIndex(newIndex);
+    setIsVideoPlaying(false);
 
     if (videoRef.current) {
       videoRef.current.src = videos[newIndex].src;
       videoRef.current.load();
-      videoRef.current.play().catch(err => console.error('Main video autoplay failed:', err));
     }
 
-    if (fifthVideoRef.current) {
+    if (prevVideoRef.current) {
       const prevIdx = newIndex === 0 ? videos.length - 1 : newIndex - 1;
-      fifthVideoRef.current.src = videos[prevIdx].src;
-      fifthVideoRef.current.load();
-      fifthVideoRef.current.currentTime = 0;
-      fifthVideoRef.current.play().catch(err => console.error('Prev video autoplay failed:', err));
+      prevVideoRef.current.src = videos[prevIdx].src;
+      prevVideoRef.current.load();
+      prevVideoRef.current.currentTime = 0;
     }
 
     if (nextVideoRef.current) {
@@ -121,7 +118,14 @@ const References = () => {
       nextVideoRef.current.src = videos[nextIdx].src;
       nextVideoRef.current.load();
       nextVideoRef.current.currentTime = 0;
-      nextVideoRef.current.play().catch(err => console.error('Next video autoplay failed:', err));
+    }
+  };
+
+  const handlePlayVideo = () => {
+    if (videoRef.current) {
+      videoRef.current.play().then(() => {
+        setIsVideoPlaying(true);
+      }).catch(err => console.error('Video play failed:', err));
     }
   };
 
@@ -141,19 +145,17 @@ const References = () => {
   }, [selectedPhoto]);
 
   useEffect(() => {
-    const loadInitialVideos = async () => {
+    const loadInitialVideos = () => {
       if (videoRef.current) {
         videoRef.current.src = videos[currentVideoIndex].src;
         videoRef.current.load();
-        videoRef.current.play().catch(err => console.error('Initial main video autoplay failed:', err));
       }
 
-      if (fifthVideoRef.current) {
+      if (prevVideoRef.current) {
         const prevIndex = currentVideoIndex === 0 ? videos.length - 1 : currentVideoIndex - 1;
-        fifthVideoRef.current.src = videos[prevIndex].src;
-        fifthVideoRef.current.load();
-        fifthVideoRef.current.currentTime = 0;
-        fifthVideoRef.current.play().catch(err => console.error('Initial prev video autoplay failed:', err));
+        prevVideoRef.current.src = videos[prevIndex].src;
+        prevVideoRef.current.load();
+        prevVideoRef.current.currentTime = 0;
       }
 
       if (nextVideoRef.current) {
@@ -161,16 +163,14 @@ const References = () => {
         nextVideoRef.current.src = videos[nextIndex].src;
         nextVideoRef.current.load();
         nextVideoRef.current.currentTime = 0;
-        nextVideoRef.current.play().catch(err => console.error('Initial next video autoplay failed:', err));
       }
     };
 
     loadInitialVideos();
-  }, []);
+  }, [currentVideoIndex]);
 
   useEffect(() => {
     const handleVideoEnd = () => {
-      console.log('Video ended, switching to next');
       handleVideoSwipe('next');
     };
 
@@ -207,7 +207,7 @@ const References = () => {
 
   return (
     <>
-      <section className="video-section" ref={videoSectionRef}>
+      <section className="video-section">
         <div className="section-header">
           <h2 className="section-title">Videó Referenciák</h2>
           <p className="section-subtitle">Prémium videó munkáink</p>
@@ -218,10 +218,9 @@ const References = () => {
             <div 
               className="adjacent-video"
               onClick={() => handleVideoSwipe('prev')}
-              style={{ cursor: 'pointer' }}
             >
               <video
-                ref={fifthVideoRef}
+                ref={prevVideoRef}
                 className="video-media"
                 muted
                 playsInline
@@ -240,18 +239,28 @@ const References = () => {
                   className="video-media"
                   loop={false}
                   playsInline
-                  controls
-                  autoPlay
+                  controls={isVideoPlaying}
+                  muted={false}
                 >
                   <source src={videos[currentVideoIndex].src} type="video/mp4" />
                 </video>
+                {!isVideoPlaying && (
+                  <button 
+                    className="modern-play-button" 
+                    onClick={handlePlayVideo}
+                    aria-label="Videó lejátszása"
+                  >
+                    <svg className="play-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M5 3l14 9-14 9V3z" fill="white"/>
+                    </svg>
+                  </button>
+                )}
               </div>
             </div>
 
             <div 
               className="adjacent-video"
               onClick={() => handleVideoSwipe('next')}
-              style={{ cursor: 'pointer' }}
             >
               <video
                 ref={nextVideoRef}
