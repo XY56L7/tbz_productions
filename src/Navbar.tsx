@@ -344,7 +344,7 @@ const Navbar = () => {
               style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}
             >
               <a href="./" style={{ flexShrink: 0 }}>
-                <img src={logo} alt="Logo" style={{ width: '80px', height: 'auto' }} />
+                <img src={wallpeper} alt="Logo" style={{ width: '80px', height: 'auto' }} />
               </a>
             </div>
             {/* Toggle gomb a jobb oldalon */}
