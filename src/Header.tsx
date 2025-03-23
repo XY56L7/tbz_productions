@@ -3,30 +3,25 @@ import './Header.css';
 import wallpaper from './wallpaper.png';
 
 const headings = [
-  // "MI VAGYUNK A TBZ. PRODUCTIONS!" - kiemelve: "TBZ. PRODUCTIONS!"
   [
     { text: "MI VAGYUNK A", highlight: false },
     { text: "TBZ. PRODUCTIONS!", highlight: true }
   ],
-  // "SZERETNÉD EGY KÉZBEN TARTANI AZ ONLINE JELENLÉTED?" - kiemelve: "EGY KÉZBEN TARTANI"
   [
     { text: "SZERETNÉD", highlight: false },
     { text: "EGY KÉZBEN TARTANI", highlight: true },
     { text: "AZ ONLINE JELENLÉTED?", highlight: false }
   ],
-  // "EGYEDI ÉS PROFI MÉDIATARTALMAK A MÁRKÁDNAK ÉS VÁLLALKOZÁSODNAK" - kiemelve: "MÁRKÁDNAK ÉS VÁLLALKOZÁSODNAK"
   [
     { text: "EGYEDI ÉS PROFI MÉDIATARTALMAK A", highlight: false },
     { text: "MÁRKÁDNAK ÉS VÁLLALKOZÁSODNAK", highlight: true }
   ],
-  // "TE MÁRKÁD, TE TÖRTÉNETED" - kiemelve: "TE" (mindkét előfordulás)
   [
     { text: "TE", highlight: true },
     { text: "MÁRKÁD,", highlight: false },
     { text: "TE", highlight: true },
     { text: "TÖRTÉNETED", highlight: false }
   ],
-  // "TERVEZÉSTŐL A MEGVALÓSÍTÁSIG" - kiemelve: "TERVEZÉSTŐL" és "MEGVALÓSÍTÁSIG"
   [
     { text: "TERVEZÉSTŐL", highlight: true },
     { text: "A", highlight: false },
@@ -168,7 +163,9 @@ const Header = () => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                padding: '15px 20px'
+                padding: '15px 20px',
+                boxShadow: '0 0 8px rgba(255, 255, 255, 0.3)',
+                transition: 'box-shadow 0.3s ease-in-out'
               }}
               onClick={() => {
                 const mainSection = document.getElementById('services');
@@ -176,6 +173,8 @@ const Header = () => {
                   mainSection.scrollIntoView({ behavior: 'smooth' });
                 }
               }}
+              onMouseEnter={(e) => e.currentTarget.style.boxShadow = '0 0 12px rgba(255, 255, 255, 0.5)'}
+              onMouseLeave={(e) => e.currentTarget.style.boxShadow = '0 0 8px rgba(255, 255, 255, 0.3)'}
               tabIndex={0}
             >
               <div

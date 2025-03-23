@@ -13,7 +13,7 @@
   top: 100%;
   left: 0;
   right: 0;
-  z-index: 1100 !important; /* Módosítva: 1000 -> 1100 */
+  z-index: 1100 !important;
   background-color: var(--bg-color);
 }
 
@@ -21,7 +21,6 @@
   z-index: 10000 !important;
 }
 
-/* Ensure the dropdown menu stays on top */
 .navbar-nav {
   position: relative;
   z-index: 9999 !important;
@@ -35,4 +34,3 @@
     display: block !important;
   }
 }
-  

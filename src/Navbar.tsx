@@ -16,6 +16,13 @@ const Navbar = () => {
     }
   };
 
+  const scrollToRef = () => {
+    const aboutSection = document.getElementById('REF');
+    if (aboutSection) {
+      aboutSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const scrollToServices = () => {
     const mainSection = document.getElementById('services');
     if (mainSection) {
@@ -80,7 +87,7 @@ const Navbar = () => {
               style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}
             >
               <a href="./" style={{ flexShrink: 0 }}>
-                <img src={wallpeper} alt="Logo" style={{ width: '100px', height: 'auto' }} />
+                <img src={logo} alt="Logo" style={{ width: '100px', height: 'auto' }} />
               </a>
             </div>
             {/* Linkek */}
@@ -168,7 +175,7 @@ const Navbar = () => {
                   }}
                   className="framer-text"
                 >
-                  <a className="framer-text framer-styles-preset-1b1g0kp" data-styles-preset="dRzQBmjh2" href="./#referenciak">
+                  <a onClick={scrollToRef} className="framer-text framer-styles-preset-1b1g0kp" data-styles-preset="dRzQBmjh2" href="./#referenciak">
                     Referenciák
                   </a>
                 </p>
@@ -282,10 +289,14 @@ const Navbar = () => {
                     backdropFilter: 'none',
                     backgroundColor: 'rgb(255, 255, 255)',
                     borderRadius: '100px',
-                    WebkitBackdropFilter: 'none'
+                    WebkitBackdropFilter: 'none',
+                    boxShadow: '0 0 8px rgba(255, 255, 255, 0.3)',
+                    transition: 'box-shadow 0.3s ease-in-out'
                   }}
                   href="./#szolgaltatasok"
                   tabIndex={0}
+                  onMouseEnter={(e) => e.currentTarget.style.boxShadow = '0 0 12px rgba(255, 255, 255, 0.5)'}
+                  onMouseLeave={(e) => e.currentTarget.style.boxShadow = '0 0 8px rgba(255, 255, 255, 0.3)'}
                 >
                   <div
                     className="framer-1wnb748"
@@ -326,7 +337,6 @@ const Navbar = () => {
             position: 'relative'
           }}
         >
-          {/* Fix pozícionált, fix magasságú navigációs sáv, ahol a logó mindig ugyanabban a helyen marad */}
           <div
             className="framer-mx8mak"
             data-framer-name="Nav Wrapper"
@@ -338,16 +348,14 @@ const Navbar = () => {
               height: '60px'
             }}
           >
-            {/* Logo a bal oldalon */}
             <div
               className="logo-container"
               style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}
             >
               <a href="./" style={{ flexShrink: 0 }}>
-                <img src={wallpeper} alt="Logo" style={{ width: '80px', height: 'auto' }} />
+                <img src={logo} alt="Logo" style={{ width: '80px', height: 'auto' }} />
               </a>
             </div>
-            {/* Toggle gomb a jobb oldalon */}
             <div className="framer-1ve3frv" data-framer-name="Content" style={{ position: 'relative' }}>
               <div className="framer-1mo70g1" data-framer-name="Logo & Hamburger Icon">
                 <button
@@ -368,7 +376,6 @@ const Navbar = () => {
               </div>
             </div>
           </div>
-          {/* Dropdown menü – abszolút pozícionált a navigációs sáv alatt, és homályos háttérrel */}
           {isMenuOpen && (
             <div
               className="framer-1b61lg7"
