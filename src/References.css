@@ -1,22 +1,21 @@
 /* General Section Styles */
 .references-section {
-  padding: 6rem 0;
+  padding: 8rem 0; /* Nagyobb padding a szekcióknak */
   background-color: #0a0a0a;
-  min-height: 100vh;
   position: relative;
 }
 
 .section-header {
   text-align: center;
-  margin-bottom: 4rem;
-  padding: 0 1rem;
+  margin-bottom: 3rem; /* Nagyobb tér a fejléc alatt */
+  padding: 0 1.5rem; /* Nagyobb oldalsó padding */
 }
 
 .section-title {
   font-size: 3.5rem;
   font-weight: 800;
   color: white;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem; /* Nagyobb tér a cím alatt */
   position: relative;
   display: inline-block;
 }
@@ -36,21 +35,20 @@
 .section-subtitle {
   color: #888;
   font-size: 1.2rem;
-  margin-top: 1.5rem;
+  margin-top: 2rem; /* Nagyobb tér a felirat felett */
 }
 
 /* Video Section */
 .video-section {
-  padding: 6rem 0;
+  padding: 6rem 0 4rem 0; /* Nagyobb felső és alsó padding */
   background-color: #000;
-  min-height: 100vh;
   position: relative;
   overflow: hidden;
 }
 
 .video-container {
   max-width: 100%;
-  height: calc(100vh - 200px);
+  height: auto; /* Dinamikus magasság */
   margin: 0 auto;
   position: relative;
   overflow: visible;
@@ -65,7 +63,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1.5rem;
+  gap: 2rem; /* Nagyobb tér a videók között */
   padding: 0 12%;
 }
 
@@ -220,13 +218,13 @@
 
 .video-controls {
   position: absolute;
-  bottom: 50px;
+  bottom: 60px; /* Nagyobb távolság alulról */
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 2rem;
+  gap: 2.5rem; /* Nagyobb tér a gombok között */
   z-index: 10;
 }
 
@@ -255,11 +253,11 @@
 
 .progress-dots {
   position: absolute;
-  bottom: 20px;
+  bottom: 25px; /* Nagyobb távolság alulról */
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 10px;
+  gap: 12px; /* Nagyobb tér a pontok között */
   z-index: 10;
 }
 
@@ -313,16 +311,15 @@
 
 /* Photo Section */
 .photo-section {
-  padding: 6rem 0;
+  padding: 2rem 0 4rem 0; /* Nagyobb felső és alsó padding */
   background-color: transparent;
-  min-height: 100vh;
   position: relative;
   overflow: hidden;
 }
 
 .photo-container {
   max-width: 1200px;
-  height: calc(100vh - 200px);
+  height: auto; /* Dinamikus magasság */
   margin: 0 auto;
   position: relative;
   overflow: hidden;
@@ -335,8 +332,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 2rem;
-  padding: 0 2rem;
+  gap: 2.5rem; /* Nagyobb tér a képek között */
+  padding: 0 2.5rem; /* Nagyobb oldalsó padding */
 }
 
 .photo-card {
@@ -397,10 +394,11 @@
   padding: 1.5rem;
   color: white;
   transition: all 0.3s ease;
+  display: none;
 }
 
 .photo-category {
-  display: inline-block;
+  display: none;
   padding: 0.5rem 1rem;
   background: rgba(0, 123, 255, 0.3);
   color: #007bff;
@@ -413,17 +411,18 @@
   font-size: 1.4rem;
   font-weight: 600;
   margin: 0;
+  display: none;
 }
 
 .photo-controls {
   position: absolute;
-  bottom: 50px;
+  bottom: 60px; /* Nagyobb távolság alulról */
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 2rem;
+  gap: 2.5rem; /* Nagyobb tér a gombok között */
   z-index: 10;
 }
 
@@ -538,15 +537,15 @@
 @media (max-width: 1200px) {
   .video-wrapper {
     padding: 0 8%;
-    gap: 1.2rem;
+    gap: 1.5rem;
   }
   .phone-frame, .adjacent-video {
     width: 220px;
     height: 470px;
   }
   .photo-wrapper {
-    padding: 0 1.5rem;
-    gap: 1.5rem;
+    padding: 0 2rem;
+    gap: 2rem;
   }
   .photo-card {
     width: 350px;
@@ -559,15 +558,19 @@
 }
 
 @media (max-width: 768px) {
-  .video-section, .photo-section {
-    padding: 4rem 0;
+  .video-section {
+    padding: 4rem 0 2rem 0;
+  }
+  .photo-section {
+    padding: 1.5rem 0 3rem 0;
   }
   .video-container, .photo-container {
-    height: calc(100vh - 150px);
+    height: auto;
+    margin-top: 0;
   }
   .video-wrapper {
     padding: 0 2%;
-    gap: 0.5rem;
+    gap: 1rem;
   }
   .phone-frame {
     width: 260px;
@@ -580,8 +583,8 @@
     border-width: 5px;
   }
   .photo-wrapper {
-    padding: 0 1rem;
-    gap: 1rem;
+    padding: 0 1.5rem;
+    gap: 1.5rem;
   }
   .photo-card {
     width: 300px;
@@ -597,8 +600,8 @@
     font-size: 1.4rem;
   }
   .progress-dots {
-    bottom: 15px;
-    gap: 8px;
+    bottom: 20px;
+    gap: 10px;
   }
   .progress-dot {
     width: 10px;
@@ -621,9 +624,15 @@
 }
 
 @media (max-width: 480px) {
+  .video-section {
+    padding: 3rem 0 1.5rem 0;
+  }
+  .photo-section {
+    padding: 1rem 0 2rem 0;
+  }
   .video-wrapper {
     padding: 0 1%;
-    gap: 0.3rem;
+    gap: 0.5rem;
   }
   .phone-frame {
     width: 240px;
@@ -635,8 +644,8 @@
     height: 500px;
   }
   .photo-wrapper {
-    padding: 0 0.5rem;
-    gap: 0.5rem;
+    padding: 0 1rem;
+    gap: 1rem;
   }
   .photo-card {
     width: 250px;
@@ -652,8 +661,8 @@
     font-size: 1.2rem;
   }
   .progress-dots {
-    bottom: 10px;
-    gap: 6px;
+    bottom: 15px;
+    gap: 8px;
   }
   .progress-dot {
     width: 8px;
@@ -694,13 +703,6 @@
   }
   .modal-media.zoomed {
     transform: scale(1.1);
-  }
-  .photo-title {
-    font-size: 1.2rem;
-  }
-  .photo-category {
-    font-size: 0.8rem;
-    padding: 0.4rem 0.8rem;
   }
 }
 
