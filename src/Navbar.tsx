@@ -87,7 +87,7 @@ const Navbar = () => {
               style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}
             >
               <a href="./" style={{ flexShrink: 0 }}>
-                <img src={logo} alt="Logo" style={{ width: '100px', height: 'auto' }} />
+                <img src={wallpeper} alt="Logo" style={{ width: '100px', height: 'auto' }} />
               </a>
             </div>
             {/* Linkek */}
@@ -355,7 +355,7 @@ const Navbar = () => {
               style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}
             >
               <a href="./" style={{ flexShrink: 0 }}>
-                <img src={logo} alt="Logo" style={{ width: '80px', height: 'auto' }} />
+                <img src={wallpeper} alt="Logo" style={{ width: '80px', height: 'auto' }} />
               </a>
             </div>
             <div className="framer-1ve3frv" data-framer-name="Content" style={{ position: 'relative' }}>
