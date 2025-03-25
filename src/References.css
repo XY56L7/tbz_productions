@@ -484,23 +484,15 @@
 }
 
 .phone-frame {
-  width: 320px;
-  height: 680px;
   position: relative;
-  background: #1a1a1a;
   border-radius: 50px;
   overflow: hidden;
-  box-shadow: 
-    0 30px 80px rgba(0, 0, 0, 0.6),
-    0 0 40px rgba(0, 123, 255, 0.4),
-    0 0 80px rgba(0, 255, 136, 0.3),
-    0 0 20px rgba(255, 255, 255, 0.2);
-  transform: translateZ(0);
-  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 2;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
   border: 8px solid #000000;
   flex-shrink: 0;
-  padding: 0;
+  background: #1a1a1a;
+  width: 280px;
+  height: 600px;
 }
 
 .phone-frame:hover {
@@ -607,8 +599,8 @@
 
 .adjacent-video {
   position: relative;
-  width: 340px;
-  height: 680px;
+  width: 280px;
+  height: 600px;
   border-radius: 50px;
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -838,18 +830,14 @@
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   }
 
-  .video-wrapper {
-    padding: 0 4%;
+  .video-wrapper, .photo-wrapper {
+    padding: 0 8%;
+    gap: 1.2rem;
   }
 
-  .phone-frame {
-    width: 280px;
-    height: 600px;
-  }
-
-  .adjacent-video {
-    width: 300px;
-    height: 600px;
+  .phone-frame, .adjacent-video, .photo-item {
+    width: 220px;
+    height: 470px;
   }
 }
 
@@ -943,8 +931,9 @@
   }
   
   .photo-item {
-    width: 100%;
-    aspect-ratio: 4/5;
+    width: 200px;
+    height: 430px;
+    border-width: 5px;
     margin: 0;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
@@ -1024,8 +1013,8 @@
   }
 
   .video-wrapper {
-    padding: 0 1rem;
-    gap: 0.2rem;
+    padding: 0 2%;
+    gap: 0.5rem;
     justify-content: center;
   }
 
@@ -1132,9 +1121,9 @@
     font-size: 1.2rem;
   }
 
-  .video-wrapper {
-    padding: 0 0.5rem;
-    gap: 0.15rem;
+  .video-wrapper, .photo-wrapper {
+    padding: 0 1%;
+    gap: 0.3rem;
   }
 
   .phone-frame {
@@ -1320,4 +1309,188 @@
 .play-icon {
   width: 24px;
   height: 24px;
+}
+
+/* Egységes konténer méretezés */
+.video-container, .photo-container {
+  max-width: 100%;
+  height: calc(100vh - 200px);
+  margin: 0 auto;
+  position: relative;
+  overflow: visible;
+  perspective: 2500px;
+  transform-style: preserve-3d;
+}
+
+.video-wrapper, .photo-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 0 12%;
+}
+
+/* Egységes telefon méretezés - desktop és laptop nézet */
+.phone-frame, .adjacent-video, .photo-item {
+  position: relative;
+  border-radius: 50px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+  border: 8px solid #000000;
+  flex-shrink: 0;
+  background: #1a1a1a;
+  width: 280px;
+  height: 600px;
+}
+
+/* Gloweffect a fő telefonhoz */
+.phone-frame {
+  box-shadow: 
+    0 30px 80px rgba(0, 0, 0, 0.6),
+    0 0 40px rgba(0, 123, 255, 0.4),
+    0 0 80px rgba(0, 255, 136, 0.3),
+    0 0 20px rgba(255, 255, 255, 0.2);
+  animation: glowPulse 3s infinite alternate;
+}
+
+@keyframes glowPulse {
+  0% {
+    box-shadow: 
+      0 30px 80px rgba(0, 0, 0, 0.6),
+      0 0 40px rgba(0, 123, 255, 0.4),
+      0 0 80px rgba(0, 255, 136, 0.3),
+      0 0 20px rgba(255, 255, 255, 0.2);
+  }
+  100% {
+    box-shadow: 
+      0 30px 80px rgba(0, 0, 0, 0.6),
+      0 0 60px rgba(0, 123, 255, 0.6),
+      0 0 100px rgba(0, 255, 136, 0.5),
+      0 0 30px rgba(255, 255, 255, 0.3);
+  }
+}
+
+/* Glow effect az árajánlat és szolgáltatások gombokhoz */
+.glow-button {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 
+    0 0 10px rgba(0, 123, 255, 0.4),
+    0 0 20px rgba(0, 255, 136, 0.2),
+    0 0 5px rgba(255, 255, 255, 0.1);
+  animation: buttonGlow 3s infinite alternate;
+}
+
+@keyframes buttonGlow {
+  0% {
+    box-shadow: 
+      0 0 10px rgba(0, 123, 255, 0.4),
+      0 0 20px rgba(0, 255, 136, 0.2),
+      0 0 5px rgba(255, 255, 255, 0.1);
+  }
+  100% {
+    box-shadow: 
+      0 0 20px rgba(0, 123, 255, 0.6),
+      0 0 30px rgba(0, 255, 136, 0.4),
+      0 0 10px rgba(255, 255, 255, 0.2);
+  }
+}
+
+/* Laptop nézet */
+@media (max-width: 1200px) {
+  .video-wrapper, .photo-wrapper {
+    padding: 0 8%;
+    gap: 1.2rem;
+  }
+  
+  .phone-frame, .adjacent-video, .photo-item {
+    width: 220px;
+    height: 470px;
+  }
+}
+
+/* Mobil nézet - visszaállítva az eredeti értékekre */
+@media (max-width: 768px) {
+  .video-container, .photo-container {
+    height: calc(100vh - 150px);
+  }
+
+  .video-wrapper, .photo-wrapper {
+    padding: 0 2%;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+  
+  /* Visszaállítva az eredeti értékekre */
+  .phone-frame {
+    width: 260px;
+    height: 560px;
+    border-width: 6px;
+  }
+  
+  .adjacent-video {
+    width: 200px;
+    height: 540px;
+    border-width: 5px;
+    transform: scale(0.9);
+  }
+  
+  .photo-item {
+    width: 100%;
+    aspect-ratio: 4/5;
+    border-radius: 10px;
+    border-width: normal;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* Kisebb mobilok - visszaállítva az eredeti értékekre */
+@media (max-width: 480px) {
+  .video-wrapper, .photo-wrapper {
+    padding: 0 1%;
+    gap: 0.3rem;
+  }
+  
+  /* Visszaállítva az eredeti értékekre */
+  .phone-frame {
+    width: 240px;
+    height: 520px;
+    border-width: 5px;
+  }
+  
+  .adjacent-video {
+    width: 180px;
+    height: 500px;
+    transform: scale(0.95);
+  }
+}
+
+/* Erősebb glow effect a navbar árajánlat gombjához */
+.navbar-quote-btn {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 
+    0 0 15px rgba(0, 123, 255, 0.6),
+    0 0 30px rgba(0, 255, 136, 0.4),
+    0 0 10px rgba(255, 255, 255, 0.3);
+  animation: navbarButtonGlow 3s infinite alternate;
+  transform: scale(1.1);
+}
+
+@keyframes navbarButtonGlow {
+  0% {
+    box-shadow: 
+      0 0 15px rgba(0, 123, 255, 0.6),
+      0 0 30px rgba(0, 255, 136, 0.4),
+      0 0 10px rgba(255, 255, 255, 0.3);
+  }
+  100% {
+    box-shadow: 
+      0 0 25px rgba(0, 123, 255, 0.8),
+      0 0 50px rgba(0, 255, 136, 0.6),
+      0 0 20px rgba(255, 255, 255, 0.5);
+  }
 }

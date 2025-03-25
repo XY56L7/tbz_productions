@@ -50,7 +50,7 @@ const ServiceSelection = () => {
                 ki és hatékonyan közvetítik az üzenetedet. Ezek a videók ideálisak arra,
                 hogy elérd közönségedet ott, ahol a legtöbb időt töltik: a közösségi médián.
               </p>
-              <a href="#" className="btn btn-light custom-btn quote-btn">
+              <a href="#" className="btn btn-light custom-btn quote-btn glow-button">
                 Árajánlat <span className="btn-subtext">(24H)</span>
               </a>
             </div>
@@ -71,7 +71,7 @@ const ServiceSelection = () => {
                 Magával ragadó, minőségi reklámfilmek, amelyek hatékonyan mesélik el
                 márkád üzenetét és történetét.
               </p>
-              <a href="#" className="btn btn-light custom-btn quote-btn">
+              <a href="#" className="btn btn-light custom-btn quote-btn glow-button">
                 Árajánlat <span className="btn-subtext">(24H)</span>
               </a>
             </div>
@@ -93,7 +93,7 @@ const ServiceSelection = () => {
                 egyediségét, valamint megmutatják termékeid/szolgáltatásaid értékét.
                 Célunk, hogy a legtöbbet hozzuk ki a márkából.
               </p>
-              <a href="#" className="btn btn-light custom-btn quote-btn">
+              <a href="#" className="btn btn-light custom-btn quote-btn glow-button">
                 Árajánlat <span className="btn-subtext">(24H)</span>
               </a>
             </div>
@@ -114,7 +114,7 @@ const ServiceSelection = () => {
                 Mi gondoskodunk a közösségi médiád sikeréről! Facebook, Instagram, TikTok
                 és YouTube profiljaidat aktívan frissítjük, vonzó tartalommal töltjük meg.
               </p>
-              <a href="#" className="btn btn-light custom-btn quote-btn">
+              <a href="#" className="btn btn-light custom-btn quote-btn glow-button">
                 Árajánlat <span className="btn-subtext">(24H)</span>
               </a>
             </div>
@@ -135,7 +135,7 @@ const ServiceSelection = () => {
                 Professzionális, modern, esztétikus, felhasználóbarát weboldalak, amelyek
                 megfelelnek céged igényeinek és céljainak.
               </p>
-              <a href="#" className="btn btn-light custom-btn quote-btn">
+              <a href="#" className="btn btn-light custom-btn quote-btn glow-button">
                 Árajánlat <span className="btn-subtext">(24H)</span>
               </a>
             </div>

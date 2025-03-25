@@ -87,11 +87,38 @@
   background-color: #fff !important; /* fehér háttér */
   color: #000 !important;            /* fekete betűszín */
   border: 1px solid #ccc;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.1),
+    0 0 10px rgba(0, 123, 255, 0.4),
+    0 0 20px rgba(0, 255, 136, 0.2);
+  animation: buttonGlow 3s infinite alternate;
 }
 
 .quote-btn:hover {
   background-color: #f7f7f7 !important;
   color: #000 !important;
+  box-shadow: 
+    0 6px 12px rgba(0, 0, 0, 0.15),
+    0 0 20px rgba(0, 123, 255, 0.6),
+    0 0 30px rgba(0, 255, 136, 0.4);
+  transform: translateY(-2px);
+}
+
+@keyframes buttonGlow {
+  0% {
+    box-shadow: 
+      0 4px 6px rgba(0, 0, 0, 0.1),
+      0 0 10px rgba(0, 123, 255, 0.4),
+      0 0 20px rgba(0, 255, 136, 0.2);
+  }
+  100% {
+    box-shadow: 
+      0 4px 6px rgba(0, 0, 0, 0.1),
+      0 0 20px rgba(0, 123, 255, 0.6),
+      0 0 30px rgba(0, 255, 136, 0.4);
+  }
 }
 
 /* Card styles */

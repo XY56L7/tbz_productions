@@ -153,7 +153,7 @@ const Header = () => {
         <div className="ssr-variant">
           <div className="framer-7we1a5-container">
             <a
-              className="framer-BTbjQ framer-dKer1 framer-bhZhX framer-152rnsu framer-v-1mb0zqp framer-1qzgy94"
+              className="framer-BTbjQ framer-dKer1 framer-bhZhX framer-152rnsu framer-v-1mb0zqp framer-1qzgy94 glow-button"
               data-framer-name="White"
               data-highlight="true"
               style={{
@@ -173,7 +173,7 @@ const Header = () => {
                   mainSection.scrollIntoView({ behavior: 'smooth' });
                 }
               }}
-              onMouseEnter={(e) => e.currentTarget.style.boxShadow = '0 0 12px rgba(255, 255, 255, 0.5)'}
+              onMouseEnter={(e) => e.currentTarget.style.boxShadow = '0 0 20px rgba(255, 255, 255, 0.7)'}
               onMouseLeave={(e) => e.currentTarget.style.boxShadow = '0 0 8px rgba(255, 255, 255, 0.3)'}
               tabIndex={0}
             >

@@ -276,7 +276,7 @@ const Navbar = () => {
             <div className="framer-qlevbk" data-framer-name="Buttons">
               <div className="framer-fwbndh-container">
                 <a
-                  className="framer-BTbjQ framer-dKer1 framer-bhZhX framer-152rnsu framer-v-1mb0zqp framer-1qzgy94"
+                  className="framer-BTbjQ framer-dKer1 framer-bhZhX framer-152rnsu framer-v-1mb0zqp framer-1qzgy94 glow-button"
                   data-framer-name="White"
                   data-highlight="true"
                   style={{
@@ -290,13 +290,15 @@ const Navbar = () => {
                     backgroundColor: 'rgb(255, 255, 255)',
                     borderRadius: '100px',
                     WebkitBackdropFilter: 'none',
-                    boxShadow: '0 0 8px rgba(255, 255, 255, 0.3)',
-                    transition: 'box-shadow 0.3s ease-in-out'
+                    boxShadow: '0 0 10px rgba(255, 255, 255, 0.4), 0 0 15px rgba(0, 255, 136, 0.3), 0 0 5px rgba(255, 255, 255, 0.2)',
+                    transition: 'box-shadow 0.3s ease-in-out',
+                    transform: 'scale(1.05)',
+                    padding: '12px 20px'
                   }}
                   href="./#szolgaltatasok"
                   tabIndex={0}
-                  onMouseEnter={(e) => e.currentTarget.style.boxShadow = '0 0 12px rgba(255, 255, 255, 0.5)'}
-                  onMouseLeave={(e) => e.currentTarget.style.boxShadow = '0 0 8px rgba(255, 255, 255, 0.3)'}
+                  onMouseEnter={(e) => e.currentTarget.style.boxShadow = '0 0 15px rgba(255, 255, 255, 0.5), 0 0 25px rgba(0, 255, 136, 0.4), 0 0 10px rgba(255, 255, 255, 0.3)'}
+                  onMouseLeave={(e) => e.currentTarget.style.boxShadow = '0 0 10px rgba(255, 255, 255, 0.4), 0 0 15px rgba(0, 255, 136, 0.3), 0 0 5px rgba(255, 255, 255, 0.2)'}
                 >
                   <div
                     className="framer-1wnb748"
@@ -314,7 +316,7 @@ const Navbar = () => {
                     <p
                       className="framer-text framer-styles-preset-1ress3h"
                       data-styles-preset="OdrXVUxks"
-                      style={{ color: 'rgb(33, 33, 33)' }}
+                      style={{ color: 'rgb(33, 33, 33)', fontSize: '15px', fontWeight: '600' }}
                     >
                       Árajánlat
                     </p>
