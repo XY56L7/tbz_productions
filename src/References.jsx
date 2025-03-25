@@ -15,13 +15,15 @@ import vid5 from './videos/5.mp4';
 const References = () => {
   const [selectedPhoto, setSelectedPhoto] = useState(null);
   const [currentVideoIndex, setCurrentVideoIndex] = useState(1);
+  const [currentPhotoIndex, setCurrentPhotoIndex] = useState(1);
   const [isZoomed, setIsZoomed] = useState(false);
-  const [showAllPhotos, setShowAllPhotos] = useState(false);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const modalRef = useRef(null);
   const videoRef = useRef(null);
   const prevVideoRef = useRef(null);
   const nextVideoRef = useRef(null);
+  const prevPhotoRef = useRef(null);
+  const nextPhotoRef = useRef(null);
 
   const photos = [
     { id: 1, src: img1, title: 'Referencia 1', category: 'Fotózás' },
@@ -110,15 +112,22 @@ const References = () => {
       const prevIdx = newIndex === 0 ? videos.length - 1 : newIndex - 1;
       prevVideoRef.current.src = videos[prevIdx].src;
       prevVideoRef.current.load();
-      prevVideoRef.current.currentTime = 0;
     }
 
     if (nextVideoRef.current) {
       const nextIdx = newIndex === videos.length - 1 ? 0 : newIndex + 1;
       nextVideoRef.current.src = videos[nextIdx].src;
       nextVideoRef.current.load();
-      nextVideoRef.current.currentTime = 0;
     }
+  };
+
+  const handlePhotoSwipe = (direction) => {
+    const prevIndex = currentPhotoIndex;
+    const newIndex = direction === 'next'
+      ? (prevIndex === photos.length - 1 ? 0 : prevIndex + 1)
+      : (prevIndex === 0 ? photos.length - 1 : prevIndex - 1);
+
+    setCurrentPhotoIndex(newIndex);
   };
 
   const handlePlayVideo = () => {
@@ -135,8 +144,10 @@ const References = () => {
         closeModal();
       } else if (e.key === 'ArrowLeft') {
         handleVideoSwipe('prev');
+        handlePhotoSwipe('prev');
       } else if (e.key === 'ArrowRight') {
         handleVideoSwipe('next');
+        handlePhotoSwipe('next');
       }
     };
 
@@ -150,60 +161,20 @@ const References = () => {
         videoRef.current.src = videos[currentVideoIndex].src;
         videoRef.current.load();
       }
-
       if (prevVideoRef.current) {
-        const prevIndex = currentVideoIndex === 0 ? videos.length - 1 : currentVideoIndex - 1;
-        prevVideoRef.current.src = videos[prevIndex].src;
+        const prevIdx = currentVideoIndex === 0 ? videos.length - 1 : currentVideoIndex - 1;
+        prevVideoRef.current.src = videos[prevIdx].src;
         prevVideoRef.current.load();
-        prevVideoRef.current.currentTime = 0;
       }
-
       if (nextVideoRef.current) {
-        const nextIndex = currentVideoIndex === videos.length - 1 ? 0 : currentVideoIndex + 1;
-        nextVideoRef.current.src = videos[nextIndex].src;
+        const nextIdx = currentVideoIndex === videos.length - 1 ? 0 : currentVideoIndex + 1;
+        nextVideoRef.current.src = videos[nextIdx].src;
         nextVideoRef.current.load();
-        nextVideoRef.current.currentTime = 0;
       }
     };
 
     loadInitialVideos();
   }, [currentVideoIndex]);
-
-  useEffect(() => {
-    const handleVideoEnd = () => {
-      handleVideoSwipe('next');
-    };
-
-    if (videoRef.current) {
-      videoRef.current.addEventListener('ended', handleVideoEnd);
-    }
-
-    return () => {
-      if (videoRef.current) {
-        videoRef.current.removeEventListener('ended', handleVideoEnd);
-      }
-    };
-  }, [currentVideoIndex]);
-
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-      if (window.innerWidth > 768) {
-        setShowAllPhotos(true);
-      }
-    };
-
-    window.addEventListener('resize', handleResize);
-    handleResize();
-    
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  const handleLoadMoreClick = () => {
-    setShowAllPhotos(true);
-  };
 
   return (
     <>
@@ -212,95 +183,43 @@ const References = () => {
           <h2 className="section-title">Videó Referenciák</h2>
           <p className="section-subtitle">Prémium videó munkáink</p>
         </div>
-
-        <div className="video-container" id="REF">
+        <div className="video-container">
           <div className="video-wrapper">
-            <div 
-              className="adjacent-video"
-              onClick={() => handleVideoSwipe('prev')}
-            >
-              <video
-                ref={prevVideoRef}
-                className="video-media"
-                muted
-                playsInline
-                preload="metadata"
-              >
+            <div className="adjacent-video" onClick={() => handleVideoSwipe('prev')}>
+              <video ref={prevVideoRef} className="video-media" muted playsInline preload="metadata">
                 <source src={currentVideoIndex === 0 ? videos[videos.length - 1].src : videos[currentVideoIndex - 1].src} type="video/mp4" />
               </video>
               <div className="status-info"></div>
             </div>
-
             <div className="phone-frame">
               <div className="status-bar"></div>
               <div className="video-player">
-                <video
-                  ref={videoRef}
-                  className="video-media"
-                  loop={false}
-                  playsInline
-                  controls={isVideoPlaying}
-                  muted={false}
-                >
+                <video ref={videoRef} className="video-media" loop={false} playsInline controls={isVideoPlaying} muted={false}>
                   <source src={videos[currentVideoIndex].src} type="video/mp4" />
                 </video>
                 {!isVideoPlaying && (
-                  <button 
-                    className="modern-play-button" 
-                    onClick={handlePlayVideo}
-                    aria-label="Videó lejátszása"
-                  >
+                  <button className="modern-play-button" onClick={handlePlayVideo} aria-label="Videó lejátszása">
                     <svg className="play-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M5 3l14 9-14 9V3z" fill="white"/>
+                      <path d="M5 3l14 9-14 9V3z" fill="white" />
                     </svg>
                   </button>
                 )}
               </div>
             </div>
-
-            <div 
-              className="adjacent-video"
-              onClick={() => handleVideoSwipe('next')}
-            >
-              <video
-                ref={nextVideoRef}
-                className="video-media"
-                muted
-                playsInline
-                preload="metadata"
-              >
+            <div className="adjacent-video" onClick={() => handleVideoSwipe('next')}>
+              <video ref={nextVideoRef} className="video-media" muted playsInline preload="metadata">
                 <source src={currentVideoIndex === videos.length - 1 ? videos[0].src : videos[currentVideoIndex + 1].src} type="video/mp4" />
               </video>
               <div className="status-info"></div>
             </div>
           </div>
-
           <div className="video-controls">
-            <button 
-              className="nav-btn prev-btn" 
-              onClick={() => handleVideoSwipe('prev')}
-              aria-label="Előző videó"
-            >
-              ←
-            </button>
-            <button 
-              className="nav-btn next-btn" 
-              onClick={() => handleVideoSwipe('next')}
-              aria-label="Következő videó"
-            >
-              →
-            </button>
+            <button className="nav-btn prev-btn" onClick={() => handleVideoSwipe('prev')} aria-label="Előző videó">←</button>
+            <button className="nav-btn next-btn" onClick={() => handleVideoSwipe('next')} aria-label="Következő videó">→</button>
           </div>
-
           <div className="progress-dots">
             {videos.map((_, index) => (
-              <div 
-                key={index}
-                className={`progress-dot ${index === currentVideoIndex ? 'active' : ''}`}
-                onClick={() => setCurrentVideoIndex(index)}
-                role="button"
-                aria-label={`${index + 1}. videó`}
-              />
+              <div key={index} className={`progress-dot ${index === currentVideoIndex ? 'active' : ''}`} onClick={() => setCurrentVideoIndex(index)} />
             ))}
           </div>
         </div>
@@ -311,67 +230,72 @@ const References = () => {
           <h2 className="section-title">Fotó Referenciák</h2>
           <p className="section-subtitle">Válogatott fotóink az elmúlt időszakból</p>
         </div>
-
-        <div className="photo-grid">
-          {photos.map((photo, index) => (
-            <div 
-              key={photo.id} 
-              className={`photo-item ${isMobile && index >= 2 && !showAllPhotos ? 'hidden' : ''}`}
-              onClick={() => handlePhotoClick(photo)}
-            >
-              <div className="photo-inner">
-                <img 
-                  src={photo.src} 
-                  alt={photo.title} 
-                  className="photo-image" 
-                  loading="lazy"
-                />
-                <div className="photo-overlay always-visible">
-                  <div className="photo-content">
-                    <span className="photo-category">{photo.category}</span>
-                    <h3 className="photo-title">{photo.title}</h3>
-                  </div>
-                </div>
+        <div className="photo-container">
+          <div className="photo-wrapper">
+            <div className="adjacent-photo" onClick={() => handlePhotoSwipe('prev')}>
+              <img
+                ref={prevPhotoRef}
+                src={currentPhotoIndex === 0 ? photos[photos.length - 1].src : photos[currentPhotoIndex - 1].src}
+                alt={currentPhotoIndex === 0 ? photos[photos.length - 1].title : photos[currentPhotoIndex - 1].title}
+                className="photo-media"
+              />
+              <div className="photo-overlay">
+                <span className="photo-category">{currentPhotoIndex === 0 ? photos[photos.length - 1].category : photos[currentPhotoIndex - 1].category}</span>
+                <h3 className="photo-title">{currentPhotoIndex === 0 ? photos[photos.length - 1].title : photos[currentPhotoIndex - 1].title}</h3>
               </div>
             </div>
-          ))}
+            <div className="photo-card" onClick={() => handlePhotoClick(photos[currentPhotoIndex])}>
+              <img
+                src={photos[currentPhotoIndex].src}
+                alt={photos[currentPhotoIndex].title}
+                className="photo-media"
+              />
+              <div className="photo-overlay">
+                <span className="photo-category">{photos[currentPhotoIndex].category}</span>
+                <h3 className="photo-title">{photos[currentPhotoIndex].title}</h3>
+              </div>
+            </div>
+            <div className="adjacent-photo" onClick={() => handlePhotoSwipe('next')}>
+              <img
+                ref={nextPhotoRef}
+                src={currentPhotoIndex === photos.length - 1 ? photos[0].src : photos[currentPhotoIndex + 1].src}
+                alt={currentPhotoIndex === photos.length - 1 ? photos[0].title : photos[currentPhotoIndex + 1].title}
+                className="photo-media"
+              />
+              <div className="photo-overlay">
+                <span className="photo-category">{currentPhotoIndex === photos.length - 1 ? photos[0].category : photos[currentPhotoIndex + 1].category}</span>
+                <h3 className="photo-title">{currentPhotoIndex === photos.length - 1 ? photos[0].title : photos[currentPhotoIndex + 1].title}</h3>
+              </div>
+            </div>
+          </div>
+          <div className="photo-controls">
+            <button className="nav-btn prev-btn" onClick={() => handlePhotoSwipe('prev')} aria-label="Előző fotó">←</button>
+            <button className="nav-btn next-btn" onClick={() => handlePhotoSwipe('next')} aria-label="Következő fotó">→</button>
+          </div>
+          <div className="progress-dots">
+            {photos.map((_, index) => (
+              <div key={index} className={`progress-dot ${index === currentPhotoIndex ? 'active' : ''}`} onClick={() => setCurrentPhotoIndex(index)} />
+            ))}
+          </div>
         </div>
-
-        {isMobile && !showAllPhotos && photos.length > 2 && (
-          <button 
-            className="load-more-btn" 
-            onClick={handleLoadMoreClick}
-            aria-label="További képek megjelenítése"
-          >
-            További képek megtekintése
-          </button>
-        )}
 
         {selectedPhoto && (
           <div className="modal-backdrop" onClick={handleModalClick}>
-            <div 
-              ref={modalRef}
-              className={`modal-container ${isZoomed ? 'zoomed' : ''}`}
-              onClick={(e) => e.stopPropagation()}
-            >
+            <div ref={modalRef} className={`modal-container ${isZoomed ? 'zoomed' : ''}`} onClick={(e) => e.stopPropagation()}>
               <div className="modal-header">
                 <div className="modal-info">
                   <h3>{selectedPhoto.title}</h3>
                   <span className="modal-category">{selectedPhoto.category}</span>
                 </div>
                 <div className="modal-controls">
-                  <button className="control-btn zoom-btn" onClick={handleZoom} aria-label="Nagyítás">
-                    {isZoomed ? '🔍-' : '🔍+'}
-                  </button>
-                  <button className="control-btn close-btn" onClick={closeModal} aria-label="Bezárás">
-                    ✕
-                  </button>
+                  <button className="control-btn zoom-btn" onClick={handleZoom} aria-label="Nagyítás">{isZoomed ? '🔍-' : '🔍+'}</button>
+                  <button className="control-btn close-btn" onClick={closeModal} aria-label="Bezárás">✕</button>
                 </div>
               </div>
               <div className="modal-content">
-                <img 
-                  src={selectedPhoto.src} 
-                  alt={selectedPhoto.title} 
+                <img
+                  src={selectedPhoto.src}
+                  alt={selectedPhoto.title}
                   className={`modal-media ${isZoomed ? 'zoomed' : ''}`}
                   onClick={handleZoom}
                 />
