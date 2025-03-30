@@ -1,10 +1,10 @@
 /* FAQ.css */
 .faq-section {
   background: radial-gradient(circle at center, #0a1f1a 0%, #000000 70%);
-  padding: 60px 20px;
+  padding: 40px 20px;
   position: relative;
   overflow: hidden;
-  min-height: 300vh; /* Plenty of scroll space */
+  min-height: 120vh; /* Jelentősen csökkentett scroll space */
 }
 
 .faq-container {
@@ -28,7 +28,7 @@
 
 .process-stack {
   max-width: 800px;
-  margin: 0 auto 4rem;
+  margin: 0 auto 2rem; /* Csökkentett alsó margó */
 }
 
 .scroll-item {
@@ -39,11 +39,11 @@
 .process-main {
   background: linear-gradient(135deg, rgba(0, 54, 42, 0.85), rgba(0, 26, 21, 0.85));
   border-radius: 20px 20px 0 0;
-  padding: 3rem;
+  padding: 2rem; /* Csökkentett padding */
   text-align: center;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   opacity: 0;
-  transform: translateY(100vh); /* Start below viewport */
+  transform: translateY(100vh);
   position: relative;
   z-index: 10;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -73,30 +73,80 @@
 .process-layer {
   background: linear-gradient(135deg, rgba(0, 54, 42, 0.85), rgba(0, 26, 21, 0.85));
   border-radius: 0;
-  padding: 2rem;
+  padding: 1.5rem;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   opacity: 0;
   transform: translateY(100vh);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-top: none;
   position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.process-layer:last-child {
-  border-radius: 0 0 20px 20px;
+.process-layer:hover {
+  background: linear-gradient(135deg, rgba(0, 54, 42, 0.95), rgba(0, 26, 21, 0.95));
+}
+
+.process-layer.open {
+  background: linear-gradient(135deg, rgba(0, 54, 42, 0.95), rgba(0, 26, 21, 0.95));
+  box-shadow: 0 15px 35px rgba(0, 179, 143, 0.3);
+}
+
+.layer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 .layer-subtitle {
   font-size: 1.5rem;
   font-weight: 600;
   color: #fff;
-  margin-bottom: 1rem;
+  margin: 0;
   text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+}
+
+.toggle-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  transition: transform 0.3s ease;
+}
+
+.arrow {
+  color: #fff;
+  font-size: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.arrow.up {
+  transform: rotate(180deg);
+}
+
+.layer-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+  opacity: 0;
+}
+
+.layer-content.visible {
+  max-height: 200px;
+  opacity: 1;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .layer-description {
   font-size: 1.1rem;
   color: #e6f0ed;
+  margin: 0;
+  line-height: 1.6;
 }
 
 .info-grid {
@@ -146,16 +196,17 @@
 /* Responsive Design */
 @media (max-width: 768px) {
   .faq-section {
-    padding: 40px 15px;
-    min-height: 280vh;
+    padding: 30px 15px;
+    min-height: 100vh; /* Még kisebb scroll space mobilon */
   }
 
   .process-main {
-    padding: 2rem;
+    padding: 1.5rem;
   }
 
   .section-title {
-    font-size: 1.8rem;
+    font-size: 1.6rem; /* Kisebb betűméret */
+    margin-bottom: 0.5rem;
   }
 
   .section-subtitle {
@@ -163,28 +214,42 @@
   }
 
   .process-layer {
-    padding: 1.5rem;
+    padding: 1rem;
   }
 
   .layer-subtitle {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
   }
 
   .layer-description {
-    font-size: 1rem;
+    font-size: 0.95rem;
+  }
+
+  .toggle-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .arrow {
+    font-size: 0.9rem;
   }
 
   .info-grid {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
-    padding: 0 1rem;
+    gap: 1rem;
+    padding: 0 0.5rem;
   }
 
   .info-box {
-    padding: 1.5rem;
+    padding: 1.2rem;
   }
 
   .info-title {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .info-text {
+    font-size: 0.9rem;
   }
 }

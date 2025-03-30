@@ -1,21 +1,21 @@
 /* General Section Styles */
 .references-section {
-  padding: 8rem 0; /* Nagyobb padding a szekcióknak */
+  padding: 8rem 0;
   background-color: #0a0a0a;
   position: relative;
 }
 
 .section-header {
   text-align: center;
-  margin-bottom: 3rem; /* Nagyobb tér a fejléc alatt */
-  padding: 0 1.5rem; /* Nagyobb oldalsó padding */
+  margin-bottom: 3rem;
+  padding: 0 1.5rem;
 }
 
 .section-title {
   font-size: 3.5rem;
   font-weight: 800;
   color: white;
-  margin-bottom: 1.5rem; /* Nagyobb tér a cím alatt */
+  margin-bottom: 1.5rem;
   position: relative;
   display: inline-block;
 }
@@ -35,12 +35,12 @@
 .section-subtitle {
   color: #888;
   font-size: 1.2rem;
-  margin-top: 2rem; /* Nagyobb tér a felirat felett */
+  margin-top: 2rem;
 }
 
 /* Video Section */
 .video-section {
-  padding: 6rem 0 4rem 0; /* Nagyobb felső és alsó padding */
+  padding: 6rem 0 4rem 0;
   background-color: #000;
   position: relative;
   overflow: hidden;
@@ -48,7 +48,7 @@
 
 .video-container {
   max-width: 100%;
-  height: auto; /* Dinamikus magasság */
+  height: auto;
   margin: 0 auto;
   position: relative;
   overflow: visible;
@@ -63,7 +63,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 2rem; /* Nagyobb tér a videók között */
+  gap: 2rem;
   padding: 0 12%;
 }
 
@@ -71,21 +71,25 @@
   position: relative;
   border-radius: 50px;
   overflow: hidden;
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+  box-shadow: 
+    0 30px 80px rgba(0, 0, 0, 0.6),
+    0 0 60px rgba(0, 123, 255, 0.4),    /* Default glow effect */
+    0 0 100px rgba(0, 255, 136, 0.2),   /* Default glow effect */
+    0 0 30px rgba(255, 255, 255, 0.2);  /* Default glow effect */
   border: 8px solid #000000;
   flex-shrink: 0;
   background: #1a1a1a;
-  width: 280px;
-  height: 600px;
+  width: 240px;  /* Reduced from 280px for smaller desktop size */
+  height: 520px; /* Reduced from 600px for smaller desktop size */
   cursor: pointer;
 }
 
 .phone-frame:hover {
   box-shadow: 
     0 30px 80px rgba(0, 0, 0, 0.6),
-    0 0 60px rgba(0, 123, 255, 0.6),
-    0 0 100px rgba(0, 255, 136, 0.4),
-    0 0 30px rgba(255, 255, 255, 0.3);
+    0 0 60px rgba(0, 123, 255, 0.6),    /* Enhanced glow on hover */
+    0 0 100px rgba(0, 255, 136, 0.4),   /* Enhanced glow on hover */
+    0 0 30px rgba(255, 255, 255, 0.3);  /* Enhanced glow on hover */
 }
 
 .video-player {
@@ -109,8 +113,8 @@
   top: 12px;
   left: 50%;
   transform: translateX(-50%);
-  width: 120px;
-  height: 36px;
+  width: 100px;  /* Adjusted slightly for smaller size */
+  height: 32px;  /* Adjusted slightly for smaller size */
   background: #000;
   border-radius: 20px;
   z-index: 5;
@@ -151,12 +155,12 @@
 
 .adjacent-video {
   position: relative;
-  width: 280px;
-  height: 600px;
+  width: 240px;  /* Reduced from 280px for smaller desktop size */
+  height: 520px; /* Reduced from 600px for smaller desktop size */
   border-radius: 50px;
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4); /* No glow effect by default */
   border: 8px solid #000000;
   flex-shrink: 0;
   transform: scale(0.9);
@@ -166,7 +170,7 @@
 
 .adjacent-video:hover {
   transform: scale(0.92);
-  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.6); /* Enhanced shadow, no glow */
 }
 
 .adjacent-video::before {
@@ -175,8 +179,8 @@
   top: 12px;
   left: 50%;
   transform: translateX(-50%);
-  width: 100px;
-  height: 32px;
+  width: 90px;  /* Adjusted slightly for smaller size */
+  height: 30px; /* Adjusted slightly for smaller size */
   background: #000;
   border-radius: 20px;
   z-index: 5;
@@ -218,13 +222,13 @@
 
 .video-controls {
   position: absolute;
-  bottom: 60px; /* Nagyobb távolság alulról */
+  bottom: 60px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 2.5rem; /* Nagyobb tér a gombok között */
+  gap: 2.5rem;
   z-index: 10;
 }
 
@@ -253,11 +257,11 @@
 
 .progress-dots {
   position: absolute;
-  bottom: 25px; /* Nagyobb távolság alulról */
+  bottom: 25px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 12px; /* Nagyobb tér a pontok között */
+  gap: 12px;
   z-index: 10;
 }
 
@@ -284,8 +288,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 70px;
-  height: 70px;
+  width: 60px;  /* Slightly reduced for smaller video size */
+  height: 60px; /* Slightly reduced for smaller video size */
   background: linear-gradient(135deg, rgba(0, 123, 255, 0.9), rgba(0, 255, 136, 0.7));
   border: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 50%;
@@ -305,13 +309,13 @@
 }
 
 .play-icon {
-  width: 24px;
-  height: 24px;
+  width: 20px;  /* Slightly reduced for smaller button */
+  height: 20px; /* Slightly reduced for smaller button */
 }
 
 /* Photo Section */
 .photo-section {
-  padding: 2rem 0 4rem 0; /* Nagyobb felső és alsó padding */
+  padding: 2rem 0 4rem 0;
   background-color: transparent;
   position: relative;
   overflow: hidden;
@@ -319,7 +323,7 @@
 
 .photo-container {
   max-width: 1200px;
-  height: auto; /* Dinamikus magasság */
+  height: auto;
   margin: 0 auto;
   position: relative;
   overflow: hidden;
@@ -332,8 +336,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 2.5rem; /* Nagyobb tér a képek között */
-  padding: 0 2.5rem; /* Nagyobb oldalsó padding */
+  gap: 2.5rem;
+  padding: 0 2.5rem;
 }
 
 .photo-card {
@@ -347,11 +351,69 @@
   background: #1a1a1a;
   transition: transform 0.4s ease, box-shadow 0.4s ease;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .photo-card:hover {
   transform: scale(1.02);
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 123, 255, 0.2);
+}
+
+.photo-media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+  display: block;
+}
+
+.photo-card:hover .photo-media {
+  transform: scale(1.1);
+}
+
+/* FIXED: Modified the glow effect to use a radial-gradient shadow instead of linear */
+.photo-card:nth-child(2) {
+  box-shadow: 
+    0 0 40px rgba(0, 0, 0, 0.5),
+    0 0 30px rgba(0, 123, 255, 0.3),
+    0 0 50px rgba(0, 255, 136, 0.2);
+  animation: cardGlow 3s infinite alternate;
+  position: relative;
+  z-index: 2;
+}
+
+.photo-card:nth-child(2):hover {
+  box-shadow: 
+    0 0 50px rgba(0, 0, 0, 0.6),
+    0 0 40px rgba(0, 123, 255, 0.4),
+    0 0 60px rgba(0, 255, 136, 0.3);
+}
+
+.photo-card:nth-child(2) .photo-media {
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.photo-card:nth-child(2):hover .photo-media {
+  transform: scale(1.15);
+}
+
+/* FIXED: Modified the keyframe animation to use circular shadows */
+@keyframes cardGlow {
+  0% {
+    box-shadow: 
+      0 0 40px rgba(0, 0, 0, 0.5),
+      0 0 30px rgba(0, 123, 255, 0.3),
+      0 0 50px rgba(0, 255, 136, 0.2);
+  }
+  100% {
+    box-shadow: 
+      0 0 40px 8px rgba(0, 0, 0, 0.5),
+      0 0 40px 5px rgba(0, 123, 255, 0.4),
+      0 0 60px 8px rgba(0, 255, 136, 0.3);
+  }
 }
 
 .adjacent-photo {
@@ -360,7 +422,7 @@
   height: 400px;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); /* No glow effect by default */
   flex-shrink: 0;
   background: #1a1a1a;
   opacity: 0.7;
@@ -371,18 +433,7 @@
 .adjacent-photo:hover {
   opacity: 0.9;
   transform: scale(1.02);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
-}
-
-.photo-media {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.4s ease;
-}
-
-.photo-card:hover .photo-media {
-  transform: scale(1.05);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5); /* Enhanced shadow, no glow */
 }
 
 .photo-overlay {
@@ -416,13 +467,13 @@
 
 .photo-controls {
   position: absolute;
-  bottom: 60px; /* Nagyobb távolság alulról */
+  bottom: 60px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 2.5rem; /* Nagyobb tér a gombok között */
+  gap: 2.5rem;
   z-index: 10;
 }
 
@@ -714,5 +765,43 @@
   to {
     opacity: 1;
     transform: scale(1) translateY(0);
+  }
+}
+
+.quote-btn {
+  background-color: #fff !important;
+  color: #000 !important;
+  border: 1px solid #ccc;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.1),
+    0 0 8px rgba(0, 123, 255, 0.3),
+    0 0 15px rgba(0, 255, 136, 0.15);
+  animation: buttonGlow 3s infinite alternate;
+}
+
+.quote-btn:hover {
+  background-color: #f7f7f7 !important;
+  color: #000 !important;
+  box-shadow: 
+    0 6px 12px rgba(0, 0, 0, 0.15),
+    0 0 15px rgba(0, 123, 255, 0.4),
+    0 0 25px rgba(0, 255, 136, 0.25);
+  transform: translateY(-2px);
+}
+
+@keyframes buttonGlow {
+  0% {
+    box-shadow: 
+      0 4px 6px rgba(0, 0, 0, 0.1),
+      0 0 8px rgba(0, 123, 255, 0.3),
+      0 0 15px rgba(0, 255, 136, 0.15);
+  }
+  100% {
+    box-shadow: 
+      0 4px 6px rgba(0, 0, 0, 0.1),
+      0 0 12px rgba(0, 123, 255, 0.4),
+      0 0 20px rgba(0, 255, 136, 0.2);
   }
 }

@@ -113,7 +113,8 @@ const CallToActionCard: React.FC = () => {
     border: "none",
     cursor: "pointer",
     fontSize: "1rem",
-    transition: "background-color 0.3s ease", // Sima átmenet
+    transition: "all 0.3s ease", // Módosítva, hogy minden tulajdonságra vonatkozzon
+    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)", // Alapértelmezett árnyék
   };
 
   const linkStyle: React.CSSProperties = {
@@ -158,12 +159,16 @@ const CallToActionCard: React.FC = () => {
           <div style={actionsRowStyle}>
             <button
               style={buttonStyle}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.backgroundColor = "#00B87A")
-              } // Hover hatás: kissé sötétebb zöld
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.backgroundColor = "#00D28C")
-              }
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = "#00B87A";
+                e.currentTarget.style.boxShadow = "0 6px 12px rgba(0, 0, 0, 0.15), 0 0 20px rgba(0, 210, 140, 0.6), 0 0 30px rgba(0, 210, 140, 0.4)";
+                e.currentTarget.style.transform = "translateY(-2px)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = "#00D28C";
+                e.currentTarget.style.boxShadow = "0 4px 6px rgba(0, 0, 0, 0.1)";
+                e.currentTarget.style.transform = "translateY(0)";
+              }}
             >
               30 perces online konzultáció
             </button>

@@ -1,5 +1,5 @@
 // FAQ.tsx
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import './FAQ.css';
 
 interface ProcessStep {
@@ -28,6 +28,17 @@ const additionalInfo: InfoBox[] = [
 
 const FAQ: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const [openSteps, setOpenSteps] = useState<number[]>([]);
+
+  const toggleStep = (index: number) => {
+    setOpenSteps(prev => {
+      if (prev.includes(index)) {
+        return prev.filter(i => i !== index);
+      } else {
+        return [...prev, index];
+      }
+    });
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,17 +47,17 @@ const FAQ: React.FC = () => {
       const sectionTop = sectionRef.current.getBoundingClientRect().top;
       const sectionHeight = sectionRef.current.offsetHeight;
       const windowHeight = window.innerHeight;
-      const totalItems = processSteps.length + additionalInfo.length + 1; // Main + subtitles + info boxes
+      const totalItems = processSteps.length + additionalInfo.length + 1;
 
       // Scroll progress over the entire section
-      const scrollProgress = Math.min(1, Math.max(0, (windowHeight - sectionTop) / (sectionHeight * 0.8)));
+      const scrollProgress = Math.min(1, Math.max(0, (windowHeight - sectionTop) / (sectionHeight * 0.4)));
       
       // Update each element's position
       const elements = sectionRef.current.querySelectorAll('.scroll-item') as NodeListOf<HTMLElement>;
       elements.forEach((element, index) => {
-        const itemStart = index / totalItems; // When each item starts moving
+        const itemStart = index / totalItems;
         const itemProgress = Math.min(1, Math.max(0, (scrollProgress - itemStart) / (1 / totalItems)));
-        const translateY = (1 - itemProgress) * windowHeight; // Slide from full window height below
+        const translateY = (1 - itemProgress) * (windowHeight * 0.5);
         element.style.transform = `translateY(${translateY}px)`;
         element.style.opacity = `${itemProgress}`;
       });
@@ -70,9 +81,20 @@ const FAQ: React.FC = () => {
           </div>
 
           {processSteps.map((step, index) => (
-            <div key={index} className="process-layer scroll-item">
-              <h3 className="layer-subtitle">{step.subtitle}</h3>
-              <p className="layer-description">{step.description}</p>
+            <div 
+              key={index} 
+              className={`process-layer scroll-item ${openSteps.includes(index) ? 'open' : ''}`}
+              onClick={() => toggleStep(index)}
+            >
+              <div className="layer-header">
+                <h3 className="layer-subtitle">{step.subtitle}</h3>
+                <div className="toggle-icon">
+                  <span className={`arrow ${openSteps.includes(index) ? 'up' : 'down'}`}>▼</span>
+                </div>
+              </div>
+              <div className={`layer-content ${openSteps.includes(index) ? 'visible' : ''}`}>
+                <p className="layer-description">{step.description}</p>
+              </div>
             </div>
           ))}
         </div>
