@@ -191,14 +191,6 @@ const References = () => {
   }, [selectedPhoto, closeModal, handleVideoSwipe, handlePhotoSwipe]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      handlePhotoSwipe('next');
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, [handlePhotoSwipe]);
-
-  useEffect(() => {
     setCurrentVideo(videos[currentVideoIndex]);
   }, [currentVideoIndex, videos]);
 
