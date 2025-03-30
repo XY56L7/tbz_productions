@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './References.css';
 import img1 from './images/1.jpeg';
@@ -6,11 +6,28 @@ import img2 from './images/2.jpg';
 import img3 from './images/3.JPG';
 import img4 from './images/4.jpg';
 import img5 from './images/5.jpg';
+import img6 from './images/6.jpg';
+import img7 from './images/7.jpg';
+import img8 from './images/8.jpg';
+import img9 from './images/9.jpg';
+import img10 from './images/10.jpg';
+import img11 from './images/11.jpg';
+import img12 from './images/12.jpg';
 import vid1 from './videos/1.mp4';
 import vid2 from './videos/2.mp4';
 import vid3 from './videos/3.mp4';
 import vid4 from './videos/4.mp4';
 import vid5 from './videos/5.mp4';
+import vid6 from './videos/6.mp4';
+import vid7 from './videos/7.mp4';
+import thumb1 from './thumbnails/1_Cover.jpg';
+import thumb2 from './thumbnails/2_Cover.jpg';
+import thumb3 from './thumbnails/3_Cover.jpg';
+import thumb4 from './thumbnails/4_Cover.jpg';
+import thumb5 from './thumbnails/5_Cover.jpg';
+import thumb6 from './thumbnails/6_Cover.jpg';
+import thumb7 from './thumbnails/7_Cover.jpg';
+
 
 const References = () => {
   const [selectedPhoto, setSelectedPhoto] = useState(null);
@@ -18,25 +35,32 @@ const References = () => {
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(1);
   const [isZoomed, setIsZoomed] = useState(false);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const [currentVideo, setCurrentVideo] = useState(null);
   const modalRef = useRef(null);
   const videoRef = useRef(null);
-  const prevVideoRef = useRef(null);
-  const nextVideoRef = useRef(null);
   const prevPhotoRef = useRef(null);
   const nextPhotoRef = useRef(null);
 
-  const photos = [
+  const photos = useMemo(() => [
     { id: 1, src: img1, title: 'Referencia 1', category: 'Fotózás' },
     { id: 2, src: img2, title: 'Referencia 2', category: 'Videó' },
     { id: 3, src: img3, title: 'Referencia 3', category: 'Fotózás' },
     { id: 4, src: img4, title: 'Referencia 4', category: 'Videó' },
     { id: 5, src: img5, title: 'Referencia 5', category: 'Fotózás' },
-  ];
+    { id: 6, src: img6, title: 'Referencia 6', category: 'Fotózás' },
+    { id: 7, src: img7, title: 'Referencia 7', category: 'Fotózás' },
+    { id: 8, src: img8, title: 'Referencia 8', category: 'Fotózás' },
+    { id: 9, src: img9, title: 'Referencia 9', category: 'Fotózás' },
+    { id: 10, src: img10, title: 'Referencia 10', category: 'Fotózás' },
+    { id: 11, src: img11, title: 'Referencia 11', category: 'Fotózás' },
+    { id: 12, src: img12, title: 'Referencia 12', category: 'Fotózás' },
+  ], []);
 
-  const videos = [
+  const videos = useMemo(() => [
     { 
       id: 1, 
       src: vid1, 
+      thumbnail: thumb1,
       title: 'Esküvői Videó', 
       category: 'Esküvő',
       description: 'Egy csodálatos esküvői pillanat megörökítése'
@@ -44,6 +68,7 @@ const References = () => {
     { 
       id: 2, 
       src: vid2, 
+      thumbnail: thumb2,
       title: 'Rendezvény Aftermovie', 
       category: 'Rendezvény',
       description: 'Energikus aftermovie egy fantasztikus rendezvényről'
@@ -51,6 +76,7 @@ const References = () => {
     { 
       id: 3, 
       src: vid3, 
+      thumbnail: thumb3,
       title: 'Promóciós Videó', 
       category: 'Marketing',
       description: 'Modern promóciós videó egy innovatív termékről'
@@ -58,6 +84,7 @@ const References = () => {
     { 
       id: 4, 
       src: vid4, 
+      thumbnail: thumb4,
       title: 'Koncert Felvétel', 
       category: 'Zene',
       description: 'Lenyűgöző koncertfelvétel professzionális minőségben'
@@ -65,36 +92,52 @@ const References = () => {
     { 
       id: 5, 
       src: vid5, 
+      thumbnail: thumb5,
       title: 'Termék Bemutató', 
       category: 'Marketing',
       description: 'Elegáns termékbemutató videó prémium kivitelezésben'
     },
-  ];
+    { 
+      id: 6, 
+      src: vid6, 
+      thumbnail: thumb6,
+      title: 'Termék Bemutató', 
+      category: 'Marketing',
+      description: 'Elegáns termékbemutató videó prémium kivitelezésben'
+    }, { 
+      id: 7, 
+      src: vid7, 
+      thumbnail: thumb7,
+      title: 'Termék Bemutató', 
+      category: 'Marketing',
+      description: 'Elegáns termékbemutató videó prémium kivitelezésben'
+    },
+  ], []);
 
-  const handlePhotoClick = (photo) => {
+  const handlePhotoClick = useCallback((photo) => {
     setSelectedPhoto(photo);
     setIsZoomed(false);
     document.body.style.overflow = 'hidden';
-  };
+  }, []);
 
-  const closeModal = () => {
+  const closeModal = useCallback(() => {
     setSelectedPhoto(null);
     setIsZoomed(false);
     document.body.style.overflow = 'auto';
-  };
+  }, []);
 
-  const handleZoom = (e) => {
+  const handleZoom = useCallback((e) => {
     e.stopPropagation();
     setIsZoomed(!isZoomed);
-  };
+  }, [isZoomed]);
 
-  const handleModalClick = (e) => {
+  const handleModalClick = useCallback((e) => {
     if (modalRef.current && !modalRef.current.contains(e.target)) {
       closeModal();
     }
-  };
+  }, [closeModal]);
 
-  const handleVideoSwipe = (direction) => {
+  const handleVideoSwipe = useCallback((direction) => {
     const prevIndex = currentVideoIndex;
     const newIndex = direction === 'next'
       ? (prevIndex === videos.length - 1 ? 0 : prevIndex + 1)
@@ -102,41 +145,33 @@ const References = () => {
 
     setCurrentVideoIndex(newIndex);
     setIsVideoPlaying(false);
+  }, [currentVideoIndex, videos]);
 
-    if (videoRef.current) {
-      videoRef.current.src = videos[newIndex].src;
-      videoRef.current.load();
-    }
-
-    if (prevVideoRef.current) {
-      const prevIdx = newIndex === 0 ? videos.length - 1 : newIndex - 1;
-      prevVideoRef.current.src = videos[prevIdx].src;
-      prevVideoRef.current.load();
-    }
-
-    if (nextVideoRef.current) {
-      const nextIdx = newIndex === videos.length - 1 ? 0 : newIndex + 1;
-      nextVideoRef.current.src = videos[nextIdx].src;
-      nextVideoRef.current.load();
-    }
-  };
-
-  const handlePhotoSwipe = (direction) => {
+  const handlePhotoSwipe = useCallback((direction) => {
     const prevIndex = currentPhotoIndex;
     const newIndex = direction === 'next'
       ? (prevIndex === photos.length - 1 ? 0 : prevIndex + 1)
       : (prevIndex === 0 ? photos.length - 1 : prevIndex - 1);
 
     setCurrentPhotoIndex(newIndex);
-  };
+  }, [currentPhotoIndex, photos]);
 
-  const handlePlayVideo = () => {
-    if (videoRef.current) {
-      videoRef.current.play().then(() => {
-        setIsVideoPlaying(true);
-      }).catch(err => console.error('Video play failed:', err));
-    }
-  };
+  const handlePlayVideo = useCallback(() => {
+    // First set the playing state to true which will render the video element
+    setIsVideoPlaying(true);
+    
+    // Use setTimeout to ensure the video element has been rendered before trying to play
+    setTimeout(() => {
+      if (videoRef.current) {
+        videoRef.current.src = videos[currentVideoIndex].src;
+        videoRef.current.load();
+        videoRef.current.play().catch(err => {
+          console.error('Video play failed:', err);
+          setIsVideoPlaying(false); // Reset to thumbnail if playback fails
+        });
+      }
+    }, 50);
+  }, [currentVideoIndex, videos]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -153,28 +188,19 @@ const References = () => {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [selectedPhoto]);
+  }, [selectedPhoto, closeModal, handleVideoSwipe, handlePhotoSwipe]);
 
   useEffect(() => {
-    const loadInitialVideos = () => {
-      if (videoRef.current) {
-        videoRef.current.src = videos[currentVideoIndex].src;
-        videoRef.current.load();
-      }
-      if (prevVideoRef.current) {
-        const prevIdx = currentVideoIndex === 0 ? videos.length - 1 : currentVideoIndex - 1;
-        prevVideoRef.current.src = videos[prevIdx].src;
-        prevVideoRef.current.load();
-      }
-      if (nextVideoRef.current) {
-        const nextIdx = currentVideoIndex === videos.length - 1 ? 0 : currentVideoIndex + 1;
-        nextVideoRef.current.src = videos[nextIdx].src;
-        nextVideoRef.current.load();
-      }
-    };
+    const interval = setInterval(() => {
+      handlePhotoSwipe('next');
+    }, 5000);
 
-    loadInitialVideos();
-  }, [currentVideoIndex]);
+    return () => clearInterval(interval);
+  }, [handlePhotoSwipe]);
+
+  useEffect(() => {
+    setCurrentVideo(videos[currentVideoIndex]);
+  }, [currentVideoIndex, videos]);
 
   return (
     <>
@@ -186,17 +212,27 @@ const References = () => {
         <div className="video-container">
           <div className="video-wrapper">
             <div className="adjacent-video" onClick={() => handleVideoSwipe('prev')}>
-              <video ref={prevVideoRef} className="video-media" muted playsInline preload="metadata">
-                <source src={currentVideoIndex === 0 ? videos[videos.length - 1].src : videos[currentVideoIndex - 1].src} type="video/mp4" />
-              </video>
+              <img
+                src={currentVideoIndex === 0 ? videos[videos.length - 1].thumbnail : videos[currentVideoIndex - 1].thumbnail}
+                alt={currentVideoIndex === 0 ? videos[videos.length - 1].title : videos[currentVideoIndex - 1].title}
+                className="video-media"
+              />
               <div className="status-info"></div>
             </div>
             <div className="phone-frame">
               <div className="status-bar"></div>
               <div className="video-player">
-                <video ref={videoRef} className="video-media" loop={false} playsInline controls={isVideoPlaying} muted={false}>
-                  <source src={videos[currentVideoIndex].src} type="video/mp4" />
-                </video>
+                {isVideoPlaying ? (
+                  <video ref={videoRef} className="video-media" loop={false} playsInline controls={true} muted={false}>
+                    <source src={videos[currentVideoIndex].src} type="video/mp4" />
+                  </video>
+                ) : (
+                  <img 
+                    src={videos[currentVideoIndex].thumbnail} 
+                    alt={videos[currentVideoIndex].title}
+                    className="video-media" 
+                  />
+                )}
                 {!isVideoPlaying && (
                   <button className="modern-play-button" onClick={handlePlayVideo} aria-label="Videó lejátszása">
                     <svg className="play-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -207,9 +243,11 @@ const References = () => {
               </div>
             </div>
             <div className="adjacent-video" onClick={() => handleVideoSwipe('next')}>
-              <video ref={nextVideoRef} className="video-media" muted playsInline preload="metadata">
-                <source src={currentVideoIndex === videos.length - 1 ? videos[0].src : videos[currentVideoIndex + 1].src} type="video/mp4" />
-              </video>
+              <img
+                src={currentVideoIndex === videos.length - 1 ? videos[0].thumbnail : videos[currentVideoIndex + 1].thumbnail}
+                alt={currentVideoIndex === videos.length - 1 ? videos[0].title : videos[currentVideoIndex + 1].title}
+                className="video-media"
+              />
               <div className="status-info"></div>
             </div>
           </div>

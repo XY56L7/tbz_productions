@@ -2,10 +2,14 @@
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
   width: 100%;
-  z-index: 9999 !important;
-  background-color: var(--bg-color);
+  height: 80px;
+  background: #000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5%;
+  z-index: 1000;
 }
 
 .navbar-collapse {
@@ -32,5 +36,8 @@
   }
   .hidden-17mnt2g {
     display: block !important;
+  }
+  .navbar {
+    height: 60px;
   }
 }

@@ -156,6 +156,7 @@ const Header = () => {
               className="framer-BTbjQ framer-dKer1 framer-bhZhX framer-152rnsu framer-v-1mb0zqp framer-1qzgy94"
               data-framer-name="White"
               data-highlight="true"
+              href="#services"
               style={{
                 backgroundColor: '#fff',
                 borderRadius: '100px',
@@ -166,7 +167,8 @@ const Header = () => {
                 padding: '15px 20px',
                 transition: 'all 0.3s ease-in-out'
               }}
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault();
                 const mainSection = document.getElementById('services');
                 if (mainSection) {
                   mainSection.scrollIntoView({ behavior: 'smooth' });
