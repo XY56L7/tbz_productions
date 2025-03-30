@@ -4,18 +4,21 @@
   color: #fff;
   padding-top: 80px;
   padding-bottom: 80px;
+  position: relative;
+  z-index: 1; /* Ensure section is below navbar */
 }
 
 /* Push the text content down and use sticky in desktop view */
 .text-content {
   margin-top: 80px;
+  z-index: 2; /* Ensure text-content is above cards but below navbar */
 }
 
 @media (min-width: 992px) {
   .text-content {
     position: sticky;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 120px; /* Adjusted to account for navbar height */
+    transform: translateY(0); /* Removed transform to avoid overlap */
     align-self: flex-start;
     max-height: calc(100vh - 160px);
     overflow-y: auto;
@@ -23,6 +26,7 @@
 
   .cards {
     position: relative;
+    z-index: 1; /* Ensure cards are below navbar */
   }
 
   .cards::after {
@@ -126,6 +130,7 @@
   border-radius: 24px;
   overflow: hidden;
   background: linear-gradient(to bottom, #002c23 0%, #005945 50%, #002C23 100%);
+  z-index: 1; /* Ensure cards are below navbar */
 }
 
 .card-img {
@@ -194,4 +199,4 @@
     padding-left: 2rem;
     padding-right: 2rem;
   }
-} 
+}

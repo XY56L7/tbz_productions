@@ -42,18 +42,18 @@ const Navbar = () => {
     if (pricesSection) {
       pricesSection.scrollIntoView({ behavior: 'smooth' });
     }
-  };
-
+}
   return (
     <div className="framer-1yv3j76-container">
       {/* Desktop navbar */}
       <div className="ssr-variant hidden-1303b6h">
         <nav
-          className="framer-f4Ugu framer-9oCrN framer-qva57 framer-v-qva57"
+          className="framer-f4Ugu framer-9oCrN framer-qva57 framer-v-qva57 navbar"
           data-framer-name="Desktop"
           style={{
             background: 'linear-gradient(180deg, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0) 100%)',
-            width: '100%'
+            width: '100%',
+            zIndex: 1000, // Navbar z-index
           }}
         >
           <div className="framer-7auulw-container">
@@ -331,12 +331,13 @@ const Navbar = () => {
       {/* Mobile navbar */}
       <div className="ssr-variant hidden-17mnt2g">
         <nav
-          className="framer-f4Ugu framer-9oCrN framer-qva57 framer-v-qva57"
+          className="framer-f4Ugu framer-9oCrN framer-qva57 framer-v-qva57 navbar"
           data-framer-name="Mobile"
           style={{
             background: 'linear-gradient(180deg, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0) 100%)',
             width: '100%',
-            position: 'relative'
+            position: 'relative',
+            zIndex: 1000, // Navbar z-index
           }}
         >
           <div
