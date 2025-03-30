@@ -164,8 +164,7 @@ const Header = () => {
                 alignItems: 'center',
                 justifyContent: 'center',
                 padding: '15px 20px',
-                boxShadow: '0 0 6px rgba(255, 255, 255, 0.3)',
-                transition: 'box-shadow 0.3s ease-in-out'
+                transition: 'all 0.3s ease-in-out'
               }}
               onClick={() => {
                 const mainSection = document.getElementById('services');
@@ -173,8 +172,6 @@ const Header = () => {
                   mainSection.scrollIntoView({ behavior: 'smooth' });
                 }
               }}
-              onMouseEnter={(e) => e.currentTarget.style.boxShadow = '0 0 10px rgba(255, 255, 255, 0.4)'}
-              onMouseLeave={(e) => e.currentTarget.style.boxShadow = '0 0 6px rgba(255, 255, 255, 0.3)'}
               tabIndex={0}
             >
               <div

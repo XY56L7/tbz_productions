@@ -40,7 +40,7 @@
 
 /* Video Section */
 .video-section {
-  padding: 6rem 0 4rem 0;
+  padding: 6rem 0 6rem 0;
   background-color: #000;
   position: relative;
   overflow: hidden;
@@ -65,6 +65,7 @@
   justify-content: center;
   gap: 2rem;
   padding: 0 12%;
+  margin-bottom: 2rem;
 }
 
 .phone-frame {
@@ -113,8 +114,8 @@
   top: 12px;
   left: 50%;
   transform: translateX(-50%);
-  width: 100px;  /* Adjusted slightly for smaller size */
-  height: 32px;  /* Adjusted slightly for smaller size */
+  width: 120px;
+  height: 32px;
   background: #000;
   border-radius: 20px;
   z-index: 5;
@@ -124,29 +125,29 @@
 .phone-frame::after {
   content: '12:30';
   position: absolute;
-  top: 20px;
-  left: 20px;
+  top: 22px;
+  left: 25px;
   color: white;
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 600;
   z-index: 6;
 }
 
 .status-bar {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 22px;
+  right: 3px;
   display: flex;
-  gap: 8px;
+  gap: 6px;
   z-index: 6;
   color: white;
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 500;
 }
 
 .status-bar::before {
   content: '5G';
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .status-bar::after {
@@ -315,10 +316,10 @@
 
 /* Photo Section */
 .photo-section {
-  padding: 2rem 0 4rem 0;
+  padding: 2rem 0 6rem 0;
   background-color: transparent;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .photo-container {
@@ -326,7 +327,7 @@
   height: auto;
   margin: 0 auto;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .photo-wrapper {
@@ -338,6 +339,8 @@
   justify-content: center;
   gap: 2.5rem;
   padding: 0 2.5rem;
+  margin-bottom: 2rem;
+  overflow: visible;
 }
 
 .photo-card {
@@ -345,20 +348,19 @@
   width: 400px;
   height: 500px;
   border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+  overflow: visible;
   flex-shrink: 0;
-  background: #1a1a1a;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  background: transparent;
+  transition: transform 0.4s ease;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-.photo-card:hover {
-  transform: scale(1.02);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 123, 255, 0.2);
+.photo-content {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #1a1a1a;
 }
 
 .photo-media {
@@ -368,21 +370,21 @@
   transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   transform-origin: center;
   display: block;
+  border-radius: 16px;
 }
 
 .photo-card:hover .photo-media {
   transform: scale(1.1);
 }
 
-/* FIXED: Modified the glow effect to use a radial-gradient shadow instead of linear */
 .photo-card:nth-child(2) {
+  background: transparent;
+  border-radius: 16px;
   box-shadow: 
     0 0 40px rgba(0, 0, 0, 0.5),
     0 0 30px rgba(0, 123, 255, 0.3),
     0 0 50px rgba(0, 255, 136, 0.2);
-  animation: cardGlow 3s infinite alternate;
-  position: relative;
-  z-index: 2;
+  animation: photoCardGlow 3s infinite alternate;
 }
 
 .photo-card:nth-child(2):hover {
@@ -392,27 +394,16 @@
     0 0 60px rgba(0, 255, 136, 0.3);
 }
 
-.photo-card:nth-child(2) .photo-media {
-  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.photo-card:nth-child(2):hover .photo-media {
-  transform: scale(1.15);
-}
-
-/* FIXED: Modified the keyframe animation to use circular shadows */
-@keyframes cardGlow {
+@keyframes photoCardGlow {
   0% {
     box-shadow: 
-      0 0 40px rgba(0, 0, 0, 0.5),
       0 0 30px rgba(0, 123, 255, 0.3),
       0 0 50px rgba(0, 255, 136, 0.2);
   }
   100% {
     box-shadow: 
-      0 0 40px 8px rgba(0, 0, 0, 0.5),
-      0 0 40px 5px rgba(0, 123, 255, 0.4),
-      0 0 60px 8px rgba(0, 255, 136, 0.3);
+      0 0 40px rgba(0, 123, 255, 0.4),
+      0 0 60px rgba(0, 255, 136, 0.3);
   }
 }
 
@@ -610,10 +601,10 @@
 
 @media (max-width: 768px) {
   .video-section {
-    padding: 4rem 0 2rem 0;
+    padding: 4rem 0 4rem 0;
   }
   .photo-section {
-    padding: 1.5rem 0 3rem 0;
+    padding: 1.5rem 0 4rem 0;
   }
   .video-container, .photo-container {
     height: auto;
@@ -676,7 +667,7 @@
 
 @media (max-width: 480px) {
   .video-section {
-    padding: 3rem 0 1.5rem 0;
+    padding: 3rem 0 3rem 0;
   }
   .photo-section {
     padding: 1rem 0 2rem 0;
