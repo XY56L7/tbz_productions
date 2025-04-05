@@ -10,17 +10,21 @@
 
 /* Push the text content down and use sticky in desktop view */
 .text-content {
-  margin-top: 80px;
+  margin-top: 0;
   z-index: 2; /* Ensure text-content is above cards but below navbar */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
 }
 
 @media (min-width: 992px) {
   .text-content {
     position: sticky;
-    top: 120px; /* Adjusted to account for navbar height */
-    transform: translateY(0); /* Removed transform to avoid overlap */
-    align-self: flex-start;
-    max-height: calc(100vh - 160px);
+    top: 50%;
+    transform: translateY(-50%);
+    align-self: center;
+    max-height: 70vh;
     overflow-y: auto;
   }
 
