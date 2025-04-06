@@ -1,9 +1,3 @@
-/* Base styling for the header */
-header.framer-16709mg {
-  margin-bottom: 80px;
-}
-
-/* Highlight text and normal text base styles */
 .highlight {
   color: #003B2E !important;
   text-shadow: 
@@ -22,141 +16,26 @@ header.framer-16709mg {
     -1px -1px 0 #003B2E !important;
 }
 
-/* Media query for mobile devices (max-width: 768px) */
-@media (max-width: 768px) {
-  /* Ensure the fixed button is behind the navbar when expanded */
-  .fixed-button {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1; /* Lower z-index to place it behind the navbar */
-    width: 300px;
-    max-width: 90%;
-    text-align: center;
-    box-sizing: border-box;
-  }
-
-  /* Navbar and navbar-collapse z-index adjustments */
-  .navbar {
-    z-index: 9999 !important;
-  }
-
-  .navbar-collapse {
-    z-index: 9998 !important; /* Slightly lower than navbar to ensure proper layering */
-  }
-
-  .navbar-toggler {
-    z-index: 10000 !important;
-  }
-
-  /* Rest of the mobile styles remain the same */
-  .framer-BTbjQ {
-    padding: 12px 18px;
-  }
-
-  .mobile-view .highlight,
-  .mobile-view .normal-text {
-    margin: 0;
-    padding: 0;
-  }
-
-  .mobile-view.row-layout span {
-    margin: 0;
-  }
-  
-  .mobile-view.column-layout span {
-    margin: 4px 0;
-  }
-}
-
-/* Media query for desktop devices (min-width: 769px) */
-@media (min-width: 769px) {
-  .fixed-button {
-    position: absolute;
-    bottom: 20px;
-    z-index: 999; /* Módosítva: 1000 -> 999 */
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  /* Desktopnál van space a highlight körül */
-  .desktop-view .highlight {
-    margin: 0 4px;
-    padding: 0 2px;
-  }
-  
-  /* Normál szöveg esetén nincs külön space */
-  .desktop-view .normal-text {
-    margin: 0;
-    padding: 0;
-  }
-  
-  /* Column layout-nál különleges kezelés */
-  .desktop-view.column-layout .highlight {
-    margin: 4px 0;
-  }
-  
-  /* "TE MÁRKÁD, TE TÖRTÉNETED" és hasonló rövid szövegű soroknál */
-  .desktop-view.row-layout .highlight:not(:first-child):not(:last-child) {
-    margin: 0 6px;
-  }
-}
-
-/* Finomhangolás speciális elrendezésekhez */
-.row-layout {
-  word-spacing: normal;
-}
-
-.column-layout {
-  word-spacing: normal;
-}
-
-.framer-BTbjQ {
-  background-color: #fff;
-  border-radius: 100px;
-  width: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 15px 20px;
-  box-shadow: 
-    0 0 15px rgba(255, 255, 255, 0.45),
-    0 0 25px rgba(0, 123, 255, 0.25),
-    0 0 30px rgba(0, 255, 136, 0.15);
+.custom-button {
   transition: all 0.3s ease-in-out;
 }
 
-.framer-BTbjQ:hover {
-  box-shadow: 
-    0 0 20px rgba(255, 255, 255, 0.55),
-    0 0 35px rgba(0, 123, 255, 0.35),
-    0 0 45px rgba(0, 255, 136, 0.25);
+.custom-button:hover {
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.55),
+              0 0 35px rgba(0, 123, 255, 0.35),
+              0 0 45px rgba(0, 255, 136, 0.25);
   transform: translateY(-2px);
 }
 
-.quote-button-header {
-  background-color: transparent !important;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: #fff !important;
-  padding: 12px 24px;
-  border-radius: 100px;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  box-shadow: 
-    0 0 20px rgba(255, 255, 255, 0.2),
-    0 0 30px rgba(0, 123, 255, 0.2),
-    0 0 35px rgba(0, 255, 136, 0.15);
-}
-
-.quote-button-header:hover {
-  background-color: rgba(255, 255, 255, 0.1) !important;
-  border-color: rgba(255, 255, 255, 0.5);
-  box-shadow: 
-    0 0 25px rgba(255, 255, 255, 0.35),
-    0 0 35px rgba(0, 123, 255, 0.3),
-    0 0 45px rgba(0, 255, 136, 0.25);
-  transform: translateY(-2px);
+@media (max-width: 991px) {
+  .fixed-button {
+    bottom: 10px;
+  }
+  .custom-button {
+    padding: 12px 18px;
+    max-width: 90%;
+  }
+  .header-section {
+    width: 100%; /* Teljes szélesség mobil nézetben */
+  }
 }
