@@ -6,6 +6,11 @@
   padding-bottom: 80px;
   position: relative;
   z-index: 1; /* Ensure section is below navbar */
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 /* Push the text content down and use sticky in desktop view */
@@ -135,6 +140,9 @@
   overflow: hidden;
   background: linear-gradient(to bottom, #002c23 0%, #005945 50%, #002C23 100%);
   z-index: 1; /* Ensure cards are below navbar */
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .card-img {
@@ -148,6 +156,7 @@
 .card-content {
   padding: 1rem;
   text-align: left;
+  width: 100%;
 }
 
 .card-title {
@@ -199,8 +208,37 @@
 
 /* Mobile styles */
 @media (max-width: 767px) {
+  .my-section {
+    padding-left: 0;
+    padding-right: 0;
+    width: 100vw;
+    overflow: hidden;
+  }
+  
+  .row {
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+  }
+  
+  .cards {
+    padding-left: 0;
+    padding-right: 0;
+    width: 100%;
+  }
+  
   .text-content {
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    width: 100%;
+  }
+  
+  .card-item {
+    border-radius: 20px;
+    margin-bottom: 15px;
+  }
+  
+  .card-content {
+    padding: 0.75rem;
   }
 }
