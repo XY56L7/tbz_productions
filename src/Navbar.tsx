@@ -79,6 +79,10 @@ const CustomNavbar = () => {
     backdropFilter: isMobile ? 'blur(5px)' : 'none',
     WebkitBackdropFilter: isMobile ? 'blur(5px)' : 'none',
     padding: isMobile ? '0px 0' : '0',
+    position: isMobile ? 'absolute' as const : 'relative' as const,
+    top: isMobile ? '10px' : 'auto',
+    left: 0,
+    right: 0,
   };
 
   const buttonStyle = {
@@ -96,6 +100,16 @@ const CustomNavbar = () => {
     color: '#fff',
     fontSize: '24px',
     marginRight: '15px',
+    position: 'absolute' as const,
+    right: '15px',
+    top: '15px',
+  };
+
+  const brandStyle = {
+    marginLeft: '15px',
+    position: 'absolute' as const,
+    left: '15px',
+    top: '15px',
   };
 
   return (
@@ -108,7 +122,7 @@ const CustomNavbar = () => {
       className="w-100"
     >
       <Container fluid className="px-0 mx-0 w-100">
-        <Navbar.Brand href="./" style={{ marginLeft: '15px' }}>
+        <Navbar.Brand href="./" style={brandStyle}>
           <img src={logo} alt="Logo" style={{ width: '100px', height: 'auto' }} />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbar-nav" style={toggleStyle} />
