@@ -4,7 +4,7 @@ import "./ServiceSelection.css";
 
 const ServiceSelection = () => {
   return (
-    <div className="my-section container py-5" id="services">
+    <div className="my-section container py-5" >
       <div className="row">
         {/* Left-side text (sticky) */}
         <div className="text-content col-md-6 mb-4 mb-md-0">

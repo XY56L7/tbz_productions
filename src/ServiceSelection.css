@@ -139,17 +139,17 @@
   border-radius: 24px;
   overflow: hidden;
   background: linear-gradient(to bottom, #002c23 0%, #005945 50%, #002C23 100%);
-  z-index: 1; /* Ensure cards are below navbar */
+  z-index: 1;
   width: 100%;
   margin-left: 0;
   margin-right: 0;
 }
 
 .card-img {
-  width: 100%;
-  height: 200px;
+  height: 300px;
   background-size: cover;
   background-position: center;
+  border-radius: 8px;
 }
 
 /* Card content: balra igazítás */
@@ -240,5 +240,18 @@
   
   .card-content {
     padding: 0.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .card-img {
+    height: 150px;
+  }
+}
+
+/* Még kisebb képernyőkön még kisebb magasság */
+@media (max-width: 576px) {
+  .card-img {
+    height: 120px;
   }
 }

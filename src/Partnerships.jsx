@@ -46,7 +46,9 @@ const Partnerships = () => {
           </div>
         </div>
       </div>
+      <div id="services"></div>
     </div>
+
   );
 };
 
