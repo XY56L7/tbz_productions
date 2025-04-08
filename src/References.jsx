@@ -197,7 +197,7 @@ const References = () => {
   return (
     <>
       <section className="video-section">
-        <div className="section-header">
+        <div className="section-header" id="REF">
           <h2 className="section-title">Videó Referenciák</h2>
           <p className="section-subtitle">Prémium videó munkáink</p>
         </div>

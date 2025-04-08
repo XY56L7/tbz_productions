@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar, Nav, Container, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './Navbar.css';
 import logo from './logo.png';
 
 const CustomNavbar = () => {
   const [isMobile, setIsMobile] = useState(false);
+  const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -22,94 +24,35 @@ const CustomNavbar = () => {
   const scrollToFAQ = () => {
     const aboutSection = document.getElementById('FAQ');
     if (aboutSection) aboutSection.scrollIntoView({ behavior: 'smooth' });
-    closeNavbar();
+    setExpanded(false);
   };
 
   const scrollToRef = () => {
     const aboutSection = document.getElementById('REF');
     if (aboutSection) aboutSection.scrollIntoView({ behavior: 'smooth' });
-    closeNavbar();
+    setExpanded(false);
   };
 
   const scrollToServices = () => {
     const mainSection = document.getElementById('services');
     if (mainSection) mainSection.scrollIntoView({ behavior: 'smooth' });
-    closeNavbar();
+    setExpanded(false);
   };
 
   const scrollToContact = () => {
     const servicesSection = document.getElementById('contact');
     if (servicesSection) servicesSection.scrollIntoView({ behavior: 'smooth' });
-    closeNavbar();
+    setExpanded(false);
   };
 
   const scrollToPrices = () => {
     const pricesSection = document.getElementById('prices-section');
     if (pricesSection) pricesSection.scrollIntoView({ behavior: 'smooth' });
-    closeNavbar();
+    setExpanded(false);
   };
 
   const closeNavbar = () => {
-    if (isMobile) {
-      const navbarCollapse = document.getElementById('navbar-nav');
-      if (navbarCollapse) {
-        navbarCollapse.classList.remove('show');
-      }
-    }
-  };
-
-  const navbarStyle = {
-    width: '100%',
-    zIndex: 1000,
-    maxWidth: '100vw',
-    margin: 0,
-    padding: 0,
-  };
-
-  const navLinkStyle = {
-    color: '#fff',
-    fontFamily: 'Poppins, sans-serif',
-    fontSize: '16px',
-    fontWeight: 500,
-    transition: 'color 0.3s ease',
-  };
-
-  const navCollapseStyle = {
-    backgroundColor: isMobile ? 'rgba(0, 0, 0, 0.8)' : 'transparent',
-    backdropFilter: isMobile ? 'blur(5px)' : 'none',
-    WebkitBackdropFilter: isMobile ? 'blur(5px)' : 'none',
-    padding: isMobile ? '0px 0' : '0',
-    position: isMobile ? 'absolute' as const : 'relative' as const,
-    top: isMobile ? '10px' : 'auto',
-    left: 0,
-    right: 0,
-  };
-
-  const buttonStyle = {
-    borderRadius: '100px',
-    padding: isMobile ? '12px 20px' : '12px 15px',
-    color: '#333',
-    fontWeight: 600,
-    border: 'none',
-    transition: 'all 0.3s ease-in-out',
-    marginRight: isMobile ? '0' : '20px',
-  };
-
-  const toggleStyle = {
-    border: 'none',
-    color: '#fff',
-    fontSize: '24px',
-    marginRight: '15px',
-    position: 'absolute' as const,
-    right: '15px',
-    top: '15px',
-  };
-
-  const brandStyle = {
-    marginLeft: '15px',
-    position: 'absolute' as const,
-    left: '15px',
-    top: '15px',
+    setExpanded(false);
   };
 
   return (
@@ -118,43 +61,70 @@ const CustomNavbar = () => {
       variant="dark"
       expand="lg"
       fixed="top"
-      style={navbarStyle}
-      className="w-100"
+      expanded={expanded}
+      onToggle={(expanded) => setExpanded(expanded)}
+      className="custom-navbar"
     >
-      <Container fluid className="px-0 mx-0 w-100">
-        <Navbar.Brand href="./" style={brandStyle}>
-          <img src={logo} alt="Logo" style={{ width: '100px', height: 'auto' }} />
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls="navbar-nav" style={toggleStyle} />
-        <Navbar.Collapse id="navbar-nav" style={navCollapseStyle}>
-          <Nav className={isMobile ? 'mx-auto text-center w-100' : 'mx-auto d-flex justify-content-center'}>
-            <Nav.Link onClick={scrollToServices} style={navLinkStyle}>
-              Szolgáltatások
-            </Nav.Link>
-            <Nav.Link onClick={scrollToRef} style={navLinkStyle}>
-              Referenciák
-            </Nav.Link>
-            <Nav.Link href="./#velemenyek" onClick={closeNavbar} style={navLinkStyle}>
-              Vélemények
-            </Nav.Link>
-            <Nav.Link onClick={scrollToFAQ} style={navLinkStyle}>
-              GY.I.K
-            </Nav.Link>
-            <Nav.Link onClick={scrollToContact} style={navLinkStyle}>
-              Kapcsolat
-            </Nav.Link>
-          </Nav>
-          {!isMobile && (
-            <Button onClick={scrollToPrices} variant="light" style={buttonStyle}>
-              Árajánlat
-            </Button>
-          )}
-          {isMobile && (
-            <div className="text-center mt-3 w-100">
-              <Button
-                onClick={scrollToPrices}
-                variant="light"
-                style={buttonStyle}
+      <Container fluid className="px-4">
+        <div className="d-flex justify-content-between align-items-center w-100">
+          <Navbar.Brand href="./">
+            <img src={logo} alt="Logo" style={{ width: '100px', height: 'auto' }} />
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="navbar-nav" />
+        </div>
+        <Navbar.Collapse id="navbar-nav">
+          {isMobile ? (
+            <>
+              <div className="mobile-header">
+                <Navbar.Brand href="./">
+                  <img src={logo} alt="Logo" style={{ width: '100px', height: 'auto' }} />
+                </Navbar.Brand>
+                <Navbar.Toggle aria-controls="navbar-nav" />
+              </div>
+              <div className="mobile-nav-content">
+                <Nav className="text-center w-100">
+                  <Nav.Link onClick={scrollToServices}>
+                    Szolgáltatások
+                  </Nav.Link>
+                  <Nav.Link onClick={scrollToRef}>
+                    Referenciák
+                  </Nav.Link>
+                  <Nav.Link href="./#velemenyek" onClick={closeNavbar}>
+                    Vélemények
+                  </Nav.Link>
+                  <Nav.Link onClick={scrollToFAQ}>
+                    GY.I.K
+                  </Nav.Link>
+                  <Nav.Link onClick={scrollToContact}>
+                    Kapcsolat
+                  </Nav.Link>
+                </Nav>
+              </div>
+            </>
+          ) : (
+            <div className="w-100 d-flex flex-row align-items-center justify-content-between">
+              <div className="d-none d-lg-block" style={{ width: '100px' }}></div>
+              <Nav className="mx-auto">
+                <Nav.Link onClick={scrollToServices}>
+                  Szolgáltatások
+                </Nav.Link>
+                <Nav.Link onClick={scrollToRef}>
+                  Referenciák
+                </Nav.Link>
+                <Nav.Link href="./#velemenyek" onClick={closeNavbar}>
+                  Vélemények
+                </Nav.Link>
+                <Nav.Link onClick={scrollToFAQ}>
+                  GY.I.K
+                </Nav.Link>
+                <Nav.Link onClick={scrollToContact}>
+                  Kapcsolat
+                </Nav.Link>
+              </Nav>
+              <Button 
+                onClick={scrollToPrices} 
+                variant="light" 
+                className="quote-button"
               >
                 Árajánlat
               </Button>
