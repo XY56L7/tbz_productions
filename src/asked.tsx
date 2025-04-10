@@ -74,9 +74,10 @@ import React, { useRef } from 'react';
 
   const cardsContainerStyle: CSSProperties = {
 
-    width: '90%',
+    width: '50%',
 
-    margin: '0 auto',
+//     margin: '0 auto',
+marginLeft:0,
 
     position: 'relative',
 
