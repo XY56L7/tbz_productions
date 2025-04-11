@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import Header from './Header';
 import Navbar from './Navbar';
@@ -8,7 +9,7 @@ import Contact from './Contact';
 import Footer from './Footer';
 import Partnerships from './Partnerships';
 import References from './References';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import Testimonials from './Testimonials';
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
       <Partnerships />
       <ServicesSection />
       <References />
+      <Testimonials />
       <Asked />
       <CallToActionCard />
       <Contact />
