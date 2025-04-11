@@ -14,16 +14,28 @@ const FAQ = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const leftCardsRef = useRef<(HTMLLIElement | null)[]>([]);
   const rightContainerRef = useRef<HTMLUListElement>(null);
-  const [rightCardsVisible, setRightCardsVisible] = useState(true); // Start visible
+  const [rightCardsVisible, setRightCardsVisible] = useState(true);
+  const [headerSticky, setHeaderSticky] = useState(true);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); // Mobile breakpoint at 768px
+
+  const navbarHeight = '80px'; // Adjust based on your navbar's actual height
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const faqSectionStyle: CSSProperties = {
     background: 'radial-gradient(circle at center, #0a1f1a 0%, #000000 70%)',
-    padding: '40px 20px',
+    padding: isMobile ? `120px 10px 40px 10px` : `120px 20px 40px 20px`,
     position: 'relative',
-    minHeight: 'calc(6 * 40vh + (6 * 7.5em))',
+    minHeight: isMobile ? 'auto' : 'calc(6 * 40vh + (6 * 7.5em))',
     display: 'flex',
-    justifyContent: 'center',
-    gap: '20px',
+    flexDirection: 'column',
+    alignItems: 'center',
   };
 
   const starryBackgroundStyle: CSSProperties = {
@@ -42,8 +54,31 @@ const FAQ = () => {
     50% { opacity: 0.6; }
   }`;
 
+  const headerStyle: CSSProperties = {
+    position: isMobile ? 'relative' : (headerSticky ? 'sticky' : 'relative'),
+    top: isMobile ? 'auto' : (headerSticky ? navbarHeight : 'auto'),
+    zIndex: 3,
+    fontSize: isMobile ? '2rem' : '2.5rem',
+    fontWeight: 700,
+    color: '#fff',
+    textAlign: 'center',
+    margin: '0 0 120px 0',
+    textShadow: '0 0 5px rgba(255, 255, 255, 0.3)',
+    width: '100%',
+    background: 'transparent',
+  };
+
+  const columnsContainerStyle: CSSProperties = {
+    display: 'flex',
+    flexDirection: isMobile ? 'column' : 'row',
+    justifyContent: isMobile ? 'flex-start' : 'center',
+    gap: isMobile ? '40px' : '20px',
+    width: '100%',
+    maxWidth: isMobile ? 'none' : '1200px',
+  };
+
   const cardsContainerStyle: CSSProperties = {
-    width: '45%',
+    width: isMobile ? '100%' : '45%',
     position: 'relative',
     zIndex: 2,
   };
@@ -52,38 +87,37 @@ const FAQ = () => {
     ...({
       '--cards': 6,
       '--cardHeight': '20vh',
-      '--cardTopPadding': '7.5em',
-      '--cardMargin': '4vw',
+      '--cardTopPadding': '0',
+      '--cardMargin': isMobile ? '2vw' : '4vw',
       listStyle: 'none',
       paddingLeft: 0,
       marginTop: 0,
-      marginBottom: '4vw',
-      paddingBottom: 'calc(6 * 7.5em)',
+      marginBottom: isMobile ? '2vw' : '4vw',
+      paddingBottom: isMobile ? '0' : 'calc(6 * 7.5em)',
       display: 'grid',
       gridTemplateColumns: '1fr',
-      gridTemplateRows: 'repeat(6, 40vh)',
-      gap: '4vw',
+      gridTemplateRows: `repeat(6, ${isMobile ? 'auto' : '40vh'})`,
+      gap: isMobile ? '2vw' : '4vw',
     } as any),
   };
 
   const cardsStyleRight: CSSProperties = {
     listStyle: 'none',
     paddingLeft: 0,
-    marginTop: 0,
-    marginBottom: '4vw',
+    marginTop: isMobile ? '0' : '2vw',
+    marginBottom: isMobile ? '0' : '2vw',
     display: 'flex',
     flexDirection: 'column',
-    gap: '4vw',
-    position: 'sticky',
-    top: '7.5em',
+    gap: isMobile ? '2vw' : '2vw',
+    position: isMobile ? 'relative' : 'sticky',
+    top: isMobile ? 'auto' : `calc(${navbarHeight} + 120px)`,
     opacity: rightCardsVisible ? 1 : 0,
     transition: 'opacity 0.5s ease-in-out',
   };
 
   const cardStyleLeft: CSSProperties = {
-    position: 'sticky',
-    top: 'calc(var(--index) * 70px)',
-    paddingTop: 'var(--cardTopPadding)',
+    position: isMobile ? 'relative' : 'sticky',
+    top: isMobile ? 'auto' : `calc(${navbarHeight} + 120px + (var(--index) * 70px))`,
     backgroundColor: 'transparent',
   };
 
@@ -97,7 +131,8 @@ const FAQ = () => {
     borderRadius: '20px',
     boxShadow: '0 15px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 179, 143, 0.2)',
     border: '1px solid rgba(255, 255, 255, 0.15)',
-    height: '20vh',
+    height: isMobile ? 'auto' : '20vh',
+    minHeight: isMobile ? '150px' : 'none',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-start',
@@ -105,11 +140,11 @@ const FAQ = () => {
     transition: 'all 0.5s',
     position: 'relative',
     background: '#00362A',
-    opacity: index === 5 ? 0 : 1, // Sixth card (index 5) is invisible
+    opacity: index === 5 ? 0 : 1,
   });
 
   const layerSubtitleStyle: CSSProperties = {
-    fontSize: '1.5rem',
+    fontSize: isMobile ? '1.3rem' : '1.5rem',
     fontWeight: 600,
     color: '#fff',
     margin: '0 0 0.5rem 0',
@@ -122,12 +157,21 @@ const FAQ = () => {
   };
 
   const layerDescriptionStyle: CSSProperties = {
-    fontSize: '1rem',
+    fontSize: isMobile ? '0.9rem' : '1rem',
     color: '#e6f0ed',
     margin: '0',
     lineHeight: 1.6,
     textAlign: 'center',
     flexGrow: 1,
+  };
+
+  const leftColumnTitleStyle: CSSProperties = {
+    fontSize: isMobile ? '1.8rem' : '2.2rem',
+    fontWeight: 600,
+    color: '#fff',
+    textAlign: isMobile ? 'center' : 'left',
+    marginBottom: isMobile ? '20px' : '30px',
+    textShadow: '0 0 5px rgba(255, 255, 255, 0.3)',
   };
 
   const cardIndexStylesLeft = [
@@ -151,37 +195,27 @@ const FAQ = () => {
           const fifthRect = fifthCard.getBoundingClientRect();
           const sixthRect = sixthCard.getBoundingClientRect();
 
-          // Hide right cards when sixth card's top reaches or passes fifth card's top
           if (sixthRect.top <= fifthRect.top) {
             setRightCardsVisible(false);
+            setHeaderSticky(false);
           } else {
-            // Show right cards when sixth card's top is above fifth card's top
             setRightCardsVisible(true);
+            setHeaderSticky(true);
           }
         }
       },
       {
         root: null,
-        threshold: [0, 0.1, 0.5, 1], // Trigger on position changes
+        threshold: [0, 0.1, 0.5, 1],
       }
     );
 
-    // Observe fifth and sixth cards
-    if (cards[4]) {
-      observer.observe(cards[4]);
-    }
-    if (cards[5]) {
-      observer.observe(cards[5]);
-    }
+    if (cards[4]) observer.observe(cards[4]);
+    if (cards[5]) observer.observe(cards[5]);
 
-    // Cleanup
     return () => {
-      if (cards[4]) {
-        observer.unobserve(cards[4]);
-      }
-      if (cards[5]) {
-        observer.unobserve(cards[5]);
-      }
+      if (cards[4]) observer.unobserve(cards[4]);
+      if (cards[5]) observer.unobserve(cards[5]);
     };
   }, []);
 
@@ -189,37 +223,39 @@ const FAQ = () => {
     <section style={faqSectionStyle} id="FAQ" ref={sectionRef}>
       <style>{twinkleKeyframes}</style>
       <div style={starryBackgroundStyle} />
-      {/* Left Column (6 cards, stacking) */}
-      <div style={cardsContainerStyle}>
-        <ul style={cardsStyleLeft}>
-          {processSteps.map((step, index) => (
-            <li
-              key={`left-${index}`}
-              style={{ ...cardStyleLeft, ...cardIndexStylesLeft[index] }}
-              ref={(el) => {
-                leftCardsRef.current[index] = el; // Assign ref without returning
-              }}
-            >
-              <div style={cardBodyStyle(index)}>
-                <h2 style={layerSubtitleStyle}>{step.subtitle}</h2>
-                <p style={layerDescriptionStyle}>{step.description}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
-      {/* Right Column (3 cards, sticky) */}
-      <div style={cardsContainerStyle}>
-        <ul style={cardsStyleRight} ref={rightContainerRef}>
-          {processSteps.slice(0, 3).map((step, index) => (
-            <li key={`right-${index}`} style={cardStyleRight}>
-              <div style={cardBodyStyle(index)}>
-                <h2 style={layerSubtitleStyle}>{step.subtitle}</h2>
-                <p style={layerDescriptionStyle}>{step.description}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
+      <h1 style={headerStyle}>Gyakran Ismételt Kérdések</h1>
+      <div style={columnsContainerStyle}>
+        <div style={cardsContainerStyle}>
+          <h2 style={leftColumnTitleStyle}>Így építjük fel a sikeredet lépésről lépésre</h2>
+          <ul style={cardsStyleLeft}>
+            {processSteps.map((step, index) => (
+              <li
+                key={`left-${index}`}
+                style={{ ...cardStyleLeft, ...cardIndexStylesLeft[index] }}
+                ref={(el) => {
+                  leftCardsRef.current[index] = el;
+                }}
+              >
+                <div style={cardBodyStyle(index)}>
+                  <h2 style={layerSubtitleStyle}>{step.subtitle}</h2>
+                  <p style={layerDescriptionStyle}>{step.description}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div style={cardsContainerStyle}>
+          <ul style={cardsStyleRight} ref={rightContainerRef}>
+            {processSteps.slice(0, 3).map((step, index) => (
+              <li key={`right-${index}`} style={cardStyleRight}>
+                <div style={cardBodyStyle(index)}>
+                  <h2 style={layerSubtitleStyle}>{step.subtitle}</h2>
+                  <p style={layerDescriptionStyle}>{step.description}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   );
