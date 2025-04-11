@@ -7,19 +7,20 @@ const processSteps = [
   { subtitle: "Megegyezés", description: "Szerződéskötés után elkezdjük a közös munkát." },
   { subtitle: "Tervezés és forgatás", description: "Stratégiát készítünk, forgatókönyvet írunk, majd professzionális tartalmat forgatunk." },
   { subtitle: "Utómunka és átadás", description: "A kész anyagokat szerkesztjük, átadjuk jóváhagyásra, majd kezeljük a közösségi médiádat, ha kéred." },
+  { subtitle: "", description: "" }, // Dummy sixth card (content will be invisible)
 ];
 
 const FAQ = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const leftCardsRef = useRef<(HTMLLIElement | null)[]>([]);
   const rightContainerRef = useRef<HTMLUListElement>(null);
-  const [rightCardsVisible, setRightCardsVisible] = useState(false);
+  const [rightCardsVisible, setRightCardsVisible] = useState(true); // Start visible
 
   const faqSectionStyle: CSSProperties = {
     background: 'radial-gradient(circle at center, #0a1f1a 0%, #000000 70%)',
     padding: '40px 20px',
     position: 'relative',
-    minHeight: 'calc(5 * 40vh + (5 * 7.5em))',
+    minHeight: 'calc(6 * 40vh + (6 * 7.5em))',
     display: 'flex',
     justifyContent: 'center',
     gap: '20px',
@@ -49,7 +50,7 @@ const FAQ = () => {
 
   const cardsStyleLeft: CSSProperties = {
     ...({
-      '--cards': 5,
+      '--cards': 6,
       '--cardHeight': '20vh',
       '--cardTopPadding': '7.5em',
       '--cardMargin': '4vw',
@@ -57,10 +58,10 @@ const FAQ = () => {
       paddingLeft: 0,
       marginTop: 0,
       marginBottom: '4vw',
-      paddingBottom: 'calc(5 * 7.5em)',
+      paddingBottom: 'calc(6 * 7.5em)',
       display: 'grid',
       gridTemplateColumns: '1fr',
-      gridTemplateRows: 'repeat(5, 40vh)',
+      gridTemplateRows: 'repeat(6, 40vh)',
       gap: '4vw',
     } as any),
   };
@@ -90,7 +91,7 @@ const FAQ = () => {
     backgroundColor: 'transparent',
   };
 
-  const cardBodyStyle: CSSProperties = {
+  const cardBodyStyle = (index: number): CSSProperties => ({
     boxSizing: 'border-box',
     padding: '1rem',
     borderRadius: '20px',
@@ -104,7 +105,8 @@ const FAQ = () => {
     transition: 'all 0.5s',
     position: 'relative',
     background: '#00362A',
-  };
+    opacity: index === 5 ? 0 : 1, // Sixth card (index 5) is invisible
+  });
 
   const layerSubtitleStyle: CSSProperties = {
     fontSize: '1.5rem',
@@ -134,59 +136,60 @@ const FAQ = () => {
     { '--index': 2 } as CSSProperties,
     { '--index': 3 } as CSSProperties,
     { '--index': 4 } as CSSProperties,
+    { '--index': 5 } as CSSProperties,
   ];
 
   useEffect(() => {
-    // Copy leftCardsRef.current to a local variable
     const cards = leftCardsRef.current;
 
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          // When the first left card becomes visible, show right cards
-          if (entry.target === cards[0] && entry.isIntersecting) {
+        const fifthCard = cards[4];
+        const sixthCard = cards[5];
+
+        if (fifthCard && sixthCard) {
+          const fifthRect = fifthCard.getBoundingClientRect();
+          const sixthRect = sixthCard.getBoundingClientRect();
+
+          // Hide right cards when sixth card's top reaches or passes fifth card's top
+          if (sixthRect.top <= fifthRect.top) {
+            setRightCardsVisible(false);
+          } else {
+            // Show right cards when sixth card's top is above fifth card's top
             setRightCardsVisible(true);
           }
-
-          // When the fourth card reaches the fifth card
-          if (entry.target === cards[3] && entry.isIntersecting) {
-            const fourthCard = cards[3];
-            const fifthCard = cards[4];
-            if (fourthCard && fifthCard) {
-              const fourthRect = fourthCard.getBoundingClientRect();
-              const fifthRect = fifthCard.getBoundingClientRect();
-              // Check if the fourth card's bottom reaches the fifth card's top
-              if (fourthRect.bottom >= fifthRect.top) {
-                setRightCardsVisible(false); // Hide right cards
-              }
-            }
-          }
-        });
+        }
       },
       {
         root: null,
-        threshold: [0, 0.1, 0.5, 1], // Multiple thresholds for finer observation
+        threshold: [0, 0.1, 0.5, 1], // Trigger on position changes
       }
     );
 
-    // Observe left cards
-    cards.forEach((card) => {
-      if (card) observer.observe(card);
-    });
+    // Observe fifth and sixth cards
+    if (cards[4]) {
+      observer.observe(cards[4]);
+    }
+    if (cards[5]) {
+      observer.observe(cards[5]);
+    }
 
     // Cleanup
     return () => {
-      cards.forEach((card) => {
-        if (card) observer.unobserve(card);
-      });
+      if (cards[4]) {
+        observer.unobserve(cards[4]);
+      }
+      if (cards[5]) {
+        observer.unobserve(cards[5]);
+      }
     };
-  }, []); // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <section style={faqSectionStyle} id="FAQ" ref={sectionRef}>
       <style>{twinkleKeyframes}</style>
       <div style={starryBackgroundStyle} />
-      {/* Left Column (5 cards, stacking) */}
+      {/* Left Column (6 cards, stacking) */}
       <div style={cardsContainerStyle}>
         <ul style={cardsStyleLeft}>
           {processSteps.map((step, index) => (
@@ -197,7 +200,7 @@ const FAQ = () => {
                 leftCardsRef.current[index] = el; // Assign ref without returning
               }}
             >
-              <div style={cardBodyStyle}>
+              <div style={cardBodyStyle(index)}>
                 <h2 style={layerSubtitleStyle}>{step.subtitle}</h2>
                 <p style={layerDescriptionStyle}>{step.description}</p>
               </div>
@@ -210,7 +213,7 @@ const FAQ = () => {
         <ul style={cardsStyleRight} ref={rightContainerRef}>
           {processSteps.slice(0, 3).map((step, index) => (
             <li key={`right-${index}`} style={cardStyleRight}>
-              <div style={cardBodyStyle}>
+              <div style={cardBodyStyle(index)}>
                 <h2 style={layerSubtitleStyle}>{step.subtitle}</h2>
                 <p style={layerDescriptionStyle}>{step.description}</p>
               </div>
