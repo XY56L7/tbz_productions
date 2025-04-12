@@ -52,8 +52,6 @@
   margin: 0 auto;
   position: relative;
   overflow: visible;
-  perspective: 2500px;
-  transform-style: preserve-3d;
 }
 
 .video-wrapper {
@@ -72,25 +70,12 @@
   position: relative;
   border-radius: 50px;
   overflow: hidden;
-  box-shadow: 
-    0 30px 80px rgba(0, 0, 0, 0.6),
-    0 0 60px rgba(0, 123, 255, 0.4),    /* Default glow effect */
-    0 0 100px rgba(0, 255, 136, 0.2),   /* Default glow effect */
-    0 0 30px rgba(255, 255, 255, 0.2);  /* Default glow effect */
   border: 8px solid #000000;
   flex-shrink: 0;
   background: #1a1a1a;
-  width: 240px;  /* Reduced from 280px for smaller desktop size */
-  height: 520px; /* Reduced from 600px for smaller desktop size */
+  width: 240px;
+  height: 520px;
   cursor: pointer;
-}
-
-.phone-frame:hover {
-  box-shadow: 
-    0 30px 80px rgba(0, 0, 0, 0.6),
-    0 0 60px rgba(0, 123, 255, 0.6),    /* Enhanced glow on hover */
-    0 0 100px rgba(0, 255, 136, 0.4),   /* Enhanced glow on hover */
-    0 0 30px rgba(255, 255, 255, 0.3);  /* Enhanced glow on hover */
 }
 
 .video-player {
@@ -106,6 +91,7 @@
   height: 100%;
   object-fit: cover;
   background: #000;
+  will-change: transform; /* GPU gyorsítás */
 }
 
 .phone-frame::before {
@@ -156,22 +142,15 @@
 
 .adjacent-video {
   position: relative;
-  width: 240px;  /* Reduced from 280px for smaller desktop size */
-  height: 520px; /* Reduced from 600px for smaller desktop size */
+  width: 240px;
+  height: 520px;
   border-radius: 50px;
   overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4); /* No glow effect by default */
   border: 8px solid #000000;
   flex-shrink: 0;
   transform: scale(0.9);
   background: #000;
   cursor: pointer;
-}
-
-.adjacent-video:hover {
-  transform: scale(0.92);
-  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.6); /* Enhanced shadow, no glow */
 }
 
 .adjacent-video::before {
@@ -180,8 +159,8 @@
   top: 12px;
   left: 50%;
   transform: translateX(-50%);
-  width: 90px;  /* Adjusted slightly for smaller size */
-  height: 30px; /* Adjusted slightly for smaller size */
+  width: 90px;
+  height: 30px;
   background: #000;
   border-radius: 20px;
   z-index: 5;
@@ -213,14 +192,6 @@
   content: '5G 100%';
 }
 
-.adjacent-video .video-media {
-  opacity: 0.8;
-}
-
-.adjacent-video:hover .video-media {
-  opacity: 0.9;
-}
-
 .video-controls {
   position: absolute;
   bottom: 60px;
@@ -242,18 +213,9 @@
   color: white;
   font-size: 1.6rem;
   cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   align-items: center;
   justify-content: center;
-  backdrop-filter: blur(10px);
-}
-
-.nav-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: scale(1.15);
-  border-color: rgba(255, 255, 255, 0.4);
-  box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
 }
 
 .progress-dots {
@@ -272,7 +234,6 @@
   background: rgba(255, 255, 255, 0.3);
   border-radius: 50%;
   cursor: pointer;
-  transition: all 0.3s ease;
 }
 
 .progress-dot.active {
@@ -280,17 +241,13 @@
   transform: scale(1.3);
 }
 
-.progress-dot:hover {
-  background: rgba(255, 255, 255, 0.8);
-}
-
 .modern-play-button {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 60px;  /* Slightly reduced for smaller video size */
-  height: 60px; /* Slightly reduced for smaller video size */
+  width: 60px;
+  height: 60px;
   background: linear-gradient(135deg, rgba(0, 123, 255, 0.9), rgba(0, 255, 136, 0.7));
   border: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 50%;
@@ -299,19 +256,11 @@
   justify-content: center;
   cursor: pointer;
   z-index: 10;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4), 0 0 20px rgba(0, 255, 136, 0.2);
-}
-
-.modern-play-button:hover {
-  transform: translate(-50%, -50%) scale(1.1);
-  background: linear-gradient(135deg, rgba(0, 123, 255, 1), rgba(0, 255, 136, 0.9));
-  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.6), 0 0 30px rgba(0, 255, 136, 0.3);
 }
 
 .play-icon {
-  width: 20px;  /* Slightly reduced for smaller button */
-  height: 20px; /* Slightly reduced for smaller button */
+  width: 20px;
+  height: 20px;
 }
 
 /* Photo Section */
@@ -351,80 +300,15 @@
   overflow: visible;
   flex-shrink: 0;
   background: transparent;
-  transition: transform 0.4s ease;
   cursor: pointer;
-}
-
-.photo-content {
-  position: absolute;
-  inset: 0;
-  border-radius: 16px;
-  overflow: hidden;
-  background: #1a1a1a;
 }
 
 .photo-media {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  transform-origin: center;
   display: block;
   border-radius: 16px;
-}
-
-.photo-card:hover .photo-media {
-  transform: scale(1.1);
-}
-
-.photo-card:nth-child(2) {
-  background: transparent;
-  border-radius: 16px;
-  box-shadow: 
-    0 0 40px rgba(0, 0, 0, 0.5),
-    0 0 30px rgba(0, 123, 255, 0.3),
-    0 0 50px rgba(0, 255, 136, 0.2);
-  animation: photoCardGlow 3s infinite alternate;
-}
-
-.photo-card:nth-child(2):hover {
-  box-shadow: 
-    0 0 50px rgba(0, 0, 0, 0.6),
-    0 0 40px rgba(0, 123, 255, 0.4),
-    0 0 60px rgba(0, 255, 136, 0.3);
-}
-
-@keyframes photoCardGlow {
-  0% {
-    box-shadow: 
-      0 0 30px rgba(0, 123, 255, 0.3),
-      0 0 50px rgba(0, 255, 136, 0.2);
-  }
-  100% {
-    box-shadow: 
-      0 0 40px rgba(0, 123, 255, 0.4),
-      0 0 60px rgba(0, 255, 136, 0.3);
-  }
-}
-
-.adjacent-photo {
-  position: relative;
-  width: 300px;
-  height: 400px;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); /* No glow effect by default */
-  flex-shrink: 0;
-  background: #1a1a1a;
-  opacity: 0.7;
-  transition: all 0.4s ease;
-  cursor: pointer;
-}
-
-.adjacent-photo:hover {
-  opacity: 0.9;
-  transform: scale(1.02);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5); /* Enhanced shadow, no glow */
 }
 
 .photo-overlay {
@@ -435,18 +319,11 @@
   background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
   padding: 1.5rem;
   color: white;
-  transition: all 0.3s ease;
   display: none;
 }
 
 .photo-category {
   display: none;
-  padding: 0.5rem 1rem;
-  background: rgba(0, 123, 255, 0.3);
-  color: #007bff;
-  border-radius: 20px;
-  font-size: 0.9rem;
-  margin-bottom: 1rem;
 }
 
 .photo-title {
@@ -454,6 +331,18 @@
   font-weight: 600;
   margin: 0;
   display: none;
+}
+
+.adjacent-photo {
+  position: relative;
+  width: 300px;
+  height: 400px;
+  border-radius: 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: #1a1a1a;
+  opacity: 0.7;
+  cursor: pointer;
 }
 
 .photo-controls {
@@ -468,7 +357,7 @@
   z-index: 10;
 }
 
-/* Modal Styles */
+/*",Modal Styles */
 .modal-backdrop {
   position: fixed;
   top: 0;
@@ -480,15 +369,12 @@
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  backdrop-filter: blur(10px);
 }
 
 .modal-container {
   background: transparent;
   border-radius: 20px;
   position: relative;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-  animation: modalEnter 0.4s ease;
   width: 90vw;
   height: 90vh;
   display: flex;
@@ -508,7 +394,6 @@
   align-items: center;
   padding: 1.5rem 2rem;
   background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(10px);
   position: fixed;
   top: 0;
   left: 0;
@@ -545,12 +430,6 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.control-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: scale(1.1);
 }
 
 .modal-content {
@@ -567,7 +446,6 @@
   max-width: 100%;
   max-height: 90vh;
   object-fit: contain;
-  transition: transform 0.3s ease;
   cursor: zoom-in;
 }
 
@@ -603,26 +481,18 @@
   .video-section {
     padding: 4rem 0 4rem 0;
   }
-  .photo-section {
-    padding: 1.5rem 0 4rem 0;
-  }
-  .video-container, .photo-container {
-    height: auto;
-    margin-top: 0;
+  .phone-frame {
+    width: 260px;
+    height: 560px;
+    border-width: 6px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4); /* Egyszerűsített árnyék */
   }
   .video-wrapper {
     padding: 0 2%;
     gap: 1rem;
   }
-  .phone-frame {
-    width: 260px;
-    height: 560px;
-    border-width: 6px;
-  }
-  .adjacent-video {
-    width: 200px;
-    height: 540px;
-    border-width: 5px;
+  .photo-section {
+    padding: 1.5rem 0 4rem 0;
   }
   .photo-wrapper {
     padding: 0 1.5rem;
@@ -631,10 +501,6 @@
   .photo-card {
     width: 300px;
     height: 400px;
-  }
-  .adjacent-photo {
-    width: 200px;
-    height: 300px;
   }
   .nav-btn {
     width: 50px;
@@ -669,21 +535,17 @@
   .video-section {
     padding: 3rem 0 3rem 0;
   }
-  .photo-section {
-    padding: 1rem 0 2rem 0;
-  }
-  .video-wrapper {
-    padding: 0 1%;
-    gap: 0.5rem;
-  }
   .phone-frame {
     width: 240px;
     height: 520px;
     border-width: 5px;
   }
-  .adjacent-video {
-    width: 180px;
-    height: 500px;
+  .video-wrapper {
+    padding: 0 1%;
+    gap: 0.5rem;
+  }
+  .photo-section {
+    padding: 1rem 0 2rem 0;
   }
   .photo-wrapper {
     padding: 0 1rem;
@@ -692,10 +554,6 @@
   .photo-card {
     width: 250px;
     height: 350px;
-  }
-  .adjacent-photo {
-    width: 150px;
-    height: 250px;
   }
   .nav-btn {
     width: 45px;
@@ -745,54 +603,5 @@
   }
   .modal-media.zoomed {
     transform: scale(1.1);
-  }
-}
-
-@keyframes modalEnter {
-  from {
-    opacity: 0;
-    transform: scale(0.95) translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-}
-
-.quote-btn {
-  background-color: #fff !important;
-  color: #000 !important;
-  border: 1px solid #ccc;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 
-    0 4px 6px rgba(0, 0, 0, 0.1),
-    0 0 8px rgba(0, 123, 255, 0.3),
-    0 0 15px rgba(0, 255, 136, 0.15);
-  animation: buttonGlow 3s infinite alternate;
-}
-
-.quote-btn:hover {
-  background-color: #f7f7f7 !important;
-  color: #000 !important;
-  box-shadow: 
-    0 6px 12px rgba(0, 0, 0, 0.15),
-    0 0 15px rgba(0, 123, 255, 0.4),
-    0 0 25px rgba(0, 255, 136, 0.25);
-  transform: translateY(-2px);
-}
-
-@keyframes buttonGlow {
-  0% {
-    box-shadow: 
-      0 4px 6px rgba(0, 0, 0, 0.1),
-      0 0 8px rgba(0, 123, 255, 0.3),
-      0 0 15px rgba(0, 255, 136, 0.15);
-  }
-  100% {
-    box-shadow: 
-      0 4px 6px rgba(0, 0, 0, 0.1),
-      0 0 12px rgba(0, 123, 255, 0.4),
-      0 0 20px rgba(0, 255, 136, 0.2);
   }
 }

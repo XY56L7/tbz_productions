@@ -28,7 +28,6 @@ import thumb5 from './thumbnails/5_Cover.jpg';
 import thumb6 from './thumbnails/6_Cover.jpg';
 import thumb7 from './thumbnails/7_Cover.jpg';
 
-
 const References = () => {
   const [selectedPhoto, setSelectedPhoto] = useState(null);
   const [currentVideoIndex, setCurrentVideoIndex] = useState(1);
@@ -57,61 +56,13 @@ const References = () => {
   ], []);
 
   const videos = useMemo(() => [
-    { 
-      id: 1, 
-      src: vid1, 
-      thumbnail: thumb1,
-      title: 'Esküvői Videó', 
-      category: 'Esküvő',
-      description: 'Egy csodálatos esküvői pillanat megörökítése'
-    },
-    { 
-      id: 2, 
-      src: vid2, 
-      thumbnail: thumb2,
-      title: 'Rendezvény Aftermovie', 
-      category: 'Rendezvény',
-      description: 'Energikus aftermovie egy fantasztikus rendezvényről'
-    },
-    { 
-      id: 3, 
-      src: vid3, 
-      thumbnail: thumb3,
-      title: 'Promóciós Videó', 
-      category: 'Marketing',
-      description: 'Modern promóciós videó egy innovatív termékről'
-    },
-    { 
-      id: 4, 
-      src: vid4, 
-      thumbnail: thumb4,
-      title: 'Koncert Felvétel', 
-      category: 'Zene',
-      description: 'Lenyűgöző koncertfelvétel professzionális minőségben'
-    },
-    { 
-      id: 5, 
-      src: vid5, 
-      thumbnail: thumb5,
-      title: 'Termék Bemutató', 
-      category: 'Marketing',
-      description: 'Elegáns termékbemutató videó prémium kivitelezésben'
-    },
-    { 
-      id: 6, 
-      src: vid6, 
-      thumbnail: thumb6,
-      title: 'Termék Bemutató', 
-      category: 'Marketing',
-      description: 'Elegáns termékbemutató videó prémium kivitelezésben'
-    }, { 
-      id: 7, 
-      src: vid7, 
-      thumbnail: thumb7,
-      title: 'Termék Bemutató', 
-      category: 'Marketing',
-      description: 'Elegáns termékbemutató videó prémium kivitelezésben'
-    },
+    { id: 1, src: vid1, thumbnail: thumb1, title: 'Esküvői Videó', category: 'Esküvő', description: 'Egy csodálatos esküvői pillanat megörökítése' },
+    { id: 2, src: vid2, thumbnail: thumb2, title: 'Rendezvény Aftermovie', category: 'Rendezvény', description: 'Energikus aftermovie egy fantasztikus rendezvényről' },
+    { id: 3, src: vid3, thumbnail: thumb3, title: 'Promóciós Videó', category: 'Marketing', description: 'Modern promóciós videó egy innovatív termékről' },
+    { id: 4, src: vid4, thumbnail: thumb4, title: 'Koncert Felvétel', category: 'Zene', description: 'Lenyűgöző koncertfelvétel professzionális minőségben' },
+    { id: 5, src: vid5, thumbnail: thumb5, title: 'Termék Bemutató', category: 'Marketing', description: 'Elegáns termékbemutató videó prémium kivitelezésben' },
+    { id: 6, src: vid6, thumbnail: thumb6, title: 'Termék Bemutató', category: 'Marketing', description: 'Elegáns termékbemutató videó prémium kivitelezésben' },
+    { id: 7, src: vid7, thumbnail: thumb7, title: 'Termék Bemutató', category: 'Marketing', description: 'Elegáns termékbemutató videó prémium kivitelezésben' },
   ], []);
 
   const handlePhotoClick = useCallback((photo) => {
@@ -157,17 +108,14 @@ const References = () => {
   }, [currentPhotoIndex, photos]);
 
   const handlePlayVideo = useCallback(() => {
-    // First set the playing state to true which will render the video element
     setIsVideoPlaying(true);
-    
-    // Use setTimeout to ensure the video element has been rendered before trying to play
     setTimeout(() => {
       if (videoRef.current) {
         videoRef.current.src = videos[currentVideoIndex].src;
         videoRef.current.load();
         videoRef.current.play().catch(err => {
           console.error('Video play failed:', err);
-          setIsVideoPlaying(false); // Reset to thumbnail if playback fails
+          setIsVideoPlaying(false);
         });
       }
     }, 50);
@@ -194,6 +142,11 @@ const References = () => {
     setCurrentVideo(videos[currentVideoIndex]);
   }, [currentVideoIndex, videos]);
 
+  // Function to determine if the thumbnail is thumb7 and apply rotation
+  const getThumbnailStyle = (thumbnail) => {
+    return thumbnail === thumb7 ? { transform: 'rotate(-90deg)' } : {};
+  };
+
   return (
     <>
       <section className="video-section">
@@ -208,6 +161,7 @@ const References = () => {
                 src={currentVideoIndex === 0 ? videos[videos.length - 1].thumbnail : videos[currentVideoIndex - 1].thumbnail}
                 alt={currentVideoIndex === 0 ? videos[videos.length - 1].title : videos[currentVideoIndex - 1].title}
                 className="video-media"
+                style={getThumbnailStyle(currentVideoIndex === 0 ? videos[videos.length - 1].thumbnail : videos[currentVideoIndex - 1].thumbnail)}
               />
               <div className="status-info"></div>
             </div>
@@ -219,10 +173,11 @@ const References = () => {
                     <source src={videos[currentVideoIndex].src} type="video/mp4" />
                   </video>
                 ) : (
-                  <img 
-                    src={videos[currentVideoIndex].thumbnail} 
+                  <img
+                    src={videos[currentVideoIndex].thumbnail}
                     alt={videos[currentVideoIndex].title}
-                    className="video-media" 
+                    className="video-media"
+                    style={getThumbnailStyle(videos[currentVideoIndex].thumbnail)}
                   />
                 )}
                 {!isVideoPlaying && (
@@ -239,6 +194,7 @@ const References = () => {
                 src={currentVideoIndex === videos.length - 1 ? videos[0].thumbnail : videos[currentVideoIndex + 1].thumbnail}
                 alt={currentVideoIndex === videos.length - 1 ? videos[0].title : videos[currentVideoIndex + 1].title}
                 className="video-media"
+                style={getThumbnailStyle(currentVideoIndex === videos.length - 1 ? videos[0].thumbnail : videos[currentVideoIndex + 1].thumbnail)}
               />
               <div className="status-info"></div>
             </div>
