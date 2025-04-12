@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './Testimonials.css';
-import vid1 from './videos/bence-test.mp4'; // Replace with your actual video files
+import vid1 from './videos/bence-test.mp4';
 import vid2 from './videos/madbro-test.mp4';
 import vid3 from './videos/vade-test.mp4';
 import thumb1 from './thumbnails/bence-test.jpg';
@@ -52,7 +53,7 @@ const Testimonials = () => {
           : prevIndex - 1;
 
       setCurrentTestimonialIndex(newIndex);
-      setIsVideoPlaying(false); // Reset video playback on swipe
+      setIsVideoPlaying(false);
     },
     [currentTestimonialIndex, testimonials]
   );
@@ -85,15 +86,16 @@ const Testimonials = () => {
   }, [handleTestimonialSwipe]);
 
   return (
-    <section className="video-section">
-      <div className="section-header">
+    <section className="py-5 bg-black">
+      <div className="container text-center mb-5">
         <h2 className="section-title">Vélemények</h2>
         <p className="section-subtitle">Ügyfeleink visszajelzései</p>
       </div>
-      <div className="video-container">
-        <div className="video-wrapper">
+      <div className="container-fluid">
+        <div className="d-flex justify-content-center align-items-center gap-3 mb-4 flex-nowrap">
           <div
-            className="adjacent-video"
+            className="card border-0 shadow opacity-75"
+            style={{ width: '280px', height: '450px', cursor: 'pointer' }}
             onClick={() => handleTestimonialSwipe('prev')}
           >
             <img
@@ -107,56 +109,56 @@ const Testimonials = () => {
                   ? testimonials[testimonials.length - 1].title
                   : testimonials[currentTestimonialIndex - 1].title
               }
-              className="video-media"
+              className="card-img-top object-fit-cover w-100 h-100"
             />
-            <div className="status-info"></div>
-          </div>
-          <div className="phone-frame">
-            <div className="status-bar"></div>
-            <div className="video-player">
-              {isVideoPlaying ? (
-                <video
-                  ref={videoRef}
-                  className="video-media"
-                  loop={false}
-                  playsInline
-                  controls={true}
-                  muted={false}
-                >
-                  <source
-                    src={testimonials[currentTestimonialIndex].src}
-                    type="video/mp4"
-                  />
-                </video>
-              ) : (
-                <img
-                  src={testimonials[currentTestimonialIndex].thumbnail}
-                  alt={testimonials[currentTestimonialIndex].title}
-                  className="video-media"
-                />
-              )}
-              {!isVideoPlaying && (
-                <button
-                  className="modern-play-button"
-                  onClick={handlePlayVideo}
-                  aria-label="Videó lejátszása"
-                >
-                  <svg
-                    className="play-icon"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M5 3l14 9-14 9V3z" fill="white" />
-                  </svg>
-                </button>
-              )}
-            </div>
           </div>
           <div
-            className="adjacent-video"
+            className="card border-0 shadow position-relative"
+            style={{ width: '280px', height: '450px', cursor: 'pointer' }}
+          >
+            {isVideoPlaying ? (
+              <video
+                ref={videoRef}
+                className="card-img-top object-fit-cover w-100 h-100"
+                loop={false}
+                playsInline
+                controls
+                muted={false}
+              >
+                <source
+                  src={testimonials[currentTestimonialIndex].src}
+                  type="video/mp4"
+                />
+              </video>
+            ) : (
+              <img
+                src={testimonials[currentTestimonialIndex].thumbnail}
+                alt={testimonials[currentTestimonialIndex].title}
+                className="card-img-top object-fit-cover w-100 h-100"
+              />
+            )}
+            {!isVideoPlaying && (
+              <button
+                className="btn btn-primary rounded-circle position-absolute top-50 start-50 translate-middle btn-play"
+                style={{ width: '36px', height: '36px' }}
+                onClick={handlePlayVideo}
+                aria-label="Videó lejátszása"
+              >
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="white"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M5 3l14 9-14 9V3z" />
+                </svg>
+              </button>
+            )}
+          </div>
+          <div
+            className="card border-0 shadow opacity-75"
+            style={{ width: '280px', height: '450px', cursor: 'pointer' }}
             onClick={() => handleTestimonialSwipe('next')}
           >
             <img
@@ -170,38 +172,41 @@ const Testimonials = () => {
                   ? testimonials[0].title
                   : testimonials[currentTestimonialIndex + 1].title
               }
-              className="video-media"
+              className="card-img-top object-fit-cover w-100 h-100"
             />
-            <div className="status-info"></div>
           </div>
         </div>
-        <div className="video-controls">
+        <div className="d-flex justify-content-center gap-3 mb-4">
           <button
-            className="nav-btn prev-btn"
+            className="btn btn-outline-light rounded-circle btn-nav"
+            style={{ width: '36px', height: '36px' }}
             onClick={() => handleTestimonialSwipe('prev')}
             aria-label="Előző videó"
           >
             ←
           </button>
           <button
-            className="nav-btn next-btn"
+            className="btn btn-outline-light rounded-circle btn-nav"
+            style={{ width: '36px', height: '36px' }}
             onClick={() => handleTestimonialSwipe('next')}
             aria-label="Következő videó"
           >
             →
           </button>
         </div>
-        <div className="progress-dots">
+        <div className="d-flex justify-content-center gap-2">
           {testimonials.map((_, index) => (
-            <div
+            <button
               key={index}
-              className={`progress-dot ${
-                index === currentTestimonialIndex ? 'active' : ''
+              className={`btn btn-sm p-0 rounded-circle ${
+                index === currentTestimonialIndex ? 'btn-primary' : 'btn-outline-secondary'
               }`}
+              style={{ width: '8px', height: '8px' }}
               onClick={() => {
                 setCurrentTestimonialIndex(index);
                 setIsVideoPlaying(false);
               }}
+              aria-label={`Videó ${index + 1}`}
             />
           ))}
         </div>
