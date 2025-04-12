@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { CSSProperties } from 'react';
 
 const processSteps = [
-  { subtitle: "Kapcsolatfelvétel", description: "Töltsd ki az űrlapot vagy foglalj egy teljesen díjmentes konzultációt, és 24 órán belül felvesszük veled a kapcsolatot." },
+  { subtitle: "Hogyan néz ki a közös munka velünk?", description: "" },
   { subtitle: "Ismerkedés", description: "Online vagy személyes meetingen megismerjük vállalkozásod és céljaid." },
   { subtitle: "Megegyezés", description: "Szerződéskötés után elkezdjük a közös munkát." },
   { subtitle: "Tervezés és forgatás", description: "Stratégiát készítünk, forgatókönyvet írunk, majd professzionális tartalmat forgatunk." },
@@ -72,7 +72,7 @@ const FAQ = () => {
     display: 'flex',
     flexDirection: isMobile ? 'column' : 'row',
     justifyContent: isMobile ? 'flex-start' : 'center',
-    gap: isMobile ? '40px' : '20px',
+    gap: isMobile ? '0' : '80px', // Added gap for mobile to separate columns
     width: '100%',
     maxWidth: isMobile ? 'none' : '1200px',
   };
@@ -94,10 +94,11 @@ const FAQ = () => {
       marginTop: 0,
       marginBottom: isMobile ? '2vw' : '4vw',
       paddingBottom: isMobile ? '0' : 'calc(6 * 7.5em)',
-      display: 'grid',
-      gridTemplateColumns: '1fr',
-      gridTemplateRows: `repeat(6, ${isMobile ? 'auto' : '40vh'})`,
-      gap: isMobile ? '2vw' : '4vw',
+      display: isMobile ? 'flex' : 'grid', // Use flex for mobile to stack naturally
+      flexDirection: isMobile ? 'column' : 'unset',
+      gridTemplateColumns: isMobile ? 'none' : '1fr',
+      gridTemplateRows: isMobile ? 'none' : `repeat(6, 40vh)`,
+      gap: isMobile ? '20px' : '4vw', // Consistent gap for mobile stacking
     } as any),
   };
 
@@ -108,7 +109,7 @@ const FAQ = () => {
     marginBottom: isMobile ? '0' : '2vw',
     display: 'flex',
     flexDirection: 'column',
-    gap: isMobile ? '2vw' : '2vw',
+    gap: isMobile ? '20px' : '2vw', // Match mobile gap for consistency
     position: isMobile ? 'relative' : 'sticky',
     top: isMobile ? 'auto' : `calc(${navbarHeight} + 120px)`,
     opacity: rightCardsVisible ? 1 : 0,
@@ -116,7 +117,7 @@ const FAQ = () => {
   };
 
   const cardStyleLeft: CSSProperties = {
-    position: isMobile ? 'relative' : 'sticky',
+    position: isMobile ? 'static' : 'sticky', // Use static for mobile to stack naturally
     top: isMobile ? 'auto' : `calc(${navbarHeight} + 120px + (var(--index) * 70px))`,
     backgroundColor: 'transparent',
   };
@@ -132,7 +133,7 @@ const FAQ = () => {
     boxShadow: '0 15px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 179, 143, 0.2)',
     border: '1px solid rgba(255, 255, 255, 0.15)',
     height: isMobile ? 'auto' : '20vh',
-    minHeight: isMobile ? '150px' : 'none',
+    minHeight: isMobile ? 'auto' : 'none', // Allow natural height in mobile
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-start',
@@ -166,12 +167,7 @@ const FAQ = () => {
   };
 
   const leftColumnTitleStyle: CSSProperties = {
-    fontSize: isMobile ? '1.8rem' : '2.2rem',
-    fontWeight: 600,
-    color: '#fff',
-    textAlign: isMobile ? 'center' : 'left',
-    marginBottom: isMobile ? '20px' : '30px',
-    textShadow: '0 0 5px rgba(255, 255, 255, 0.3)',
+    display: 'none', // Hide the title completely
   };
 
   const cardIndexStylesLeft = [
