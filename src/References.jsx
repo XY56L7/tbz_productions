@@ -142,11 +142,6 @@ const References = () => {
     setCurrentVideo(videos[currentVideoIndex]);
   }, [currentVideoIndex, videos]);
 
-  // Function to determine if the thumbnail is thumb7 and apply rotation
-  const getThumbnailStyle = (thumbnail) => {
-    return thumbnail === thumb7 ? { transform: 'rotate(-90deg)' } : {};
-  };
-
   return (
     <>
       <section className="video-section">
@@ -161,7 +156,6 @@ const References = () => {
                 src={currentVideoIndex === 0 ? videos[videos.length - 1].thumbnail : videos[currentVideoIndex - 1].thumbnail}
                 alt={currentVideoIndex === 0 ? videos[videos.length - 1].title : videos[currentVideoIndex - 1].title}
                 className="video-media"
-                style={getThumbnailStyle(currentVideoIndex === 0 ? videos[videos.length - 1].thumbnail : videos[currentVideoIndex - 1].thumbnail)}
               />
               <div className="status-info"></div>
             </div>
@@ -177,7 +171,6 @@ const References = () => {
                     src={videos[currentVideoIndex].thumbnail}
                     alt={videos[currentVideoIndex].title}
                     className="video-media"
-                    style={getThumbnailStyle(videos[currentVideoIndex].thumbnail)}
                   />
                 )}
                 {!isVideoPlaying && (
@@ -194,7 +187,6 @@ const References = () => {
                 src={currentVideoIndex === videos.length - 1 ? videos[0].thumbnail : videos[currentVideoIndex + 1].thumbnail}
                 alt={currentVideoIndex === videos.length - 1 ? videos[0].title : videos[currentVideoIndex + 1].title}
                 className="video-media"
-                style={getThumbnailStyle(currentVideoIndex === videos.length - 1 ? videos[0].thumbnail : videos[currentVideoIndex + 1].thumbnail)}
               />
               <div className="status-info"></div>
             </div>
