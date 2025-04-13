@@ -7,18 +7,18 @@ const processSteps = [
   { subtitle: "Megegyezés", description: "Szerződéskötés után elkezdjük a közös munkát." },
   { subtitle: "Tervezés és forgatás", description: "Stratégiát készítünk, forgatókönyvet írunk, majd professzionális tartalmat forgatunk." },
   { subtitle: "Utómunka és átadás", description: "A kész anyagokat szerkesztjük, átadjuk jóváhagyásra, majd kezeljük a közösségi médiádat, ha kéred." },
-  { subtitle: "", description: "" }, // Dummy sixth card (content will be invisible)
+  { subtitle: "", description: "" }, // Dummy sixth card
 ];
 
 const FAQ = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const leftCardsRef = useRef<(HTMLLIElement | null)[]>([]);
   const rightContainerRef = useRef<HTMLUListElement>(null);
-  const [rightCardsVisible, setRightCardsVisible] = useState(true);
+  const [isRightColumnMoved, setIsRightColumnMoved] = useState(false); // Új állapot a mozgás vezérléséhez
   const [headerSticky, setHeaderSticky] = useState(true);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); // Mobile breakpoint at 768px
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
-  const navbarHeight = '80px'; // Adjust based on your navbar's actual height
+  const navbarHeight = '80px';
 
   useEffect(() => {
     const handleResize = () => {
@@ -72,7 +72,7 @@ const FAQ = () => {
     display: 'flex',
     flexDirection: isMobile ? 'column' : 'row',
     justifyContent: isMobile ? 'flex-start' : 'center',
-    gap: isMobile ? '0' : '80px', // Added gap for mobile to separate columns
+    gap: isMobile ? '0' : '80px',
     width: '100%',
     maxWidth: isMobile ? 'none' : '1200px',
   };
@@ -94,11 +94,11 @@ const FAQ = () => {
       marginTop: 0,
       marginBottom: isMobile ? '2vw' : '4vw',
       paddingBottom: isMobile ? '0' : 'calc(6 * 7.5em)',
-      display: isMobile ? 'flex' : 'grid', // Use flex for mobile to stack naturally
+      display: isMobile ? 'flex' : 'grid',
       flexDirection: isMobile ? 'column' : 'unset',
       gridTemplateColumns: isMobile ? 'none' : '1fr',
       gridTemplateRows: isMobile ? 'none' : `repeat(6, 40vh)`,
-      gap: isMobile ? '20px' : '4vw', // Consistent gap for mobile stacking
+      gap: isMobile ? '20px' : '4vw',
     } as any),
   };
 
@@ -109,15 +109,15 @@ const FAQ = () => {
     marginBottom: isMobile ? '0' : '2vw',
     display: 'flex',
     flexDirection: 'column',
-    gap: isMobile ? '20px' : '2vw', // Match mobile gap for consistency
+    gap: isMobile ? '20px' : '2vw',
     position: isMobile ? 'relative' : 'sticky',
     top: isMobile ? 'auto' : `calc(${navbarHeight} + 120px)`,
-    opacity: rightCardsVisible ? 1 : 0,
-    transition: 'opacity 0.5s ease-in-out',
+    transform: isRightColumnMoved ? 'translateY(-100vh)' : 'translateY(0)', // Felfelé mozgás
+    transition: 'transform 0.5s ease-in-out', // Sima animáció
   };
 
   const cardStyleLeft: CSSProperties = {
-    position: isMobile ? 'static' : 'sticky', // Use static for mobile to stack naturally
+    position: isMobile ? 'static' : 'sticky',
     top: isMobile ? 'auto' : `calc(${navbarHeight} + 120px + (var(--index) * 70px))`,
     backgroundColor: 'transparent',
   };
@@ -133,7 +133,7 @@ const FAQ = () => {
     boxShadow: '0 15px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 179, 143, 0.2)',
     border: '1px solid rgba(255, 255, 255, 0.15)',
     height: isMobile ? 'auto' : '20vh',
-    minHeight: isMobile ? 'auto' : 'none', // Allow natural height in mobile
+    minHeight: isMobile ? 'auto' : 'none',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-start',
@@ -167,7 +167,7 @@ const FAQ = () => {
   };
 
   const leftColumnTitleStyle: CSSProperties = {
-    display: 'none', // Hide the title completely
+    display: 'none',
   };
 
   const cardIndexStylesLeft = [
@@ -192,10 +192,10 @@ const FAQ = () => {
           const sixthRect = sixthCard.getBoundingClientRect();
 
           if (sixthRect.top <= fifthRect.top) {
-            setRightCardsVisible(false);
+            setIsRightColumnMoved(true); // Felfelé mozgás triggerelése
             setHeaderSticky(false);
           } else {
-            setRightCardsVisible(true);
+            setIsRightColumnMoved(false); // Vissza az eredeti pozícióba
             setHeaderSticky(true);
           }
         }
