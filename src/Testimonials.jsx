@@ -92,10 +92,9 @@ const Testimonials = () => {
         <p className="section-subtitle">Ügyfeleink visszajelzései</p>
       </div>
       <div className="container-fluid">
-        <div className="d-flex justify-content-center align-items-center gap-3 mb-4 flex-nowrap">
+        <div className="d-flex justify-content-center align-items-center gap-3 mb-4 flex-nowrap testimonial-carousel">
           <div
-            className="card border-0 shadow opacity-75"
-            style={{ width: '280px', height: '450px', cursor: 'pointer' }}
+            className="card border-0 shadow opacity-75 adjacent-card"
             onClick={() => handleTestimonialSwipe('prev')}
           >
             <img
@@ -113,8 +112,7 @@ const Testimonials = () => {
             />
           </div>
           <div
-            className="card border-0 shadow position-relative"
-            style={{ width: '280px', height: '450px', cursor: 'pointer' }}
+            className="card border-0 shadow position-relative center-card"
           >
             {isVideoPlaying ? (
               <video
@@ -157,8 +155,7 @@ const Testimonials = () => {
             )}
           </div>
           <div
-            className="card border-0 shadow opacity-75"
-            style={{ width: '280px', height: '450px', cursor: 'pointer' }}
+            className="card border-0 shadow opacity-75 adjacent-card"
             onClick={() => handleTestimonialSwipe('next')}
           >
             <img
