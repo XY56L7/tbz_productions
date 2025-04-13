@@ -47,9 +47,12 @@
 }
 
 /* Default Card Sizes (Desktop) */
+/* Add this to your existing .card class */
 .card {
   width: 280px;
   height: 450px;
+  border-radius: 16px; /* Adjust the value as needed for desired roundness */
+  overflow: hidden; /* Ensures content respects the rounded corners */
 }
 
 /* Responsive Card Sizes */
