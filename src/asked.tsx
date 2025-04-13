@@ -1,38 +1,144 @@
-import React, { useRef, useEffect, useState } from 'react';
-import { CSSProperties } from 'react';
+import React, { useRef, useEffect, useState, CSSProperties } from 'react';
 
-const processSteps = [
-  { subtitle: "Hogyan néz ki a közös munka velünk?", description: "" },
-  { subtitle: "Ismerkedés", description: "Online vagy személyes meetingen megismerjük vállalkozásod és céljaid." },
-  { subtitle: "Megegyezés", description: "Szerződéskötés után elkezdjük a közös munkát." },
-  { subtitle: "Tervezés és forgatás", description: "Stratégiát készítünk, forgatókönyvet írunk, majd professzionális tartalmat forgatunk." },
-  { subtitle: "Utómunka és átadás", description: "A kész anyagokat szerkesztjük, átadjuk jóváhagyásra, majd kezeljük a közösségi médiádat, ha kéred." },
-  { subtitle: "", description: "" }, // Dummy sixth card
+// Define types for data structures
+interface ProcessStep {
+  subtitle: string;
+  answer: string | React.ReactNode;
+}
+
+interface FAQItem {
+  question: string;
+  answer: string | React.ReactNode;
+}
+
+// Data for process steps (from FAQ)
+const processSteps: ProcessStep[] = [
+  {
+    subtitle: 'Hogy néz ki a közös munka?',
+    answer: (
+      <div>
+        <p><strong>Kapcsolatfelvétel</strong></p>
+        <p>Töltsd ki az űrlapot vagy foglalj egy teljesen díjmentes konzultációt, és 24 órán belül felvesszük veled a kapcsolatot.</p>
+        <p><strong>Ismerkedés</strong></p>
+        <p>Online vagy személyes meetingen megismerjük vállalkozásod és céljaid.</p>
+        <p><strong>Megegyezés</strong></p>
+        <p>Szerződéskötés után elkezdjük a közös munkát.</p>
+        <p><strong>Tervezés és forgatás</strong></p>
+        <p>Stratégiát készítünk, forgatókönyvet írunk, majd professzionális tartalmat forgatunk.</p>
+        <p><strong>Utómunka és átadás</strong></p>
+        <p>A kész anyagokat szerkesztjük, átadjuk jóváhagyásra, majd kezeljük a közösségi médiádat, ha kéred.</p>
+      </div>
+    ),
+  },
+  { subtitle: 'Kapcsolatfelvétel', answer: 'Töltsd ki az űrlapot vagy foglalj konzultációt, és 24 órán belül jelentkezünk.' },
+  { subtitle: 'Ismerkedés, Start meeting', answer: 'Megismerjük vállalkozásod és céljaid egy online vagy személyes találkozón.' },
+  { subtitle: 'Megegyezés, szerződéskötés', answer: 'Szerződést kötünk, majd elkezdjük a közös munkát.' },
+  { subtitle: 'Stratégiai tervezés', answer: 'Kidolgozzuk a projekted stratégiáját a céljaid alapján.' },
+  { subtitle: 'Forgatókönyvek kidolgozása', answer: 'Professzionális forgatókönyveket készítünk a tartalomhoz.' },
+  {
+    subtitle: 'Forgatási időpont, helyszín és szereplők egyeztetése',
+    answer: 'Egyeztetjük a forgatás időpontját, helyszínét és a szereplőket.',
+  },
+  { subtitle: 'Helyszíni forgatás', answer: 'Professzionális csapattal lebonyolítjuk a forgatást.' },
+  { subtitle: 'Vágás és utómunka', answer: 'A nyers anyagokat szerkesztjük, effektekkel tökéletesítjük.' },
+  { subtitle: 'Kreatívok átadása, véleményezés', answer: 'Átadjuk a kész anyagokat, és várjuk visszajelzésed.' },
+  { subtitle: 'Social media management', answer: 'Kezeljük közösségi média felületeid, ha kéred.' },
 ];
 
-const FAQ = () => {
+// Data for accordion FAQs (from FAQ2)
+const faqItems: FAQItem[] = [
+  {
+    question: 'Mennyibe kerül?',
+    answer: 'Minden projekt egyedi, személyre szabott árajánlatot készítünk. Kérj ajánlatot!',
+  },
+  {
+    question: 'Miért éri ez meg nekem?',
+    answer: 'Leveszünk rólad minden terhet: profi csapatunk mindent egy kézben tart, neked csak jóváhagynod kell a kész anyagokat.',
+  },
+  {
+    question: 'Ki fog szerepelni?',
+    answer: 'Te vagy céged emberei, de ha kéred, mi is biztosítunk szereplőt.',
+  },
+];
+
+const FAQ: React.FC = () => {
+  // State for process steps section
   const sectionRef = useRef<HTMLElement>(null);
-  const leftCardsRef = useRef<(HTMLLIElement | null)[]>([]);
-  const rightContainerRef = useRef<HTMLUListElement>(null);
-  const [isRightColumnMoved, setIsRightColumnMoved] = useState(false); // Új állapot a mozgás vezérléséhez
+  const accordionSectionRef = useRef<HTMLElement>(null); // Új ref az accordion szekcióhoz
+  const cardsRef = useRef<(HTMLLIElement | null)[]>([]);
   const [headerSticky, setHeaderSticky] = useState(true);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [activeCard, setActiveCard] = useState<number | null>(null);
+
+  // State for accordion FAQs section
+  const [activeFAQIndex, setActiveFAQIndex] = useState<number | null>(null);
+  const [mousePosition, setMousePosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
 
   const navbarHeight = '80px';
 
+  // Handle resize for mobile detection
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
+      if (window.innerWidth > 768) setActiveCard(null);
     };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // Handle mouse movement for FAQ accordion animations
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  // Intersection observer for sticky header based on accordion section
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (!isMobile) {
+          // Csak desktopon figyeljük az accordion szekciót
+          setHeaderSticky(!entry.isIntersecting); // Ha az accordion szekció látható, nem sticky a header
+        }
+      },
+      {
+        root: null,
+        threshold: 0.1, // Az accordion szekció 10%-ának láthatósága váltja ki
+      }
+    );
+
+    if (accordionSectionRef.current) {
+      observer.observe(accordionSectionRef.current);
+    }
+
+    return () => {
+      if (accordionSectionRef.current) {
+        observer.unobserve(accordionSectionRef.current);
+      }
+    };
+  }, [isMobile]);
+
+  // Toggle card for mobile in process steps
+  const toggleCard = () => {
+    if (isMobile) {
+      setActiveCard(activeCard === 0 ? null : 0);
+    }
+  };
+
+  // Toggle accordion for FAQs
+  const toggleFAQ = (index: number) => {
+    setActiveFAQIndex(activeFAQIndex === index ? null : index);
+  };
+
+  // Styles for process steps section
   const faqSectionStyle: CSSProperties = {
     background: 'radial-gradient(circle at center, #0a1f1a 0%, #000000 70%)',
-    padding: isMobile ? `120px 10px 40px 10px` : `120px 20px 40px 20px`,
+    padding: isMobile ? '120px 10px 40px 10px' : '120px 20px 40px 20px',
     position: 'relative',
-    minHeight: isMobile ? 'auto' : 'calc(6 * 40vh + (6 * 7.5em))',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -49,211 +155,265 @@ const FAQ = () => {
     zIndex: 1,
   };
 
-  const twinkleKeyframes = `@keyframes twinkle {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 0.6; }
-  }`;
-
   const headerStyle: CSSProperties = {
-    position: isMobile ? 'relative' : (headerSticky ? 'sticky' : 'relative'),
-    top: isMobile ? 'auto' : (headerSticky ? navbarHeight : 'auto'),
+    position: isMobile ? 'relative' : headerSticky ? 'sticky' : 'relative',
+    top: isMobile ? 'auto' : headerSticky ? navbarHeight : 'auto',
     zIndex: 3,
     fontSize: isMobile ? '2rem' : '2.5rem',
     fontWeight: 700,
     color: '#fff',
     textAlign: 'center',
-    margin: '0 0 120px 0',
+    margin: '0 0 40px 0',
     textShadow: '0 0 5px rgba(255, 255, 255, 0.3)',
     width: '100%',
     background: 'transparent',
   };
 
-  const columnsContainerStyle: CSSProperties = {
-    display: 'flex',
-    flexDirection: isMobile ? 'column' : 'row',
-    justifyContent: isMobile ? 'flex-start' : 'center',
-    gap: isMobile ? '0' : '80px',
-    width: '100%',
-    maxWidth: isMobile ? 'none' : '1200px',
-  };
-
   const cardsContainerStyle: CSSProperties = {
-    width: isMobile ? '100%' : '45%',
+    width: isMobile ? '90%' : '70%',
+    maxWidth: isMobile ? '90%' : '800px',
     position: 'relative',
     zIndex: 2,
+    margin: '0 auto',
   };
 
-  const cardsStyleLeft: CSSProperties = {
+  const cardsStyle: CSSProperties = {
     ...({
-      '--cards': 6,
-      '--cardHeight': '20vh',
+      '--cards': 11,
+      '--cardHeight': '11vh',
       '--cardTopPadding': '0',
-      '--cardMargin': isMobile ? '2vw' : '4vw',
+      '--cardMargin': isMobile ? '0' : '4vw',
       listStyle: 'none',
       paddingLeft: 0,
-      marginTop: 0,
-      marginBottom: isMobile ? '2vw' : '4vw',
-      paddingBottom: isMobile ? '0' : 'calc(6 * 7.5em)',
+      margin: 0,
       display: isMobile ? 'flex' : 'grid',
       flexDirection: isMobile ? 'column' : 'unset',
       gridTemplateColumns: isMobile ? 'none' : '1fr',
-      gridTemplateRows: isMobile ? 'none' : `repeat(6, 40vh)`,
-      gap: isMobile ? '20px' : '4vw',
+      gridTemplateRows: isMobile ? 'none' : `repeat(11, 11vh)`,
+      gap: isMobile ? '0' : '4vw',
     } as any),
   };
 
-  const cardsStyleRight: CSSProperties = {
-    listStyle: 'none',
-    paddingLeft: 0,
-    marginTop: isMobile ? '0' : '2vw',
-    marginBottom: isMobile ? '0' : '2vw',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: isMobile ? '20px' : '2vw',
-    position: isMobile ? 'relative' : 'sticky',
-    top: isMobile ? 'auto' : `calc(${navbarHeight} + 120px)`,
-    transform: isRightColumnMoved ? 'translateY(-100vh)' : 'translateY(0)', // Felfelé mozgás
-    transition: 'transform 0.5s ease-in-out', // Sima animáció
-  };
-
-  const cardStyleLeft: CSSProperties = {
+  const cardStyle: CSSProperties = {
     position: isMobile ? 'static' : 'sticky',
-    top: isMobile ? 'auto' : `calc(${navbarHeight} + 120px + (var(--index) * 70px))`,
-    backgroundColor: 'transparent',
-  };
-
-  const cardStyleRight: CSSProperties = {
+    top: isMobile ? 'auto' : `calc(${navbarHeight} + 120px + (var(--index) * 50px))`,
     backgroundColor: 'transparent',
   };
 
   const cardBodyStyle = (index: number): CSSProperties => ({
     boxSizing: 'border-box',
-    padding: '1rem',
+    padding: isMobile && activeCard === index ? '0.5rem 1rem' : '0.5rem 1rem 1rem 1rem',
     borderRadius: '20px',
-    boxShadow: '0 15px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 179, 143, 0.2)',
-    border: '1px solid rgba(255, 255, 255, 0.15)',
-    height: isMobile ? 'auto' : '20vh',
-    minHeight: isMobile ? 'auto' : 'none',
+    boxShadow:
+      index === 0
+        ? '0 15px 40px rgba(0, 179, 143, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.2)'
+        : '0 15px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 179, 143, 0.2)',
+    border: index === 0 ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(255, 255, 255, 0.15)',
+    height: isMobile && activeCard === index ? 'auto' : '11vh',
+    minHeight: isMobile && activeCard === index ? '11vh' : 'none',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    transition: 'all 0.5s',
+    transition: 'all 0.3s ease',
     position: 'relative',
-    background: '#00362A',
-    opacity: index === 5 ? 0 : 1,
+    background:
+      index === 0
+        ? 'linear-gradient(135deg, rgba(0, 89, 69, 0.95), rgba(0, 44, 35, 0.95))'
+        : '#00362A',
+    backdropFilter: index === 0 ? 'blur(5px)' : 'none',
+    WebkitBackdropFilter: index === 0 ? 'blur(5px)' : 'none',
+    cursor: isMobile ? 'pointer' : 'default',
   });
 
   const layerSubtitleStyle: CSSProperties = {
-    fontSize: isMobile ? '1.3rem' : '1.5rem',
+    fontSize: isMobile ? '1.1rem' : '1.5rem',
     fontWeight: 600,
     color: '#fff',
-    margin: '0 0 0.5rem 0',
+    margin: '0',
     textShadow: '0 0 5px rgba(255, 255, 255, 0.3)',
     textAlign: 'center',
     background: 'transparent',
     width: '100%',
-    padding: '10px 0',
+    padding: '5px 0 10px 0',
     boxSizing: 'border-box',
+    whiteSpace: 'normal',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
   };
 
-  const layerDescriptionStyle: CSSProperties = {
+  const answerStyle: CSSProperties = {
     fontSize: isMobile ? '0.9rem' : '1rem',
     color: '#e6f0ed',
-    margin: '0',
-    lineHeight: 1.6,
     textAlign: 'center',
-    flexGrow: 1,
+    padding: '0 1rem 1rem 1rem',
+    margin: '0',
+    width: '100%',
+    boxSizing: 'border-box',
+    display: isMobile ? 'block' : 'none',
   };
 
-  const leftColumnTitleStyle: CSSProperties = {
-    display: 'none',
+  const cardIndexStyles = Array.from({ length: 11 }, (_, i) => ({
+    '--index': i,
+  } as CSSProperties));
+
+  // Styles for accordion FAQs section
+  const accordionSectionStyle: CSSProperties = {
+    padding: '40px 20px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    background: '#000',
+    margin: 0,
   };
 
-  const cardIndexStylesLeft = [
-    { '--index': 0 } as CSSProperties,
-    { '--index': 1 } as CSSProperties,
-    { '--index': 2 } as CSSProperties,
-    { '--index': 3 } as CSSProperties,
-    { '--index': 4 } as CSSProperties,
-    { '--index': 5 } as CSSProperties,
-  ];
+  const accordionContainerStyle: CSSProperties = {
+    display: 'flex',
+    flexDirection: isMobile ? 'column' : 'row',
+    gap: isMobile ? '20px' : '40px',
+    justifyContent: 'center',
+    width: '100%',
+    maxWidth: '1400px',
+    padding: '0 20px',
+    margin: 0,
+  };
 
-  useEffect(() => {
-    const cards = leftCardsRef.current;
+  const faqItemStyle = (index: number): CSSProperties => {
+    const isActive = activeFAQIndex === index;
+    const offsetX = (mousePosition.x - window.innerWidth / 2) * 0.01;
+    const offsetY = (mousePosition.y - window.innerHeight / 2) * 0.01;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const fifthCard = cards[4];
-        const sixthCard = cards[5];
-
-        if (fifthCard && sixthCard) {
-          const fifthRect = fifthCard.getBoundingClientRect();
-          const sixthRect = sixthCard.getBoundingClientRect();
-
-          if (sixthRect.top <= fifthRect.top) {
-            setIsRightColumnMoved(true); // Felfelé mozgás triggerelése
-            setHeaderSticky(false);
-          } else {
-            setIsRightColumnMoved(false); // Vissza az eredeti pozícióba
-            setHeaderSticky(true);
-          }
-        }
-      },
-      {
-        root: null,
-        threshold: [0, 0.1, 0.5, 1],
-      }
-    );
-
-    if (cards[4]) observer.observe(cards[4]);
-    if (cards[5]) observer.observe(cards[5]);
-
-    return () => {
-      if (cards[4]) observer.unobserve(cards[4]);
-      if (cards[5]) observer.unobserve(cards[5]);
+    return {
+      position: 'relative',
+      width: isMobile ? '100%' : '350px',
+      height: isActive ? 'auto' : '180px',
+      transform: `translate(${offsetX}px, ${offsetY}px)`,
+      transition: 'all 0.5s ease',
+      background: isActive
+        ? 'linear-gradient(135deg, rgba(0, 89, 69, 0.95), rgba(0, 44, 35, 0.95))'
+        : 'linear-gradient(135deg, rgba(0, 54, 42, 0.85), rgba(0, 26, 21, 0.85))',
+      borderRadius: '20px',
+      boxShadow: isActive
+        ? '0 15px 40px rgba(0, 179, 143, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.2)'
+        : '0 10px 30px rgba(0, 0, 0, 0.5)',
+      backdropFilter: 'blur(5px)',
+      border: '1px solid rgba(255, 255, 255, 0.1)',
+      cursor: 'pointer',
+      zIndex: isActive ? 10 : 1,
+      animation: `float${index} 6s infinite ease-in-out`,
+      overflow: 'hidden',
+      margin: 0,
     };
-  }, []);
+  };
+
+  const faqHeaderStyle: CSSProperties = {
+    padding: '1rem',
+    color: '#fff',
+    fontSize: isMobile ? '1rem' : '1.2rem',
+    fontWeight: 600,
+    textAlign: 'center',
+    textShadow: '0 0 5px rgba(255, 255, 255, 0.3)',
+    margin: 0,
+  };
+
+  const faqContentStyle = (isActive: boolean): CSSProperties => {
+    return {
+      padding: isActive ? '1rem' : '0 1rem',
+      color: '#e6f0ed',
+      fontSize: isMobile ? '0.85rem' : '0.95rem',
+      lineHeight: '1.6',
+      opacity: isActive ? 1 : 0,
+      height: isActive ? 'auto' : '0',
+      overflow: 'hidden',
+      transition: 'opacity 0.3s ease, height 0.3s ease',
+      margin: 0,
+    };
+  };
 
   return (
-    <section style={faqSectionStyle} id="FAQ" ref={sectionRef}>
-      <style>{twinkleKeyframes}</style>
-      <div style={starryBackgroundStyle} />
-      <h1 style={headerStyle}>Gyakran Ismételt Kérdések</h1>
-      <div style={columnsContainerStyle}>
+    <>
+      {/* Process Steps Section */}
+      <section style={faqSectionStyle} id="ProcessSteps" ref={sectionRef}>
+        <style>
+          {`
+            @keyframes twinkle {
+              0%, 100% { opacity: 0.3; }
+              50% { opacity: 0.6; }
+            }
+          `}
+        </style>
+        <div style={starryBackgroundStyle} />
+        <h1 style={headerStyle}>Gyakran ismételt kérdések</h1>
         <div style={cardsContainerStyle}>
-          <h2 style={leftColumnTitleStyle}>Így építjük fel a sikeredet lépésről lépésre</h2>
-          <ul style={cardsStyleLeft}>
-            {processSteps.map((step, index) => (
+          <ul style={cardsStyle}>
+            {isMobile ? (
               <li
-                key={`left-${index}`}
-                style={{ ...cardStyleLeft, ...cardIndexStylesLeft[index] }}
+                key="card-0"
+                style={{ ...cardStyle, ...cardIndexStyles[0] }}
+                onClick={toggleCard}
                 ref={(el) => {
-                  leftCardsRef.current[index] = el;
+                  cardsRef.current[0] = el;
                 }}
               >
-                <div style={cardBodyStyle(index)}>
-                  <h2 style={layerSubtitleStyle}>{step.subtitle}</h2>
-                  <p style={layerDescriptionStyle}>{step.description}</p>
+                <div style={cardBodyStyle(0)}>
+                  <h2 style={layerSubtitleStyle}>{processSteps[0].subtitle}</h2>
+                  {isMobile && activeCard === 0 && (
+                    <div style={answerStyle}>{processSteps[0].answer}</div>
+                  )}
                 </div>
               </li>
-            ))}
+            ) : (
+              processSteps.map((step, index) => (
+                <li
+                  key={`card-${index}`}
+                  style={{ ...cardStyle, ...cardIndexStyles[index] }}
+                  ref={(el) => {
+                    cardsRef.current[index] = el;
+                  }}
+                >
+                  <div style={cardBodyStyle(index)}>
+                    <h2 style={layerSubtitleStyle}>{step.subtitle}</h2>
+                  </div>
+                </li>
+              ))
+            )}
           </ul>
         </div>
-        <div style={cardsContainerStyle}>
-          <ul style={cardsStyleRight} ref={rightContainerRef}>
-            {processSteps.slice(0, 3).map((step, index) => (
-              <li key={`right-${index}`} style={cardStyleRight}>
-                <div style={cardBodyStyle(index)}>
-                  <h2 style={layerSubtitleStyle}>{step.subtitle}</h2>
-                  <p style={layerDescriptionStyle}>{step.description}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
+      </section>
+
+      {/* Accordion FAQs Section */}
+      <section style={accordionSectionStyle} id="FAQs" ref={accordionSectionRef}>
+        <style>
+          {`
+            @keyframes float0 { 0%, 100% { transform: translate(${mousePosition.x * 0.01}px, ${mousePosition.y * 0.01}px) translateY(0); } 50% { transform: translate(${mousePosition.x * 0.01}px, ${mousePosition.y * 0.01}px) translateY(-10px); } }
+            @keyframes float1 { 0%, 100% { transform: translate(${mousePosition.x * 0.01}px, ${mousePosition.y * 0.01}px) translateY(0); } 50% { transform: translate(${mousePosition.x * 0.01}px, ${mousePosition.y * 0.01}px) translateY(-12px); } }
+            @keyframes float2 { 0%, 100% { transform: translate(${mousePosition.x * 0.01}px, ${mousePosition.y * 0.01}px) translateY(0); } 50% { transform: translate(${mousePosition.x * 0.01}px, ${mousePosition.y * 0.01}px) translateY(-8px); } }
+          `}
+        </style>
+        <div style={accordionContainerStyle}>
+          {faqItems.map((item, index) => {
+            const isActive = activeFAQIndex === index;
+            return (
+              <div
+                key={index}
+                style={faqItemStyle(index)}
+                onClick={() => toggleFAQ(index)}
+                onMouseEnter={(e) => {
+                  if (!isActive)
+                    e.currentTarget.style.boxShadow = '0 12px 35px rgba(0, 179, 143, 0.4)';
+                }}
+                onMouseLeave={(e) => {
+                  if (!isActive) e.currentTarget.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.5)';
+                }}
+              >
+                <div style={faqHeaderStyle}>{item.question}</div>
+                <div style={faqContentStyle(isActive)}>{item.answer}</div>
+              </div>
+            );
+          })}
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 

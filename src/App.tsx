@@ -10,6 +10,7 @@ import Footer from './Footer';
 import Partnerships from './Partnerships';
 import References from './References';
 import Testimonials from './Testimonials';
+import Asked2 from './asked2';
 
 const App = () => {
   return (
@@ -30,6 +31,8 @@ const App = () => {
       <References />
       <Testimonials />
       <Asked />
+      {/* <Asked2 /> */}
+
       <CallToActionCard />
       <Contact />
       <Footer />
