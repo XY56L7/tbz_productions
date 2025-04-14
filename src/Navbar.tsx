@@ -80,7 +80,7 @@ const CustomNavbar = () => {
                 <NavItem onClick={() => scrollToSection('services')}>Szolgáltatások</NavItem>
                 <NavItem onClick={() => scrollToSection('REF')}>Referenciák</NavItem>
                 <NavItem onClick={() => scrollToSection('test')} >Vélemények</NavItem>
-                <NavItem onClick={() => scrollToSection('FAQ')}>GY.I.K</NavItem>
+                <NavItem onClick={() => scrollToSection('FAQ')}>GY.I.K.</NavItem>
                 <NavItem onClick={() => scrollToSection('contact')}>Kapcsolat</NavItem>
               </div>
             </div>
@@ -93,7 +93,7 @@ const CustomNavbar = () => {
                 <NavItem onClick={() => scrollToSection('services')}>Szolgáltatások</NavItem>
                 <NavItem onClick={() => scrollToSection('REF')}>Referenciák</NavItem>
                 <NavItem onClick={() => scrollToSection('test')}>Vélemények</NavItem>
-                <NavItem onClick={() => scrollToSection('FAQ')}>GY.I.K</NavItem>
+                <NavItem onClick={() => scrollToSection('FAQ')}>GY.I.K.</NavItem>
                 <NavItem onClick={() => scrollToSection('contact')}>Kapcsolat</NavItem>
               </div>
               <Button
