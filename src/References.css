@@ -268,7 +268,7 @@
   padding: 2rem 0 6rem 0;
   background-color: transparent;
   position: relative;
-  overflow: visible;
+  overflow: hidden;
 }
 
 .photo-container {
@@ -276,7 +276,7 @@
   height: auto;
   margin: 0 auto;
   position: relative;
-  overflow: visible;
+  overflow-x: hidden;
 }
 
 .photo-wrapper {
@@ -286,10 +286,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 2.5rem;
-  padding: 0 2.5rem;
+  gap: 1rem;
+  padding: 0;
   margin-bottom: 2rem;
-  overflow: visible;
 }
 
 .photo-card {
@@ -297,10 +296,11 @@
   width: 400px;
   height: 500px;
   border-radius: 16px;
-  overflow: visible;
+  overflow: hidden;
   flex-shrink: 0;
   background: transparent;
   cursor: pointer;
+  z-index: 2;
 }
 
 .photo-media {
@@ -343,6 +343,15 @@
   background: #1a1a1a;
   opacity: 0.7;
   cursor: pointer;
+  z-index: 1;
+}
+
+.adjacent-photo:first-child {
+  transform: translateX(50%);
+}
+
+.adjacent-photo:last-child {
+  transform: translateX(-50%);
 }
 
 .photo-controls {
@@ -357,7 +366,7 @@
   z-index: 10;
 }
 
-/*",Modal Styles */
+/* Modal Styles */
 .modal-backdrop {
   position: fixed;
   top: 0;
@@ -475,6 +484,12 @@
     width: 250px;
     height: 350px;
   }
+  .adjacent-photo:first-child {
+    transform: translateX(50%);
+  }
+  .adjacent-photo:last-child {
+    transform: translateX(-50%);
+  }
 }
 
 @media (max-width: 768px) {
@@ -485,7 +500,7 @@
     width: 260px;
     height: 560px;
     border-width: 6px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4); /* Egyszerűsített árnyék */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
   }
   .video-wrapper {
     padding: 0 2%;
@@ -494,13 +509,27 @@
   .photo-section {
     padding: 1.5rem 0 4rem 0;
   }
+  .photo-container {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
   .photo-wrapper {
-    padding: 0 1.5rem;
-    gap: 1.5rem;
+    padding: 0;
+    gap: 0.5rem;
   }
   .photo-card {
     width: 300px;
     height: 400px;
+  }
+  .adjacent-photo {
+    width: 200px;
+    height: 300px;
+  }
+  .adjacent-photo:first-child {
+    transform: translateX(50%);
+  }
+  .adjacent-photo:last-child {
+    transform: translateX(-50%);
   }
   .nav-btn {
     width: 50px;
@@ -547,13 +576,28 @@
   .photo-section {
     padding: 1rem 0 2rem 0;
   }
+  .photo-container {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
   .photo-wrapper {
-    padding: 0 1rem;
-    gap: 1rem;
+    padding: 0;
+    gap: 0.5rem;
+    justify-content: center;
   }
   .photo-card {
     width: 250px;
     height: 350px;
+  }
+  .adjacent-photo {
+    width: 150px;
+    height: 225px;
+  }
+  .adjacent-photo:first-child {
+    transform: translateX(50%);
+  }
+  .adjacent-photo:last-child {
+    transform: translateX(-50%);
   }
   .nav-btn {
     width: 45px;
