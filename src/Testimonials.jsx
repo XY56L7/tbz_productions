@@ -86,12 +86,14 @@ const Testimonials = () => {
   }, [handleTestimonialSwipe]);
 
   return (
+    
     <section className="py-5 bg-black">
-      <div className="container text-center mb-5">
+      <div id="test" />
+      <div className="container text-center mb-5" >
         <h2 className="section-title">Vélemények</h2>
         <p className="section-subtitle">Ügyfeleink visszajelzései</p>
       </div>
-      <div className="container-fluid">
+      <div className="container-fluid" >
         <div className="d-flex justify-content-center align-items-center gap-3 mb-4 flex-nowrap testimonial-carousel">
           <div
             className="card border-0 shadow opacity-75 adjacent-card"
