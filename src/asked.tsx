@@ -342,7 +342,7 @@ const FAQ: React.FC = () => {
             }
           `}
         </style>
-        <div style={starryBackgroundStyle} />
+        <div style={starryBackgroundStyle} id="FAQ" />
         <h1 style={headerStyle}>Gyakran ismételt kérdések</h1>
         <div style={cardsContainerStyle}>
           <ul style={cardsStyle}>
@@ -382,7 +382,7 @@ const FAQ: React.FC = () => {
       </section>
 
       {/* Accordion FAQs Section */}
-      <section style={accordionSectionStyle} id="FAQs" ref={accordionSectionRef}>
+      <section style={accordionSectionStyle}  ref={accordionSectionRef}>
         <style>
           {`
             @keyframes float0 { 0%, 100% { transform: translate(${mousePosition.x * 0.01}px, ${mousePosition.y * 0.01}px) translateY(0); } 50% { transform: translate(${mousePosition.x * 0.01}px, ${mousePosition.y * 0.01}px) translateY(-10px); } }
