@@ -14,9 +14,9 @@
   bottom: -10px;
   left: 50%;
   transform: translateX(-50%);
-  width: 60%;
+  width: 100px;
   height: 4px;
-  background: linear-gradient(90deg, #007bff, #00ff88);
+  background: linear-gradient(135deg, rgba(0, 89, 69, 0.95), rgba(0, 44, 35, 0.95)) !important;
   border-radius: 2px;
 }
 

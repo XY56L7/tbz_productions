@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './Testimonials.css';
 import vid1 from './videos/bence-test.mp4';
 import vid2 from './videos/madbro-test.mp4';
 import vid3 from './videos/vade-test.mp4';
@@ -86,14 +85,131 @@ const Testimonials = () => {
   }, [handleTestimonialSwipe]);
 
   return (
-    
-    <section className="py-5 bg-black">
+    <section className="testimonials-section py-5 bg-black">
+      <style jsx>{`
+        .testimonials-section {
+          /* Scoped styles for this component */
+        }
+
+        .testimonials-section .section-title {
+          font-size: 3.5rem;
+          font-weight: 800;
+          color: white;
+          margin-bottom: 1.5rem;
+          position: relative;
+          display: inline-block;
+        }
+
+        .testimonials-section .section-title::after {
+          content: '';
+          position: absolute;
+          bottom: -10px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 200px;
+          height: 4px;
+          background: linear-gradient(135deg, rgba(0, 89, 69, 0.95), rgba(0, 44, 35, 0.95));
+          border-radius: 2px;
+        }
+
+        .testimonials-section .section-subtitle {
+          color: #888;
+          font-size: 1.2rem;
+          margin-top: 2rem;
+        }
+
+        .testimonials-section .testimonial-carousel {
+          overflow-x: auto;
+          scrollbar-width: none; /* Firefox */
+          -ms-overflow-style: none; /* IE and Edge */
+          scroll-snap-type: x mandatory;
+          display: flex;
+          flex-wrap: nowrap;
+        }
+
+        .testimonials-section .testimonial-carousel::-webkit-scrollbar {
+          display: none; /* Chrome, Safari, Opera */
+        }
+
+        .testimonials-section .testimonial-carousel .card {
+          scroll-snap-align: center;
+          flex-shrink: 0; /* Prevent collapsing */
+          min-width: 0; /* Allow override */
+        }
+
+        .testimonials-section .card {
+          width: 280px;
+          height: 450px;
+          border-radius: 16px;
+          overflow: hidden;
+        }
+
+        @media (max-width: 992px) {
+          .testimonials-section .card {
+            width: 240px;
+            height: 384px; /* Maintain ~8:5 ratio (450/280 * 240) */
+          }
+          .testimonials-section .testimonial-carousel {
+            padding: 0 120px; /* Half of 240px */
+          }
+        }
+
+        @media (max-width: 768px) {
+          .testimonials-section .card {
+            width: 260px;
+            height: 416px; /* Maintain ~8:5 ratio (450/280 * 260) */
+          }
+          .testimonials-section .testimonial-carousel {
+            padding: 0 130px; /* Half of 260px */
+          }
+          .testimonials-section .section-title {
+            font-size: 2.5rem;
+          }
+          .testimonials-section .section-subtitle {
+            font-size: 1rem;
+          }
+        }
+
+        @media (max-width: 576px) {
+          .testimonials-section .center-card {
+            width: 300px !important;
+            height: 480px !important; /* Maintain ~8:5 ratio (450/280 * 300) */
+          }
+          .testimonials-section .adjacent-card {
+            width: 300px !important;
+            height: 480px !important;
+          }
+          .testimonials-section .testimonial-carousel {
+            padding: 0 calc(50% - 150px); /* Center 300px card, show 150px of adjacent cards */
+          }
+          .testimonials-section .btn-nav {
+            width: 32px !important;
+            height: 32px !important;
+            font-size: 0.9rem !important;
+          }
+          .testimonials-section .btn-play {
+            width: 32px !important;
+            height: 32px !important;
+          }
+          .testimonials-section .btn-play svg {
+            width: 12px !important;
+            height: 12px !important;
+          }
+          .testimonials-section .section-title {
+            font-size: 2rem;
+          }
+          .testimonials-section .section-subtitle {
+            font-size: 0.9rem;
+          }
+        }
+      `}</style>
+
       <div id="test" />
-      <div className="container text-center mb-5" >
+      <div className="container text-center mb-5">
         <h2 className="section-title">Vélemények</h2>
         <p className="section-subtitle">Ügyfeleink visszajelzései</p>
       </div>
-      <div className="container-fluid" >
+      <div className="container-fluid">
         <div className="d-flex justify-content-center align-items-center gap-3 mb-4 flex-nowrap testimonial-carousel">
           <div
             className="card border-0 shadow opacity-75 adjacent-card"
@@ -113,9 +229,7 @@ const Testimonials = () => {
               className="card-img-top object-fit-cover w-100 h-100"
             />
           </div>
-          <div
-            className="card border-0 shadow position-relative center-card"
-          >
+          <div className="card border-0 shadow position-relative center-card">
             {isVideoPlaying ? (
               <video
                 ref={videoRef}
@@ -198,7 +312,9 @@ const Testimonials = () => {
             <button
               key={index}
               className={`btn btn-sm p-0 rounded-circle ${
-                index === currentTestimonialIndex ? 'btn-primary' : 'btn-outline-secondary'
+                index === currentTestimonialIndex
+                  ? 'btn-primary'
+                  : 'btn-outline-secondary'
               }`}
               style={{ width: '8px', height: '8px' }}
               onClick={() => {
