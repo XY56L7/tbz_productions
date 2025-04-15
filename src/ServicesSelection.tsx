@@ -160,34 +160,50 @@ const ServiceSelection = () => {
             0 0 30px rgba(0, 255, 136, 0.4);
         }
       }
-
-      /* Card styles */
 .card-item {
       border-radius: 24px;
       overflow: hidden;
-      background: linear-gradient(to bottom, #002c23 0%, #005945 50%, #002C23 100%);
+      background: linear-gradient(135deg, rgba(0, 54, 42, 0.85), rgba(0, 26, 21, 0.85));
       z-index: 1;
       width: 100%;
       margin-left: 0;
       margin-right: 0;
       cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, border 0.3s ease;
       height: auto;
       margin-bottom: 20px;
       border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(5px);
     }
 
-      .card-item:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 30px rgba(0, 179, 143, 0.3);
-      }
+    .card-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 179, 143, 0.3);
+    }
 
-      .card-img {
-        background-size: cover;
-        background-position: center;
-        border-radius: 8px 8px 0 0;
-        transition: height 0.3s ease;
+    .card-item.card-expanded {
+      background: linear-gradient(135deg, rgba(0, 89, 69, 0.95), rgba(0, 44, 35, 0.95));
+      box-shadow: 0 15px 40px rgba(0, 179, 143, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      backdrop-filter: blur(5px);
+      transition: all 0.5s ease;
+      cursor: pointer;
+      z-index: 10;
+      animation: floatCard 6s infinite ease-in-out;
+    }
+
+    /* Floating animation for expanded cards */
+    @keyframes floatCard {
+      0%, 100% {
+        transform: translateY(0);
       }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+
 
       /* Card content: balra igazítás */
 .card-content {
