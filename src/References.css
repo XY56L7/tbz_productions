@@ -26,13 +26,21 @@
   bottom: -10px;
   left: 50%;
   transform: translateX(-50%);
-  width: 200px;
+  /* width: 200px; */
   height: 4px;
   background: linear-gradient(135deg, rgba(0, 89, 69, 0.95), rgba(0, 44, 35, 0.95));
   border-radius: 2px;
   box-shadow: 0 0 15px rgba(0, 179, 143, 0.6), 0 0 5px rgba(255, 255, 255, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(5px);
+}
+
+.video-section .section-title::after {
+  width: 510px; /* Line length for Videó Referenciák */
+}
+
+.photo-section .section-title::after {
+  width: 470px; /* Line length for Fotó Referenciák */
 }
 
 .section-subtitle {

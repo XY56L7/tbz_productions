@@ -106,7 +106,7 @@ const Testimonials = () => {
           bottom: -10px;
           left: 50%;
           transform: translateX(-50%);
-          width: 200px;
+          width: 340px;
           height: 4px;
           background: linear-gradient(135deg, rgba(0, 89, 69, 0.95), rgba(0, 44, 35, 0.95));
           border-radius: 2px;
