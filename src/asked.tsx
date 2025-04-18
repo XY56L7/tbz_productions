@@ -207,7 +207,7 @@ const FAQ: React.FC = () => {
     boxShadow:
       index === 0
         ? '0 15px 40px rgba(0, 179, 143, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.2)'
-        : '0 15px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 179, 143, 0.2)',
+        : '0 15px 40px rgba(0, 0, 0, 0.6)',
     border: index === 0 ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(255, 255, 255, 0.15)',
     height: isMobile && activeCard === index ? 'auto' : '11vh',
     minHeight: isMobile && activeCard === index ? '11vh' : 'none',
@@ -217,12 +217,14 @@ const FAQ: React.FC = () => {
     alignItems: 'center',
     transition: 'all 0.3s ease',
     position: 'relative',
+    // Use fully opaque colors
     background:
       index === 0
-        ? 'linear-gradient(135deg, rgba(0, 89, 69, 0.95), rgba(0, 44, 35, 0.95))'
-        : '#00362A',
-    backdropFilter: index === 0 ? 'blur(5px)' : 'none',
-    WebkitBackdropFilter: index === 0 ? 'blur(5px)' : 'none',
+        ? 'linear-gradient(135deg, rgb(0, 89, 69), rgb(0, 44, 35))'
+        : 'linear-gradient(135deg, rgb(0, 54, 42), rgb(0, 26, 21))',
+    // Remove backdrop blur to avoid transparency effect
+    backdropFilter: 'none',
+    WebkitBackdropFilter: 'none',
     cursor: isMobile ? 'pointer' : 'default',
   });
 
@@ -342,7 +344,6 @@ const FAQ: React.FC = () => {
       }
     `}
   </style>
-  <div style={starryBackgroundStyle} id="FAQ" />
   <h1 style={headerStyle}>Gyakran Ismételt Kérdések</h1>
   <div style={cardsContainerStyle}>
     <ul style={cardsStyle}>
