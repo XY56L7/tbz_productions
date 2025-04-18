@@ -147,7 +147,7 @@ const References = () => {
       <section className="video-section">
         <div className="section-header" id="REF">
           <h2 className="section-title">Videó Referenciák</h2>
-          <p className="section-subtitle">Prémium videó munkáink</p>
+          <p className="section-subtitle">Válogatott prémium videóink az elmúlt időszakból</p>
         </div>
         <div className="video-container">
           <div className="video-wrapper">
@@ -206,7 +206,7 @@ const References = () => {
       <section className="photo-section">
         <div className="section-header">
           <h2 className="section-title">Fotó Referenciák</h2>
-          <p className="section-subtitle">Válogatott fotóink az elmúlt időszakból</p>
+          <p className="section-subtitle">Válogatott prémium fotóink az elmúlt időszakból</p>
         </div>
         <div className="photo-container">
           <div className="photo-wrapper">
