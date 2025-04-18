@@ -111,11 +111,11 @@ const Testimonials = () => {
           background: linear-gradient(135deg, rgba(0, 89, 69, 0.95), rgba(0, 44, 35, 0.95));
           border-radius: 2px;
         }
-
         .testimonials-section .section-subtitle {
           color: #888;
           font-size: 1.2rem;
           margin-top: 2rem;
+          margin-bottom: 3rem;
         }
 
         .testimonials-section .testimonial-carousel {
@@ -207,7 +207,7 @@ const Testimonials = () => {
       <div id="test" />
       <div className="container text-center mb-5">
         <h2 className="section-title">Vélemények</h2>
-        <p className="section-subtitle">Ügyfeleink visszajelzései</p>
+        <p className="section-subtitle">Ügyfeleink visszajelzései a közös munkáról</p>
       </div>
       <div className="container-fluid">
         <div className="d-flex justify-content-center align-items-center gap-3 mb-4 flex-nowrap testimonial-carousel">
