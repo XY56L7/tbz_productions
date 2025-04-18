@@ -7,11 +7,18 @@
 }
 
 .partnerships-title {
-  color: #00d28c; /* Bright green for "EGYÜTTMŰKÖDÉSEINK" */
   font-size: 24px;
   font-weight: bold;
   text-transform: uppercase;
   margin-bottom: 2rem;
+  background: linear-gradient(135deg, rgba(0, 89, 69, 0.95), rgba(0, 44, 35, 0.95)); /* Gradient from FAQ card */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; /* Makes text color the gradient */
+  text-shadow: 
+    0 0 15px rgba(0, 179, 143, 0.6), /* Green glow */
+    0 0 5px rgba(255, 255, 255, 0.2); /* Subtle white glow */
+  display: inline-block; /* Ensures gradient applies correctly */
+  padding: 0.5rem 1rem; /* Slight padding for spacing */
 }
 
 /* ==========================================================================
