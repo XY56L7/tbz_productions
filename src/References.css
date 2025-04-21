@@ -660,3 +660,27 @@
     transform: scale(1.1);
   }
 }
+
+@media (max-width: 768px) {
+  .video-section .section-title::after {
+    width: 110vw; /* Scales with viewport width */
+    max-width: 320px; /* Prevents it from getting too wide */
+  }
+
+  .photo-section .section-title::after {
+    width: 110vw; /* Scales with viewport width */
+    max-width: 320px; /* Prevents it from getting too wide */
+  }
+}
+
+@media (max-width: 480px) {
+  .video-section .section-title::after {
+    width: 70vw;
+    max-width: 250px;
+  }
+
+  .photo-section .section-title::after {
+    width: 70vw;
+    max-width: 230px;
+  }
+}

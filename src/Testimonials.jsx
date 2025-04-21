@@ -87,6 +87,12 @@ const Testimonials = () => {
   return (
     <section className="testimonials-section py-5 bg-black">
       <style jsx>{`
+      @media (max-width: 720px) {
+        .testimonials-section .section-title::after {
+              width: 80px; /* Mobil szélesség */
+              max-width:200px;
+        }
+      }
         .testimonials-section {
           /* Scoped styles for this component */
         }
