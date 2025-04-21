@@ -1,0 +1,15 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "redirect-to-index",
+	"main": "src/index.js",
+	"compatibility_date": "2025-04-15",
+	"observability": {
+		"enabled": true
+	},
+	"routes": [
+		{
+			"pattern": "tbzproductions.com/*",
+			"zone_name": "tbzproductions.com"
+		}
+	]
+}
