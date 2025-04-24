@@ -33,7 +33,6 @@ const processSteps: ProcessStep[] = [
   { subtitle: 'Kapcsolatfelvétel', answer: 'Töltsd ki az űrlapot vagy foglalj konzultációt, és 24 órán belül jelentkezünk.' },
   { subtitle: 'Ismerkedés, Start meeting', answer: 'Megismerjük vállalkozásod és céljaid egy online vagy személyes találkozón.' },
   { subtitle: 'Megegyezés, szerződéskötés', answer: 'Szerződést kötünk, majd elkezdjük a közös munkát.' },
-  // { subtitle: 'Stratégiai tervezés', answer: 'Kidolgozzuk a projekted stratégiáját a céljaid alapján.' },
   { subtitle: 'Stratégiai tervezés és forgatókönyvek kidolgozása', answer: 'Professzionális forgatókönyveket készítünk a tartalomhoz. Kidolgozzuk a projekted stratégiáját a céljaid alapján.' },
   {
     subtitle: 'Forgatási időpont, helyszín és szereplők egyeztetése',
@@ -64,7 +63,7 @@ const faqItems: FAQItem[] = [
 const FAQ: React.FC = () => {
   // State for process steps section
   const sectionRef = useRef<HTMLElement>(null);
-  const accordionSectionRef = useRef<HTMLElement>(null); // Új ref az accordion szekcióhoz
+  const accordionSectionRef = useRef<HTMLElement>(null);
   const cardsRef = useRef<(HTMLLIElement | null)[]>([]);
   const [headerSticky, setHeaderSticky] = useState(true);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
@@ -101,13 +100,12 @@ const FAQ: React.FC = () => {
       (entries) => {
         const [entry] = entries;
         if (!isMobile) {
-          // Csak desktopon figyeljük az accordion szekciót
-          setHeaderSticky(!entry.isIntersecting); // Ha az accordion szekció látható, nem sticky a header
+          setHeaderSticky(!entry.isIntersecting);
         }
       },
       {
         root: null,
-        threshold: 0.1, // Az accordion szekció 10%-ának láthatósága váltja ki
+        threshold: 0.1,
       }
     );
 
@@ -198,6 +196,7 @@ const FAQ: React.FC = () => {
     position: isMobile ? 'static' : 'sticky',
     top: isMobile ? 'auto' : `calc(${navbarHeight} + 120px + (var(--index) * 50px))`,
     backgroundColor: 'transparent',
+    transition: 'top 0.3s ease', // Hozzáadott átmenet a simább görgetéshez
   };
 
   const cardBodyStyle = (index: number): CSSProperties => ({
@@ -217,12 +216,10 @@ const FAQ: React.FC = () => {
     alignItems: 'center',
     transition: 'all 0.3s ease',
     position: 'relative',
-    // Use fully opaque colors
     background:
       index === 0
         ? 'linear-gradient(135deg, rgb(0, 89, 69), rgb(0, 44, 35))'
         : 'linear-gradient(135deg, rgb(0, 54, 42), rgb(0, 26, 21))',
-    // Remove backdrop blur to avoid transparency effect
     backdropFilter: 'none',
     WebkitBackdropFilter: 'none',
     cursor: isMobile ? 'pointer' : 'default',
@@ -336,70 +333,81 @@ const FAQ: React.FC = () => {
     <>
       {/* Process Steps Section */}
       <section style={faqSectionStyle} id="ProcessSteps" ref={sectionRef}>
-  <style>
-    {`
-      @keyframes twinkle {
-        0%, 100% { opacity: 0.3; }
-        50% { opacity: 0.6; }
-      }
-    `}
-  </style>
-  <h1 style={headerStyle}>Gyakran Ismételt Kérdések</h1>
-  <div style={cardsContainerStyle}>
-    <ul style={cardsStyle}>
-      {isMobile ? (
-        <li
-          key="card-0"
-          style={{ ...cardStyle, ...cardIndexStyles[0] }}
-          onClick={toggleCard}
-          ref={(el) => {
-            cardsRef.current[0] = el;
-          }}
-        >
-          <div style={cardBodyStyle(0)}>
-            <h2 style={layerSubtitleStyle}>{processSteps[0].subtitle}</h2>
-            {isMobile && activeCard === 0 && (
-              <div style={answerStyle}>
-                <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-                  {processSteps.slice(1).map((step, index) => (
-                    <li
-                      key={`step-${index}`}
-                      style={{
-                        fontSize: isMobile ? '0.9rem' : '1rem',
-                        color: '#e6f0ed',
-                        textAlign: 'center',
-                        margin: '10px 0',
-                      }}
-                    >
-                      {`${index + 1}. ${step.subtitle}`}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+        <style>
+          {`
+            @keyframes twinkle {
+              0%, 100% { opacity: 0.3; }
+              50% { opacity: 0.6; }
+            }
+          `}
+        </style>
+        <h1 style={headerStyle}>Gyakran Ismételt Kérdések</h1>
+        <div style={cardsContainerStyle} id="FAQ">
+          <ul style={cardsStyle}>
+            {isMobile ? (
+              <li
+                key="card-0"
+                style={{ ...cardStyle, ...cardIndexStyles[0] }}
+                onClick={toggleCard}
+                ref={(el) => {
+                  cardsRef.current[0] = el;
+                }}
+              >
+                <div style={cardBodyStyle(0)}>
+                  <h2 style={layerSubtitleStyle}>{processSteps[0].subtitle}</h2>
+                  {isMobile && activeCard === 0 && (
+                    <div style={answerStyle}>
+                      <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                        {processSteps.slice(1).map((step, index) => (
+                          <li
+                            key={`step-${index}`}
+                            style={{
+                              fontSize: isMobile ? '0.9rem' : '1rem',
+                              color: '#e6f0ed',
+                              textAlign: 'center',
+                              margin: '10px 0',
+                            }}
+                          >
+                            {`${index + 1}. ${step.subtitle}`}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              </li>
+            ) : (
+              processSteps.map((step, index) => (
+                <li
+                  key={`card-${index}`}
+                  style={{ ...cardStyle, ...cardIndexStyles[index] }}
+                  ref={(el) => {
+                    cardsRef.current[index] = el;
+                  }}
+                >
+                  <div style={cardBodyStyle(index)}>
+                    <h2 style={layerSubtitleStyle}>{step.subtitle}</h2>
+                  </div>
+                </li>
+              ))
             )}
-          </div>
-        </li>
-      ) : (
-        processSteps.map((step, index) => (
-          <li
-            key={`card-${index}`}
-            style={{ ...cardStyle, ...cardIndexStyles[index] }}
-            ref={(el) => {
-              cardsRef.current[index] = el;
+          </ul>
+          {/* Láthatatlan referenciaelem a 9. kártya pozíciójához */}
+          <div
+            id="scroll-target-9th-card"
+            style={{
+              position: 'absolute',
+              top: `calc(${navbarHeight} + 120px + (8 * 50px) + 11vh)`,
+              width: '100%',
+              height: '1px',
+              visibility: 'hidden',
             }}
-          >
-            <div style={cardBodyStyle(index)}>
-              <h2 style={layerSubtitleStyle}>{step.subtitle}</h2>
-            </div>
-          </li>
-        ))
-      )}
-    </ul>
-  </div>
-</section>
+          ></div>
+        </div>
+      </section>
 
       {/* Accordion FAQs Section */}
-      <section style={accordionSectionStyle}  ref={accordionSectionRef}>
+      <section style={accordionSectionStyle} ref={accordionSectionRef}>
         <style>
           {`
             @keyframes float0 { 0%, 100% { transform: translate(${mousePosition.x * 0.01}px, ${mousePosition.y * 0.01}px) translateY(0); } 50% { transform: translate(${mousePosition.x * 0.01}px, ${mousePosition.y * 0.01}px) translateY(-10px); } }

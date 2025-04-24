@@ -22,6 +22,7 @@ const NavItem: React.FC<NavItemProps> = ({ onClick, children, href }) => (
 const CustomNavbar = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [expanded, setExpanded] = useState(false);
+  const [isButtonHovered, setIsButtonHovered] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -33,50 +34,27 @@ const CustomNavbar = () => {
   }, []);
 
   const scrollToSection = (sectionId: string) => {
-    console.log(window.innerWidth); // Aktuális kijelző szélesség logolása
     if (sectionId === 'FAQ' && !isMobile) {
+      // Desktop nézetben a 9. kártya pozíciójához görgetés
       const target = document.getElementById('scroll-target-9th-card');
       if (target) {
         const targetTop = target.getBoundingClientRect().top + window.pageYOffset;
-        if (window.innerWidth < 1200) {
-          console.log("1"); // Aktuális kijelző szélesség logolása
-
-          // Ha mobil nézetben vagyunk, akkor a target elemhez görgetünk
-          window.scrollTo({
-            top: targetTop - 10,
-            behavior: 'smooth',
-          });
-         }
-        // else if (window.innerWidth > 1400) { 
-        //   console.log("2"); // Aktuális kijelző szélesség logolása
-        //   window.scrollTo({
-        //     top: targetTop + 200,
-        //     behavior: 'smooth',
-        //   });
-        // }
-        else {
-          console.log("3"); // Aktuális kijelző szélesség logolása
-          window.scrollTo({
-            top: targetTop - 50,
-            behavior: 'smooth',
-          });
-        }
-        
-
+        window.scrollTo({
+          top: targetTop - 50, // Offset a navbar magassága miatt
+          behavior: 'smooth',
+        });
       } else {
+        // Visszatérés az alapértelmezett szekcióhoz, ha a célpont nem található
         const section = document.getElementById(sectionId);
         if (section) {
           section.scrollIntoView({ behavior: 'smooth' });
         }
       }
     } else {
+      // Más szekciókhoz vagy mobil nézetben
       const section = document.getElementById(sectionId);
       if (section) {
-        const sectionTop = section.getBoundingClientRect().top + window.pageYOffset;
-        window.scrollTo({
-          top: sectionTop - 80,
-          behavior: 'smooth',
-        });
+        section.scrollIntoView({ behavior: 'smooth' });
       }
     }
     setExpanded(false);
@@ -130,9 +108,17 @@ const CustomNavbar = () => {
                 <NavItem onClick={() => scrollToSection('contact')}>Kapcsolat</NavItem>
               </div>
               <Button
-                onClick={() => scrollToSection('contact')}
+                onClick={() => scrollToSection('prices-section')}
                 variant="light"
-                className="ms-auto rounded-pill px-3 py-1 fw-semibold quote-btn"
+                className="ms-auto rounded-pill px-3 py-1 fw-semibold"
+                style={{
+                  transition: 'all 0.3s ease-in-out',
+                  boxShadow: isButtonHovered ? '0 0 10px rgba(255, 255, 255, 0.5)' : 'none',
+                  backgroundColor: '#f8f9fa',
+                  borderColor: '#f8f9fa',
+                }}
+                onMouseEnter={() => setIsButtonHovered(true)}
+                onMouseLeave={() => setIsButtonHovered(false)}
               >
                 Árajánlat
               </Button>
