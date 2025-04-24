@@ -87,12 +87,12 @@ const Testimonials = () => {
   return (
     <section className="testimonials-section py-5 bg-black">
       <style jsx>{`
-      @media (max-width: 720px) {
-        .testimonials-section .section-title::after {
-              width: 80px; /* Mobil szélesség */
-              max-width:200px;
+        @media (max-width: 720px) {
+          .testimonials-section .section-title::after {
+            width: 80px; /* Mobil szélesség */
+            max-width: 200px;
+          }
         }
-      }
         .testimonials-section {
           /* Scoped styles for this component */
         }
@@ -194,12 +194,12 @@ const Testimonials = () => {
             font-size: 0.9rem !important;
           }
           .testimonials-section .btn-play {
-            width: 32px !important;
-            height: 32px !important;
+            width: 40px !important;
+            height: 40px !important;
           }
           .testimonials-section .btn-play svg {
-            width: 12px !important;
-            height: 12px !important;
+            width: 14px !important;
+            height: 14px !important;
           }
           .testimonials-section .section-title {
             font-size: 2rem;
@@ -207,6 +207,29 @@ const Testimonials = () => {
           .testimonials-section .section-subtitle {
             font-size: 0.9rem;
           }
+        }
+
+        .testimonials-section .btn-play {
+          width: 48px;
+          height: 48px;
+          background: linear-gradient(135deg, rgb(0, 89, 69), rgb(0, 44, 35));
+          border: none;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 20px 50px rgba(0, 179, 143, 0.7), inset 0 0 12px rgba(255, 255, 255, 0.3);
+          transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .testimonials-section .btn-play:hover {
+          background: linear-gradient(135deg, rgb(0, 109, 89), rgb(0, 64, 55));
+          box-shadow: 0 25px 60px rgba(0, 179, 143, 0.9), inset 0 0 15px rgba(255, 255, 255, 0.4);
+        }
+
+        .testimonials-section .btn-play svg {
+          width: 18px;
+          height: 18px;
+          fill: white;
         }
       `}</style>
 
@@ -259,14 +282,13 @@ const Testimonials = () => {
             )}
             {!isVideoPlaying && (
               <button
-                className="btn btn-primary rounded-circle position-absolute top-50 start-50 translate-middle btn-play"
-                style={{ width: '36px', height: '36px' }}
+                className="btn btn-primary rounded-circle position-absolute top-50 start-50 btn-play"
                 onClick={handlePlayVideo}
                 aria-label="Videó lejátszása"
               >
                 <svg
-                  width="14"
-                  height="14"
+                  width="24"
+                  height="24"
                   viewBox="0 0 24 24"
                   fill="white"
                   xmlns="http://www.w3.org/2000/svg"
@@ -301,6 +323,7 @@ const Testimonials = () => {
             style={{ width: '36px', height: '36px' }}
             onClick={() => handleTestimonialSwipe('prev')}
             aria-label="Előző videó"
+            type="button"
           >
             ←
           </button>
@@ -309,6 +332,7 @@ const Testimonials = () => {
             style={{ width: '36px', height: '36px' }}
             onClick={() => handleTestimonialSwipe('next')}
             aria-label="Következő videó"
+            type="button"
           >
             →
           </button>
@@ -328,6 +352,7 @@ const Testimonials = () => {
                 setIsVideoPlaying(false);
               }}
               aria-label={`Videó ${index + 1}`}
+              type="button"
             />
           ))}
         </div>

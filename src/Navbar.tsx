@@ -22,7 +22,6 @@ const NavItem: React.FC<NavItemProps> = ({ onClick, children, href }) => (
 const CustomNavbar = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [expanded, setExpanded] = useState(false);
-  const [isHovered, setIsHovered] = useState(false); // Hover állapot kezelése
 
   useEffect(() => {
     const handleResize = () => {
@@ -34,8 +33,52 @@ const CustomNavbar = () => {
   }, []);
 
   const scrollToSection = (sectionId: string) => {
-    const section = document.getElementById(sectionId);
-    if (section) section.scrollIntoView({ behavior: 'smooth' });
+    console.log(window.innerWidth); // Aktuális kijelző szélesség logolása
+    if (sectionId === 'FAQ' && !isMobile) {
+      const target = document.getElementById('scroll-target-9th-card');
+      if (target) {
+        const targetTop = target.getBoundingClientRect().top + window.pageYOffset;
+        if (window.innerWidth < 1200) {
+          console.log("1"); // Aktuális kijelző szélesség logolása
+
+          // Ha mobil nézetben vagyunk, akkor a target elemhez görgetünk
+          window.scrollTo({
+            top: targetTop - 10,
+            behavior: 'smooth',
+          });
+         }
+        // else if (window.innerWidth > 1400) { 
+        //   console.log("2"); // Aktuális kijelző szélesség logolása
+        //   window.scrollTo({
+        //     top: targetTop + 200,
+        //     behavior: 'smooth',
+        //   });
+        // }
+        else {
+          console.log("3"); // Aktuális kijelző szélesség logolása
+          window.scrollTo({
+            top: targetTop - 50,
+            behavior: 'smooth',
+          });
+        }
+        
+
+      } else {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    } else {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        const sectionTop = section.getBoundingClientRect().top + window.pageYOffset;
+        window.scrollTo({
+          top: sectionTop - 80,
+          behavior: 'smooth',
+        });
+      }
+    }
     setExpanded(false);
   };
 
@@ -49,15 +92,8 @@ const CustomNavbar = () => {
       onToggle={(expanded) => setExpanded(expanded)}
       className="py-2"
       style={{
-        backgroundColor: 'rgba(0, 0, 0, 0.1)',
-        transition: 'background-color 0.5s ease',
+        background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0))',
       }}
-      onMouseEnter={(e: React.MouseEvent<HTMLElement>) =>
-        (e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.25)')
-      }
-      onMouseLeave={(e: React.MouseEvent<HTMLElement>) =>
-        (e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.1)')
-      }
     >
       <Container fluid className="px-4">
         <Navbar.Brand href="./" className="p-0">
@@ -79,17 +115,14 @@ const CustomNavbar = () => {
               <div className="d-flex flex-column text-center w-100 mt-4">
                 <NavItem onClick={() => scrollToSection('services')}>Szolgáltatások</NavItem>
                 <NavItem onClick={() => scrollToSection('REF')}>Referenciák</NavItem>
-                <NavItem onClick={() => scrollToSection('test')} >Vélemények</NavItem>
+                <NavItem onClick={() => scrollToSection('test')}>Vélemények</NavItem>
                 <NavItem onClick={() => scrollToSection('FAQ')}>GY.I.K.</NavItem>
                 <NavItem onClick={() => scrollToSection('contact')}>Kapcsolat</NavItem>
               </div>
             </div>
           ) : (
             <div className="d-flex w-100 align-items-center">
-              <div
-                className="d-flex justify-content-center flex-nowrap"
-                style={{ marginLeft: '30%' }} // Jobbra tolás 30%
-              >
+              <div className="d-flex justify-content-center flex-nowrap w-100">
                 <NavItem onClick={() => scrollToSection('services')}>Szolgáltatások</NavItem>
                 <NavItem onClick={() => scrollToSection('REF')}>Referenciák</NavItem>
                 <NavItem onClick={() => scrollToSection('test')}>Vélemények</NavItem>
@@ -97,17 +130,9 @@ const CustomNavbar = () => {
                 <NavItem onClick={() => scrollToSection('contact')}>Kapcsolat</NavItem>
               </div>
               <Button
-                onClick={() => scrollToSection('prices-section')}
+                onClick={() => scrollToSection('contact')}
                 variant="light"
-                className="ms-auto rounded-pill px-3 py-1 fw-semibold"
-                style={{
-                  transition: 'all 0.3s ease-in-out',
-                  boxShadow: isHovered ? '0 0 10px rgba(255, 255, 255, 0.5)' : 'none', // Glow effekt
-                  backgroundColor: isHovered ? '#f8f9fa' : '#f8f9fa', // A Bootstrap "light" háttérszíne fixen
-                  borderColor: '#f8f9fa', // Keret szín fixen
-                }}
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
+                className="ms-auto rounded-pill px-3 py-1 fw-semibold quote-btn"
               >
                 Árajánlat
               </Button>

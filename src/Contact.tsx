@@ -1,4 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+
+// Definiáljuk a formData típusát
+interface FormData {
+  fullName: string;
+  email: string;
+  phone: string;
+  projectDiscussion: string;
+  services: string[];
+}
 
 const Contact: React.FC = () => {
   // ---------- Dátum kiszámítása (a következő nap) ----------
@@ -12,16 +22,93 @@ const Contact: React.FC = () => {
     weekday: "long",
   });
 
-  // ---------- Styles ----------
+  // ---------- State for form data ----------
+  const [formData, setFormData] = useState<FormData>({
+    fullName: "",
+    email: "",
+    phone: "",
+    projectDiscussion: "",
+    services: [],
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState("");
 
-  // Outer wrapper: fekete háttér, padding
+  // ---------- Handle input changes ----------
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({ ...prev, [id]: value }));
+  };
+
+  // ---------- Handle checkbox changes ----------
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, checked } = e.target;
+    setFormData((prev) => {
+      const services = checked
+        ? [...prev.services, value]
+        : prev.services.filter((service) => service !== value);
+      return { ...prev, services };
+    });
+  };
+
+  // ---------- Handle form submission ----------
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitMessage("");
+
+    // Basic validation
+    if (
+      !formData.fullName ||
+      !formData.email ||
+      !formData.phone ||
+      !formData.projectDiscussion ||
+      formData.services.length === 0
+    ) {
+      setSubmitMessage("Kérjük, töltse ki az összes kötelező mezőt!");
+      setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        process.env.REACT_APP_WORKER_URL || "https://email-with-resend.palmartin99.workers.dev",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      if (response.ok) {
+        setSubmitMessage("Árajánlat kérelem sikeresen elküldve!");
+        setFormData({
+          fullName: "",
+          email: "",
+          phone: "",
+          projectDiscussion: "",
+          services: [],
+        });
+      } else {
+        setSubmitMessage("Hiba történt az űrlap elküldése során.");
+      }
+    } catch (error) {
+      setSubmitMessage("Hiba történt az űrlap elküldése során.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  // ---------- Styles ----------
   const outerWrapperStyle: React.CSSProperties = {
     backgroundColor: "#000",
     padding: "60px 20px",
     color: "#fff",
   };
 
-  // Main container: középre igazított tartalom, egymás alatti elrendezés
   const mainContainerStyle: React.CSSProperties = {
     maxWidth: "1200px",
     margin: "0 auto",
@@ -30,7 +117,6 @@ const Contact: React.FC = () => {
     gap: "40px",
   };
 
-  // Bal oldali container (elérhetőségi kártyák)
   const leftContainerStyle: React.CSSProperties = {
     display: "flex",
     flexDirection: "column",
@@ -41,16 +127,17 @@ const Contact: React.FC = () => {
     fontSize: "1.8rem",
     fontWeight: 600,
     margin: 0,
+    position: "relative",
+    display: "inline-block",
   };
 
   const leftParagraphStyle: React.CSSProperties = {
     fontSize: "1rem",
     lineHeight: 1.6,
-    margin: 0,
+    margin: "30px 0 0 0",
     color: "#ccc",
   };
 
-  // Container a kártyákhoz
   const contactCardsWrapperStyle: React.CSSProperties = {
     display: "flex",
     flexDirection: "row",
@@ -58,7 +145,6 @@ const Contact: React.FC = () => {
     flexWrap: "wrap",
   };
 
-  // Egyetlen kártya stílusa
   const cardStyle: React.CSSProperties = {
     backgroundColor: "#111",
     borderRadius: "12px",
@@ -70,7 +156,6 @@ const Contact: React.FC = () => {
     boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
   };
 
-  // Kártya cím: fehér színű
   const cardTitleStyle: React.CSSProperties = {
     fontSize: "1rem",
     fontWeight: 500,
@@ -78,7 +163,6 @@ const Contact: React.FC = () => {
     color: "#fff",
   };
 
-  // Kártya alcím: szürkés
   const cardSubtitleStyle: React.CSSProperties = {
     fontSize: "0.95rem",
     color: "#bbb",
@@ -96,7 +180,6 @@ const Contact: React.FC = () => {
     marginBottom: "8px",
   };
 
-  // Jobb oldali container (űrlap)
   const rightContainerStyle: React.CSSProperties = {
     backgroundColor: "#111",
     borderRadius: "12px",
@@ -113,14 +196,12 @@ const Contact: React.FC = () => {
     margin: 0,
   };
 
-  // Az űrlap fő szövege, a cím alatti rész
   const rightParagraphStyle: React.CSSProperties = {
     fontSize: "0.9rem",
     color: "#bbb",
     margin: 0,
   };
 
-  // Kötelező mezők figyelmeztetése
   const requiredNoteStyle: React.CSSProperties = {
     fontSize: "0.85rem",
     color: "#bbb",
@@ -154,7 +235,6 @@ const Contact: React.FC = () => {
     resize: "vertical",
   };
 
-  // Checkbox csoport stílusa
   const checkboxGroupStyle: React.CSSProperties = {
     display: "flex",
     flexDirection: "column",
@@ -169,21 +249,6 @@ const Contact: React.FC = () => {
     cursor: "pointer",
   };
 
-  // "Elküldés" gomb stílusa (alap: fehér háttér, fekete szöveg)
-  const submitButtonStyle: React.CSSProperties = {
-    padding: "14px 20px",
-    backgroundColor: "#fff",
-    color: "#000",
-    borderRadius: "30px",
-    border: "none",
-    cursor: "pointer",
-    fontSize: "1rem",
-    fontWeight: 500,
-    marginTop: "8px",
-    transition: "background-color 0.3s ease, color 0.3s ease",
-  };
-
-  // Bottom note stílusa, ahol a dátum zöld (#00D28C)
   const bottomNoteStyle: React.CSSProperties = {
     fontSize: "0.85rem",
     color: "#aaa",
@@ -198,30 +263,58 @@ const Contact: React.FC = () => {
     color: "#00D28C",
   };
 
+  const submitMessageStyle: React.CSSProperties = {
+    fontSize: "0.95rem",
+    color: submitMessage.includes("Hiba") ? "#ff5555" : "#00D28C",
+    textAlign: "center",
+  };
+
   return (
     <section style={outerWrapperStyle} id="contact">
       <div style={mainContainerStyle} className="contact-main-container">
         {/* Bal oldali rész: Elérhetőségi kártyák */}
         <div style={leftContainerStyle}>
-          <h2 style={leftHeadingStyle}>Kapcsolatfelvétel</h2>
-          <p style={leftParagraphStyle}>
-            Készen állsz a növekedésre? Beszélj velünk, hogy együtt emeljük új szintre a márkádat!
-          </p>
-          <div style={contactCardsWrapperStyle}>
-            {/* E-mail kártya */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              textAlign: "center",
+              gap: "32px",
+              padding: "40px 20px",
+            }}
+          >
+            <h2 style={leftHeadingStyle} className="contact-section-title">
+              Kapcsolatfelvétel
+            </h2>
+            <p style={leftParagraphStyle}>
+              Készen állsz a növekedésre? Beszélj velünk, hogy együtt emeljük új
+              szintre a márkádat!
+            </p>
+          </div>
+          <div
+            style={{ ...contactCardsWrapperStyle, justifyContent: "flex-start" }}
+          >
             <div style={cardStyle}>
               <div style={cardIconWrapperStyle}>
-                <span role="img" aria-label="Mail" style={{ fontSize: "1.2rem" }}>
+                <span
+                  role="img"
+                  aria-label="Mail"
+                  style={{ fontSize: "1.2rem" }}
+                >
                   ✉️
                 </span>
               </div>
               <h4 style={cardTitleStyle}>E-mail cím</h4>
               <p style={cardSubtitleStyle}>info@tbzproductions.com</p>
             </div>
-            {/* Telefon kártya */}
             <div style={cardStyle}>
               <div style={cardIconWrapperStyle}>
-                <span role="img" aria-label="Phone" style={{ fontSize: "1.2rem" }}>
+                <span
+                  role="img"
+                  aria-label="Phone"
+                  style={{ fontSize: "1.2rem" }}
+                >
                   📞
                 </span>
               </div>
@@ -234,107 +327,111 @@ const Contact: React.FC = () => {
         <div style={rightContainerStyle}>
           <h3 style={rightHeadingStyle}>Árajánlat kérelem</h3>
           <p style={rightParagraphStyle}>
-            Dolgozzunk együtt és emeljük új szintre az online jelenléted! Vedd fel velünk a kapcsolatot és kérj egyedi ajánlatot.
+            Dolgozzunk együtt és emeljük új szintre az online jelenléted! Vedd fel
+            velünk a kapcsolatot és kérj egyedi ajánlatot.
           </p>
           <p style={requiredNoteStyle}>
             *-gal jelölt mezők kitöltése kötelező!
           </p>
-          {/* Űrlap mezők */}
-          <div style={formGroupStyle}>
-            <label style={labelStyle} htmlFor="fullName">
-              Teljes név *
-            </label>
-            <input
-              id="fullName"
-              type="text"
-              style={inputStyle}
-              placeholder="Teljes név"
-              onFocus={(e) => (e.currentTarget.placeholder = "")}
-              onBlur={(e) => (e.currentTarget.placeholder = "Teljes név")}
-            />
-          </div>
-          <div style={formGroupStyle}>
-            <label style={labelStyle} htmlFor="email">
-              E-mail cím *
-            </label>
-            <input
-              id="email"
-              type="email"
-              style={inputStyle}
-              placeholder="E-mail cím"
-              onFocus={(e) => (e.currentTarget.placeholder = "")}
-              onBlur={(e) => (e.currentTarget.placeholder = "E-mail cím")}
-            />
-          </div>
-          <div style={formGroupStyle}>
-            <label style={labelStyle} htmlFor="phone">
-              Telefonszám *
-            </label>
-            <input
-              id="phone"
-              type="tel"
-              style={inputStyle}
-              placeholder="Telefonszám"
-              onFocus={(e) => (e.currentTarget.placeholder = "")}
-              onBlur={(e) => (e.currentTarget.placeholder = "Telefonszám")}
-            />
-          </div>
-          <div style={formGroupStyle}>
-            <label style={labelStyle} htmlFor="projectDiscussion">
-              Beszélgessünk a projektedről *
-            </label>
-            <textarea
-              id="projectDiscussion"
-              style={textareaStyle}
-              placeholder="Beszélgessünk a projektedről"
-              onFocus={(e) => (e.currentTarget.placeholder = "")}
-              onBlur={(e) =>
-                (e.currentTarget.placeholder = "Beszélgessünk a projektedről")
-              }
-            />
-          </div>
-          <div style={formGroupStyle}>
-            <label style={labelStyle}>
-              Milyen szolgáltatások érdekelnek? (Egyszerre több lehetőség is kiválasztható) *
-            </label>
-            <div style={checkboxGroupStyle}>
-              <label style={checkboxLabelStyle}>
-                <input type="checkbox" className="custom-checkbox" />
-                Teljeskörű tartalomgyártás
+          <form onSubmit={handleSubmit}>
+            <div style={formGroupStyle}>
+              <label style={labelStyle} htmlFor="fullName">
+                Teljes név *
               </label>
-              <label style={checkboxLabelStyle}>
-                <input type="checkbox" className="custom-checkbox" />
-                Reklám és Image videók készítése
-              </label>
-              <label style={checkboxLabelStyle}>
-                <input type="checkbox" className="custom-checkbox" />
-                Fotózás
-              </label>
-              <label style={checkboxLabelStyle}>
-                <input type="checkbox" className="custom-checkbox" />
-                Social media management
-              </label>
-              <label style={checkboxLabelStyle}>
-                <input type="checkbox" className="custom-checkbox" />
-                Weboldal tervezés és fejlesztés
-              </label>
+              <input
+                id="fullName"
+                type="text"
+                style={inputStyle}
+                placeholder="Teljes név"
+                value={formData.fullName}
+                onChange={handleInputChange}
+                onFocus={(e) => (e.currentTarget.placeholder = "")}
+                onBlur={(e) => (e.currentTarget.placeholder = "Teljes név")}
+              />
             </div>
-          </div>
-          {/* Submit gomb, hover hatással */}
-          <button
-            style={submitButtonStyle}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = "#00D28C";
-              e.currentTarget.style.color = "#fff";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = "#fff";
-              e.currentTarget.style.color = "#000";
-            }}
-          >
-            Elküldés
-          </button>
-          {/* Alsó jegyzet: Árajánlat várható érkezése, dátum zöld színnel */}
+            <div style={formGroupStyle}>
+              <label style={labelStyle} htmlFor="email">
+                E-mail cím *
+              </label>
+              <input
+                id="email"
+                type="email"
+                style={inputStyle}
+                placeholder="E-mail cím"
+                value={formData.email}
+                onChange={handleInputChange}
+                onFocus={(e) => (e.currentTarget.placeholder = "")}
+                onBlur={(e) => (e.currentTarget.placeholder = "E-mail cím")}
+              />
+            </div>
+            <div style={formGroupStyle}>
+              <label style={labelStyle} htmlFor="phone">
+                Telefonszám *
+              </label>
+              <input
+                id="phone"
+                type="tel"
+                style={inputStyle}
+                placeholder="Telefonszám"
+                value={formData.phone}
+                onChange={handleInputChange}
+                onFocus={(e) => (e.currentTarget.placeholder = "")}
+                onBlur={(e) => (e.currentTarget.placeholder = "Telefonszám")}
+              />
+            </div>
+            <div style={formGroupStyle}>
+              <label style={labelStyle} htmlFor="projectDiscussion">
+                Beszélgessünk a projektedről *
+              </label>
+              <textarea
+                id="projectDiscussion"
+                style={textareaStyle}
+                placeholder="Beszélgessünk a projektedről"
+                value={formData.projectDiscussion}
+                onChange={handleInputChange}
+                onFocus={(e) => (e.currentTarget.placeholder = "")}
+                onBlur={(e) =>
+                  (e.currentTarget.placeholder = "Beszélgessünk a projektedről")
+                }
+              />
+            </div>
+            <div style={formGroupStyle}>
+              <label style={labelStyle}>
+                Milyen szolgáltatások érdekelnek? (Egyszerre több lehetőség is
+                kiválasztható) *
+              </label>
+              <div style={checkboxGroupStyle}>
+                {[
+                  "Teljeskörű tartalomgyártás",
+                  "Reklám és Image videók készítése",
+                  "Fotózás",
+                  "Social media management",
+                  "Weboldal tervezés és fejlesztés",
+                ].map((service) => (
+                  <label key={service} style={checkboxLabelStyle}>
+                    <input
+                      type="checkbox"
+                      className="custom-checkbox"
+                      value={service}
+                      checked={formData.services.includes(service)}
+                      onChange={handleCheckboxChange}
+                    />
+                    {service}
+                  </label>
+                ))}
+              </div>
+            </div>
+            <button
+              type="submit"
+              className="quote-btn submit-btn"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Küldés..." : "Elküldés"}
+            </button>
+            {submitMessage && (
+              <p style={submitMessageStyle}>{submitMessage}</p>
+            )}
+          </form>
           <p style={bottomNoteStyle}>
             Árajánlat várható érkezése:{" "}
             <span style={dateStyle}>{formattedExpectedDate}</span>
@@ -343,7 +440,6 @@ const Contact: React.FC = () => {
       </div>
       <style>
         {`
-          /* Egyedi checkbox stílusok */
           .custom-checkbox {
             -webkit-appearance: none;
             -moz-appearance: none;
@@ -373,7 +469,52 @@ const Contact: React.FC = () => {
             border-width: 0 2px 2px 0;
             transform: rotate(45deg);
           }
-          /* Mobil nézet: egymás alatti elrendezés */
+          .quote-btn {
+            border-radius: 100px;
+            padding: 8px 16px;
+            font-weight: 500;
+            background-color: #fff !important;
+            color: #000 !important;
+            border: 1px solid #ccc;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+            font-size: 14px;
+            cursor: pointer;
+          }
+          .quote-btn:hover {
+            box-shadow:
+              0 0 20px rgba(255, 255, 255, 0.55),
+              0 0 35px rgba(0, 123, 255, 0.35),
+              0 0 45px rgba(0, 255, 136, 0.25);
+            transform: translateY(-2px);
+          }
+          .quote-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+          }
+          .submit-btn {
+            width: calc(100% - 16px);
+            margin: 0 auto;
+            display: block;
+          }
+          .contact-section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 230px;
+            height: 4px;
+            background: linear-gradient(135deg, rgba(0, 89, 69, 0.95), rgba(0, 44, 35, 0.95));
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba(0, 210, 140, 0.5), 0 0 20px rgba(0, 210, 140, 0.3);
+          }
+          @media (max-width: 720px) {
+            .contact-section-title::after {
+              width: 230px;
+              max-width: 230px;
+            }
+          }
           @media (max-width: 768px) {
             .contact-main-container {
               flex-direction: column;

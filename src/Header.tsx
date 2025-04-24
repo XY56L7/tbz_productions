@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Button } from 'react-bootstrap';
 import './Header.css';
-import wallpaper from './wallpaper.png';
 
 const headings = [
   [{ text: "MI VAGYUNK A", highlight: false }, { text: "TBZ. PRODUCTIONS!", highlight: true }],
@@ -37,7 +36,7 @@ const Header = () => {
     <header
       className="header-section"
       style={{
-        width: '100%', // Teljes szélesség
+        width: '100%',
         height: '100vh',
         overflow: 'hidden',
         position: 'relative',
@@ -47,19 +46,19 @@ const Header = () => {
       <div
         style={{
           position: 'absolute',
-          width: '100%', // Teljes szélesség
+          width: '100%',
           height: '100%',
           top: 0,
           left: 0,
-          backgroundImage: `url(${wallpaper})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          filter: 'blur(10px)',
+          background: 'linear-gradient(135deg, rgba(0, 89, 69, 0.95), rgba(0, 44, 35, 0.95))',
+          boxShadow: '0 15px 40px rgba(0, 179, 143, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.2)',
+          border: '1px solid rgba(255, 255, 255, 0.1)',
+          backdropFilter: 'blur(5px)',
           zIndex: 0,
         }}
       />
       <Container
-        fluid // Teljes szélességű konténer
+        fluid
         className="h-100 d-flex flex-column justify-content-center align-items-center"
         style={{ position: 'relative', zIndex: 1 }}
       >
@@ -71,7 +70,7 @@ const Header = () => {
             lineHeight: '1.5',
             fontSize: isDesktop ? '2.5rem' : '1.2rem',
             gap: isRow ? '4px' : '10px',
-            maxWidth: '100%', // Biztosítjuk, hogy ne lógjon ki
+            maxWidth: '100%',
           }}
         >
           {headings[currentHeadingIndex].map((segment, idx) => (
@@ -90,7 +89,7 @@ const Header = () => {
         style={{
           position: 'absolute',
           bottom: '20px',
-          width: '100%', // Teljes szélesség
+          width: '100%',
           display: 'flex',
           justifyContent: 'center',
           zIndex: 998,

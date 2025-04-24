@@ -1,0 +1,9 @@
+{
+    "$schema": "node_modules/wrangler/config-schema.json",
+    "name": "email-with-resend",
+    "main": "src/index.tsx",
+    "compatibility_date": "2025-04-24",
+    "observability": {
+        "enabled": true
+    }
+}

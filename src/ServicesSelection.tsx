@@ -1,4 +1,3 @@
-// ServiceSelection.tsx
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -19,8 +18,20 @@ const ServiceSelection = () => {
     setActiveCard(activeCard === index ? null : index);
   };
 
+  const scrollToSection = (sectionId: string) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      const sectionTop = section.getBoundingClientRect().top + window.pageYOffset;
+      const offset = 80;
+
+      window.scrollTo({
+        top: sectionTop - offset,
+        behavior: "smooth",
+      });
+    }
+  };
+
   useEffect(() => {
-    // Inject styles into the document head
     const style = document.createElement("style");
     style.textContent = `
       /* Base styling */
@@ -38,7 +49,6 @@ const ServiceSelection = () => {
         padding-right: 0;
       }
 
-      /* Push the text content down and use sticky in desktop view */
       .text-content {
         margin-top: 0;
         z-index: 2;
@@ -71,7 +81,6 @@ const ServiceSelection = () => {
         }
       }
 
-      /* Text content styles */
       .heading-text {
         font-size: 32px;
         line-height: 1.3;
@@ -84,139 +93,88 @@ const ServiceSelection = () => {
       }
 
       /* Button style */
-      .custom-btn {
+      .custom-btn, .ref-btn, .quote-btn {
         border-radius: 100px;
-        padding: 10px 24px;
+        padding: 8px 16px;
         font-weight: 500;
-        background-color: #00D28C;
-        color: #000;
-        border: none;
-        transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+        background-color: #fff !important;
+        color: #000 !important;
+        border: 1px solid #ccc;
+        transition: box-shadow 0.3s ease, transform 0.3s ease;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
-        outline: 2px solid transparent;
+        font-size: 14px;
+        cursor: pointer;
       }
 
-      .custom-btn:hover {
-        background-color: #00B87A;
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.12);
-        outline: 2px solid #00D28C;
+      .custom-btn:hover, .ref-btn:hover, .quote-btn:hover {
+        box-shadow:
+          0 0 20px rgba(255, 255, 255, 0.55),
+          0 0 35px rgba(0, 123, 255, 0.35),
+          0 0 45px rgba(0, 255, 136, 0.25);
         transform: translateY(-2px);
       }
 
-      .custom-btn:active {
+      .custom-btn:active, .ref-btn:active, .quote-btn:active {
         transform: translateY(0);
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
       }
 
-      /* Referenciák gomb */
-      .ref-btn {
-        background-color: #fff !important;
-        color: #000 !important;
-        border: 1px solid #ccc;
-      }
-
-      .ref-btn:hover {
-        background-color: #f7f7f7 !important;
-        color: #000 !important;
-      }
-
-      /* Árajánlat gomb */
       .quote-btn {
-        background-color: #fff !important;
-        color: #000 !important;
-        border: 1px solid #ccc;
-        position: relative;
-        overflow: hidden;
-        box-shadow: 
-          0 4px 6px rgba(0, 0, 0, 0.1),
-          0 0 10px rgba(0, 123, 255, 0.4),
-          0 0 20px rgba(0, 255, 136, 0.2);
-        animation: buttonGlow 3s infinite alternate;
         align-self: flex-start;
         margin-top: auto;
       }
 
-      .quote-btn:hover {
-        background-color: #f7f7f7 !important;
-        color: #000 !important;
-        box-shadow: 
-          0 6px 12px rgba(0, 0, 0, 0.15),
-          0 0 20px rgba(0, 123, 255, 0.6),
-          0 0 30px rgba(0, 255, 136, 0.4);
-        transform: translateY(-2px);
+      .card-item {
+        border-radius: 24px;
+        overflow: hidden;
+        background: linear-gradient(135deg, rgba(0, 54, 42, 0.85), rgba(0, 26, 21, 0.85));
+        z-index: 1;
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, border 0.3s ease;
+        height: auto;
+        margin-bottom: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(5px);
       }
 
-      @keyframes buttonGlow {
-        0% {
-          box-shadow: 
-            0 4px 6px rgba(0, 0, 0, 0.1),
-            0 0 10px rgba(0, 123, 255, 0.4),
-            0 0 20px rgba(0, 255, 136, 0.2);
+      .card-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 179, 143, 0.3);
+      }
+
+      .card-item.card-expanded {
+        background: linear-gradient(135deg, rgba(0, 89, 69, 0.95), rgba(0, 44, 35, 0.95));
+        box-shadow: 0 15px 40px rgba(0, 179, 143, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        backdrop-filter: blur(5px);
+        transition: all 0.5s ease;
+        cursor: pointer;
+        z-index: 10;
+        animation: floatCard 6s infinite ease-in-out;
+      }
+
+      @keyframes floatCard {
+        0%, 100% {
+          transform: translateY(0);
         }
-        100% {
-          box-shadow: 
-            0 4px 6px rgba(0, 0, 0, 0.1),
-            0 0 20px rgba(0, 123, 255, 0.6),
-            0 0 30px rgba(0, 255, 136, 0.4);
+        50% {
+          transform: translateY(-10px);
         }
       }
-.card-item {
-      border-radius: 24px;
-      overflow: hidden;
-      background: linear-gradient(135deg, rgba(0, 54, 42, 0.85), rgba(0, 26, 21, 0.85));
-      z-index: 1;
-      width: 100%;
-      margin-left: 0;
-      margin-right: 0;
-      cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, border 0.3s ease;
-      height: auto;
-      margin-bottom: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(5px);
-    }
 
-    .card-item:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(0, 179, 143, 0.3);
-    }
-
-    .card-item.card-expanded {
-      background: linear-gradient(135deg, rgba(0, 89, 69, 0.95), rgba(0, 44, 35, 0.95));
-      box-shadow: 0 15px 40px rgba(0, 179, 143, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.2);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 20px;
-      backdrop-filter: blur(5px);
-      transition: all 0.5s ease;
-      cursor: pointer;
-      z-index: 10;
-      animation: floatCard 6s infinite ease-in-out;
-    }
-
-    /* Floating animation for expanded cards */
-    @keyframes floatCard {
-      0%, 100% {
-        transform: translateY(0);
+      .card-content {
+        padding: 0.1rem 1rem 1rem 1rem;
+        text-align: left;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 100px;
       }
-      50% {
-        transform: translateY(-10px);
-      }
-    }
-
-
-
-      /* Card content: balra igazítás */
-.card-content {
-  padding: 0.1rem 1rem 1rem 1rem; /* Például így hagytad a paddingot */
-  text-align: left;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  /* height: 100%; */
-  justify-content: flex-start;
-  min-height: 100px; /* Ezt távolítsd el vagy csökkentsd */
-}
-
 
       .card-title {
         font-size: 20px;
@@ -244,7 +202,22 @@ const ServiceSelection = () => {
         margin-bottom: 1rem;
       }
 
-      /* Adjusted card height for desktop/laptop */
+      .card-details {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.6);
+        margin-bottom: 0.5rem;
+        transition: opacity 0.3s ease, height 0.3s ease;
+        height: auto;
+        opacity: 1;
+      }
+
+      .card-expanded .card-details {
+        height: 0;
+        opacity: 0;
+        overflow: hidden;
+        margin: 0;
+      }
+
       @media (min-width: 768px) {
         .card-img {
           height: 120px;
@@ -265,7 +238,6 @@ const ServiceSelection = () => {
         }
       }
 
-      /* Responsive adjustments */
       @media (max-width: 809px) {
         .heading-text {
           font-size: 28px;
@@ -282,13 +254,11 @@ const ServiceSelection = () => {
         }
       }
 
-      /* Base styles for text content */
       .text-content {
         padding-left: 1rem;
         padding-right: 1rem;
       }
 
-      /* Desktop styles */
       @media (min-width: 768px) {
         .text-content {
           padding-left: 5rem;
@@ -296,7 +266,6 @@ const ServiceSelection = () => {
         }
       }
 
-      /* Mobile styles */
       @media (max-width: 767px) {
         .my-section {
           padding-left: 0;
@@ -304,30 +273,32 @@ const ServiceSelection = () => {
           width: 100vw;
           overflow: hidden;
         }
-        
+
         .row {
           margin-left: 0;
           margin-right: 0;
           width: 100%;
         }
-        
+
         .cards {
-          padding-left: 0;
-          padding-right: 0;
+          padding-left: 1.5rem;
+          padding-right: 1.5rem;
           width: 100%;
         }
-        
+
         .text-content {
           padding-left: 1rem;
           padding-right: 1rem;
           width: 100%;
         }
-        
+
         .card-item {
           border-radius: 20px;
           margin-bottom: 15px;
+          padding-left: 1rem;
+          padding-right: 1rem;
         }
-        
+
         .card-content {
           padding: 0.75rem;
         }
@@ -345,7 +316,6 @@ const ServiceSelection = () => {
         }
       }
 
-      /* Smaller screens */
       @media (max-width: 576px) {
         .card-img {
           height: 100px;
@@ -354,13 +324,11 @@ const ServiceSelection = () => {
     `;
     document.head.appendChild(style);
 
-    // Cleanup on component unmount
     return () => {
       document.head.removeChild(style);
     };
   }, []);
 
-  // Services data
   const services = [
     {
       title: "Teljeskörű tartalomgyártás a tervezéstől a posztolásig",
@@ -375,13 +343,13 @@ const ServiceSelection = () => {
     {
       title: "Fotózás",
       description:
-        "Minőségi és karakteres fotók, amelyek valóban kiemelik márkád egyediségét, valamint megmutatják termékeid/szolgáltatásaid értékét. Célunk, hogy a legtöbbet hozzuk ki a márkából.",
+        "Minőségi és karakteres fotók, amelyek valóban kiemelik márkád egyediségét, valamint megmutatják termékeid/szolgáltatásaid értékét. Célunk, hogy a legtöbbet hozzuk ki a márkádból.",
       image: "https://via.placeholder.com/400x300?text=Card+3",
     },
     {
-      title: "Social media management",
+      title: "Social media management és hirdetéskezelés",
       description:
-        "Mi gondoskodunk a közösségi médiád sikeréről! Facebook, Instagram, TikTok és YouTube profiljaidat aktívan frissítjük, vonzó tartalommal töltjük meg.",
+        "Mi gondoskodunk a közösségi médiád sikeréről! Kiemeljük márkádat a digitális tömegből egy ütős közösségi média stratégiával és professzionális oldalkezeléssel.",
       image: "https://via.placeholder.com/400x300?text=Card+4",
     },
     {
@@ -395,7 +363,6 @@ const ServiceSelection = () => {
   return (
     <div className="my-section container py-5">
       <div className="row">
-        {/* Left-side text (sticky) */}
         <div className="text-content col-md-6 mb-4 mb-md-0">
           <div className="heading mb-3">
             <h2 className="heading-text">Szolgáltatások</h2>
@@ -408,42 +375,34 @@ const ServiceSelection = () => {
             </p>
           </div>
           <div className="button-container mt-3">
-            <a
-              href="#referenciak"
-              tabIndex={0}
+            <button
+              type="button"
+              onClick={() => scrollToSection("REF")}
               className="btn btn-light custom-btn ref-btn"
             >
               Referenciák
-            </a>
+            </button>
           </div>
         </div>
 
-        {/* Right-side cards */}
         <div className="cards col-md-6">
           {services.map((service, index) => (
             <div
               key={`service-${index}`}
-              className={`card-item ${
-                activeCard === index ? "card-expanded" : ""
-              }`}
+              className={`card-item ${activeCard === index ? "card-expanded" : ""}`}
               onClick={() => toggleCard(index)}
             >
-              <div
-                className="card-img"
-                style={{
-                  backgroundImage: `url(${service.image})`,
-                  height: "20px",
-                }}
-              ></div>
               <div className="card-content">
                 <h3 className="card-title">{service.title}</h3>
+                <p className="card-details">Kattints a részletekért!</p>
                 <div className="card-desc">{service.description}</div>
-                <a
-                  href="#"
-                  className="btn btn-light custom-btn quote-btn glow-button"
+                <button
+                  type="button"
+                  onClick={() => scrollToSection("contact")}
+                  className="btn btn-light custom-btn quote-btn"
                 >
-                  Árajánlat <span className="btn-subtext">(24H)</span>
-                </a>
+                  Árajánlat (24h)
+                </button>
               </div>
             </div>
           ))}

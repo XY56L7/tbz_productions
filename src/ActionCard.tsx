@@ -1,4 +1,5 @@
 import React from "react";
+import bence from './images/t_bence.JPG';
 
 const CallToActionCard: React.FC = () => {
   // ---------- Styles ----------
@@ -9,138 +10,130 @@ const CallToActionCard: React.FC = () => {
   };
 
   const cardStyle: React.CSSProperties = {
-    backgroundColor: "rgba(255, 255, 255, 0.9)", // Átlátszó fehér háttér
+    backgroundColor: "rgba(255, 255, 255, 0.9)",
     borderRadius: "24px",
-    boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1)", // Mélyebb árnyék
+    boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1)",
     padding: "32px",
     maxWidth: "1200px",
     width: "100%",
     display: "flex",
     alignItems: "center",
     gap: "32px",
-    backdropFilter: "blur(10px)", // Homályos háttérhatás
-    border: "1px solid rgba(255, 255, 255, 0.3)", // Finom keret
+    backdropFilter: "blur(10px)",
+    border: "1px solid rgba(255, 255, 255, 0.3)",
   };
 
-  // Árajánlat kérés rész (desktopon bal oldalon)
   const avatarWrapperStyle: React.CSSProperties = {
     display: "flex",
+    flexDirection: "column",
     alignItems: "center",
-    gap: "16px",
+    gap: "12px",
   };
 
   const avatarImageStyle: React.CSSProperties = {
-    width: "80px", // Nagyobb avatar
-    height: "80px",
+    width: "160px",
+    height: "160px",
     borderRadius: "50%",
     objectFit: "cover",
-    border: "3px solid #00D28C", // Színes keret
-    boxShadow: "0 4px 12px rgba(0, 210, 140, 0.3)", // Finom árnyék
+    border: "3px solid #00D28C",
+    boxShadow: "0 4px 12px rgba(0, 210, 140, 0.3)",
+    imageRendering: "auto",
   };
 
   const userInfoStyle: React.CSSProperties = {
     display: "flex",
     flexDirection: "column",
-    gap: "8px", // Nagyobb rés
-  };
-
-  const userNameRowStyle: React.CSSProperties = {
-    display: "flex",
     alignItems: "center",
-    gap: "8px",
+    gap: "4px",
   };
 
   const userNameStyle: React.CSSProperties = {
-    fontSize: "1.2rem", // Nagyobb betűméret
-    fontWeight: 700, // Vastagabb betű
-    margin: 0,
-    color: "#333", // Sötétebb szöveg
+    fontSize: "1.2rem",
+    fontWeight: 700,
+    margin: "0",
+    color: "#333",
   };
 
   const greenDotStyle: React.CSSProperties = {
-    width: "12px", // Nagyobb pont
+    width: "12px",
     height: "12px",
     borderRadius: "50%",
     backgroundColor: "#00D28C",
-    boxShadow: "0 0 8px rgba(0, 210, 140, 0.5)", // Fényes hatás
-    animation: "vibrate 1s infinite", // Vibrálás
+    boxShadow: "0 0 8px rgba(0, 210, 140, 0.5)",
+    animation: "vibrate 1s infinite",
   };
 
   const userTitleStyle: React.CSSProperties = {
     fontSize: "1rem",
-    color: "#666", // Világosabb szöveg
-    margin: 0,
-    fontStyle: "italic", // Dőlt betű
+    color: "#666",
+    margin: "0",
+    fontStyle: "italic",
   };
 
-  // Kapcsolatfelvétel rész (desktopon jobb oldalon)
   const textWrapperStyle: React.CSSProperties = {
     display: "flex",
     flexDirection: "column",
-    gap: "20px", // Nagyobb rés
+    gap: "20px",
     flex: 1,
   };
 
   const headingStyle: React.CSSProperties = {
-    fontSize: "1.6rem", // Nagyobb címsor
+    fontSize: "1.6rem",
     fontWeight: 700,
-    margin: 0,
-    color: "#222", // Sötétebb szöveg
+    margin: "0",
+    color: "#222",
     lineHeight: 1.3,
   };
 
   const paragraphStyle: React.CSSProperties = {
-    fontSize: "1rem", // Nagyobb betűméret
+    fontSize: "1rem",
     lineHeight: 1.6,
-    margin: 0,
-    color: "#555", // Világosabb szöveg
+    margin: "0",
+    color: "#555",
   };
 
   const actionsRowStyle: React.CSSProperties = {
     display: "flex",
     flexWrap: "wrap",
     gap: "16px",
-    alignItems: "center",
+    alignItems: "center", // Függőleges középre igazítás
   };
 
   const buttonStyle: React.CSSProperties = {
-    backgroundColor: "#00D28C", // Zöld háttér, mint a pötty
-    color: "#000", // Fekete betűszín
-    padding: "14px 24px", // Nagyobb gomb
+    backgroundColor: "#00D28C",
+    color: "#000",
+    padding: "14px 24px",
     borderRadius: "30px",
     textDecoration: "none",
-    fontWeight: 600, // Vastagabb betű
+    fontWeight: 600,
     border: "none",
     cursor: "pointer",
     fontSize: "1rem",
-    transition: "all 0.3s ease", // Módosítva, hogy minden tulajdonságra vonatkozzon
-    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)", // Alapértelmezett árnyék
+    transition: "all 0.3s ease",
+    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
   };
 
   const linkStyle: React.CSSProperties = {
     fontSize: "0.95rem",
-    color: "#002c23", // Szöveg színe #002c23
+    color: "#002c23",
     textDecoration: "none",
     fontWeight: 600,
-    borderBottom: "2px solid transparent", // Aláhúzás hover hatáshoz
-    transition: "border-color 0.3s ease", // Sima átmenet
+    borderBottom: "2px solid transparent",
+    transition: "border-color 0.3s ease",
   };
 
   return (
     <div style={outerContainerStyle}>
       <div style={cardStyle} className="cta-card">
-        {/* Desktop: bal oldalon árajánlat kérés (avatar) */}
+        {/* Desktop: bal oldalon árajánlat kérés (avatar és szöveg alatta) */}
         <div style={avatarWrapperStyle} className="cta-avatar">
           <img
             style={avatarImageStyle}
-            src="https://via.placeholder.com/80"
+            src={bence}
             alt="Tököli Bence"
           />
           <div style={userInfoStyle}>
-            <div style={userNameRowStyle}>
-              <h4 style={userNameStyle}>Tököli Bence</h4>
-              <div style={greenDotStyle} />
-            </div>
+            <h4 style={userNameStyle}>Tököli Bence</h4>
             <p style={userTitleStyle}>Alapító, tulajdonos</p>
           </div>
         </div>
@@ -177,7 +170,7 @@ const CallToActionCard: React.FC = () => {
               style={linkStyle}
               onMouseEnter={(e) =>
                 (e.currentTarget.style.borderBottomColor = "#002c23")
-              } // Hover hatás
+              }
               onMouseLeave={(e) =>
                 (e.currentTarget.style.borderBottomColor = "transparent")
               }
@@ -199,6 +192,11 @@ const CallToActionCard: React.FC = () => {
             }
             .cta-text {
               order: 1;
+              width: 100%; /* Biztosítjuk, hogy a szöveg wrapper kitöltse a kártyát */
+            }
+            .cta-text > div:last-child { /* Az actionsRowStyle-nak megfelelő elem */
+              justify-content: center; /* Középre igazítás csak mobil nézetben */
+              width: 100%; /* Teljes szélesség a szimmetrikus padding érdekében */
             }
           }
           @keyframes vibrate {
