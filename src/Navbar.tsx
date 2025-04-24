@@ -108,7 +108,7 @@ const CustomNavbar = () => {
                 <NavItem onClick={() => scrollToSection('contact')}>Kapcsolat</NavItem>
               </div>
               <Button
-                onClick={() => scrollToSection('prices-section')}
+                onClick={() => scrollToSection('contact')}
                 variant="light"
                 className="ms-auto rounded-pill px-3 py-1 fw-semibold"
                 style={{
