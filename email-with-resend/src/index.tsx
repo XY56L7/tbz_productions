@@ -1,7 +1,6 @@
 import { Resend } from "resend";
 import ContactEmail from "./emails/contact-email";
 
-// Definiáljuk a POST kérés várt adatstruktúráját
 interface FormData {
   fullName: string;
   email: string;
@@ -12,7 +11,6 @@ interface FormData {
 
 export default {
   async fetch(request: Request, env: { RESEND_API_KEY: string }): Promise<Response> {
-    // Handle CORS preflight
     if (request.method === "OPTIONS") {
       return new Response(null, {
         headers: {
@@ -28,13 +26,12 @@ export default {
     }
 
     try {
-      // Típusozzuk a JSON adatot az interfésszel
       const { fullName, email, phone, projectDiscussion, services } = await request.json<FormData>();
       const resend = new Resend(env.RESEND_API_KEY);
 
       const data = await resend.emails.send({
-        from: "TBZ Productions <onboarding@resend.dev>",
-        to: ["info@tbzproductions.com"],
+        from: "TBZ Productions <info@tbzproductions.com>",
+        to: ["info@tbzproductions.com"], // Teszteléshez mindkettő
         subject: "Új árajánlat kérelem",
         react: (
           <ContactEmail
@@ -47,6 +44,18 @@ export default {
         ),
       });
 
+      console.log("Resend API response:", JSON.stringify(data, null, 2)); // Részletes naplózás
+
+      if (data.error) {
+        return new Response(JSON.stringify({ error: data.error }), {
+          status: 400,
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+          },
+        });
+      }
+
       return new Response(JSON.stringify(data), {
         status: 200,
         headers: {
@@ -55,6 +64,7 @@ export default {
         },
       });
     } catch (error) {
+      console.error("Error sending email:", error);
       return new Response(JSON.stringify({ error: (error as Error).message }), {
         status: 500,
         headers: {
