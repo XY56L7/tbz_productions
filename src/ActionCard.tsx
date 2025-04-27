@@ -1,5 +1,5 @@
 import React from "react";
-import bence from './images/bence_uj.jpg';
+import bence from './images/t_bence.png'; // Import your image here
 import { PopupButton } from "react-calendly";
 
 const CallToActionCard: React.FC = () => {
@@ -38,8 +38,8 @@ const CallToActionCard: React.FC = () => {
     objectFit: "cover",
     border: "3px solid #00D28C",
     boxShadow: "0 4px 12px rgba(0, 210, 140, 0.3)",
-    imageRendering: "auto",
-    backgroundColor: "rgba(255, 255, 255, 0.9)", // Match card background
+    imageRendering: "crisp-edges", // Változtasd "auto"-ról "crisp-edges"-re
+    backgroundColor: "rgba(255, 255, 255, 0.9)",
   };
 
   const userInfoStyle: React.CSSProperties = {
