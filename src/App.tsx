@@ -38,3 +38,8 @@ const App = () => {
 };
 
 export default App;
+
+
+//Az npm installt nem csak peers legacyval kell felrakni. Kell valamilyen --dev de kerdezd meg valamelyik llm modelt majd,
+//npm install --save-dev typescript --legacy-peer-deps
+//npm install ajv@^8.12.0 --legacy-peer-deps

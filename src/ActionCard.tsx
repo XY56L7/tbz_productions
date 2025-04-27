@@ -1,5 +1,6 @@
 import React from "react";
-import bence from './images/t_bence.JPG';
+import bence from './images/bence_uj.jpg';
+import { PopupButton } from "react-calendly";
 
 const CallToActionCard: React.FC = () => {
   // ---------- Styles ----------
@@ -10,7 +11,7 @@ const CallToActionCard: React.FC = () => {
   };
 
   const cardStyle: React.CSSProperties = {
-    backgroundColor: "rgba(255, 255, 255, 0.9)",
+    backgroundColor: "#FFFFFF", // Changed to solid white
     borderRadius: "24px",
     boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1)",
     padding: "32px",
@@ -19,7 +20,7 @@ const CallToActionCard: React.FC = () => {
     display: "flex",
     alignItems: "center",
     gap: "32px",
-    backdropFilter: "blur(10px)",
+    backdropFilter: "blur(10px)", // Optional: Remove this if you want no blur effect
     border: "1px solid rgba(255, 255, 255, 0.3)",
   };
 
@@ -38,6 +39,7 @@ const CallToActionCard: React.FC = () => {
     border: "3px solid #00D28C",
     boxShadow: "0 4px 12px rgba(0, 210, 140, 0.3)",
     imageRendering: "auto",
+    backgroundColor: "rgba(255, 255, 255, 0.9)", // Match card background
   };
 
   const userInfoStyle: React.CSSProperties = {
@@ -96,7 +98,7 @@ const CallToActionCard: React.FC = () => {
     display: "flex",
     flexWrap: "wrap",
     gap: "16px",
-    alignItems: "center", // Függőleges középre igazítás
+    alignItems: "center",
   };
 
   const buttonStyle: React.CSSProperties = {
@@ -125,23 +127,15 @@ const CallToActionCard: React.FC = () => {
   return (
     <div style={outerContainerStyle}>
       <div style={cardStyle} className="cta-card">
-        {/* Desktop: bal oldalon árajánlat kérés (avatar és szöveg alatta) */}
         <div style={avatarWrapperStyle} className="cta-avatar">
-          <img
-            style={avatarImageStyle}
-            src={bence}
-            alt="Tököli Bence"
-          />
+          <img style={avatarImageStyle} src={bence} alt="Tököli Bence" />
           <div style={userInfoStyle}>
             <h4 style={userNameStyle}>Tököli Bence</h4>
             <p style={userTitleStyle}>Alapító, tulajdonos</p>
           </div>
         </div>
-        {/* Desktop: jobb oldalon kapcsolatfelvétel */}
         <div style={textWrapperStyle} className="cta-text">
-          <h3 style={headingStyle}>
-            Kérdésed van? Foglalj egy konzultációt!
-          </h3>
+          <h3 style={headingStyle}>Kérdésed van? Foglalj egy konzultációt!</h3>
           <p style={paragraphStyle}>
             Foglalj egy INGYENES és KÖTELEZETTSÉGMENTES konzultációt csapatunkkal, hogy
             megismerjük vállalkozásod és elképzeléseid, átbeszéljük a részleteket és
@@ -150,30 +144,18 @@ const CallToActionCard: React.FC = () => {
             elérésében. Gyere, vágjunk bele!
           </p>
           <div style={actionsRowStyle}>
-            <button
-              style={buttonStyle}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = "#00B87A";
-                e.currentTarget.style.boxShadow = "0 6px 12px rgba(0, 0, 0, 0.15), 0 0 20px rgba(0, 210, 140, 0.6), 0 0 30px rgba(0, 210, 140, 0.4)";
-                e.currentTarget.style.transform = "translateY(-2px)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = "#00D28C";
-                e.currentTarget.style.boxShadow = "0 4px 6px rgba(0, 0, 0, 0.1)";
-                e.currentTarget.style.transform = "translateY(0)";
-              }}
-            >
-              30 perces online konzultáció
-            </button>
+            <PopupButton
+              url="https://calendly.com/tbzproductions" // Replace with your Calendly event link
+              rootElement={document.getElementById("root")!}
+              text="30 perces online konzultáció"
+              styles={buttonStyle}
+              className="calendly-popup-button"
+            />
             <a
               href="#!"
               style={linkStyle}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.borderBottomColor = "#002c23")
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.borderBottomColor = "transparent")
-              }
+              onMouseEnter={(e) => (e.currentTarget.style.borderBottomColor = "#002c23")}
+              onMouseLeave={(e) => (e.currentTarget.style.borderBottomColor = "transparent")}
             >
               Díjmentes és kötelezettségmentes
             </a>
@@ -192,11 +174,11 @@ const CallToActionCard: React.FC = () => {
             }
             .cta-text {
               order: 1;
-              width: 100%; /* Biztosítjuk, hogy a szöveg wrapper kitöltse a kártyát */
+              width: 100%;
             }
-            .cta-text > div:last-child { /* Az actionsRowStyle-nak megfelelő elem */
-              justify-content: center; /* Középre igazítás csak mobil nézetben */
-              width: 100%; /* Teljes szélesség a szimmetrikus padding érdekében */
+            .cta-text > div:last-child {
+              justify-content: center;
+              width: 100%;
             }
           }
           @keyframes vibrate {
@@ -207,6 +189,11 @@ const CallToActionCard: React.FC = () => {
             80% { transform: translate(2px, -2px); }
             100% { transform: translate(0); }
           }
+          .calendly-popup-button:hover {
+            background-color: #00B87A !important;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15), 0 0 20px rgba(0, 210, 140, 0.6), 0 0 30px rgba(0, 210, 140, 0.4) !important;
+            transform: translateY(-2px) !important;
+          }
         `}
       </style>
     </div>
@@ -214,3 +201,5 @@ const CallToActionCard: React.FC = () => {
 };
 
 export default CallToActionCard;
+
+
