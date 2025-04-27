@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
+import Impressum from "./Impressum";
+import AdatvedelmiNyilatkozat from "./AdatvedelmiNyilatkozat";
 
 const Footer: React.FC = () => {
+  const [showImpressum, setShowImpressum] = useState(false);
+  const [showAdatvedelmi, setShowAdatvedelmi] = useState(false);
+
   // ---------- Styles ----------
 
   // Footer wrapper: sötét háttér, elegáns szöveg és padding
@@ -88,25 +93,72 @@ const Footer: React.FC = () => {
             </a>
           </span>
         </div>
+        {/* Középső rész: Gombok */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }} className="footer-buttons">
+          <button
+            onClick={() => setShowAdatvedelmi(true)}
+            style={{
+              background: 'none',
+              border: 'none',
+              color: '#00D28C',
+              cursor: 'pointer',
+              padding: 0,
+              textDecoration: 'none',
+              transition: 'color 0.2s ease'
+            }}
+            className="footer-link"
+          >
+            Adatvédelmi nyilatkozat
+          </button>
+          <button
+            onClick={() => setShowImpressum(true)}
+            style={{
+              background: 'none',
+              border: 'none',
+              color: '#00D28C',
+              cursor: 'pointer',
+              padding: 0,
+              textDecoration: 'none',
+              transition: 'color 0.2s ease'
+            }}
+            className="footer-link"
+          >
+            Impresszum
+          </button>
+        </div>
         {/* Jobb oldal: jogi információ */}
         <div style={rightTextStyle}>
           © 2025 TBZ. Productions – Minden jog fenntartva.
         </div>
       </div>
 
+      <Impressum show={showImpressum} onHide={() => setShowImpressum(false)} />
+      <AdatvedelmiNyilatkozat show={showAdatvedelmi} onHide={() => setShowAdatvedelmi(false)} />
+
       {/* Responsive stílusok */}
       <style>
         {`
           .footer-container {
             flex-direction: row;
+            justify-content: space-between;
+            gap: 20px;
+          }
+          .footer-container > div {
+            flex: 1;
+            text-align: center;
           }
           @media (max-width: 768px) {
             .footer-container {
               flex-direction: column;
               text-align: center;
+              gap: 10px;
             }
             .footer-container > div {
               margin-bottom: 10px;
+            }
+            .footer-buttons {
+              flex-direction: column;
+              gap: 10px;
             }
           }
           .footer-link:hover {
