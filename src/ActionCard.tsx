@@ -11,7 +11,7 @@ const CallToActionCard: React.FC = () => {
   };
 
   const cardStyle: React.CSSProperties = {
-    backgroundColor: "#FFFFFF", // Changed to solid white
+    backgroundColor: "#FFFFFF",
     borderRadius: "24px",
     boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1)",
     padding: "32px",
@@ -20,7 +20,7 @@ const CallToActionCard: React.FC = () => {
     display: "flex",
     alignItems: "center",
     gap: "32px",
-    backdropFilter: "blur(10px)", // Optional: Remove this if you want no blur effect
+    backdropFilter: "blur(10px)",
     border: "1px solid rgba(255, 255, 255, 0.3)",
   };
 
@@ -38,7 +38,7 @@ const CallToActionCard: React.FC = () => {
     objectFit: "cover",
     border: "3px solid #00D28C",
     boxShadow: "0 4px 12px rgba(0, 210, 140, 0.3)",
-    imageRendering: "crisp-edges", // Változtasd "auto"-ról "crisp-edges"-re
+    imageRendering: "crisp-edges",
     backgroundColor: "rgba(255, 255, 255, 0.9)",
   };
 
@@ -47,6 +47,12 @@ const CallToActionCard: React.FC = () => {
     flexDirection: "column",
     alignItems: "center",
     gap: "4px",
+  };
+
+  const userNameWrapperStyle: React.CSSProperties = {
+    display: "flex",
+    alignItems: "center",
+    gap: "8px", // Térköz a felirat és a pötty között
   };
 
   const userNameStyle: React.CSSProperties = {
@@ -67,7 +73,7 @@ const CallToActionCard: React.FC = () => {
 
   const userTitleStyle: React.CSSProperties = {
     fontSize: "1rem",
-    color: "#666",
+    color: "gray",
     margin: "0",
     fontStyle: "italic",
   };
@@ -130,7 +136,10 @@ const CallToActionCard: React.FC = () => {
         <div style={avatarWrapperStyle} className="cta-avatar">
           <img style={avatarImageStyle} src={bence} alt="Tököli Bence" />
           <div style={userInfoStyle}>
-            <h4 style={userNameStyle}>Tököli Bence</h4>
+            <div style={userNameWrapperStyle}>
+              <h4 style={userNameStyle}>Tököli Bence</h4>
+              <div style={greenDotStyle}></div>
+            </div>
             <p style={userTitleStyle}>Alapító, tulajdonos</p>
           </div>
         </div>
@@ -145,7 +154,7 @@ const CallToActionCard: React.FC = () => {
           </p>
           <div style={actionsRowStyle}>
             <PopupButton
-              url="https://calendly.com/tbzproductions" // Replace with your Calendly event link
+              url="https://calendly.com/tbzproductions"
               rootElement={document.getElementById("root")!}
               text="30 perces online konzultáció"
               styles={buttonStyle}
@@ -201,5 +210,3 @@ const CallToActionCard: React.FC = () => {
 };
 
 export default CallToActionCard;
-
-
