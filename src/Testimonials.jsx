@@ -15,6 +15,13 @@ const Testimonials = () => {
   const testimonials = useMemo(
     () => [
       {
+        id: 3,
+        src: vid3,
+        thumbnail: thumb3,
+        title: 'Vélemény 3',
+        author: 'Nagy Eszter',
+      },
+      {
         id: 1,
         src: vid1,
         thumbnail: thumb1,
@@ -28,13 +35,7 @@ const Testimonials = () => {
         title: 'Vélemény 2',
         author: 'Szabó Péter',
       },
-      {
-        id: 3,
-        src: vid3,
-        thumbnail: thumb3,
-        title: 'Vélemény 3',
-        author: 'Nagy Eszter',
-      },
+
     ],
     []
   );

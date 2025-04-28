@@ -1,18 +1,18 @@
 import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './References.css';
-import img1 from './images/1.jpeg';
+import img1 from './images/1.jpg';
 import img2 from './images/2.jpg';
 import img3 from './images/3.JPG';
-import img4 from './images/4.jpg';
-import img5 from './images/5.jpg';
-import img6 from './images/6.jpg';
+import img4 from './images/4.JPG';
+import img5 from './images/5.jpeg';
+import img6 from './images/6.JPG';
 import img7 from './images/7.jpg';
-import img8 from './images/8.jpg';
+import img8 from './images/8.JPG';
 import img9 from './images/9.jpg';
 import img10 from './images/10.jpg';
-import img11 from './images/11.jpg';
-import img12 from './images/12.jpg';
+import img11 from './images/11.JPG';
+import img12 from './images/12.JPG';
 import vid1 from './videos/1.mp4';
 import vid2 from './videos/2.mp4';
 import vid3 from './videos/3.mp4';
@@ -20,6 +20,9 @@ import vid4 from './videos/4.mp4';
 import vid5 from './videos/5.mp4';
 import vid6 from './videos/6.mp4';
 import vid7 from './videos/7.mp4';
+import vid8 from './videos/8.mp4';
+import vid9 from './videos/9.mp4';
+import vid10 from './videos/10.mp4';
 import thumb1 from './thumbnails/1_Cover.jpg';
 import thumb2 from './thumbnails/2_Cover.jpg';
 import thumb3 from './thumbnails/3_Cover.jpg';
@@ -27,6 +30,9 @@ import thumb4 from './thumbnails/4_Cover.jpg';
 import thumb5 from './thumbnails/5_Cover.jpg';
 import thumb6 from './thumbnails/6_Cover.jpg';
 import thumb7 from './thumbnails/7_Cover.jpg';
+import thumb8 from './thumbnails/8_Cover.jpg';
+import thumb9 from './thumbnails/9_Cover.jpg';
+import thumb10 from './thumbnails/10_Cover.jpg';
 
 const References = () => {
   const [selectedPhoto, setSelectedPhoto] = useState(null);
@@ -56,9 +62,17 @@ const References = () => {
   ], []);
 
   const videos = useMemo(() => [
-    { id: 1, src: vid1, thumbnail: thumb1, title: 'Esküvői Videó', category: 'Esküvő', description: 'Egy csodálatos esküvői pillanat megörökítése' },
-    { id: 2, src: vid2, thumbnail: thumb2, title: 'Rendezvény Aftermovie', category: 'Rendezvény', description: 'Energikus aftermovie egy fantasztikus rendezvényről' },
     { id: 3, src: vid3, thumbnail: thumb3, title: 'Promóciós Videó', category: 'Marketing', description: 'Modern promóciós videó egy innovatív termékről' },
+    { id: 1, src: vid1, thumbnail: thumb1, title: 'Esküvői Videó', category: 'Esküvő', description: 'Egy csodálatos esküvői pillanat megörökítése' },
+    { id: 8, src: vid8, thumbnail: thumb8, title: 'Promóciós Videó', category: 'Marketing', description: 'Modern promóciós videó egy innovatív termékről' },
+
+    { id: 2, src: vid2, thumbnail: thumb2, title: 'Rendezvény Aftermovie', category: 'Rendezvény', description: 'Energikus aftermovie egy fantasztikus rendezvényről' },
+
+
+    { id: 9, src: vid9, thumbnail: thumb9, title: 'Esküvői Videó', category: 'Esküvő', description: 'Egy csodálatos esküvői pillanat megörökítése' },
+
+    { id: 10, src: vid10, thumbnail: thumb10, title: 'Rendezvény Aftermovie', category: 'Rendezvény', description: 'Energikus aftermovie egy fantasztikus rendezvényről' },
+
     { id: 4, src: vid4, thumbnail: thumb4, title: 'Koncert Felvétel', category: 'Zene', description: 'Lenyűgöző koncertfelvétel professzionális minőségben' },
     { id: 5, src: vid5, thumbnail: thumb5, title: 'Termék Bemutató', category: 'Marketing', description: 'Elegáns termékbemutató videó prémium kivitelezésben' },
     { id: 6, src: vid6, thumbnail: thumb6, title: 'Termék Bemutató', category: 'Marketing', description: 'Elegáns termékbemutató videó prémium kivitelezésben' },
