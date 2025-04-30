@@ -7,6 +7,8 @@ import victoryFitnessLogo from './victory.png';
 import rapper from './rapper.png';
 import te from './te.png';
 import bence from './bence.png';
+import gravir from './gravir.png';
+import maszi from './maszi.png';
 
 const Partnerships = () => {
   return (
@@ -17,6 +19,16 @@ const Partnerships = () => {
           <div className="col">
             <div className="partnership-item">
               <img src={te} alt="te" className="logo grayscale desktop-grayscale" />
+            </div>
+          </div>
+          <div className="col">
+            <div className="partnership-item">
+              <img src={gravir} alt="te" className="logo grayscale desktop-grayscale" />
+            </div>
+          </div>
+          <div className="col">
+            <div className="partnership-item">
+              <img src={maszi} alt="te" className="logo grayscale desktop-grayscale" />
             </div>
           </div>
           <div className="col">

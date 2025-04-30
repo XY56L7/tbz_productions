@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
   // Footer wrapper: sötét háttér, elegáns szöveg és padding
   const footerStyle: React.CSSProperties = {
     padding: "30px 20px",
-    color: "#ccc", // világosabb szöveg
+    color: "#ccc",
     fontSize: "0.9rem",
     lineHeight: "1.5"
   };
@@ -76,10 +76,7 @@ const Footer: React.FC = () => {
       <div style={topLineStyle}></div>
       <div style={containerStyle} className="footer-container">
         {/* Bal oldal: ikon + szöveg */}
-        <div style={leftSideStyle}>
-          {/* <div style={iconCircleStyle}>
-            <span>F</span>
-          </div> */}
+        <div style={leftSideStyle} className="footer-designer">
           <span style={leftTextStyle}>
             Tervezte és készítette |{" "}
             <a
@@ -96,21 +93,6 @@ const Footer: React.FC = () => {
         {/* Középső rész: Gombok */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }} className="footer-buttons">
           <button
-            onClick={() => setShowAdatvedelmi(true)}
-            style={{
-              background: 'none',
-              border: 'none',
-              color: '#00D28C',
-              cursor: 'pointer',
-              padding: 0,
-              textDecoration: 'none',
-              transition: 'color 0.2s ease'
-            }}
-            className="footer-link"
-          >
-            Adatvédelmi nyilatkozat
-          </button>
-          <button
             onClick={() => setShowImpressum(true)}
             style={{
               background: 'none',
@@ -125,9 +107,24 @@ const Footer: React.FC = () => {
           >
             Impresszum
           </button>
+          <button
+            onClick={() => setShowAdatvedelmi(true)}
+            style={{
+              background: 'none',
+              border: 'none',
+              color: '#00D28C',
+              cursor: 'pointer',
+              padding: 0,
+              textDecoration: 'none',
+              transition: 'color 0.2s ease'
+            }}
+            className="footer-link"
+          >
+            Adatvédelmi nyilatkozat
+          </button>
         </div>
         {/* Jobb oldal: jogi információ */}
-        <div style={rightTextStyle}>
+        <div style={rightTextStyle} className="footer-copyright">
           © 2025 TBZ. Productions – Minden jog fenntartva.
         </div>
       </div>
@@ -153,12 +150,21 @@ const Footer: React.FC = () => {
               text-align: center;
               gap: 10px;
             }
-            .footer-container > div {
-              margin-bottom: 10px;
-            }
             .footer-buttons {
               flex-direction: column;
               gap: 10px;
+              order: 1;
+            }
+            .footer-buttons > button:first-child {
+              order: -1; /* Impresszum felülre kerül */
+            }
+            .footer-designer {
+              order: 2;
+              margin-bottom: 10px;
+            }
+            .footer-copyright {
+              order: 3;
+              margin-bottom: 10px;
             }
           }
           .footer-link:hover {
