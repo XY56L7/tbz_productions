@@ -279,7 +279,7 @@
 .modern-play-button svg {
   width: 18px;
   height: 18px;
-  fill: white;
+  fill: white !important; /* Biztosítjuk a fehér színt */
 }
 
 /* Photo Section */
@@ -564,12 +564,13 @@
     height: 10px;
   }
   .modern-play-button {
-    width: 36px;
-    height: 36px;
+    width: 44px; /* Adjusted from 36px */
+    height: 44px; /* Adjusted from 36px */
   }
   .modern-play-button svg {
-    width: 14px;
-    height: 14px;
+    width: 20px; /* Slightly smaller for mobile */
+    height: 20px;
+    fill: white !important;
   }
   .section-title {
     font-size: 2.5rem;
@@ -587,7 +588,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 576px) {
   .video-section {
     padding: 3rem 0 3rem 0;
   }
@@ -640,12 +641,13 @@
     height: 8px;
   }
   .modern-play-button {
-    width: 32px;
-    height: 32px;
+    width: 48px; /* Adjusted from 40px */
+    height: 48px; /* Adjusted from 40px */
   }
   .modern-play-button svg {
-    width: 12px;
-    height: 12px;
+    width: 18px; /* Slightly smaller for very small screens */
+    height: 18px;
+    fill: white !important;
   }
   .section-title {
     font-size: 2rem;

@@ -33,6 +33,7 @@ import thumb7 from './thumbnails/7_Cover.jpg';
 import thumb8 from './thumbnails/8_Cover.jpg';
 import thumb9 from './thumbnails/9_Cover.jpg';
 import thumb10 from './thumbnails/10_Cover.jpg';
+import playIcon from './images/play.svg'; // Az elérési út a fájl helyétől függ
 
 const References = () => {
   const [selectedPhoto, setSelectedPhoto] = useState(null);
@@ -196,10 +197,14 @@ const References = () => {
                       fill="white"
                       xmlns="http://www.w3.org/2000/svg"
                     >
-                      <path d="M5 3l14 9-14 9V3z" />
+                      <polygon points="5,3 19,12 5,21" fill="white" />
                     </svg>
                   </button>
                 )}
+
+
+
+
               </div>
             </div>
             <div className="adjacent-video" onClick={() => handleVideoSwipe('next')}>
