@@ -84,9 +84,9 @@ const CustomNavbar = () => {
       fixed="top"
       expanded={expanded}
       onToggle={(expanded) => setExpanded(expanded)}
-      className="py-2"
+      className="py-0"
       style={{
-        background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0))',
+        background: 'linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0))',
       }}
     >
       <Container fluid className="px-4">
