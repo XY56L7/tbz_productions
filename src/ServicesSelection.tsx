@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const ServiceSelection = () => {
   const [activeCard, setActiveCard] = useState<number | null>(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<HTMLDivElement>(null);
 
   // Handle resize for mobile detection
   useEffect(() => {
@@ -12,6 +14,30 @@ const ServiceSelection = () => {
     };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Add scroll target element for navbar navigation
+  useEffect(() => {
+    // Create a scroll target element that's positioned correctly
+    const scrollTarget = document.createElement("div");
+    scrollTarget.id = "scroll-target-services";
+    scrollTarget.style.position = "absolute";
+    scrollTarget.style.top = "120px"; // Position below navbar
+    scrollTarget.style.width = "100%";
+    scrollTarget.style.height = "1px";
+    scrollTarget.style.visibility = "hidden";
+    
+    // Append to the section
+    if (sectionRef.current) {
+      sectionRef.current.style.position = "relative";
+      sectionRef.current.appendChild(scrollTarget);
+    }
+
+    return () => {
+      if (sectionRef.current && document.getElementById("scroll-target-services")) {
+        sectionRef.current.removeChild(document.getElementById("scroll-target-services")!);
+      }
+    };
   }, []);
 
   const toggleCard = (index: number) => {
@@ -361,7 +387,7 @@ const ServiceSelection = () => {
   ];
 
   return (
-    <div className="my-section container py-5">
+    <div className="my-section container py-5" ref={sectionRef} id="services">
       <div className="row">
         <div className="text-content col-md-6 mb-4 mb-md-0">
           <div className="heading mb-3">
@@ -385,12 +411,13 @@ const ServiceSelection = () => {
           </div>
         </div>
 
-        <div className="cards col-md-6">
+        <div className="cards col-md-6" ref={cardsRef}>
           {services.map((service, index) => (
             <div
               key={`service-${index}`}
               className={`card-item ${activeCard === index ? "card-expanded" : ""}`}
               onClick={() => toggleCard(index)}
+              id={index === 0 ? "first-service-card" : ""}
             >
               <div className="card-content">
                 <h3 className="card-title">{service.title}</h3>
@@ -398,7 +425,10 @@ const ServiceSelection = () => {
                 <div className="card-desc">{service.description}</div>
                 <button
                   type="button"
-                  onClick={() => scrollToSection("contact")}
+                  onClick={(e) => {
+                    e.stopPropagation(); // Prevent card toggle
+                    scrollToSection("contact");
+                  }}
                   className="btn btn-light custom-btn quote-btn"
                 >
                   Árajánlat (24h)

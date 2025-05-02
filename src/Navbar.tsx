@@ -34,7 +34,23 @@ const CustomNavbar = () => {
   }, []);
 
   const scrollToSection = (sectionId: string) => {
-    if (sectionId === 'FAQ' && !isMobile) {
+    if (sectionId === 'services' && !isMobile) {
+      // Desktop nézetben a services target pozíciójához görgetés
+      const target = document.getElementById('scroll-target-services');
+      if (target) {
+        const targetTop = target.getBoundingClientRect().top + window.pageYOffset;
+        window.scrollTo({
+          top: targetTop -240 , // Offset a navbar magassága miatt
+          behavior: 'smooth',
+        });
+      } else {
+        // Visszatérés az alapértelmezett szekcióhoz, ha a célpont nem található
+        const section = document.getElementById(sectionId);
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    } else if (sectionId === 'FAQ' && !isMobile) {
       // Desktop nézetben a 9. kártya pozíciójához görgetés
       const target = document.getElementById('scroll-target-9th-card');
       if (target) {
