@@ -196,7 +196,7 @@ const FAQ: React.FC = () => {
     position: isMobile ? 'static' : 'sticky',
     top: isMobile ? 'auto' : `calc(${navbarHeight} + 120px + (var(--index) * 50px))`,
     backgroundColor: 'transparent',
-    transition: 'top 0.3s ease', // Hozzáadott átmenet a simább görgetéshez
+    transition: 'top 0.3s ease',
   };
 
   const cardBodyStyle = (index: number): CSSProperties => ({
@@ -329,6 +329,49 @@ const FAQ: React.FC = () => {
     };
   };
 
+  // Styles for contact card section
+  const contactSectionStyle: CSSProperties = {
+    padding: '40px 20px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    background: '#000',
+    margin: 0,
+  };
+
+  const contactCardStyle: CSSProperties = {
+    background: 'linear-gradient(135deg, rgba(0, 89, 69, 0.95), rgba(0, 44, 35, 0.95))',
+    borderRadius: '20px',
+    padding: isMobile ? '1.5rem' : '2rem',
+    boxShadow: '0 15px 40px rgba(0, 179, 143, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.2)',
+    border: '1px solid rgba(255, 255, 255, 0.1)',
+    textAlign: 'center',
+    width: isMobile ? '90%' : '50%',
+    maxWidth: '600px',
+    margin: '0 auto',
+  };
+
+  const contactTextStyle: CSSProperties = {
+    color: '#e6f0ed',
+    fontSize: isMobile ? '1rem' : '1.2rem',
+    fontWeight: 500,
+    margin: 0,
+    lineHeight: '1.6',
+  };
+
+  const contactLinkStyle: CSSProperties = {
+    color: '#fff',
+    textDecoration: 'none',
+    fontWeight: 600,
+    transition: 'color 0.3s ease',
+  };
+
+  const contactLinkHoverStyle = `
+    a:hover {
+      color: #00b38f;
+    }
+  `;
+
   return (
     <>
       {/* Process Steps Section */}
@@ -392,7 +435,6 @@ const FAQ: React.FC = () => {
               ))
             )}
           </ul>
-          {/* Láthatatlan referenciaelem a 9. kártya pozíciójához */}
           <div
             id="scroll-target-9th-card"
             style={{
@@ -436,6 +478,19 @@ const FAQ: React.FC = () => {
               </div>
             );
           })}
+        </div>
+      </section>
+
+      {/* Contact Card Section */}
+      <section style={contactSectionStyle}>
+        <style>{contactLinkHoverStyle}</style>
+        <div style={contactCardStyle}>
+          <p style={contactTextStyle}>
+            Egyéb kérdés esetén: <br />
+            <a href="mailto:info@tbzproductions.com" style={contactLinkStyle}>
+              info@tbzproductions.com
+            </a>
+          </p>
         </div>
       </section>
     </>
