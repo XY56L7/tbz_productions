@@ -188,7 +188,7 @@ const FAQ: React.FC = () => {
       flexDirection: isMobile ? 'column' : 'unset',
       gridTemplateColumns: isMobile ? 'none' : '1fr',
       gridTemplateRows: isMobile ? 'none' : `repeat(11, 11vh)`,
-      gap: isMobile ? '0' : '4vw',
+      gap: isMobile ? '10px' : '4vw',
     } as any),
   };
 
@@ -197,11 +197,13 @@ const FAQ: React.FC = () => {
     top: isMobile ? 'auto' : `calc(${navbarHeight} + 120px + (var(--index) * 50px))`,
     backgroundColor: 'transparent',
     transition: 'top 0.3s ease',
+    width: '100%', // Ensure full width on mobile
   };
 
   const cardBodyStyle = (index: number): CSSProperties => ({
     boxSizing: 'border-box',
-    padding: isMobile && activeCard === index ? '0.5rem 1rem' : '0.5rem 1rem 1rem 1rem',
+    width: '100%', // Make card width uniform on mobile
+    padding: isMobile ? '0.5rem 1rem' : '0.5rem 1rem 1rem 1rem',
     borderRadius: '20px',
     boxShadow:
       index === 0
@@ -252,6 +254,17 @@ const FAQ: React.FC = () => {
     display: isMobile ? 'block' : 'none',
   };
 
+  const cardDetailsStyle: CSSProperties = {
+    fontSize: '1rem', // Increased font size
+    fontStyle: 'italic', // Made text italic
+    color: 'rgba(255, 255, 255, 0.8)', // Slightly brighter color
+    marginBottom: '0.5rem',
+    textAlign: 'center',
+    transition: 'opacity 0.3s ease, height 0.3s ease',
+    height: 'auto',
+    opacity: 1,
+  };
+
   const cardIndexStyles = Array.from({ length: 11 }, (_, i) => ({
     '--index': i,
   } as CSSProperties));
@@ -281,13 +294,13 @@ const FAQ: React.FC = () => {
     const isActive = activeFAQIndex === index;
     const offsetX = (mousePosition.x - window.innerWidth / 2) * 0.01;
     const offsetY = (mousePosition.y - window.innerHeight / 2) * 0.01;
-  
+
     return {
       position: 'relative',
       width: isMobile ? '100%' : '350px',
-      height: isActive ? 'auto' : isMobile ? 'auto' : '180px', // Use 'auto' for mobile when not active
-      minHeight: isMobile && !isActive ? 'unset' : '180px', // Ensure no forced min-height on mobile when not active
-      padding: isMobile && !isActive ? '2px 0' : '0', // Add 2px vertical padding for mobile when not active
+      height: isActive ? 'auto' : isMobile ? 'auto' : '180px',
+      minHeight: isMobile && !isActive ? 'unset' : '180px',
+      padding: isMobile && !isActive ? '2px 0' : '0',
       transform: `translate(${offsetX}px, ${offsetY}px)`,
       transition: 'all 0.5s ease',
       background: isActive
@@ -317,18 +330,28 @@ const FAQ: React.FC = () => {
     margin: 0,
   };
 
-  const faqContentStyle = (isActive: boolean): CSSProperties => {
-    return {
-      padding: isActive ? '1rem' : '0 1rem',
-      color: '#e6f0ed',
-      fontSize: isMobile ? '0.85rem' : '0.95rem',
-      lineHeight: '1.6',
-      opacity: isActive ? 1 : 0,
-      height: isActive ? 'auto' : '0',
-      overflow: 'hidden',
-      transition: 'opacity 0.3s ease, height 0.3s ease',
-      margin: 0,
-    };
+  const faqContentStyle = (isActive: boolean): CSSProperties => ({
+    padding: isActive ? '1rem' : '0 1rem',
+    color: '#e6f0ed',
+    fontSize: isMobile ? '0.85rem' : '0.95rem',
+    lineHeight: '1.6',
+    opacity: isActive ? 1 : 0,
+    height: isActive ? 'auto' : '0',
+    overflow: 'hidden',
+    transition: 'opacity 0.3s ease, height 0.3s ease',
+    margin: 0,
+  });
+
+  const faqDetailsStyle: CSSProperties = {
+    fontSize: '1rem', // Increased font size
+    fontStyle: 'italic', // Made text italic
+    color: 'rgba(255, 255, 255, 0.8)', // Slightly brighter color
+    marginBottom: '0.5rem',
+    textAlign: 'center',
+    transition: 'opacity 0.3s ease, height 0.3s ease',
+    height: 'auto',
+    opacity: 1,
+    padding: '0 1rem',
   };
 
   // Styles for contact card section
@@ -400,26 +423,29 @@ const FAQ: React.FC = () => {
               >
                 <div style={cardBodyStyle(0)}>
                   <h2 style={layerSubtitleStyle}>{processSteps[0].subtitle}</h2>
+                  {isMobile && activeCard !== 0 && (
+                    <p style={cardDetailsStyle}>Kattints a részletekért!</p>
+                  )}
                   {isMobile && activeCard === 0 && (
-                  <div style={answerStyle}>
-                    <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-                      {processSteps.slice(1).map((step, index) => (
-                        <li
-                          key={`step-${index}`}
-                          style={{
-                            fontSize: isMobile ? '0.9rem' : '1rem',
-                            color: '#e6f0ed',
-                            textAlign: isMobile ? 'left' : 'center', // Ensure consistency in list items
-                            margin: '10px 0',
-                            fontWeight: isMobile ? 'bold' : 'normal',
-                          }}
-                        >
-                          {`${index + 1}. ${step.subtitle}`}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
+                    <div style={answerStyle}>
+                      <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                        {processSteps.slice(1).map((step, index) => (
+                          <li
+                            key={`step-${index}`}
+                            style={{
+                              fontSize: isMobile ? '0.9rem' : '1rem',
+                              color: '#e6f0ed',
+                              textAlign: isMobile ? 'left' : 'center',
+                              margin: '10px 0',
+                              fontWeight: isMobile ? 'bold' : 'normal',
+                            }}
+                          >
+                            {`${index + 1}. ${step.subtitle}`}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 </div>
               </li>
             ) : (
@@ -463,6 +489,9 @@ const FAQ: React.FC = () => {
         <div style={accordionContainerStyle}>
           {faqItems.map((item, index) => {
             const isActive = activeFAQIndex === index;
+            const offsetX = (mousePosition.x - window.innerWidth / 2) * 0.01;
+            const offsetY = (mousePosition.y - window.innerHeight / 2) * 0.01;
+
             return (
               <div
                 key={index}
@@ -477,6 +506,9 @@ const FAQ: React.FC = () => {
                 }}
               >
                 <div style={faqHeaderStyle}>{item.question}</div>
+                {!isActive && (
+                  <p style={faqDetailsStyle}>Kattints a részletekért!</p>
+                )}
                 <div style={faqContentStyle(isActive)}>{item.answer}</div>
               </div>
             );
