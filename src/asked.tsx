@@ -281,11 +281,13 @@ const FAQ: React.FC = () => {
     const isActive = activeFAQIndex === index;
     const offsetX = (mousePosition.x - window.innerWidth / 2) * 0.01;
     const offsetY = (mousePosition.y - window.innerHeight / 2) * 0.01;
-
+  
     return {
       position: 'relative',
       width: isMobile ? '100%' : '350px',
-      height: isActive ? 'auto' : '180px',
+      height: isActive ? 'auto' : isMobile ? 'auto' : '180px', // Use 'auto' for mobile when not active
+      minHeight: isMobile && !isActive ? 'unset' : '180px', // Ensure no forced min-height on mobile when not active
+      padding: isMobile && !isActive ? '2px 0' : '0', // Add 2px vertical padding for mobile when not active
       transform: `translate(${offsetX}px, ${offsetY}px)`,
       transition: 'all 0.5s ease',
       background: isActive
@@ -399,24 +401,25 @@ const FAQ: React.FC = () => {
                 <div style={cardBodyStyle(0)}>
                   <h2 style={layerSubtitleStyle}>{processSteps[0].subtitle}</h2>
                   {isMobile && activeCard === 0 && (
-                    <div style={answerStyle}>
-                      <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-                        {processSteps.slice(1).map((step, index) => (
-                          <li
-                            key={`step-${index}`}
-                            style={{
-                              fontSize: isMobile ? '0.9rem' : '1rem',
-                              color: '#e6f0ed',
-                              textAlign: 'center',
-                              margin: '10px 0',
-                            }}
-                          >
-                            {`${index + 1}. ${step.subtitle}`}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
+                  <div style={answerStyle}>
+                    <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                      {processSteps.slice(1).map((step, index) => (
+                        <li
+                          key={`step-${index}`}
+                          style={{
+                            fontSize: isMobile ? '0.9rem' : '1rem',
+                            color: '#e6f0ed',
+                            textAlign: isMobile ? 'left' : 'center', // Ensure consistency in list items
+                            margin: '10px 0',
+                            fontWeight: isMobile ? 'bold' : 'normal',
+                          }}
+                        >
+                          {`${index + 1}. ${step.subtitle}`}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
                 </div>
               </li>
             ) : (
