@@ -255,16 +255,15 @@ const FAQ: React.FC = () => {
   };
 
   const cardDetailsStyle: CSSProperties = {
-    fontSize: '1rem', // Increased font size
-    fontStyle: 'italic', // Made text italic
-    color: 'rgba(255, 255, 255, 0.8)', // Slightly brighter color
+    fontSize: isMobile ? '0.8rem' : '1rem', // Smaller font size on mobile
+    fontStyle: 'italic',
+    color: 'rgba(255, 255, 255, 0.8)',
     marginBottom: '0.5rem',
     textAlign: 'center',
     transition: 'opacity 0.3s ease, height 0.3s ease',
     height: 'auto',
     opacity: 1,
   };
-
   const cardIndexStyles = Array.from({ length: 11 }, (_, i) => ({
     '--index': i,
   } as CSSProperties));
@@ -343,9 +342,9 @@ const FAQ: React.FC = () => {
   });
 
   const faqDetailsStyle: CSSProperties = {
-    fontSize: '1rem', // Increased font size
-    fontStyle: 'italic', // Made text italic
-    color: 'rgba(255, 255, 255, 0.8)', // Slightly brighter color
+    fontSize: isMobile ? '0.8rem' : '1rem', // Smaller font size on mobile
+    fontStyle: 'italic',
+    color: 'rgba(255, 255, 255, 0.8)',
     marginBottom: '0.5rem',
     textAlign: 'center',
     transition: 'opacity 0.3s ease, height 0.3s ease',
